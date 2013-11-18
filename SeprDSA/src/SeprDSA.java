@@ -6,7 +6,8 @@ public class SeprDSA {
 		System.out.println("Sam wrote this line.\n");
 		System.out.println("Dan the man wrote this line.\n");
 		System.out.println("David wrote this line.\n");
-
+		
+		System.out.println("David smells.\n")
 	}
 
 }
