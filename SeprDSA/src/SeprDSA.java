@@ -1,7 +1,6 @@
 
-import game.*;
-import engine.*;
-import org.la4j.vector.*;
+import engine.Drawables;
+import game.Plane;
 
 public class SeprDSA {
 
