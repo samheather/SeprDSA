@@ -1,6 +1,5 @@
-
 package engine;
 
 public interface Drawable {
-    Sprite draw();
+	Sprite draw();
 }
