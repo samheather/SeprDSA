@@ -1,7 +1,7 @@
 package engine;
 
-interface Clickable {
+public interface Clickable {
+	
 	void click(int button);
 	
-
 }

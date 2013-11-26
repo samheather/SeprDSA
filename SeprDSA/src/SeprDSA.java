@@ -1,5 +1,6 @@
 
 import engine.Drawables;
+import engine.Input;
 import game.Plane;
 
 public class SeprDSA {
@@ -10,6 +11,7 @@ public class SeprDSA {
 	Plane p = new Plane();
 	
 	while (true) {
+		Input.logic();
 	    Drawables.logic();
 	}
 
