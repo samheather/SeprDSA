@@ -6,10 +6,11 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class Audible {
 
-	public static void playSound(String path, boolean looping) {
+	public static void playSound(String path, boolean looping, float volume) {
 		try {
 			Audio sound = SoundStore.get().getWAV(path);
-			sound.playAsMusic(1, 1, looping); // (pitch gain looping)
+			SoundStore.get().setSoundVolume(volume);
+			sound.playAsSoundEffect(1, 1, looping); // (pitch gain looping)
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

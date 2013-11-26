@@ -12,11 +12,11 @@ public class SeprDSA {
     public static void main(String[] args) {
 	Drawables.initialise(800, 600);
 	SoundStore.get().init();
-	SoundStore.get().setMusicOn(true);
+	SoundStore.get().setCurrentMusicVolume(9.0f);
 	
 	Plane p = new Plane();
-	Audible.playSound("sounds/arribba.wav", true);
-	SoundStore.get().setCurrentMusicVolume(9.0f);
+	Audible.playSound("sounds/arribba.wav", true, 0.1f);
+	Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 	
 	while (true) {
 	    Drawables.logic();
