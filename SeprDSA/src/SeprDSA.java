@@ -1,6 +1,7 @@
 
 import engine.Audible;
 import engine.Drawables;
+import engine.Input;
 import game.Plane;
 
 import org.lwjgl.openal.AL;
@@ -19,6 +20,7 @@ public class SeprDSA {
 	Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 	
 	while (true) {
+		Input.logic();
 	    Drawables.logic();
 	    
 	    

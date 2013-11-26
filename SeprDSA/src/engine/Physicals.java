@@ -28,7 +28,7 @@ public class Physicals {
 			
 			
 			
-			for (int j = 0; j < physicals.size(); i++){ // This for loop will iterate all physicals to check for collisions
+			for (int j = 0; j < physicals.size(); j++){ // This for loop will iterate all physicals to check for collisions
 				Physical checkOther = physicals.get(j);
 				
 				if (!(phys.equals(checkOther)) && (phys.isCollidingPos(checkOther.getPos()))){ // If the physical isn't itself and is colliding
