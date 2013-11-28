@@ -15,7 +15,7 @@ public class SeprDSA {
 
 
 		Plane p = new Plane();
-		//Map m = new Map();
+		Map m = new Map();
 		
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
