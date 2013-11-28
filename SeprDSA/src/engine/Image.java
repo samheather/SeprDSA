@@ -22,7 +22,8 @@ public class Image {
 	internal.bind();
     }
     public Vector size() {
-	return new BasicVector(new double[]{internal.getTextureWidth(), internal.getTextureHeight()});
+    	System.out.println(internal.getTextureHeight());
+    	return new BasicVector(new double[]{internal.getTextureWidth(), internal.getTextureHeight()});
     }
 }
 

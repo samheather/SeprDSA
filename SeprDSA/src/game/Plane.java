@@ -9,6 +9,6 @@ public class Plane implements Drawable {
     	Drawables.add(this);
     }
     public Sprite draw() {
-    	return new Sprite(Images.plane, new BasicVector(new double[]{400.0, 300.0}), 1.0f, 0.0f);
+    	return new Sprite(Images.plane, new BasicVector(new double[]{512.0, 320.0}), 1.0f, 0.0f);
     }
 }

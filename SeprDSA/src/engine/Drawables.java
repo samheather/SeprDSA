@@ -41,7 +41,7 @@ public class Drawables {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, width, height, 0, 1, -1);
+		GL11.glOrtho(0, width, 0, height, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 
@@ -60,14 +60,17 @@ public class Drawables {
 			GL11.glTranslated(s.translation.get(0), s.translation.get(1), 0.0);
 			GL11.glBegin(GL11.GL_QUADS);
 			Vector size = s.image.size();
+//			System.out.println(size.get(0));
+//			System.out.println(size.get(1));
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2d(-size.get(0) / 2.0, -size.get(1) / 2.0);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2d(size.get(0) / 2.0, -size.get(1) / 2.0);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2d(size.get(0) / 2.0, size.get(1) / 2.0);
-			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2d(-size.get(0) / 2.0, size.get(1) / 2.0);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2d(size.get(0) / 2.0, size.get(1) / 2.0);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2d(size.get(0) / 2.0, -size.get(1) / 2.0);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2d(-size.get(0) / 2.0, -size.get(1) / 2.0);
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}
