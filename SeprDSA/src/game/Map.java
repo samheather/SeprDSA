@@ -8,8 +8,8 @@ public class Map implements Drawable {
     	Drawables.add(this);
     }
     
-    private double x = 512;
-    private double y = 320;
+    private double x = 0;
+    private double y = 0;
     
     public Sprite draw() {
     	return new Sprite(Images.map, new BasicVector(

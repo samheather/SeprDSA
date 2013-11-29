@@ -3,7 +3,7 @@ import engine.Drawables;
 import engine.Input;
 import engine.Window;
 import game.Plane;
-//import game.Map;
+import game.Map;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
@@ -14,7 +14,7 @@ public class SeprDSA {
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
-		//Map m = new Map();
+		Map m = new Map();
 		Plane p = new Plane();
 		
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
@@ -24,7 +24,7 @@ public class SeprDSA {
 		while (true) {
 			Input.logic();
 			Drawables.logic();
-			/*
+		/*	
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 												// clear your things.
