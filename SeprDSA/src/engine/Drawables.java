@@ -60,15 +60,15 @@ public class Drawables {
 			Vector size = s.image.size();
 			s.image.bind();
 			GL11.glBegin(GL11.GL_QUADS);
-            GL11.glTexCoord2d(0, 0);
-            GL11.glVertex2d(-size.get(0) / 2.0, -size.get(1) / 2.0);
-            GL11.glTexCoord2d(size.get(0), 0);
-            GL11.glVertex2d(size.get(0) / 2.0, -size.get(1) / 2.0);
-            GL11.glTexCoord2d(size.get(0), size.get(1));
-            GL11.glVertex2d(size.get(0) / 2.0, size.get(1) / 2.0);
-            GL11.glTexCoord2d(0, size.get(1));
-            GL11.glVertex2d(-size.get(0) / 2.0, size.get(1) / 2.0);
-            GL11.glEnd();
+			GL11.glTexCoord2d(0, 0);
+			GL11.glVertex2d(-size.get(0) / 2.0, -size.get(1) / 2.0);
+			GL11.glTexCoord2d(size.get(0), 0);
+			GL11.glVertex2d(size.get(0) / 2.0, -size.get(1) / 2.0);
+			GL11.glTexCoord2d(size.get(0), size.get(1));
+			GL11.glVertex2d(size.get(0) / 2.0, size.get(1) / 2.0);
+			GL11.glTexCoord2d(0, size.get(1));
+			GL11.glVertex2d(-size.get(0) / 2.0, size.get(1) / 2.0);
+			GL11.glEnd();
 			GL11.glPopMatrix();
 		}
 		Display.update();
