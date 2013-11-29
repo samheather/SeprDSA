@@ -24,15 +24,14 @@ public class SeprDSA {
 		while (true) {
 			Input.logic();
 			Drawables.logic();
-		/*	
+			
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 												// clear your things.
 				Display.destroy();
-				AL.destroy();
 				System.exit(0);
 			}
-			*/
+			
 		}
 	}
 

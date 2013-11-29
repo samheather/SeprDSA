@@ -49,17 +49,14 @@ public class Input {
 
 	public static void logic() {
 		while (Keyboard.next()) {
-			if (Keyboard.getEventKeyState()) {
 				int key = Keyboard.getEventKey();
 				List<Keyboardable> handlers = map.get(key);
 				if (handlers == null) {
 					continue;
 				}
 				for (int i = 0; i < handlers.size(); i++) {
-					handlers.get(i).handleKeyboard(key);
-
+					handlers.get(i).handleKeyboard(key, Keyboard.getEventKeyState());
 				}
-			}
 		}
 		while (Mouse.next()) {
 			if (Mouse.getEventButtonState()) {
