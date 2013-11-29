@@ -13,8 +13,8 @@ public class Plane implements Drawable, Keyboardable {
 		Input.addKeyboardable(this);
 	}
 
-	private double x = 400.0;
-	private double y = 300.0;
+	private double x = 0.0;
+	private double y = 0.0;
 
 	public Sprite draw() {
 		return new Sprite(Images.plane, new BasicVector(
@@ -28,9 +28,9 @@ public class Plane implements Drawable, Keyboardable {
 		} else if (key == Keyboard.KEY_RIGHT || key == Keyboard.KEY_D) {
 			x += 10.0;
 		} else if (key == Keyboard.KEY_UP || key == Keyboard.KEY_W) {
-			y -= 10.0;
-		} else if (key == Keyboard.KEY_DOWN || key == Keyboard.KEY_S) {
 			y += 10.0;
+		} else if (key == Keyboard.KEY_DOWN || key == Keyboard.KEY_S) {
+			y -= 10.0;
 		}
 	}
 

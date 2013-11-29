@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="la4j-0.4.5/bin/la4j-0.4.5.jar"/>
 	<classpathentry kind="lib" path="lwjgl-2.9.0/jar/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="SeprDSA/lwjgl-2.9.0/native/macosx"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="SeprDSA/lwjgl-2.9.0/native/linux"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libraries (backup copies)/slick-util.jar"/>

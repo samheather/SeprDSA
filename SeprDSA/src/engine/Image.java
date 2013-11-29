@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL31;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -36,7 +35,7 @@ public class Image {
 		ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth()
 				* image.getHeight() * 4);
 
-		for (int y = 0; y < image.getHeight(); y++) {
+		for (int y = image.getHeight() - 1; y >= 0; y--) {
 			for (int x = 0; x < image.getWidth(); x++) {
 				int pixel = image.getRGB(x, y);
 				buffer.put((byte) ((pixel >> 16) & 0xFF));
