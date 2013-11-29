@@ -4,6 +4,8 @@ import engine.Input;
 import engine.Window;
 import game.Plane;
 import game.Map;
+
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
@@ -27,7 +29,7 @@ public class SeprDSA {
 			
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
-												// clear your things.
+				AL.destroy();					// clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
