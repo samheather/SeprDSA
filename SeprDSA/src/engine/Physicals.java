@@ -23,6 +23,7 @@ public class Physicals {
 		
 		for (int i = 0; i < physicals.size(); i++) {
 			Physical phys = physicals.get(i);
+			System.out.print(phys.getPos());
 			
 			phys.setPos(phys.getPos().add((phys.getVel().multiply(time)))); // Update physical object's positions
 			

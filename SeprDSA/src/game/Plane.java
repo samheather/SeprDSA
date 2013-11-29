@@ -3,22 +3,28 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
+import org.la4j.vector.Vector;
 
 import engine.*;
 import org.la4j.vector.dense.*;
 
-public class Plane implements Drawable, Keyboardable {
+public class Plane implements Drawable, Keyboardable, Physical {
 	public Plane() {
 		Drawables.add(this);
+		Physicals.add(this);
 		Input.addKeyboardable(this);
 	}
 
-	private double x = 0.0;
+	private double x = 0.0; // Should be pixel values for x,y
 	private double y = 0.0;
+	private double z = 10.0;
+	private float rotation = 20;
 	private boolean left = false; 
 	private boolean right =  false;
 	private boolean up = false;
 	private boolean down = false;
+	private double speed = 100;
+	private double radius = 200;
 
 	public Sprite draw() {
 		if (left ) {
@@ -34,8 +40,39 @@ public class Plane implements Drawable, Keyboardable {
 			y -= 10.0;
 		}
 		return new Sprite(Images.plane, new BasicVector(
-				new double[] { x, y }), 1.0f, 0.0f);
+				new double[] { x, y }), 1.0f, rotation);
 	}
+	
+	public Vector getPos(){
+		return new BasicVector(new double[] {x, y, z}); 
+	}
+	
+	public void setPos(Vector newPos){
+		x = newPos.get(0);
+		y = newPos.get(1);
+		z = newPos.get(2);
+	}
+	
+	public Vector getVel(){
+		/*TODO
+		 * Implement z stuff, need more attributes.
+		*/
+		return new BasicVector(new double[] {Math.sin(rotation), Math.cos(rotation), 0}).multiply(speed); 
+	}
+	
+	public void setVel(Vector newVel){
+		rotation = (float) Math.atan(y/x);
+		speed = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+	}
+	
+	public boolean isCollidingPos(Vector checkPos){
+		return Math.sqrt(Math.pow(x-checkPos.get(0), 2) + Math.pow(y-checkPos.get(1), 2)) < radius;
+	}
+	
+	public boolean isCollidingObj(Physical checkObj){
+		return Math.sqrt(Math.pow(x-checkObj.getPos().get(0), 2) + Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
+	}
+	
 
 	@Override
 	public void handleKeyboard(int key, boolean pressed) {

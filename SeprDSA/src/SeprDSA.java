@@ -1,6 +1,7 @@
 import engine.Audible;
 import engine.Drawables;
 import engine.Input;
+import engine.Physicals;
 import engine.Window;
 import game.Plane;
 import game.Map;
@@ -10,7 +11,7 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		Drawables.initialise(new Window(1024, 640), 1024, 640);
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
@@ -18,7 +19,7 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Plane p = new Plane();
-		
+
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
@@ -26,14 +27,14 @@ public class SeprDSA {
 		while (true) {
 			Input.logic();
 			Drawables.logic();
-			
+			Physicals.logic(0);
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
-				AL.destroy();					// clear your things.
+				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
-			
+
 		}
 	}
 
