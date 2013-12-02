@@ -28,7 +28,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private double speed = 100;
 	private double radius = 200;
 	private Image[] planeImages = {Images.plane1,Images.plane2};
-	private int randomInt = new Random().nextInt(planeImages.length);
+	private int randomImage = new Random().nextInt(planeImages.length);
 
 	public Sprite draw() {
 		if (left ) {
@@ -43,7 +43,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		if (down) {
 			y -= 10.0;
 		}
-		return new Sprite(planeImages[randomInt], new BasicVector(
+		return new Sprite(planeImages[randomImage], new BasicVector(
 				new double[] { x, y }), 1.0f, rotation);
 	}
 	
