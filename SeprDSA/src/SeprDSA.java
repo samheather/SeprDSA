@@ -19,7 +19,6 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Plane p = new Plane();
-
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
@@ -27,7 +26,7 @@ public class SeprDSA {
 		while (true) {
 			Input.logic();
 			Drawables.logic();
-			Physicals.logic(0);
+			Physicals.logic(0.01);
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.

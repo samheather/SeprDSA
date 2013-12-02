@@ -17,9 +17,9 @@ public class Physicals {
 		physicals.remove(d);
 	}
 
-	public static List<Physical> logic(double time) {
-		ArrayList<Physical> colliding;
-		colliding = new ArrayList<Physical>();
+	public static ArrayList<Physical[]> logic(double time) {
+		ArrayList<Physical[]> colliding;
+		colliding = new ArrayList<Physical[]>();
 		
 		for (int i = 0; i < physicals.size(); i++) {
 			Physical phys = physicals.get(i);
@@ -33,7 +33,7 @@ public class Physicals {
 				Physical checkOther = physicals.get(j);
 				
 				if (!(phys.equals(checkOther)) && (phys.isCollidingPos(checkOther.getPos()))){ // If the physical isn't itself and is colliding
-					colliding.add(checkOther);
+					colliding.add(new Physical[] {phys, checkOther});
 				}
 				
 			}

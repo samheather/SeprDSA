@@ -2,6 +2,8 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
@@ -18,13 +20,15 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private double x = 0.0; // Should be pixel values for x,y
 	private double y = 0.0;
 	private double z = 10.0;
-	private float rotation = 20;
+	private float rotation = 0;
 	private boolean left = false; 
 	private boolean right =  false;
 	private boolean up = false;
 	private boolean down = false;
 	private double speed = 100;
 	private double radius = 200;
+	private Image[] planeImages = {Images.plane1,Images.plane2};
+	private int randomInt = new Random().nextInt(planeImages.length);
 
 	public Sprite draw() {
 		if (left ) {
@@ -39,7 +43,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		if (down) {
 			y -= 10.0;
 		}
-		return new Sprite(Images.plane, new BasicVector(
+		return new Sprite(planeImages[randomInt], new BasicVector(
 				new double[] { x, y }), 1.0f, rotation);
 	}
 	
@@ -57,7 +61,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		/*TODO
 		 * Implement z stuff, need more attributes.
 		*/
-		return new BasicVector(new double[] {Math.sin(rotation), Math.cos(rotation), 0}).multiply(speed); 
+		return new BasicVector(new double[] {Math.cos(rotation), Math.sin(rotation), 0}).multiply(speed); 
 	}
 	
 	public void setVel(Vector newVel){
@@ -69,7 +73,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		return Math.sqrt(Math.pow(x-checkPos.get(0), 2) + Math.pow(y-checkPos.get(1), 2)) < radius;
 	}
 	
-	public boolean isCollidingObj(Physical checkObj){
+	public boolean isCollidingObj(Physical checkObj){ // This function isn't actually used anywhere.
 		return Math.sqrt(Math.pow(x-checkObj.getPos().get(0), 2) + Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
 	}
 	
