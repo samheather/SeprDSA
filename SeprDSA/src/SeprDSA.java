@@ -2,8 +2,10 @@ import engine.Audible;
 import engine.Drawables;
 import engine.Input;
 import engine.Window;
+import game.Leaderboard;
 import game.Plane;
 import game.Map;
+
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
@@ -16,6 +18,7 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Plane p = new Plane();
+		Leaderboard l = new Leaderboard();
 		
 		
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);

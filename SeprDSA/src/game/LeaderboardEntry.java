@@ -1,6 +1,6 @@
 package game;
 
-public class LeaderboardEntry {
+public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 private int score;
 private String name;
 
@@ -18,6 +18,10 @@ public void setScore(int score) {
 
 public void setName(String name) {
 	this.name = name;
+}
+
+public int compareTo(LeaderboardEntry other) {
+    return this.score - other.score;
 }
 
 }

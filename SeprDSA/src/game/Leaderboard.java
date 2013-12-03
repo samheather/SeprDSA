@@ -2,32 +2,52 @@ package game;
 import engine.Drawable;
 import engine.Sprite;
 import game.LeaderboardEntry;
+
 import java.awt.Font;
+import java.util.Arrays;
 
 import org.la4j.vector.dense.BasicVector;
 import org.newdawn.slick.TrueTypeFont;
 
-public class Leaderboard implements Drawable {
-LeaderboardEntry[] leaderboardentries = new LeaderboardEntry[5];
+public class Leaderboard /*implements Drawable*/ {
+	
+	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	
+	// From playing about with lwjgl text rendering.
+	//public TrueTypeFont font;
+	//public void writeStuff() {
+	//	Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
+	//	font = new TrueTypeFont(awtFont, false);
+	//}
+	
 
-public TrueTypeFont font;
-
-public Sprite draw() {
-	return new Sprite(Images.map, new BasicVector(
-			new double[] { x, y }), 1.0f, 0.0f);
-}
-
-private Leaderboard() {
-	for (int i = 0;i < 5; i++){
-		leaderboardentries[i].setName("Sam");
-		leaderboardentries[i].setScore(5*i);
+	//TODO(Jamaal) make leaderboard drawable, then re-enable and adjust this
+	//plus re-enable 'implements Drawable' in Class title at top.
+	
+//	public Sprite draw() {
+//		return new Sprite(Images.map, new BasicVector(
+//				new double[] { x, y }), 1.0f, 0.0f);
+//	}
+	
+	public Leaderboard() {
+		for (int i = 0;i < 5; i++){
+			leaderboardEntries[i] = new LeaderboardEntry();
+			leaderboardEntries[i].setName("Sam");
+			leaderboardEntries[i].setScore(-5*i);
+		}
+		printLeaderboard();
+		Arrays.sort(leaderboardEntries);
+		printLeaderboard();
 	}
-}
-
-public void getLeaderboardEntry() {
-	Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
-	font = new TrueTypeFont(awtFont, false);
-}
+	
+	private void printLeaderboard() {
+		for (int i = 0; i<leaderboardEntries.length; i++) {
+			System.out.println(leaderboardEntries[i].getScore());
+		}
+	}
+	
+	public void getLeaderboardEntry() {
+	}
 
 }
 
