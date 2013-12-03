@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.la4j.vector.Vector;
+
 public class Physicals {
 	private static ArrayList<Physical> physicals;
 	static {
@@ -17,14 +19,12 @@ public class Physicals {
 		physicals.remove(d);
 	}
 
-	public static ArrayList<Physical[]> logic(double time) {
+	public static ArrayList<Physical[]> logic(double time){
 		ArrayList<Physical[]> colliding;
 		colliding = new ArrayList<Physical[]>();
 		
 		for (int i = 0; i < physicals.size(); i++) {
 			Physical phys = physicals.get(i);
-			System.out.print(phys.getPos());
-			
 			phys.setPos(phys.getPos().add((phys.getVel().multiply(time)))); // Update physical object's positions
 			
 			
@@ -38,6 +38,7 @@ public class Physicals {
 				
 			}
 		}
+		//System.out.println(colliding);
 		return colliding;
 	}
 

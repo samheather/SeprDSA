@@ -11,25 +11,30 @@ import engine.*;
 import org.la4j.vector.dense.*;
 
 public class Plane implements Drawable, Keyboardable, Physical {
-	public Plane() {
-		Drawables.add(this);
-		Physicals.add(this);
-		Input.addKeyboardable(this);
-	}
 
 	private double x = 0.0; // Should be pixel values for x,y
 	private double y = 0.0;
 	private double z = 10.0;
-	private float rotation = 0;
+	private Vector velocity = new BasicVector( new double[] {0,0,0});
+	private float rotation = 30;
 	private boolean left = false; 
 	private boolean right =  false;
 	private boolean up = false;
 	private boolean down = false;
-	private double speed = 100;
 	private double radius = 200;
 	private Image[] planeImages = {Images.plane1,Images.plane2};
 	private int randomImage = new Random().nextInt(planeImages.length);
 
+	public Plane(Vector pos,float rotate) {
+		rotation = rotate;
+		x = pos.get(0);
+		y = pos.get(1);
+		z = pos.get(2);
+		Drawables.add(this);
+		Physicals.add(this);
+		Input.addKeyboardable(this);
+	}
+	
 	public Sprite draw() {
 		if (left ) {
 			x -= 10.0;
@@ -61,12 +66,12 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		/*TODO
 		 * Implement z stuff, need more attributes.
 		*/
-		return new BasicVector(new double[] {Math.cos(rotation), Math.sin(rotation), 0}).multiply(speed); 
+		return velocity; 
 	}
 	
 	public void setVel(Vector newVel){
-		rotation = (float) Math.atan(y/x);
-		speed = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+		rotation = (float) Math.atan(newVel.get(1)/newVel.get(0));
+		velocity = newVel;
 	}
 	
 	public boolean isCollidingPos(Vector checkPos){

@@ -78,27 +78,28 @@ public class Drawables {
 		for (int i = 0; i < drawables.size(); i++) {
 			GL11.glPushMatrix();
 			Sprite s = drawables.get(i).draw();
-			GL11.glRotatef(s.rotation, 0.0f, 0.0f, 1.0f);
-			GL11.glScalef(s.scale, s.scale, 0.0f);
 			GL11.glTranslated(s.translation.get(0), s.translation.get(1), 0.0);
+			GL11.glScalef(s.scale, s.scale, 0.0f);
+			GL11.glRotatef(s.rotation, 0.0f, 0.0f, 1.0f);
+
 			Vector size = s.image.size();
 			s.image.bind();
 			double x = size.get(0);
 			double y = size.get(1);
 			GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-			
-				GL11.glTexCoord2d(0, 0);
-				GL11.glVertex2d(-x / 2.0, -y / 2.0);
-				
-				GL11.glTexCoord2d(x, 0);
-				GL11.glVertex2d(x / 2.0, -y / 2.0);
-				
-				GL11.glTexCoord2d(0, y);
-				GL11.glVertex2d(-x / 2.0, y / 2.0);
-				
-				GL11.glTexCoord2d(x, y);
-				GL11.glVertex2d(x / 2.0, y / 2.0);
-				
+
+			GL11.glTexCoord2d(0, 0);
+			GL11.glVertex2d(-x / 2.0, -y / 2.0);
+
+			GL11.glTexCoord2d(x, 0);
+			GL11.glVertex2d(x / 2.0, -y / 2.0);
+
+			GL11.glTexCoord2d(0, y);
+			GL11.glVertex2d(-x / 2.0, y / 2.0);
+
+			GL11.glTexCoord2d(x, y);
+			GL11.glVertex2d(x / 2.0, y / 2.0);
+
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}

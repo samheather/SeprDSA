@@ -14,7 +14,7 @@ public class Audible {
 		try {
 			SoundStore.get().setSoundVolume(volume);
 			if (path.endsWith(".wav")) {
-				Audio sound = SoundStore.get().getWAV(path); 
+				Audio sound = SoundStore.get().getWAV(path);
 				sound.playAsSoundEffect(1, 1, looping); // (pitch gain looping)
 			} else if (path.endsWith(".ogg")) {
 				Audio sound = SoundStore.get().getOgg(path);
