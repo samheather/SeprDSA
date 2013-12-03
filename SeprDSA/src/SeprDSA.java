@@ -6,16 +6,10 @@ import engine.Window;
 import game.Leaderboard;
 import game.Plane;
 import game.Map;
-<<<<<<< HEAD
 import game.WayPoint;
-
 import java.util.Random;
-
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
-=======
-
->>>>>>> LeaderboardFonts
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
