@@ -3,14 +3,19 @@ import engine.Drawables;
 import engine.Input;
 import engine.Physicals;
 import engine.Window;
+import game.Leaderboard;
 import game.Plane;
 import game.Map;
+<<<<<<< HEAD
 import game.WayPoint;
 
 import java.util.Random;
 
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
+=======
+
+>>>>>>> LeaderboardFonts
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
@@ -26,6 +31,8 @@ public class SeprDSA {
 		Map m = new Map();
 		Plane p = new Plane(new BasicVector(new double[] {0,0,0}), 0.0f); // Plane(position,rotation)
 		Plane p1 = new Plane(new BasicVector(new double[] {200,0,0}), 30.0f);
+		Leaderboard l = new Leaderboard();
+	
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
