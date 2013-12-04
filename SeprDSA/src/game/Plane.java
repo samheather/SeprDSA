@@ -75,11 +75,14 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	}
 	
 	public boolean isCollidingPos(Vector checkPos){
-		return Math.sqrt(Math.pow(x-checkPos.get(0), 2) + Math.pow(y-checkPos.get(1), 2)) < radius;
+		return Math.sqrt(Math.pow(x-checkPos.get(0), 2) + 
+				Math.pow(y-checkPos.get(1), 2)) < radius;
 	}
 	
-	public boolean isCollidingObj(Physical checkObj){ // This function isn't actually used anywhere.
-		return Math.sqrt(Math.pow(x-checkObj.getPos().get(0), 2) + Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
+	// This function isn't actually used anywhere.
+	public boolean isCollidingObj(Physical checkObj){
+		return Math.sqrt(Math.pow(x-checkObj.getPos().get(0), 2) + 
+				Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
 	}
 	
 

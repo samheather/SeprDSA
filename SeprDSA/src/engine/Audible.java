@@ -5,7 +5,8 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 
 /* 8 or 16 bit encoding between 8 kHz and 48 kHz is what javax supports. 
- * If there are errors, it's your sound file. Use Audacity to convert it to a 16 bit format
+ * If there are errors, it's your sound file. Use Audacity to convert it to a 16
+ * bit format
  */
 
 public class Audible {

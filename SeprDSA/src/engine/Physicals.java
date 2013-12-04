@@ -25,14 +25,17 @@ public class Physicals {
 		
 		for (int i = 0; i < physicals.size(); i++) {
 			Physical phys = physicals.get(i);
-			phys.setPos(phys.getPos().add((phys.getVel().multiply(time)))); // Update physical object's positions
+			// Update physical object's positions
+			phys.setPos(phys.getPos().add((phys.getVel().multiply(time))));
 			
 			
-			
-			for (int j = 0; j < physicals.size(); j++){ // This for loop will iterate all physicals to check for collisions
+			// This for loop will iterate all physicals to check for collisions
+			for (int j = 0; j < physicals.size(); j++){
 				Physical checkOther = physicals.get(j);
 				
-				if (!(phys.equals(checkOther)) && (phys.isCollidingPos(checkOther.getPos()))){ // If the physical isn't itself and is colliding
+				// If the physical isn't itself and is colliding
+				if (!(phys.equals(checkOther)) && (phys.isCollidingPos(
+						checkOther.getPos()))){
 					colliding.add(new Physical[] {phys, checkOther});
 				}
 				

@@ -8,7 +8,8 @@ public class Sprite {
     public Vector translation;
     public float scale;
     public float rotation;
-    public Sprite(Image image_, Vector translation_, float scale_, float rotation_) {
+    public Sprite(Image image_, Vector translation_, float scale_, 
+    		float rotation_) {
 	image = image_;
 	translation = translation_;
 	scale = scale_;

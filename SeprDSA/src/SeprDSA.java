@@ -23,7 +23,8 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		Plane p = new Plane(new BasicVector(new double[] {0,0,0}), 0.0f); // Plane(position,rotation)
+		Plane p = new Plane(new BasicVector(
+				new double[] {0,0,0}), 0.0f); // Plane(position,rotation)
 		Plane p1 = new Plane(new BasicVector(new double[] {200,0,0}), 30.0f);
 		Leaderboard l = new Leaderboard();
 	
@@ -32,7 +33,10 @@ public class SeprDSA {
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 		
 		for (int i = 1; i <10; i++){
-			WayPoint w = new WayPoint(new BasicVector(new double[] {(randomgen.nextDouble()-0.5)*924,(randomgen.nextDouble()-0.5)*540,randomgen.nextDouble()*20}));
+			WayPoint w = new WayPoint(new BasicVector(new double[] {
+					(randomgen.nextDouble()-0.5)*924,
+					(randomgen.nextDouble()-0.5)*540,
+					randomgen.nextDouble()*20}));
 			System.out.println(w.getPos());
 		}
 		

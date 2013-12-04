@@ -22,7 +22,8 @@ import engine.Sprite;
 		}
 		public Sprite draw(){
 			return new Sprite(Images.waypoint, new BasicVector(
-					new double[] { position.get(0), position.get(1) }), 1.0f, 0.0f);
+					new double[] { position.get(0), position.get(1) }), 1.0f,
+					0.0f);
 		}
 
 		public Vector getPos() {
