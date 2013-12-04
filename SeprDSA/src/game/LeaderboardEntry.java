@@ -21,7 +21,7 @@ public void setName(String name) {
 }
 
 public int compareTo(LeaderboardEntry other) {
-    return this.score - other.score;
+    return -(this.score - other.score);
 }
 
 }

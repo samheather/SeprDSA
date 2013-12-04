@@ -13,6 +13,7 @@ import org.newdawn.slick.TrueTypeFont;
 public class Leaderboard /*implements Drawable*/ {
 	
 	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	String leaderboardFile = "thisIsNotTheLeaderboard.googleIsCool867";
 	
 	// From playing about with lwjgl text rendering.
 	//public TrueTypeFont font;
@@ -31,42 +32,62 @@ public class Leaderboard /*implements Drawable*/ {
 //	}
 	
 	public Leaderboard() {
-		for (int i = 0;i < 5; i++){
+		// Initialise
+		for (int i = 0; i < leaderboardEntries.length; i++) {
 			leaderboardEntries[i] = new LeaderboardEntry();
-			leaderboardEntries[i].setName("Sam");
-			leaderboardEntries[i].setScore(-5*i);
 		}
+		
+		// Initialise values if first run.
+		
+			readLeaderboard();
+			sortLeaderboard();
+			saveLeaderboard();
+		//}
 		printLeaderboard();
+	}
+	
+	public void sortLeaderboard() {
 		Arrays.sort(leaderboardEntries);
-		printLeaderboard();
 	}
 	
 	public void saveLeaderboard() {
 		try {
 	        // create a new file with an ObjectOutputStream
-	        FileOutputStream out = new FileOutputStream("thisIsNotTheLeaderboard.googleIsCool");
+	        FileOutputStream out = new FileOutputStream(leaderboardFile);
 	        ObjectOutputStream oout = new ObjectOutputStream(out);
 	
 	        // write something in the file
 	        for (int i = 0; i<leaderboardEntries.length; i++) {
-	        	oout.writeObject(leaderboardEntries[i]);
+	        	oout.writeObject(leaderboardEntries[i].getName());
+	        	oout.writeObject(leaderboardEntries[i].getScore());
 	        }
 	        
 	        oout.close();
 		}
 		catch (Exception ex) {
-			System.out.println("Saving leaderboard raised exception");
+			System.out.println("Saving leaderboard raised exception.");
 		}
-
+	}
+	
+	public void readLeaderboard() {
+		try {
+			ObjectInputStream ois =
+	                new ObjectInputStream(new FileInputStream(leaderboardFile));
+			for (int i = 0; i<leaderboardEntries.length; i++) {
+				leaderboardEntries[i].setName((String)ois.readObject());
+				leaderboardEntries[i].setScore((Integer)ois.readObject());
+			}
+		}
+		catch (Exception ex) {
+			System.out.println("Saving leaderboard raised exception.");
+		}
 	}
 	
 	private void printLeaderboard() {
 		for (int i = 0; i<leaderboardEntries.length; i++) {
-			System.out.println(leaderboardEntries[i].getScore());
+			System.out.println(leaderboardEntries[i].getName() + " scored: " +
+					leaderboardEntries[i].getScore());
 		}
-	}
-	
-	public void getLeaderboardEntry() {
 	}
 
 }
