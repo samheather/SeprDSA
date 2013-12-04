@@ -4,6 +4,7 @@ import engine.Sprite;
 import game.LeaderboardEntry;
 
 import java.awt.Font;
+import java.io.*;
 import java.util.Arrays;
 
 import org.la4j.vector.dense.BasicVector;
@@ -38,6 +39,25 @@ public class Leaderboard /*implements Drawable*/ {
 		printLeaderboard();
 		Arrays.sort(leaderboardEntries);
 		printLeaderboard();
+	}
+	
+	public void saveLeaderboard() {
+		try {
+	        // create a new file with an ObjectOutputStream
+	        FileOutputStream out = new FileOutputStream("thisIsNotTheLeaderboard.googleIsCool");
+	        ObjectOutputStream oout = new ObjectOutputStream(out);
+	
+	        // write something in the file
+	        for (int i = 0; i<leaderboardEntries.length; i++) {
+	        	oout.writeObject(leaderboardEntries[i]);
+	        }
+	        
+	        oout.close();
+		}
+		catch (Exception ex) {
+			System.out.println("Saving leaderboard raised exception");
+		}
+
 	}
 	
 	private void printLeaderboard() {
