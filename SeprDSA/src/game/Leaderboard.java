@@ -13,7 +13,7 @@ import org.newdawn.slick.TrueTypeFont;
 public class Leaderboard /*implements Drawable*/ {
 	
 	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
-	String leaderboardFile = "thisIsNotTheLeaderboard.googleIsCool867";
+	String leaderboardFile = "thisIsNotTheLeaderboard.googleIsCool";
 	
 	// From playing about with lwjgl text rendering.
 	//public TrueTypeFont font;
@@ -38,19 +38,51 @@ public class Leaderboard /*implements Drawable*/ {
 		}
 		
 		// Initialise values if first run.
-		
-			readLeaderboard();
-			sortLeaderboard();
+		File leaderboardFileCheckForFile = new File(leaderboardFile);
+		if(!leaderboardFileCheckForFile.exists()) {
+			System.out.println(
+					"Is first load, initialising leaderboard values");
+			for (int i = 0; i < leaderboardEntries.length; i++){
+				leaderboardEntries[i].setName("Sam");
+				leaderboardEntries[i].setScore((double)5+i);
+			}
+			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
-		//}
-		printLeaderboard();
+		}
+		else {
+			readLeaderboard();
+			sortLeaderboard(leaderboardEntries);
+			saveLeaderboard();
+		}
+		
+		// This is a test of the leaderboard
+		//TODO(Dan) Turn this block into a test, so we can add these values and
+		//check we get the expected output array of LeaderboardEntries.
+//		printLeaderboard();
+//		addLeaderboardEntry("a", 17);
+//		addLeaderboardEntry("b", 1);
+//		addLeaderboardEntry("c", 5.5);
+//		addLeaderboardEntry("d", 8.3);
+//		addLeaderboardEntry("e", 6.2);
+//		printLeaderboard(); // Expect a 17, s 9, d 8.3, s 8, s 7
 	}
 	
-	public void sortLeaderboard() {
-		Arrays.sort(leaderboardEntries);
+	public void addLeaderboardEntry(String name, double score) {
+		LeaderboardEntry[] tempLeaderboardEntries = new LeaderboardEntry[6];
+		System.arraycopy( leaderboardEntries, 0, tempLeaderboardEntries, 0, 
+				leaderboardEntries.length );
+		tempLeaderboardEntries[5] = new LeaderboardEntry(name, score);
+		sortLeaderboard(tempLeaderboardEntries);
+		System.arraycopy( tempLeaderboardEntries, 0, leaderboardEntries, 0, 
+				leaderboardEntries.length );
+		saveLeaderboard();
 	}
 	
-	public void saveLeaderboard() {
+	private void sortLeaderboard(LeaderboardEntry[] leaderboardToSort) {
+		Arrays.sort(leaderboardToSort);
+	}
+	
+	private void saveLeaderboard() {
 		try {
 	        // create a new file with an ObjectOutputStream
 	        FileOutputStream out = new FileOutputStream(leaderboardFile);
@@ -69,14 +101,16 @@ public class Leaderboard /*implements Drawable*/ {
 		}
 	}
 	
-	public void readLeaderboard() {
+	private void readLeaderboard() {
 		try {
 			ObjectInputStream ois =
 	                new ObjectInputStream(new FileInputStream(leaderboardFile));
 			for (int i = 0; i<leaderboardEntries.length; i++) {
 				leaderboardEntries[i].setName((String)ois.readObject());
-				leaderboardEntries[i].setScore((Integer)ois.readObject());
+				leaderboardEntries[i].setScore((Double)ois.readObject());
 			}
+			
+			ois.close();
 		}
 		catch (Exception ex) {
 			System.out.println("Saving leaderboard raised exception.");

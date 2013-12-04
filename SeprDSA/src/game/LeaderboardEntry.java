@@ -1,27 +1,38 @@
 package game;
 
 public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
-private int score;
-private String name;
+	
+	private String name;
+	private double score;
+	
+	public LeaderboardEntry() {
+		// Do nothing.
+	}
 
-public int getScore() {
-	return score;
-}
+	public LeaderboardEntry(String name, double score) {
+		this.name = name;
+		this.score = score;
+	}
 
-public String getName() {
-	return name;
-}
+	public double getScore() {
+		return score;
+	}
 
-public void setScore(int score) {
-	this.score = score;
-}
+	public String getName() {
+		return name;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public void setScore(double score) {
+		this.score = score;
+	}
 
-public int compareTo(LeaderboardEntry other) {
-    return -(this.score - other.score);
-}
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public int compareTo(LeaderboardEntry other) {
+		if (this.score > other.score) { return -1; }
+		if (this.score < other.score) { return 1; }
+	    return 0;
+	}
 }
