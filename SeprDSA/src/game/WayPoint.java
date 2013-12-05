@@ -14,6 +14,7 @@ import engine.Sprite;
 	public class WayPoint implements Drawable, Physical {
 		
 		private Vector position = new BasicVector( new double[] {0,0,0});
+		private int radius = 50;
 		
 		public WayPoint(Vector pos) {
 			position = pos;

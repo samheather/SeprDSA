@@ -3,6 +3,7 @@ import engine.Drawables;
 import engine.Input;
 import engine.Physicals;
 import engine.Window;
+import game.EntryExitPoint;
 import game.Leaderboard;
 import game.Plane;
 import game.Map;
@@ -15,6 +16,8 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
 
+	private static int pixelsFromEdge = 100;
+	
 	public static void main(String[] args) {
 		Random randomgen = new Random(System.currentTimeMillis());
 		Drawables.initialise(new Window(1024, 640), 1024, 640);
@@ -32,16 +35,17 @@ public class SeprDSA {
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 		
-		for (int i = 1; i <10; i++){
-			WayPoint w = new WayPoint(new BasicVector(new double[] {
-					(randomgen.nextDouble()-0.5)*924,
-					(randomgen.nextDouble()-0.5)*540,
-					randomgen.nextDouble()*20}));
-			System.out.println(w.getPos());
-		}
+		new EntryExitPoint(new BasicVector(new double[] {-170,-48,0}),40);
 		
+		for (int i = 1; i <10; i++){
+			new WayPoint(new BasicVector(new double[] {
+					(randomgen.nextDouble()-0.5)*(Display.getWidth()-pixelsFromEdge),
+					(randomgen.nextDouble()-0.5)*(Display.getHeight()-pixelsFromEdge),
+					randomgen.nextDouble()*20}));
+		}
+
 		while (true) {
-			Physicals.logic(0.01);
+			Physicals.logic(1);
 			Input.logic();
 			Drawables.logic();
 

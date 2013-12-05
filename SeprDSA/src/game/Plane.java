@@ -12,18 +12,18 @@ import org.la4j.vector.dense.*;
 
 public class Plane implements Drawable, Keyboardable, Physical {
 
-	private double x = 0.0; // Should be pixel values for x,y
-	private double y = 0.0;
-	private double z = 10.0;
+	private double x; // Should be pixel values for x,y
+	private double y;
+	private double z;
 	private Vector velocity = new BasicVector( new double[] {0,0,0});
-	private float rotation = 30;
+	private float rotation;
 	private boolean left = false; 
 	private boolean right =  false;
 	private boolean up = false;
 	private boolean down = false;
 	private double radius = 200;
 	private Image[] planeImages = {Images.plane1,Images.plane2};
-	private int randomImage = new Random().nextInt(planeImages.length);
+	private int randomImage = new Random(System.currentTimeMillis()).nextInt(planeImages.length);
 
 	public Plane(Vector pos,float rotate) {
 		rotation = rotate;
