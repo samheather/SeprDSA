@@ -8,6 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
 import engine.*;
+
 import org.la4j.vector.dense.*;
 
 public class Plane implements Drawable, Keyboardable, Physical {
@@ -112,5 +113,13 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		result.add(Keyboard.KEY_S);
 		result.add(Keyboard.KEY_D);
 		return result;
+	}
+	@Override
+	public double getZ() {
+		return z;
+	}
+	@Override
+	public int compareTo(Drawable o) {
+		return (int)(this.getZ() - o.getZ());
 	}
 }

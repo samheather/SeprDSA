@@ -1,12 +1,14 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.Display;
 import org.la4j.vector.*;
 import org.lwjgl.LWJGLException;
+
 
 public class Drawables {
 	private static List<Drawable> drawables;
@@ -75,6 +77,7 @@ public class Drawables {
 			resize();
 		}
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		Collections.sort(drawables);
 		for (int i = 0; i < drawables.size(); i++) {
 			GL11.glPushMatrix();
 			Sprite s = drawables.get(i).draw();

@@ -50,5 +50,16 @@ import engine.Sprite;
 		public boolean isCollidingObj(Physical checkObj) {
 			return false;
 		}
+		
+		@Override
+		public double getZ() {
+			return position.get(2);
+		}
+		
+		@Override
+		public int compareTo(Drawable o) {
+			// TODO Auto-generated method stub
+			return (int)(this.getZ() - o.getZ());
+		}
 	}
 

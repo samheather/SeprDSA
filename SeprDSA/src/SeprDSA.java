@@ -27,8 +27,8 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Plane p = new Plane(new BasicVector(
-				new double[] {0,0,0}), 0.0f); // Plane(position,rotation)
-		Plane p1 = new Plane(new BasicVector(new double[] {200,0,0}), 30.0f);
+				new double[] {0,0,10}), 0.0f); // Plane(position,rotation)
+		Plane p1 = new Plane(new BasicVector(new double[] {50,0,30}), 30.0f);
 		Leaderboard l = new Leaderboard();
 	
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);

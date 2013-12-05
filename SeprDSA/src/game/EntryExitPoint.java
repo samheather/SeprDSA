@@ -55,6 +55,15 @@ public class EntryExitPoint implements Drawable, Physical {
 				Math.pow(position.get(1)-checkObj.getPos().get(1), 2)) < radius;
 	}
 	
+	@Override
+	public double getZ() {
+		return position.get(2);
+	}
 	
+	@Override
+	public int compareTo(Drawable o) {
+		// TODO Auto-generated method stub
+		return (int)(this.getZ() - o.getZ());
+	}
 
 }
