@@ -22,18 +22,26 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean right =  false;
 	private boolean up = false;
 	private boolean down = false;
-	private double radius = 200;
+	private double radius = 50;
 	private Image[] planeImages = {Images.plane1,Images.plane2};
-	private int randomImage = new Random(System.currentTimeMillis()).nextInt(planeImages.length);
+	private int randomImage = new Random().nextInt(planeImages.length);
+	private int size = 50;
+	private String number;
 
-	public Plane(Vector pos,float rotate) {
+	public Plane(Vector pos,float rotate, String flightNumber) {
 		rotation = rotate;
 		x = pos.get(0);
 		y = pos.get(1);
 		z = pos.get(2);
+		number = flightNumber;
 		Drawables.add(this);
 		Physicals.add(this);
 		Input.addKeyboardable(this);
+	}
+	
+	@Override
+	public String toString(){
+		return "Plane" + number;
 	}
 	
 	public Sprite draw() {
@@ -50,7 +58,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 			y -= 10.0;
 		}
 		return new Sprite(planeImages[randomImage], new BasicVector(
-				new double[] { x, y }), 1.0f, rotation);
+				new double[] { x, y }), (float)(size/planeImages[randomImage].size().get(0)), rotation);
 	}
 	
 	public Vector getPos(){
@@ -86,6 +94,15 @@ public class Plane implements Drawable, Keyboardable, Physical {
 				Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
 	}
 	
+	public void destroy(){
+		for(int i = size; i > 0; i--){
+			size -= 1;
+		}
+		Input.removeKeyboardable(this);
+		Physicals.remove(this);
+		Drawables.remove(this);
+	}
+	
 
 	@Override
 	public void handleKeyboard(int key, boolean pressed) {
@@ -114,11 +131,11 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		result.add(Keyboard.KEY_D);
 		return result;
 	}
-	@Override
+
 	public double getZ() {
 		return z;
 	}
-	@Override
+
 	public int compareTo(Drawable o) {
 		return (int)(this.getZ() - o.getZ());
 	}

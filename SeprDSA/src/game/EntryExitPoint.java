@@ -14,18 +14,26 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float bearingNeeded;
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[]{0,0,0});
-	private double radius = 50;
+	private double radius = 10;
+	private int size = 16; // Size in pixels (Square)
+	private int number;
 	
-	public EntryExitPoint(Vector pos, float bearing){
+	@Override
+	public String toString(){
+		return "EntryExitPoint" + number;
+	}
+	
+	public EntryExitPoint(Vector pos, float bearing, int pointNumber){
 		position = pos;
 		bearingNeeded = bearing;
+		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
 	}
 	
 	public Sprite draw(){
 		return new Sprite(Images.entryExitPoint, new BasicVector(
-				new double[] { position.get(0), position.get(1) }), 1.0f,
+				new double[] { position.get(0), position.get(1) }), (float)(size/Images.entryExitPoint.size().get(0)),
 				0.0f);
 	}
 
@@ -55,14 +63,11 @@ public class EntryExitPoint implements Drawable, Physical {
 				Math.pow(position.get(1)-checkObj.getPos().get(1), 2)) < radius;
 	}
 	
-	@Override
 	public double getZ() {
 		return position.get(2);
 	}
 	
-	@Override
 	public int compareTo(Drawable o) {
-		// TODO Auto-generated method stub
 		return (int)(this.getZ() - o.getZ());
 	}
 

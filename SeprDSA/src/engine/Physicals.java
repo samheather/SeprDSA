@@ -41,7 +41,9 @@ public class Physicals {
 				
 			}
 		}
-		//System.out.println(colliding);
+		/*if (!colliding.isEmpty()){
+		System.out.println(colliding.get(0)[0].toString() + colliding.get(0)[1].toString());
+		}*/
 		return colliding;
 	}
 

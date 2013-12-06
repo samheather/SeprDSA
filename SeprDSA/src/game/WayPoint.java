@@ -15,15 +15,24 @@ import engine.Sprite;
 		
 		private Vector position = new BasicVector( new double[] {0,0,0});
 		private int radius = 50;
+		private int size = 16;
+		private int number;
 		
-		public WayPoint(Vector pos) {
+		public WayPoint(Vector pos, int pointNumber) {
 			position = pos;
+			number = pointNumber;
 			Drawables.add(this);
 			Physicals.add(this);
 		}
+		
+		@Override
+		public String toString(){
+			return "WayPoint" + number;
+		}
+		
 		public Sprite draw(){
 			return new Sprite(Images.waypoint, new BasicVector(
-					new double[] { position.get(0), position.get(1) }), 1.0f,
+					new double[] { position.get(0), position.get(1) }), (float)(size/Images.waypoint.size().get(0)),
 					0.0f);
 		}
 
