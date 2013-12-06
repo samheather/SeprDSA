@@ -1,4 +1,4 @@
-package engine;
+package engine.graphics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,9 +6,10 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.Display;
-import org.la4j.vector.*;
+
 import org.lwjgl.LWJGLException;
 
+import engine.graphics.display.DisplayMode;
 
 public class Drawables {
 	private static List<Drawable> drawables;
@@ -46,6 +47,7 @@ public class Drawables {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glPushMatrix();
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		resize();
 	}
 
@@ -72,39 +74,18 @@ public class Drawables {
 
 	public static void logic() {
 		if (Display.wasResized()) {
+			GL11.glPopAttrib();
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
+			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 			resize();
 		}
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		Collections.sort(drawables);
 		for (int i = 0; i < drawables.size(); i++) {
 			GL11.glPushMatrix();
-			Sprite s = drawables.get(i).draw();
-			GL11.glTranslated(s.translation.get(0), s.translation.get(1), 0.0);
-			GL11.glScalef(s.scale, s.scale, 0.0f);
-			GL11.glRotatef(s.rotation, 0.0f, 0.0f, 1.0f);
+			drawables.get(i).draw().render();
 
-			Vector size = s.image.size();
-			s.image.bind();
-			double x = size.get(0);
-			double y = size.get(1);
-			GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-
-			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2d(-x / 2.0, -y / 2.0);
-
-			GL11.glTexCoord2d(x, 0);
-			GL11.glVertex2d(x / 2.0, -y / 2.0);
-
-			GL11.glTexCoord2d(0, y);
-			GL11.glVertex2d(-x / 2.0, y / 2.0);
-
-			GL11.glTexCoord2d(x, y);
-			GL11.glVertex2d(x / 2.0, y / 2.0);
-
-			GL11.glEnd();
-			GL11.glPopMatrix();
 		}
 		Display.update();
 	}

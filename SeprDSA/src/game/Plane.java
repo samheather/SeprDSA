@@ -7,7 +7,13 @@ import java.util.Random;
 import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
-import engine.*;
+import engine.graphics.*;
+import engine.graphics.image.*;
+import engine.graphics.transform.*;
+import engine.input.Input;
+import engine.input.Keyboardable;
+import engine.physics.Physical;
+import engine.physics.Physicals;
 
 import org.la4j.vector.dense.*;
 
@@ -23,8 +29,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean up = false;
 	private boolean down = false;
 	private double radius = 0;
-	private Image[] planeImages = { Images.plane1, Images.plane2 };
-	private int randomImage = new Random().nextInt(planeImages.length);
+	private int randomImage = new Random().nextInt(Images.planes.length);
 	private int size = 50;
 	private String number;
 
@@ -36,6 +41,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		number = flightNumber;
 		Drawables.add(this);
 		Physicals.add(this);
+		// Planes.add(this);
 		Input.addKeyboardable(this);
 	}
 
@@ -44,7 +50,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		return "Plane" + number;
 	}
 
-	public Sprite draw() {
+	public Drawing draw() {
 		if (left) {
 			x -= 10.0;
 		}
@@ -57,10 +63,11 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		if (down) {
 			y -= 10.0;
 		}
-		return new Sprite(planeImages[randomImage], new BasicVector(
-				new double[] { x, y }),
-				(float) (size / planeImages[randomImage].size().get(0)),
-				rotation);
+
+		return new Translate(new Scale(new Rotate(new Sprite(
+				Images.planes[randomImage]), rotation), size
+				/ Images.planes[randomImage].size().get(0)), new BasicVector(
+				new double[] { x, y }));
 	}
 
 	public Vector getPos() {

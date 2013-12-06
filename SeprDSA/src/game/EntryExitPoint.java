@@ -3,13 +3,12 @@ package game;
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
-
-import engine.Drawable;
-import engine.Drawables;
-import engine.Physical;
-import engine.Physicals;
-import engine.Sprite;
 import java.util.Random;
+import engine.graphics.*;
+import engine.graphics.image.Sprite;
+import engine.graphics.transform.*;
+import engine.physics.Physical;
+import engine.physics.Physicals;
 
 public class EntryExitPoint implements Drawable, Physical {
 
@@ -28,6 +27,9 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
+		
+		Drawables.add(this);
+		Physicals.add(this);
 		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
 			position = pos;
 		} else {
@@ -65,16 +67,10 @@ public class EntryExitPoint implements Drawable, Physical {
 			}
 		}
 		tolerance = tolerances;
-		bearingNeeded = bearing;
-		number = pointNumber;
-		Drawables.add(this);
-		Physicals.add(this);
 	}
 
-	public Sprite draw() {
-		return new Sprite(Images.entryExitPoint, new BasicVector(new double[] {
-				position.get(0), position.get(1) }),
-				(float) (size / Images.entryExitPoint.size().get(0)), 0.0f);
+	public Drawing draw() {
+		return new Translate(new Scale(new Sprite(Images.entryExitPoint), size/Images.entryExitPoint.size().get(0)), position);
 	}
 
 	public Vector getPos() {
@@ -94,8 +90,8 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public boolean isCollidingPos(Vector checkPos) {
-		return (Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
-				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius);
+		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
+				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {

@@ -1,8 +1,7 @@
-import engine.Audible;
-import engine.Drawables;
-import engine.Input;
-import engine.Physicals;
-import engine.Window;
+import engine.graphics.Drawables;
+import engine.graphics.display.Window;
+import engine.input.Input;
+import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.Leaderboard;
 import game.Plane;
@@ -38,6 +37,7 @@ public class SeprDSA {
 		Map m = new Map();
 		//Plane p = new Plane(new BasicVector(new double[] { 0, 0, 10 }), 0.0f, generateFlightNumber()); // Plane(position,bearing, flight number)
 		Plane p1 = new Plane(new BasicVector(new double[] {50,0,30}), 349.0f, generateFlightNumber());
+
 		Leaderboard l = new Leaderboard();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);

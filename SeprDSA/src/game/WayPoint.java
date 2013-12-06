@@ -3,13 +3,11 @@ package game;
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
-import engine.Drawable;
-import engine.Drawables;
-import engine.Physical;
-import engine.Physicals;
-import engine.Sprite;
-
-
+import engine.graphics.*;
+import engine.graphics.image.Sprite;
+import engine.graphics.transform.*;
+import engine.physics.Physical;
+import engine.physics.Physicals;
 
 	public class WayPoint implements Drawable, Physical {
 		
@@ -30,10 +28,8 @@ import engine.Sprite;
 			return "WayPoint" + number;
 		}
 		
-		public Sprite draw(){
-			return new Sprite(Images.waypoint, new BasicVector(
-					new double[] { position.get(0), position.get(1) }), (float)(size/Images.waypoint.size().get(0)),
-					0.0f);
+		public Drawing draw() {
+			return new Translate(new Scale(new Sprite(Images.waypoint), size/Images.waypoint.size().get(0)), position);
 		}
 
 		public Vector getPos() {
@@ -74,5 +70,4 @@ import engine.Sprite;
 		public float getBearing() {
 			return 0;
 		}
-	}
-
+}

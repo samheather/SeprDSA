@@ -1,9 +1,10 @@
-package engine;
+package engine.input;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,14 +50,15 @@ public class Input {
 
 	public static void logic() {
 		while (Keyboard.next()) {
-				int key = Keyboard.getEventKey();
-				List<Keyboardable> handlers = map.get(key);
-				if (handlers == null) {
-					continue;
-				}
-				for (int i = 0; i < handlers.size(); i++) {
-					handlers.get(i).handleKeyboard(key, Keyboard.getEventKeyState());
-				}
+			int key = Keyboard.getEventKey();
+			List<Keyboardable> handlers = map.get(key);
+			if (handlers == null) {
+				continue;
+			}
+			for (int i = 0; i < handlers.size(); i++) {
+				handlers.get(i)
+						.handleKeyboard(key, Keyboard.getEventKeyState());
+			}
 		}
 		while (Mouse.next()) {
 			if (Mouse.getEventButtonState()) {
