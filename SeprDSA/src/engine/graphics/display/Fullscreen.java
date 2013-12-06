@@ -1,4 +1,4 @@
-package engine;
+package engine.graphics.display;
 
 public class Fullscreen extends DisplayMode {
 	org.lwjgl.opengl.DisplayMode d;

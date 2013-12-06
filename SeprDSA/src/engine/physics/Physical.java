@@ -1,4 +1,4 @@
-package engine;
+package engine.physics;
 
 import org.la4j.vector.*;
 

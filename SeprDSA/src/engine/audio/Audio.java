@@ -1,7 +1,6 @@
-package engine;
+package engine.audio;
 
 import java.io.IOException;
-import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 
 /* 8 or 16 bit encoding between 8 kHz and 48 kHz is what javax supports. 
@@ -9,16 +8,18 @@ import org.newdawn.slick.openal.SoundStore;
  * bit format
  */
 
-public class Audible {
+public class Audio {
 
 	public static void playSound(String path, boolean looping, float volume) {
 		try {
 			SoundStore.get().setSoundVolume(volume);
 			if (path.endsWith(".wav")) {
-				Audio sound = SoundStore.get().getWAV(path);
+				org.newdawn.slick.openal.Audio sound = SoundStore.get().getWAV(
+						path);
 				sound.playAsSoundEffect(1, 1, looping); // (pitch gain looping)
 			} else if (path.endsWith(".ogg")) {
-				Audio sound = SoundStore.get().getOgg(path);
+				org.newdawn.slick.openal.Audio sound = SoundStore.get().getOgg(
+						path);
 				sound.playAsSoundEffect(1, 1, looping);
 			}
 		} catch (IOException e) {

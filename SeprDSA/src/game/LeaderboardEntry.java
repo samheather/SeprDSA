@@ -1,10 +1,10 @@
 package game;
 
 public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
-	
+
 	private String name;
 	private double score;
-	
+
 	public LeaderboardEntry() {
 		// Do nothing.
 	}
@@ -31,8 +31,12 @@ public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 	}
 
 	public int compareTo(LeaderboardEntry other) {
-		if (this.score > other.score) { return -1; }
-		if (this.score < other.score) { return 1; }
-	    return 0;
+		if (this.score > other.score) {
+			return -1;
+		}
+		if (this.score < other.score) {
+			return 1;
+		}
+		return 0;
 	}
 }

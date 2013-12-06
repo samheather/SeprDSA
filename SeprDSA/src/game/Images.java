@@ -1,6 +1,6 @@
 package game;
 
-import engine.Image;
+import engine.graphics.image.Image;
 
 public class Images {
 	public static Image plane1 = new Image("plane1.png");

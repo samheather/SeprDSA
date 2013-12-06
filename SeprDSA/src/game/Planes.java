@@ -8,11 +8,11 @@ public class Planes {
 	static {
 		planes = new ArrayList<Plane>();
 	}
-	
+
 	public static void add(Plane p) {
 		planes.add(p);
 	}
-	
+
 	public static void remove(Plane p) {
 		planes.remove(p);
 	}

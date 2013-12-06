@@ -1,4 +1,4 @@
-package engine;
+package engine.graphics.image;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -54,17 +54,19 @@ public class Image {
 				GL12.GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL31.GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER,
 				GL_LINEAR);
-				//GL_LINEAR_MIPMAP_LINEAR);
+		// GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL31.GL_TEXTURE_RECTANGLE, GL_TEXTURE_MIN_FILTER,
 				GL_LINEAR);
-				//GL_LINEAR_MIPMAP_LINEAR);
-		//glTexImage2D(GL31.GL_TEXTURE_RECTANGLE, 8, GL_RGBA8, image.getWidth(),
-		//		image.getHeight(), 0, GL12.GL_BGRA, GL_UNSIGNED_BYTE, buffer);
-		//GL30.glGenerateMipmap(GL31.GL_TEXTURE_RECTANGLE);
+		// GL_LINEAR_MIPMAP_LINEAR);
+		// glTexImage2D(GL31.GL_TEXTURE_RECTANGLE, 8, GL_RGBA8,
+		// image.getWidth(),
+		// image.getHeight(), 0, GL12.GL_BGRA, GL_UNSIGNED_BYTE, buffer);
+		// GL30.glGenerateMipmap(GL31.GL_TEXTURE_RECTANGLE);
 		glTexImage2D(GL31.GL_TEXTURE_RECTANGLE, 0, GL_RGBA8, image.getWidth(),
 				image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
 	}
+
 	public void bind() {
 		glBindTexture(GL31.GL_TEXTURE_RECTANGLE, internal);
 
