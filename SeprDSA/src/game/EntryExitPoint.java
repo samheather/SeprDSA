@@ -14,7 +14,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float bearingNeeded;
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[]{0,0,0});
-	private double radius = 50;
+	private double radius = 10;
 	
 	public EntryExitPoint(Vector pos, float bearing){
 		position = pos;

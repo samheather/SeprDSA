@@ -33,6 +33,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		z = pos.get(2);
 		Drawables.add(this);
 		Physicals.add(this);
+		Planes.add(this);
 		Input.addKeyboardable(this);
 	}
 	
