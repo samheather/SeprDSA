@@ -16,19 +16,19 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private double x; // Should be pixel values for x,y
 	private double y;
 	private double z;
-	private Vector velocity = new BasicVector( new double[] {0,0,0});
+	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
 	private float rotation;
-	private boolean left = false; 
-	private boolean right =  false;
+	private boolean left = false;
+	private boolean right = false;
 	private boolean up = false;
 	private boolean down = false;
-	private double radius = 50;
-	private Image[] planeImages = {Images.plane1,Images.plane2};
+	private double radius = 0;
+	private Image[] planeImages = { Images.plane1, Images.plane2 };
 	private int randomImage = new Random().nextInt(planeImages.length);
 	private int size = 50;
 	private String number;
 
-	public Plane(Vector pos,float rotate, String flightNumber) {
+	public Plane(Vector pos, float rotate, String flightNumber) {
 		rotation = rotate;
 		x = pos.get(0);
 		y = pos.get(1);
@@ -38,14 +38,14 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		Input.addKeyboardable(this);
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "Plane" + number;
 	}
-	
+
 	public Sprite draw() {
-		if (left ) {
+		if (left) {
 			x -= 10.0;
 		}
 		if (right) {
@@ -58,56 +58,60 @@ public class Plane implements Drawable, Keyboardable, Physical {
 			y -= 10.0;
 		}
 		return new Sprite(planeImages[randomImage], new BasicVector(
-				new double[] { x, y }), (float)(size/planeImages[randomImage].size().get(0)), rotation);
+				new double[] { x, y }),
+				(float) (size / planeImages[randomImage].size().get(0)),
+				rotation);
 	}
-	
-	public Vector getPos(){
-		return new BasicVector(new double[] {x, y, z}); 
+
+	public Vector getPos() {
+		return new BasicVector(new double[] { x, y, z });
 	}
-	
-	public void setPos(Vector newPos){
+
+	public void setPos(Vector newPos) {
 		x = newPos.get(0);
 		y = newPos.get(1);
 		z = newPos.get(2);
 	}
-	
-	public Vector getVel(){
-		/*TODO
-		 * Implement z stuff, need more attributes.
-		*/
-		return velocity; 
+
+	public Vector getVel() {
+		/*
+		 * TODO Implement z stuff, need more attributes.
+		 */
+		return velocity;
 	}
-	
-	public void setVel(Vector newVel){
-		rotation = (float) Math.atan(newVel.get(1)/newVel.get(0));
+
+	public void setVel(Vector newVel) {
+		rotation = (float) Math.atan(newVel.get(1) / newVel.get(0));
 		velocity = newVel;
 	}
-	
-	public boolean isCollidingPos(Vector checkPos){
-		return Math.sqrt(Math.pow(x-checkPos.get(0), 2) + 
-				Math.pow(y-checkPos.get(1), 2)) < radius;
+
+	public boolean isCollidingPos(Vector checkPos) {
+		return Math.sqrt(Math.pow(x - checkPos.get(0), 2)
+				+ Math.pow(y - checkPos.get(1), 2)) < radius;
 	}
-	
-	// This function isn't actually used anywhere.
-	public boolean isCollidingObj(Physical checkObj){
-		return Math.sqrt(Math.pow(x-checkObj.getPos().get(0), 2) + 
-				Math.pow(y-checkObj.getPos().get(1), 2)) < radius;
+
+	public boolean isCollidingObj(Physical checkObj) {
+		return Math.sqrt(Math.pow(x - checkObj.getPos().get(0), 2)
+				+ Math.pow(y - checkObj.getPos().get(1), 2)) < radius;
 	}
-	
-	public void destroy(){
-		for(int i = size; i > 0; i--){
+
+	public float getBearing() {
+		return rotation;
+	};
+
+	public void destroy() {
+		for (int i = size; i > 0; i--) {
 			size -= 1;
 		}
 		Input.removeKeyboardable(this);
 		Physicals.remove(this);
 		Drawables.remove(this);
 	}
-	
 
 	@Override
 	public void handleKeyboard(int key, boolean pressed) {
-		
-		if (key == Keyboard.KEY_LEFT || key == Keyboard.KEY_A ) {
+
+		if (key == Keyboard.KEY_LEFT || key == Keyboard.KEY_A) {
 			left = pressed;
 		} else if (key == Keyboard.KEY_RIGHT || key == Keyboard.KEY_D) {
 			right = pressed;
@@ -137,6 +141,6 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	}
 
 	public int compareTo(Drawable o) {
-		return (int)(this.getZ() - o.getZ());
+		return (int) (this.getZ() - o.getZ());
 	}
 }

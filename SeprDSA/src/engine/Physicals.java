@@ -34,16 +34,16 @@ public class Physicals {
 				Physical checkOther = physicals.get(j);
 				
 				// If the physical isn't itself and is colliding
-				if (!(phys.equals(checkOther)) && (phys.isCollidingPos(
-						checkOther.getPos()))){
+				if (!(phys.equals(checkOther)) && (phys.isCollidingObj(
+						checkOther))){
 					colliding.add(new Physical[] {phys, checkOther});
 				}
 				
 			}
 		}
-		/*if (!colliding.isEmpty()){
-		System.out.println(colliding.get(0)[0].toString() + colliding.get(0)[1].toString());
-		}*/
+		if (!colliding.isEmpty()){
+			System.out.println(colliding.get(0)[0].toString() + colliding.get(0)[1].toString());
+		}
 		return colliding;
 	}
 

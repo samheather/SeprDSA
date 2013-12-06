@@ -14,4 +14,6 @@ public interface Physical {
 	boolean isCollidingPos(Vector checkPos);
 
 	boolean isCollidingObj(Physical checkObj);
+
+	float getBearing();
 }

@@ -70,5 +70,9 @@ import engine.Sprite;
 			// TODO Auto-generated method stub
 			return (int)(this.getZ() - o.getZ());
 		}
+		
+		public float getBearing() {
+			return 0;
+		}
 	}
 

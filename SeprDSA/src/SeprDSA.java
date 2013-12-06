@@ -23,7 +23,6 @@ public class SeprDSA {
 		for (int i = 0; i < 8; i++) {
 			result = result + alphabet.charAt(r.nextInt(alphabet.length()));
 		}
-
 		return result;
 	}
 
@@ -37,17 +36,21 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		Plane p = new Plane(new BasicVector(new double[] { 0, 0, 10 }), 0.0f, generateFlightNumber()); // Plane(position,bearing, flight number)
-		Plane p1 = new Plane(new BasicVector(new double[] {50,0,30}), 30.0f, generateFlightNumber());
+		//Plane p = new Plane(new BasicVector(new double[] { 0, 0, 10 }), 0.0f, generateFlightNumber()); // Plane(position,bearing, flight number)
+		Plane p1 = new Plane(new BasicVector(new double[] {50,0,30}), 349.0f, generateFlightNumber());
 		Leaderboard l = new Leaderboard();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
+		
+		for (int i = 1; i <= 5; i++){ // Random EntryExits
+			new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }),0, 360, i); 
+		}
+		
+		new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0, 10, 0); // Landing Strip
 
-		new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0, 0);
-
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i <= 10; i++) {  // Random waypoints
 			new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
