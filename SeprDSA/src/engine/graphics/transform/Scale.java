@@ -12,10 +12,11 @@ public class Scale extends Affine {
 		// TODO Auto-generated constructor stub
 		this.value = value;
 	}
+
 	public Scale(Drawing arg, double value) {
 		super(arg);
 		// TODO Auto-generated constructor stub
-		this.value = new BasicVector(new double[] {value, value});
+		this.value = new BasicVector(new double[] { value, value });
 	}
 
 	Vector value;

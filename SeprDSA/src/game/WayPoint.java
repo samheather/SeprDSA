@@ -9,65 +9,66 @@ import engine.graphics.transform.*;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
-	public class WayPoint implements Drawable, Physical {
-		
-		private Vector position = new BasicVector( new double[] {0,0,0});
-		private int radius = 50;
-		private int size = 16;
-		private int number;
-		
-		public WayPoint(Vector pos, int pointNumber) {
-			position = pos;
-			number = pointNumber;
-			Drawables.add(this);
-			Physicals.add(this);
-		}
-		
-		@Override
-		public String toString(){
-			return "WayPoint" + number;
-		}
-		
-		public Drawing draw() {
-			return new Translate(new Scale(new Sprite(Images.waypoint), size/Images.waypoint.size().get(0)), position);
-		}
+public class WayPoint implements Drawable, Physical {
 
-		public Vector getPos() {
-			return position;
-		}
+	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
+	private int radius = 50;
+	private int size = 16;
+	private int number;
 
-		public void setPos(Vector newPos) {
-			position = newPos;
-			
-		}
+	public WayPoint(Vector pos, int pointNumber) {
+		position = pos;
+		number = pointNumber;
+		Drawables.add(this);
+		Physicals.add(this);
+	}
 
-		public Vector getVel() {
-			return new BasicVector(new double[] {0,0,0});
-		}
+	@Override
+	public String toString() {
+		return "WayPoint" + number;
+	}
 
-		public void setVel(Vector newVel) {
-		}
-		
-		public boolean isCollidingPos(Vector checkPos) {
-			return false;
-		}
+	public Drawing draw() {
+		return new Translate(new Scale(new Sprite(Images.waypoint), size
+				/ Images.waypoint.size().get(0)), position);
+	}
 
-		public boolean isCollidingObj(Physical checkObj) {
-			return false;
-		}
-		
-		@Override
-		public double getZ() {
-			return position.get(2);
-		}
-		
-		@Override
-		public int compareTo(Drawable o) {
-			// TODO Auto-generated method stub
-			return (int)(this.getZ() - o.getZ());
-		}
-		
-		public float getBearing() {
-			return 0;
-		}
+	public Vector getPos() {
+		return position;
+	}
+
+	public void setPos(Vector newPos) {
+		position = newPos;
+
+	}
+
+	public Vector getVel() {
+		return new BasicVector(new double[] { 0, 0, 0 });
+	}
+
+	public void setVel(Vector newVel) {
+	}
+
+	public boolean isCollidingPos(Vector checkPos) {
+		return false;
+	}
+
+	public boolean isCollidingObj(Physical checkObj) {
+		return false;
+	}
+
+	@Override
+	public double getZ() {
+		return position.get(2);
+	}
+
+	@Override
+	public int compareTo(Drawable o) {
+		// TODO Auto-generated method stub
+		return (int) (this.getZ() - o.getZ());
+	}
+
+	public float getBearing() {
+		return 0;
+	}
 }

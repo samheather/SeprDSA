@@ -28,7 +28,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean right = false;
 	private boolean up = false;
 	private boolean down = false;
-	private double radius = 0;
+	private double radius = 50;
 	private int randomImage = new Random().nextInt(Images.planes.length);
 	private int size = 50;
 	private String number;
@@ -68,6 +68,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 				Images.planes[randomImage]), rotation), size
 				/ Images.planes[randomImage].size().get(0)), new BasicVector(
 				new double[] { x, y }));
+
 	}
 
 	public Vector getPos() {

@@ -27,7 +27,7 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
-		
+
 		Drawables.add(this);
 		Physicals.add(this);
 		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
@@ -70,7 +70,8 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public Drawing draw() {
-		return new Translate(new Scale(new Sprite(Images.entryExitPoint), size/Images.entryExitPoint.size().get(0)), position);
+		return new Translate(new Scale(new Sprite(Images.entryExitPoint), size
+				/ Images.entryExitPoint.size().get(0)), position);
 	}
 
 	public Vector getPos() {
@@ -95,16 +96,28 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {
-		/*System.out.println("Distance: " + (Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0),
-				2) + Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius));
-		System.out.println("Within negative Tolerance: " + (checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance)% 360 > bearingNeeded - tolerance : checkObj.getBearing() > bearingNeeded - tolerance )); 
-		System.out.println("Within positive Tolerance: " + (checkObj.getBearing() > 180 ? (checkObj.getBearing() + tolerance)% 360 < bearingNeeded + tolerance : checkObj.getBearing() < bearingNeeded + tolerance ));
-		*/
+		/*
+		 * System.out.println("Distance: " + (Math.sqrt(Math.pow(position.get(0)
+		 * - checkObj.getPos().get(0), 2) + Math.pow(position.get(1) -
+		 * checkObj.getPos().get(1), 2)) < radius));
+		 * System.out.println("Within negative Tolerance: " +
+		 * (checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance)%
+		 * 360 > bearingNeeded - tolerance : checkObj.getBearing() >
+		 * bearingNeeded - tolerance ));
+		 * System.out.println("Within positive Tolerance: " +
+		 * (checkObj.getBearing() > 180 ? (checkObj.getBearing() + tolerance)%
+		 * 360 < bearingNeeded + tolerance : checkObj.getBearing() <
+		 * bearingNeeded + tolerance ));
+		 */
 		return (Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0),
 				2) + Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius)
-				
-				&& ((checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance)% 360 > bearingNeeded - tolerance : checkObj.getBearing() > bearingNeeded - tolerance ) && 
-						(checkObj.getBearing() > 180 ? (checkObj.getBearing() + tolerance)% 360 < bearingNeeded + tolerance : checkObj.getBearing() < bearingNeeded + tolerance ));
+
+				&& ((checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance) % 360 > bearingNeeded
+						- tolerance
+						: checkObj.getBearing() > bearingNeeded - tolerance) && (checkObj
+						.getBearing() > 180 ? (checkObj.getBearing() + tolerance) % 360 < bearingNeeded
+						+ tolerance
+						: checkObj.getBearing() < bearingNeeded + tolerance));
 	}
 
 	public double getZ() {
