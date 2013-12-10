@@ -6,6 +6,7 @@ public class Images {
 	private static Image load(String fileName) {
 		return new Image("res/images/" + fileName);
 	}
+
 	public static Image planes[] = new Image[] { load("plane1.png"),
 			load("plane2.png") };
 	public static Image plane1 = load("plane1.png");
