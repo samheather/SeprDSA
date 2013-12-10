@@ -1,3 +1,0 @@
-cd src
-java -cp ".:../jar/*:./main/java" -Djava.library.path=../native/macosx SeprDSA
-

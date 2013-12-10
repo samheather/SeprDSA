@@ -21,7 +21,7 @@ public class Image {
 	public Image(String filePath) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("src/images/" + filePath));
+			image = ImageIO.read(new File(filePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);

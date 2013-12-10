@@ -1,8 +1,0 @@
-EXTRA BUILD INSTRUCTIONS - READ
-
-When building, you will need to configure lwjgl for the OS that you are building
-on.  This is done by going to Project Properties > Java Build Path > Libraries >
-Expand lwjgl > 'Native Library Folder Location' > change to folder in work 
-space > choose appropriate foler (i.e. for Mac it is:
-SeprDSA/lwjgl-2.9.0/native/macosx ).
-
