@@ -1,5 +1,7 @@
 package engine.graphics.transform;
 
+import org.lwjgl.opengl.GL11;
+
 import engine.graphics.Drawing;
 
 public abstract class Affine extends Drawing {
@@ -7,15 +9,14 @@ public abstract class Affine extends Drawing {
 		this.arg = arg;
 	}
 
-	Drawing arg;
+	private Drawing arg;
 
-	public abstract void push();
-
-	public abstract void pop();
+	public abstract void transform();
 
 	public void render() {
-		push();
+		GL11.glPushMatrix();
+		transform();
 		arg.render();
-		pop();
+		GL11.glPopMatrix();
 	}
 }

@@ -12,17 +12,11 @@ public class Translate extends Affine {
 		this.value = value;
 	}
 
-	Vector value;
+	private Vector value;
 
 	@Override
-	public void push() {
-		GL11.glPushMatrix();
+	public void transform() {
 		GL11.glTranslated(value.get(0), value.get(1), 0.0);
-	}
-
-	@Override
-	public void pop() {
-		GL11.glPopMatrix();
 	}
 
 }

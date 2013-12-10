@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 import engine.graphics.Drawing;
 
 public class Sprite extends Drawing {
-	public Image image;
+	private Image image;
 
 	public Sprite(Image image) {
 		this.image = image;

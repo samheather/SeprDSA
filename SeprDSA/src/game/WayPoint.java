@@ -5,7 +5,6 @@ import org.la4j.vector.dense.BasicVector;
 
 import engine.graphics.*;
 import engine.graphics.image.Sprite;
-import engine.graphics.transform.*;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
@@ -29,8 +28,10 @@ public class WayPoint implements Drawable, Physical {
 	}
 
 	public Drawing draw() {
-		return new Translate(new Scale(new Sprite(Images.waypoint), size
-				/ Images.waypoint.size().get(0)), position);
+		return new
+				 Sprite(Images.waypoint)
+				.scale(size / Images.waypoint.size().get(0))
+				.translate( position);
 	}
 
 	public Vector getPos() {

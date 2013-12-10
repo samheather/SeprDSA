@@ -12,21 +12,14 @@ public class Rotate extends Affine {
 		// TODO Auto-generated constructor stub
 	}
 
-	double degrees;
+	private double degrees;
 
 	@Override
-	public void push() {
-		GL11.glPushMatrix();
+	public void transform() {
 		GL11.glRotated(degrees, 0.0, 0.0, 1.0);
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void pop() {
-		GL11.glPopMatrix();
-		// TODO Auto-generated method stub
-
-	}
 
 }

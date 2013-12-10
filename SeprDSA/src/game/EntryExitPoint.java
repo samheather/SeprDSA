@@ -6,7 +6,6 @@ import org.lwjgl.opengl.Display;
 import java.util.Random;
 import engine.graphics.*;
 import engine.graphics.image.Sprite;
-import engine.graphics.transform.*;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
@@ -70,8 +69,10 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public Drawing draw() {
-		return new Translate(new Scale(new Sprite(Images.entryExitPoint), size
-				/ Images.entryExitPoint.size().get(0)), position);
+		return new
+				 Sprite(Images.entryExitPoint)
+				.scale(size / Images.entryExitPoint.size().get(0))
+				.translate(position);
 	}
 
 	public Vector getPos() {

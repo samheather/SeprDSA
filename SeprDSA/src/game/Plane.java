@@ -9,7 +9,6 @@ import org.la4j.vector.Vector;
 
 import engine.graphics.*;
 import engine.graphics.image.*;
-import engine.graphics.transform.*;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -64,10 +63,11 @@ public class Plane implements Drawable, Keyboardable, Physical {
 			y -= 10.0;
 		}
 
-		return new Translate(new Scale(new Rotate(new Sprite(
-				Images.planes[randomImage]), rotation), size
-				/ Images.planes[randomImage].size().get(0)), new BasicVector(
-				new double[] { x, y }));
+		return new
+				 Sprite(Images.planes[randomImage])
+				.rotate(rotation)
+				.scale(size / Images.planes[randomImage].size().get(0))
+				.translate(new BasicVector(new double[] { x, y }));
 
 	}
 
