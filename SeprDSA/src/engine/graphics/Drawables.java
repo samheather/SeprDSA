@@ -41,31 +41,36 @@ public class Drawables {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		
+		GL11.glShadeModel(GL11.GL_SMOOTH);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glPushMatrix();
-		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		resize();
 	}
 
 	private static void resize() {
+		GL11.glLoadIdentity();
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+		GL11.glLoadIdentity();
 		int dw = Display.getWidth();
 		int dh = Display.getHeight();
 		GL11.glViewport(0, 0, dw, dh);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1, -1);
+		//GL11.glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1, -1);
+		GL11.glOrtho(-dw / 2, dw / 2, -dh / 2, dh / 2, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		double widthr = (double) (dw) / (double) (width);
 		double heightr = (double) (dh) / (double) (height);
 		if (heightr < widthr) {
 			widthr = heightr;
 		}
-		// GL11.glScaled(widthr, widthr, 0.0f);
+		GL11.glScaled(widthr, widthr, 0.0f);
 	}
 
 	public static void deinitialise() {
@@ -74,10 +79,6 @@ public class Drawables {
 
 	public static void logic() {
 		if (Display.wasResized()) {
-			GL11.glPopAttrib();
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 			resize();
 		}
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);

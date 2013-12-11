@@ -9,6 +9,7 @@ import org.la4j.vector.Vector;
 
 import engine.graphics.*;
 import engine.graphics.image.*;
+import engine.graphics.text.Text;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -67,6 +68,9 @@ public class Plane implements Drawable, Keyboardable, Physical {
 				 Sprite(Images.planes[randomImage])
 				.rotate(rotation)
 				.scale(size / Images.planes[randomImage].size().get(0))
+				.overlay(new
+							 Text(number, Fonts.test)
+							.red(1.0))
 				.translate(new BasicVector(new double[] { x, y }));
 
 	}
