@@ -1,4 +1,4 @@
-package engine.graphics.transform;
+package engine.graphics.combinators;
 
 import engine.graphics.Drawing;
 import org.la4j.vector.*;

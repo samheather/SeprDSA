@@ -1,7 +1,9 @@
-package engine.graphics;
+package engine.graphics.combinators;
 
 import org.la4j.vector.Vector;
 import org.lwjgl.opengl.GL11;
+
+import engine.graphics.Drawing;
 
 public class Colour extends Drawing {
 

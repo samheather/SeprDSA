@@ -1,23 +1,22 @@
-package engine.graphics.image;
+package engine.graphics;
 
 import org.la4j.vector.*;
 import org.lwjgl.opengl.GL11;
 
-import engine.graphics.Drawing;
+import engine.graphics.sprite.Texture;
 
 public class Sprite extends Drawing {
-	private Image image;
+	private Texture texture;
 
-	public Sprite(Image image) {
-		this.image = image;
+	public Sprite(Texture texture) {
+		this.texture = texture;
 	}
 
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		Vector size = image.size();
-		GL11.glPushMatrix();
-		image.bind();
+		Vector size = texture.size();
+		texture.bind();
 		double x = size.get(0);
 		double y = size.get(1);
 		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
@@ -35,7 +34,6 @@ public class Sprite extends Drawing {
 		GL11.glVertex2d(x / 2.0, y / 2.0);
 
 		GL11.glEnd();
-		GL11.glPopMatrix();
 
 	}
 }

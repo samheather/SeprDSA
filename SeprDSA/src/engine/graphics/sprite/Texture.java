@@ -1,33 +1,35 @@
-package engine.graphics.image;
+package engine.graphics.sprite;
+
+import static org.lwjgl.opengl.GL11.GL_LINEAR;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_RGBA8;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_T;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+import static org.lwjgl.opengl.GL11.glTexParameteri;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import javax.imageio.ImageIO;
+
+import org.la4j.vector.Vector;
+import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL31;
 
-import static org.lwjgl.opengl.GL11.*;
-import org.la4j.vector.*;
-import org.la4j.vector.dense.*;
+public class Texture {
 
-public class Image {
 	private int internal;
-	private double xs = 0.0;
-	private double ys = 0.0;
+	private Vector size;
 
-	public Image(String filePath) {
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(new File(filePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-		xs = image.getWidth();
-		ys = image.getHeight();
+	public Texture(BufferedImage image) {
+		double xs = image.getWidth();
+		double ys = image.getHeight();
 		int[] pixels = new int[image.getWidth() * image.getHeight()];
 		image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0,
 				image.getWidth());
@@ -65,6 +67,8 @@ public class Image {
 		glTexImage2D(GL31.GL_TEXTURE_RECTANGLE, 0, GL_RGBA8, image.getWidth(),
 				image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
+		size = new BasicVector(new double[] { xs, ys });
+
 	}
 
 	public void bind() {
@@ -73,6 +77,7 @@ public class Image {
 	}
 
 	public Vector size() {
-		return new BasicVector(new double[] { xs, ys });
+		return size;
 	}
+
 }

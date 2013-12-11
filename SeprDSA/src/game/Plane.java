@@ -8,8 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
 import engine.graphics.*;
-import engine.graphics.image.*;
-import engine.graphics.text.Text;
+import engine.graphics.sprite.*;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -32,6 +31,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private int randomImage = new Random().nextInt(Images.planes.length);
 	private int size = 50;
 	private String number;
+	private Text numbertext;
 
 	public Plane(Vector pos, float rotate, String flightNumber) {
 		rotation = rotate;
@@ -43,6 +43,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		// Planes.add(this);
 		Input.addKeyboardable(this);
+		numbertext = new Text(number, Fonts.test);
 	}
 
 	@Override
@@ -66,11 +67,12 @@ public class Plane implements Drawable, Keyboardable, Physical {
 
 		return new
 				 Sprite(Images.planes[randomImage])
-				.rotate(rotation)
 				.scale(size / Images.planes[randomImage].size().get(0))
-				.overlay(new
-							 Text(number, Fonts.test)
-							.red(1.0))
+				.rotate(rotation)
+				.overlay(
+							 numbertext
+							.red(1.0)
+							.translate(new BasicVector(new double[] {0, -40})))
 				.translate(new BasicVector(new double[] { x, y }));
 
 	}

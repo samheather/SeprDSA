@@ -1,4 +1,4 @@
-package engine.graphics.transform;
+package engine.graphics.combinators;
 
 import org.la4j.vector.*;
 import org.lwjgl.opengl.GL11;

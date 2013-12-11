@@ -3,9 +3,10 @@ package game;
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
+
 import java.util.Random;
+
 import engine.graphics.*;
-import engine.graphics.image.Sprite;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 

@@ -1,4 +1,6 @@
-package engine.graphics;
+package engine.graphics.combinators;
+
+import engine.graphics.Drawing;
 
 public class Overlay extends Drawing {
 

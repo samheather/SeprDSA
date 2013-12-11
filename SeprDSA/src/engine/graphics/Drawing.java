@@ -3,7 +3,7 @@ package engine.graphics;
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
-import engine.graphics.transform.*;
+import engine.graphics.combinators.*;
 
 public abstract class Drawing {
 	public abstract void render();

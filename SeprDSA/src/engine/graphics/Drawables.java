@@ -3,10 +3,12 @@ package engine.graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.la4j.vector.Vector;
+import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.Display;
-
 import org.lwjgl.LWJGLException;
 
 import engine.graphics.display.DisplayMode;
@@ -54,7 +56,6 @@ public class Drawables {
 	}
 
 	private static void resize() {
-		GL11.glLoadIdentity();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 		int dw = Display.getWidth();
@@ -72,6 +73,10 @@ public class Drawables {
 		}
 		GL11.glScaled(widthr, widthr, 0.0f);
 	}
+	
+	public static Vector virtualDisplaySize() {
+		return new BasicVector(new double[] {width, height});
+	}
 
 	public static void deinitialise() {
 		Display.destroy();
@@ -84,7 +89,6 @@ public class Drawables {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		Collections.sort(drawables);
 		for (int i = 0; i < drawables.size(); i++) {
-			GL11.glPushMatrix();
 			drawables.get(i).draw().render();
 
 		}
