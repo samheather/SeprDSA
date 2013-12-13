@@ -2,13 +2,13 @@ package game;
 
 import java.io.IOException;
 
-import engine.graphics.sprite.Image;
+import engine.graphics.drawing.Texture;
 
 public class Images {
-	private static Image load(String fileName) {
-		Image i = null;
+	private static Texture load(String fileName) {
+		Texture i = null;
 		try {
-			i = new Image("res/images/" + fileName);
+			i = new Texture("res/images/" + fileName);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -17,11 +17,11 @@ public class Images {
 		return i;
 	}
 
-	public static Image planes[] = new Image[] { load("plane1.png"),
+	public static Texture planes[] = new Texture[] { load("plane1.png"),
 			load("plane2.png") };
-	public static Image plane1 = load("plane1.png");
-	public static Image plane2 = load("plane2.png");
-	public static Image map = load("map.png");
-	public static Image waypoint = load("waypoint.png");
-	public static Image entryExitPoint = load("exit.png");
+	public static Texture plane1 = load("plane1.png");
+	public static Texture plane2 = load("plane2.png");
+	public static Texture map = load("map.png");
+	public static Texture waypoint = load("waypoint.png");
+	public static Texture entryExitPoint = load("exit.png");
 }

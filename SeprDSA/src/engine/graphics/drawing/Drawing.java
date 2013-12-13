@@ -1,9 +1,9 @@
-package engine.graphics;
+package engine.graphics.drawing;
 
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
-import engine.graphics.combinators.*;
+import engine.graphics.drawing.combinators.*;
 
 public abstract class Drawing {
 	public abstract void render();

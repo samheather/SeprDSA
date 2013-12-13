@@ -2,6 +2,8 @@ package engine.graphics;
 
 import java.lang.Comparable;
 
+import engine.graphics.drawing.Drawing;
+
 public interface Drawable extends Comparable<Drawable> {
 	Drawing draw();
 

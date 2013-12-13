@@ -1,6 +1,6 @@
-package engine.graphics.combinators;
+package engine.graphics.drawing.combinators;
 
-import engine.graphics.Drawing;
+import engine.graphics.drawing.Drawing;
 
 public class Overlay extends BinaryCombinator {
 

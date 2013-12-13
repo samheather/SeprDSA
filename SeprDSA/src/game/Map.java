@@ -1,6 +1,8 @@
 package game;
 
 import engine.graphics.*;
+import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.primitives.Sprite;
 
 public class Map implements Drawable {
 	public Map() {

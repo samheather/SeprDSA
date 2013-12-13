@@ -1,8 +1,8 @@
-package engine.graphics.combinators;
+package engine.graphics.drawing.combinators;
 
 import org.lwjgl.opengl.GL11;
 
-import engine.graphics.Drawing;
+import engine.graphics.drawing.Drawing;
 
 public class Rotate extends Affine {
 

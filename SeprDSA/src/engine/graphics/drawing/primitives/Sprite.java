@@ -1,9 +1,10 @@
-package engine.graphics;
+package engine.graphics.drawing.primitives;
 
 import org.la4j.vector.*;
 import org.lwjgl.opengl.GL11;
 
-import engine.graphics.sprite.Texture;
+import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.Texture;
 
 public class Sprite extends Drawing {
 	private final Texture texture;

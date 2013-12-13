@@ -8,7 +8,9 @@ import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
 import engine.graphics.*;
-import engine.graphics.sprite.*;
+import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.Texture;
+import engine.graphics.drawing.primitives.*;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -31,7 +33,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private int randomImage = new Random().nextInt(Images.planes.length);
 	private int size = 50;
 	private String number;
-	private Text numbertext;
+	private Texture numbertext;
 
 	public Plane(Vector pos, float rotate, String flightNumber) {
 		rotation = rotate;
@@ -43,7 +45,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		// Planes.add(this);
 		Input.addKeyboardable(this);
-		numbertext = new Text(number, Fonts.test);
+		numbertext = new Texture(number, Fonts.test);
 	}
 
 	@Override
@@ -66,14 +68,15 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		}
 
 		return new
-				 Sprite(Images.planes[randomImage])
-				.scale(size / Images.planes[randomImage].size().get(0))
-				.rotate(rotation)
-				.overlay(
-							 numbertext
-							.red(1.0).blue(1.0).alpha(0.5)
-							.translate(new BasicVector(new double[] {0, -40})))
-				.translate(new BasicVector(new double[] { x, y }));
+			 Sprite(Images.planes[randomImage])
+			.scale(size / Images.planes[randomImage].size().get(0))
+			.rotate(rotation)
+			.overlay (new
+				 Sprite(numbertext)
+				.red(1.0).blue(1.0).alpha(0.5)
+				.translate(new BasicVector(new double[] {0, -40}))
+			 )
+			.translate(new BasicVector(new double[] { x, y }));
 
 	}
 
