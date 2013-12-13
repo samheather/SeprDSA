@@ -9,11 +9,31 @@ public abstract class UnaryCombinator extends Drawing {
 		this.arg = arg;
 	}
 	
-	protected final Drawing arg;
+	protected Drawing arg;
 
 	@Override
 	public void render() {
 		arg.render();
+	}
+	
+	public Drawing red(double amount) {
+		arg = arg.red(amount);
+		return this;
+	}
+	
+	public Drawing green(double amount) {
+		arg = arg.green(amount);
+		return this;
+	}
+	
+	public Drawing blue(double amount) {
+		arg = arg.blue(amount);
+		return this;
+	}
+	
+	public Drawing alpha(double amount) {
+		arg = arg.alpha(amount);
+		return this;
 	}
 
 }

@@ -71,7 +71,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 				.rotate(rotation)
 				.overlay(
 							 numbertext
-							.red(1.0)
+							.red(1.0).blue(1.0).alpha(0.5)
 							.translate(new BasicVector(new double[] {0, -40})))
 				.translate(new BasicVector(new double[] { x, y }));
 
