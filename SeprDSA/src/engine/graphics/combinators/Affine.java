@@ -4,19 +4,18 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.Drawing;
 
-public abstract class Affine extends Drawing {
+public abstract class Affine extends UnaryCombinator {
 	Affine(Drawing arg) {
-		this.arg = arg;
+		super(arg);
 	}
 
-	private Drawing arg;
 
-	public abstract void transform();
+	protected abstract void transform();
 
 	public void render() {
 		GL11.glPushMatrix();
 		transform();
-		arg.render();
+		super.render();
 		GL11.glPopMatrix();
 	}
 }

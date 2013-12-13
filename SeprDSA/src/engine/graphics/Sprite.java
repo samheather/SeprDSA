@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 import engine.graphics.sprite.Texture;
 
 public class Sprite extends Drawing {
-	private Texture texture;
+	private final Texture texture;
 
 	public Sprite(Texture texture) {
 		this.texture = texture;

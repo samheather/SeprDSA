@@ -24,8 +24,8 @@ import org.lwjgl.opengl.GL31;
 
 public class Texture {
 
-	private int internal;
-	private Vector size;
+	private final int internal;
+	private final Vector size;
 
 	public Texture(BufferedImage image) {
 		double xs = image.getWidth();

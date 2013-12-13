@@ -12,10 +12,10 @@ public class Scale extends Affine {
 		this.value = value;
 	}
 
-	private Vector value;
+	private final Vector value;
 
 	@Override
-	public void transform() {
+	protected void transform() {
 		GL11.glScaled(value.get(0), value.get(1), 0.0);
 		// TODO Auto-generated method stub
 

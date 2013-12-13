@@ -12,10 +12,10 @@ public class Rotate extends Affine {
 		// TODO Auto-generated constructor stub
 	}
 
-	private double degrees;
+	private final double degrees;
 
 	@Override
-	public void transform() {
+	protected void transform() {
 		GL11.glRotated(degrees, 0.0, 0.0, 1.0);
 		// TODO Auto-generated method stub
 

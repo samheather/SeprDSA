@@ -5,14 +5,14 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.Drawing;
 
-public class Colour extends Drawing {
+public class Colour extends UnaryCombinator {
 
-	private Drawing arg;
-	private Vector colour;
+
+	private final Vector colour;
 
 	public Colour(Drawing arg, Vector colour) {
 		// TODO Auto-generated constructor stub
-		this.arg = arg;
+		super(arg);
 		this.colour = colour;
 	}
 
@@ -21,7 +21,7 @@ public class Colour extends Drawing {
 		GL11.glPushAttrib(GL11.GL_CURRENT_BIT);
 		GL11.glColor4d(colour.get(0), colour.get(1), colour.get(2),
 				colour.get(3));
-		arg.render();
+		super.render();
 		GL11.glPopAttrib();
 		// TODO Auto-generated method stub
 

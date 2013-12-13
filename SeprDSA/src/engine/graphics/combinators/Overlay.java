@@ -2,23 +2,19 @@ package engine.graphics.combinators;
 
 import engine.graphics.Drawing;
 
-public class Overlay extends Drawing {
+public class Overlay extends BinaryCombinator {
 
-	private Drawing top;
-	private Drawing bottom;
+
 
 	public Overlay(Drawing bottom, Drawing top) {
 		// TODO Auto-generated constructor stub
-		this.bottom = bottom;
-		this.top = top;
+		super(bottom, top);
 	}
 
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		bottom.render();
-		top.render();
-
+		super.render();
 	}
 
 }

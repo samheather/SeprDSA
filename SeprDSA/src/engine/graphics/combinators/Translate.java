@@ -12,10 +12,10 @@ public class Translate extends Affine {
 		this.value = value;
 	}
 
-	private Vector value;
+	private final Vector value;
 
 	@Override
-	public void transform() {
+	protected void transform() {
 		GL11.glTranslated(value.get(0), value.get(1), 0.0);
 	}
 
