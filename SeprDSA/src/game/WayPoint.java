@@ -1,10 +1,13 @@
 package game;
 
+import java.util.Random;
+
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.Sprite;
 import engine.physics.Physical;
 import engine.physics.Physicals;
@@ -14,13 +17,16 @@ public class WayPoint implements Drawable, Physical {
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private int radius = 50;
 	private int size = 16;
-	private int number;
+	private String number;
+	private int randomImage = new Random().nextInt(Images.waypoints.length);
+	private Texture numbertext;
 
-	public WayPoint(Vector pos, int pointNumber) {
+	public WayPoint(Vector pos, String pointNumber) {
 		position = pos;
 		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
+		numbertext = new Texture(number, Fonts.test);
 	}
 
 	@Override
@@ -30,8 +36,13 @@ public class WayPoint implements Drawable, Physical {
 
 	public Drawing draw() {
 		return new
-				 Sprite(Images.waypoint)
-				.scale(size / Images.waypoint.size().get(0))
+				 Sprite(Images.waypoints[randomImage])
+				.scale(size / Images.waypoints[randomImage].size().get(0))
+				.overlay (new
+				 Sprite(numbertext)
+				.red(0).blue(0).green(0).alpha(0.7)
+				.translate(new BasicVector(new double[] {0, 0}))
+				)
 				.translate( position);
 	}
 

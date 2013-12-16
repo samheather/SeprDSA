@@ -53,13 +53,13 @@ public class SeprDSA {
 		new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
 				10, 0); // Landing Strip
 
-		for (int i = 1; i <= 10; i++) { // Random waypoints
+		for (Integer i = 1; i <= 10; i++) { // Random waypoints
 			new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getHeight() - pixelsFromEdge),
-					randomgen.nextDouble() * 20 }), i);
+					randomgen.nextDouble() * 20 }),i.toString());
 		}
 
 		while (true) {

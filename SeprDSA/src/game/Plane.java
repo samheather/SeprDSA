@@ -31,7 +31,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean down = false;
 	private double radius = 50;
 	private int randomImage = new Random().nextInt(Images.planes.length);
-	private int size = 50;
+	private int size = 40;
 	private String number;
 	private Texture numbertext;
 
