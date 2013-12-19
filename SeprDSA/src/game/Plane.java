@@ -45,7 +45,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		// Planes.add(this);
 		Input.addKeyboardable(this);
-		numbertext = new Texture(number, Fonts.test);
+		numbertext = new Texture(flightNumber, Fonts.test);
 	}
 
 	@Override

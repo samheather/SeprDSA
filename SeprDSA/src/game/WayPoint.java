@@ -26,7 +26,7 @@ public class WayPoint implements Drawable, Physical {
 		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
-		numbertext = new Texture(number, Fonts.test);
+		numbertext = new Texture(pointNumber, Fonts.smallFont);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class WayPoint implements Drawable, Physical {
 				.overlay (new
 				 Sprite(numbertext)
 				.red(0).blue(0).green(0).alpha(0.7)
-				.translate(new BasicVector(new double[] {0, 0}))
+				.translate(new BasicVector(new double[] {0, 6}))
 				)
 				.translate( position);
 	}
