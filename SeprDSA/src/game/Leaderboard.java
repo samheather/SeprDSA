@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Leaderboard /* implements Drawable */{
 
 	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
-	String leaderboardFile = "thisIsNotTheLeaderboard.googleIsCool";
+	String leaderboardFile = "leaderboardscores.txt";
 
 	// From playing about with lwjgl text rendering.
 	// public TrueTypeFont font;
@@ -38,27 +38,49 @@ public class Leaderboard /* implements Drawable */{
 					.println("Is first load, initialising leaderboard values");
 			for (int i = 0; i < leaderboardEntries.length; i++) {
 				leaderboardEntries[i].setName("Sam");
-				leaderboardEntries[i].setScore((double) 5 + i);
+				leaderboardEntries[i].setScore((double) 5 + i);	
 			}
+
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		} else {
-			readLeaderboard();
+			//readLeaderboard();
+			addLeaderBoardEntries();				//ADDED FUNCTION TO ADD VALUES TO LEADERBOARD. VALUES ARE DISPALYED ON MAIN MENU
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
+				}
 		}
+		
+	//=====================================================================================
+			//This is a test of the leaderboard
+			// TODO(Dan) Turn this block into a test, so we can add these values and
+			// check we get the expected output array of LeaderboardEntries.
+		// printLeaderboard(); // Expect a 17, s 9, d 8.3, s 8, s 7*/
 
-		// This is a test of the leaderboard
-		// TODO(Dan) Turn this block into a test, so we can add these values and
-		// check we get the expected output array of LeaderboardEntries.
-		// printLeaderboard();
-		// addLeaderboardEntry("a", 17);
-		// addLeaderboardEntry("b", 1);
-		// addLeaderboardEntry("c", 5.5);
-		// addLeaderboardEntry("d", 8.3);
-		// addLeaderboardEntry("e", 6.2);
-		// printLeaderboard(); // Expect a 17, s 9, d 8.3, s 8, s 7
-	}
+	public void addLeaderBoardEntries(){
+			try{
+				addLeaderboardEntry("a", 17);
+				addLeaderboardEntry("b", 1);
+				addLeaderboardEntry("c", 5.5);
+				addLeaderboardEntry("d", 2.3);
+				addLeaderboardEntry("e", 6.2);
+				}
+			catch (Exception ex){
+				System.out.println("Adding leaderboard data caused error");}
+	
+			try{
+				for (int i=0; i<leaderboardEntries.length; i++){
+					System.out.println(leaderboardEntries[i].getName());
+					System.out.println(leaderboardEntries[i].getScore());
+					}
+				}
+			catch(Exception ex){
+				System.out.println("Error printing leaderboard data");}
+
+		}
+	
+	//======================================================================================
+	
 
 	public void addLeaderboardEntry(String name, double score) {
 		LeaderboardEntry[] tempLeaderboardEntries = new LeaderboardEntry[6];

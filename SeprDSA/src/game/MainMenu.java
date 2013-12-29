@@ -2,6 +2,7 @@ package game;
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
+import game.Leaderboard;
 
 public class MainMenu extends JFrame {
 
@@ -65,6 +66,38 @@ public class MainMenu extends JFrame {
        mainMenuPanel.add(startGame);
        mainMenuPanel.add(help);
        mainMenuPanel.add(exitGame);
+       
+       //display leaderboard
+       JLabel leaderboardLabel = new JLabel("Leaderboard");
+       JLabel nameLabel = new JLabel("Name");
+       JLabel scoreLabel = new JLabel("Score");
+       
+       //place leaderboard label 2/3 across, 1/10 down the screen
+       leaderboardLabel.setBounds((2*widthMainMenu/3), (heightMainMenu/10), 75, 25);
+       nameLabel.setBounds((3*widthMainMenu/5), heightMainMenu/5, 75, 25);
+       scoreLabel.setBounds((4*widthMainMenu/5), heightMainMenu/5, 75, 25);
+       
+       mainMenuPanel.add(leaderboardLabel);
+       mainMenuPanel.add(nameLabel);
+       mainMenuPanel.add(scoreLabel);
+       
+       //create an instance of Leaderboard class so data can be passed between MainMenu class and Leaderboard class
+       Leaderboard leaderboardInstance = new Leaderboard();
+       int numberOfEntries=leaderboardInstance.leaderboardEntries.length;
+     
+       //create JLabels that will display the leaderboard name and scores
+       		for (int i=0; i<numberOfEntries; i++){
+       				JLabel nameOfScorer = new JLabel(leaderboardInstance.leaderboardEntries[i].getName());
+       				
+       				//turns the double type to a string via (+"")
+       				JLabel score = new JLabel(leaderboardInstance.leaderboardEntries[i].getScore()+"");
+       		
+       				nameOfScorer.setBounds((3*widthMainMenu/5), ((heightMainMenu/5)+50*(i+1)), 75, 25);
+       				score.setBounds((4*widthMainMenu/5), ((heightMainMenu/5)+50*(i+1)), 75, 25);
+       				
+       				mainMenuPanel.add(nameOfScorer);
+       				mainMenuPanel.add(score);
+       		}
 
        //sets frame variables
        setTitle("Air Traffic Control Game: Main Menu");
@@ -72,7 +105,16 @@ public class MainMenu extends JFrame {
        setResizable(false);
        setLocationRelativeTo(null);
        setDefaultCloseOperation(EXIT_ON_CLOSE);
-       setBackground(Color.GREEN);
+       mainMenuPanel.setBackground(Color.green);
+       
+       
+       //set the background for the leaderboard
+       JPanel leaderboardBackground = new JPanel();
+       leaderboardBackground.setLayout(null);
+       leaderboardBackground.setBounds((2*widthMainMenu/3)-100, (heightMainMenu/10)-25, 300, 500);
+       mainMenuPanel.add(leaderboardBackground);
+       //leaderboardBackground.setBackground(Color.gray);
+       
        
        
     }
