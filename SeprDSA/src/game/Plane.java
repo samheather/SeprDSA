@@ -43,7 +43,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		number = fnumber;
 		Drawables.add(this);
 		Physicals.add(this);
-		// Planes.add(this);
+		Planes.add(this);
 		Input.addKeyboardable(this);
 		numbertext = new Texture(fnumber, Fonts.test);
 	}

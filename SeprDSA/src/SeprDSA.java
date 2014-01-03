@@ -5,7 +5,6 @@ import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
-import game.Plane;
 import game.Map;
 import game.WayPoint;
 import java.util.Random;
@@ -26,7 +25,6 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		FuturePlane fp = new FuturePlane();
 		Leaderboard l = new Leaderboard();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
@@ -60,6 +58,8 @@ public class SeprDSA {
 				Display.destroy();
 				System.exit(0);
 			}
+		
+		FuturePlane.CreatePlanes();
 
 		}
 	}

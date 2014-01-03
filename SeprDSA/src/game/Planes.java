@@ -16,5 +16,9 @@ public class Planes {
 	public static void remove(Plane p) {
 		planes.remove(p);
 	}
+	
+	public static int size(){
+		return planes.size();
+	}
 
 }

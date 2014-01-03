@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
+import org.lwjgl.opengl.Display;
 
 public class FuturePlane {
 	private int velocity;
@@ -11,14 +12,30 @@ public class FuturePlane {
 	private float rotation;
 	private String fnumber;
 	private Vector position;
+	private String planename = "p" + (Planes.size()+1);
+	private static int maxplanenumb = 1;
+	private static int pixelsFromEdge = 100;
+	Random randomgen = new Random(System.currentTimeMillis());
 	
 	public FuturePlane() {
 		velocity = (250 + (int)(Math.random() * (1105)));
 		passenger = (20 + (int)(Math.random() * (834)));
 		rotation = 349.0f;
 		fnumber = generateFlightNumber();
-		position = new BasicVector(new double[] { 50, 0, 30 });
-		Plane p1 = new Plane(velocity, passenger, rotation, fnumber, position);
+		position = new BasicVector(new double[] {
+				(randomgen.nextDouble() - 0.5)
+				* (Display.getWidth() - pixelsFromEdge),
+		(randomgen.nextDouble() - 0.5)
+				* (Display.getHeight() - pixelsFromEdge),
+		randomgen.nextDouble() * 20 });
+		Plane planename = new Plane(velocity, passenger, rotation, fnumber, position);
+	}
+	
+	public static void CreatePlanes() {
+		while (Planes.size() < maxplanenumb)
+		{
+				FuturePlane fp = new FuturePlane();
+		}		
 	}
 	
 	public static String generateFlightNumber() {
