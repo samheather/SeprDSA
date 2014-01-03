@@ -3,6 +3,7 @@ import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
+import game.FuturePlane;
 import game.Leaderboard;
 import game.Plane;
 import game.Map;
@@ -15,16 +16,6 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
 
-	public static String generateFlightNumber() {
-		String alphabet = new String("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-		String result = new String();
-		Random r = new Random();
-		for (int i = 0; i < 8; i++) {
-			result = result + alphabet.charAt(r.nextInt(alphabet.length()));
-		}
-		return result;
-	}
-
 	private static int pixelsFromEdge = 100;
 
 	public static void main(String[] args) {
@@ -35,10 +26,7 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		// Plane p = new Plane(new BasicVector(new double[] { 0, 0, 10 }), 0.0f,
-		// generateFlightNumber()); // Plane(position,bearing, flight number)
-		Plane p1 = new Plane(new BasicVector(new double[] { 50, 0, 30 }),
-				349.0f, generateFlightNumber());
+		FuturePlane fp = new FuturePlane();
 		Leaderboard l = new Leaderboard();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);

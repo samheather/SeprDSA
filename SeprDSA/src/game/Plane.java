@@ -35,17 +35,17 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private String number;
 	private Texture numbertext;
 
-	public Plane(Vector pos, float rotate, String flightNumber) {
-		rotation = rotate;
+	public Plane(int vel, int pas, float rota, String fnumber, Vector pos) {
+		rotation = rota;
 		x = pos.get(0);
 		y = pos.get(1);
 		z = pos.get(2);
-		number = flightNumber;
+		number = fnumber;
 		Drawables.add(this);
 		Physicals.add(this);
 		// Planes.add(this);
 		Input.addKeyboardable(this);
-		numbertext = new Texture(flightNumber, Fonts.test);
+		numbertext = new Texture(fnumber, Fonts.test);
 	}
 
 	@Override
