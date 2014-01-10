@@ -19,7 +19,7 @@ public class SeprDSA {
 
 	public static void main(String[] args) {
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1640, 640), 1064, 640);
+		Drawables.initialise(new Window(1024, 640), 1024, 640);
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
