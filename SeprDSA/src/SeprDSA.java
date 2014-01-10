@@ -3,9 +3,9 @@ import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
-import game.FuturePlane;
 import game.Leaderboard;
 import game.Map;
+import game.Planes;
 import game.WayPoint;
 import java.util.Random;
 import org.la4j.vector.dense.BasicVector;
@@ -14,10 +14,11 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
-
+	
+	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Random randomgen = new Random(System.currentTimeMillis());
 		Drawables.initialise(new Window(1640, 640), 1064, 640);
 		Display.setTitle("Dat flying game");
@@ -47,19 +48,19 @@ public class SeprDSA {
 							* (Display.getHeight() - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
 		}
-
+		
 		while (true) {
 			Physicals.logic(1);
 			Input.logic();
 			Drawables.logic();
+			Planes.updateTimer(System.currentTimeMillis() - timer);
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
-		
-		FuturePlane.CreatePlanes();
+		timer = System.currentTimeMillis();
 
 		}
 	}

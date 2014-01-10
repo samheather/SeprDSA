@@ -35,7 +35,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private String number;
 	private Texture numbertext;
 
-	public Plane(int vel, int pas, float rota, String fnumber, Vector pos) {
+	public Plane(int vel, float rota, String fnumber, Vector pos) {
 		rotation = rota;
 		x = pos.get(0);
 		y = pos.get(1);
@@ -43,7 +43,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		number = fnumber;
 		Drawables.add(this);
 		Physicals.add(this);
-		Planes.add(this);
+		//Planes.add(this);
 		Input.addKeyboardable(this);
 		numbertext = new Texture(fnumber, Fonts.test);
 	}
