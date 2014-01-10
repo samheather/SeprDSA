@@ -22,8 +22,14 @@ public class SeprDSA {
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
 		menu.setVisible(true);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1024, 640), 1024, 640);
+		Drawables.initialise(new Window(1024, 640), 1024, 640, menu.canvas);
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);

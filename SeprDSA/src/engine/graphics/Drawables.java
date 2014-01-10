@@ -1,5 +1,6 @@
 package engine.graphics;
 
+import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,11 +31,12 @@ public class Drawables {
 	private static int width;
 	private static int height;
 
-	public static void initialise(DisplayMode d, int width, int height) {
+	public static void initialise(DisplayMode d, int width, int height, Canvas canvas) {
 		Drawables.width = width;
 		Drawables.height = height;
 
 		try {
+			Display.setParent(canvas);
 			d.set();
 			Display.create();
 			Display.setVSyncEnabled(true);
