@@ -18,8 +18,8 @@ public class FuturePlane {
 	Random randomgen = new Random(System.currentTimeMillis());
 	
 	public FuturePlane() {
-		velocity = (250 + (int)(Math.random() * (1105)));
-		passenger = (20 + (int)(Math.random() * (834)));
+		velocity = (250 + randomgen.nextInt(1105));
+		passenger = (20 + randomgen.nextInt(834));
 		rotation = 349.0f;
 		fnumber = generateFlightNumber();
 		position = new BasicVector(new double[] {

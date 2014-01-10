@@ -5,6 +5,7 @@ import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
+import game.MainMenu;
 import game.Map;
 import game.WayPoint;
 import java.util.Random;
@@ -14,10 +15,13 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
-
+	
+	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 
 	public static void main(String[] args) {
+		MainMenu menu = new MainMenu();
+		menu.setVisible(true);
 		Random randomgen = new Random(System.currentTimeMillis());
 		Drawables.initialise(new Window(1640, 640), 1064, 640);
 		Display.setTitle("Dat flying game");
@@ -49,7 +53,7 @@ public class SeprDSA {
 		}
 
 		while (true) {
-			Physicals.logic(1);
+			Physicals.logic(System.currentTimeMillis()-timer);
 			Input.logic();
 			Drawables.logic();
 
@@ -60,7 +64,7 @@ public class SeprDSA {
 			}
 		
 		FuturePlane.CreatePlanes();
-
+		timer = System.currentTimeMillis();
 		}
 	}
 
