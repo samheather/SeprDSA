@@ -7,4 +7,6 @@ public class Fonts {
 			36);
 	public static Font smallFont = new Font("Times New Roman", java.awt.Font.BOLD,
 			12);
+	public static Font planeFont = new Font("Times New Roman", java.awt.Font.BOLD,
+			16);
 }

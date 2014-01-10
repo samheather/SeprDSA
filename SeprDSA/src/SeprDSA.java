@@ -3,10 +3,10 @@ import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
-import game.FuturePlane;
 import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
+import game.Planes;
 import game.WayPoint;
 import java.util.Random;
 import org.la4j.vector.dense.BasicVector;
@@ -18,6 +18,7 @@ public class SeprDSA {
 	
 	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
+
 
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
@@ -59,19 +60,18 @@ public class SeprDSA {
 							* (Display.getHeight() - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
 		}
-
+		
 		while (true) {
 			Physicals.logic(System.currentTimeMillis()-timer);
 			Input.logic();
 			Drawables.logic();
+			Planes.updateTimer(System.currentTimeMillis() - timer);
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
-		
-		FuturePlane.CreatePlanes();
 		timer = System.currentTimeMillis();
 		}
 	}
