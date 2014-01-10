@@ -10,18 +10,29 @@ import java.awt.Canvas;
 
 public class MainMenu extends JFrame {
 
-	public Canvas canvas = null;
+	public Canvas canvas;
+	public JPanel mainMenuPanel;
 	
 	public MainMenu() {
+        setSize(1024, 640);
+        setVisible(true);
+		mainMenuPanel = new JPanel();
+		mainMenuPanel.setLayout(null);
+		add(mainMenuPanel);
+
+		// disables layout manager so buttons/panels can be placed using
+		// coordinates
+		
 
 		
 		
 		canvas = new Canvas();
+		canvas.setVisible(false);
         //canvas.setFocusTraversalKeysEnabled(false);
 		canvas.setIgnoreRepaint(true);
-        canvas.setSize(200, 200);
-        setSize(1024, 640);
-        setVisible(true);
+        canvas.setSize(1024, 640);
+        mainMenuPanel.add(canvas);
+        
         /*
         canvas.addComponentListener(new ComponentAdapter() {
             @Override
@@ -31,8 +42,9 @@ public class MainMenu extends JFrame {
         });
         */
 
-        getContentPane().add(canvas, BorderLayout.CENTER);
-        createGUI();
+        //mainMenuPanel.add(canvas);
+        //createGUI();
+        
         //setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("icon16.png")));
 
         // on Windows we need to transfer focus to the Canvas
@@ -55,9 +67,10 @@ public class MainMenu extends JFrame {
             }
         });
         */
-	}
+        createGUI();
 
-	private void createGUI() {
+	}
+	public void createGUI() {
 
 		// used to place buttons relative positions
 		int widthMainMenu = 1024;
@@ -67,12 +80,7 @@ public class MainMenu extends JFrame {
 		int widthButton = 100;
 
 		// create panel to place main menu buttons on
-		JPanel mainMenuPanel = new JPanel();
-		getContentPane().add(mainMenuPanel);
 
-		// disables layout manager so buttons/panels can be placed using
-		// coordinates
-		mainMenuPanel.setLayout(null);
 
 		// create "Start" button at coordinates (x, y, width, height)
 		JButton startGame = new JButton("Start");
@@ -85,6 +93,7 @@ public class MainMenu extends JFrame {
 		startGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				canvas.setVisible(true);
 				//mainMenuPanel.setBounds(0, 0, 0, 0);
 			}
 		});

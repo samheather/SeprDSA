@@ -12,6 +12,6 @@ clean:
 	mkdir bin
 
 run:
-	java -cp `find lib -name "*.jar" | tr "\n" ":"`:bin -Djava.library.path=lib/native SeprDSA
+	java -cp `find lib -name "*.jar" | tr "\n" ":"`:bin -Dsun.awt.disableMixing=true -Djava.library.path=lib/native SeprDSA
 
 

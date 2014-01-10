@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
@@ -30,8 +32,10 @@ public class Drawables {
 
 	private static int width;
 	private static int height;
+	private static JPanel panel;
 
 	public static void initialise(DisplayMode d, int width, int height, Canvas canvas) {
+		Drawables.panel = panel;
 		Drawables.width = width;
 		Drawables.height = height;
 

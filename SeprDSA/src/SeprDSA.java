@@ -33,6 +33,8 @@ public class SeprDSA {
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
+		
+
 
 		Map m = new Map();
 		Leaderboard l = new Leaderboard();
