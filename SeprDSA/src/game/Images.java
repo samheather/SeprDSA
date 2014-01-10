@@ -17,8 +17,21 @@ public class Images {
 		return i;
 	}
 
-	public static Texture planes[] = new Texture[] { load("plane1.png"),
-			load("plane2.png") };
+	public static Texture planes[] = new Texture[] { 
+		load("many_planes/plane1.png"),
+		load("many_planes/plane2.png"),
+		load("many_planes/plane3.png"),
+		load("many_planes/plane4.png"),
+		load("many_planes/plane5.png"),
+		load("many_planes/plane6.png"),
+		load("many_planes/plane7.png"),
+		load("many_planes/plane8.png"),
+		load("many_planes/plane9.png"),
+		load("many_planes/plane10.png"),
+		load("many_planes/plane11.png"),
+		load("many_planes/plane12.png"),
+		load("many_planes/plane13.png"),
+		load("many_planes/plane14.png") };
 	//public static Texture plane1 = load("plane1.png");
 	//public static Texture plane2 = load("plane2.png");
 	public static Texture map = load("map.png");
