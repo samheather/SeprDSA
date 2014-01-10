@@ -18,7 +18,7 @@ public class FuturePlane {
 	
 	public FuturePlane() {
 		velocity = (250 + randomgen.nextInt(1105));
-		rotation = 349.0f;
+		rotation = 90.0f;
 		fnumber = generateFlightNumber();
 		position = new BasicVector(new double[] {
 				(randomgen.nextDouble() - 0.5)

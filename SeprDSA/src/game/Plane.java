@@ -31,7 +31,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean down = false;
 	private double radius = 50;
 	private int randomImage = new Random().nextInt(Images.planes.length);
-	private int size = 40;
+	private int size = 60;
 	private String number;
 	private Texture numbertext;
 
@@ -45,7 +45,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		//Planes.add(this);
 		Input.addKeyboardable(this);
-		numbertext = new Texture(fnumber, Fonts.test);
+		numbertext = new Texture(fnumber, Fonts.planeFont);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 			.rotate(rotation)
 			.overlay (new
 				 Sprite(numbertext)
-				.red(1.0).blue(1.0).alpha(0.5)
+				.red(1.0).blue(1.0).green(1.0).alpha(0.75)
 				.translate(new BasicVector(new double[] {0, -40}))
 			 )
 			.translate(new BasicVector(new double[] { x, y }));

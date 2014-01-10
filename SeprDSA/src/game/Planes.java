@@ -6,7 +6,7 @@ import java.util.Random;
 
 
 public class Planes {
-	private static int maxplanenumb = 10;
+	private static int maxplanenumb = 1;
 	static Random randomgen = new Random();
 	private static double spawnThreshhold = 300 + randomgen.nextInt(600);
 	private static double currTime = 0;
