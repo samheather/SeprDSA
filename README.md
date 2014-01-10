@@ -1,4 +1,4 @@
 SeprDSA
 =======
 
-Sepr Team DSA Air Traffic Controll Game.
+Sepr Team DSA Air Traffic Control Game.
