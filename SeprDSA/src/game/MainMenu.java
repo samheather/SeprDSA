@@ -14,8 +14,8 @@ public class MainMenu extends JFrame {
     private void createGUI() {
         
         //used to place buttons relative positions
-        int widthMainMenu=1064;
-        int heightMainMenu=600;
+        int widthMainMenu=1024;
+        int heightMainMenu=640;
         
         int heightButton = 40;
         int widthButton = 100;

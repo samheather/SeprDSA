@@ -4,6 +4,7 @@ import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.Leaderboard;
+import game.MainMenu;
 import game.Map;
 import game.Planes;
 import game.WayPoint;
@@ -18,9 +19,12 @@ public class SeprDSA {
 	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 
-	public static void main(String[] args) throws InterruptedException {
+
+	public static void main(String[] args) {
+		MainMenu menu = new MainMenu();
+		menu.setVisible(true);
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1640, 640), 1064, 640);
+		Drawables.initialise(new Window(1024, 640), 1024, 640);
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
@@ -50,7 +54,7 @@ public class SeprDSA {
 		}
 		
 		while (true) {
-			Physicals.logic(1);
+			Physicals.logic(System.currentTimeMillis()-timer);
 			Input.logic();
 			Drawables.logic();
 			Planes.updateTimer(System.currentTimeMillis() - timer);
@@ -61,7 +65,6 @@ public class SeprDSA {
 				System.exit(0);
 			}
 		timer = System.currentTimeMillis();
-
 		}
 	}
 
