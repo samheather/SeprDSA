@@ -33,7 +33,7 @@ public class MainMenu extends JFrame {
         canvas.setSize(1024, 640);
         mainMenuPanel.add(canvas);
         
-<<<<<<< HEAD
+
         /*
         canvas.addComponentListener(new ComponentAdapter() {
             @Override
@@ -59,11 +59,7 @@ public class MainMenu extends JFrame {
                 }
             });
         }
-=======
-        //used to place buttons relative positions
-        int widthMainMenu=1024;
-        int heightMainMenu=640;
->>>>>>> 9a15e0d0e5c3c5815fe190921b090b8dba8128c1
+
         
         
         addWindowListener(new WindowAdapter() {
