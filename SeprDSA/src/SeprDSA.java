@@ -7,8 +7,11 @@ import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
 import game.Planes;
+import game.Sidemenu;
 import game.WayPoint;
+
 import java.util.Random;
+
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
@@ -34,11 +37,10 @@ public class SeprDSA {
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
-		
-
 
 		Map m = new Map();
 		Leaderboard l = new Leaderboard();
+		Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);

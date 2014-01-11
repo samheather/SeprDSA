@@ -2,6 +2,7 @@
 .PHONY: clean
 .PHONY: all
 .PHONY: run
+.PHONY: e
 
 all:
 	javac -d bin -cp `find lib -name "*.jar" | tr "\n" ":"` -sourcepath src src/SeprDSA.java
@@ -12,6 +13,9 @@ clean:
 
 run:
 	java -cp `find lib -name "*.jar" | tr "\n" ":"`:bin -Dsun.awt.disableMixing=true -Djava.library.path=lib/native SeprDSA
-
-
-
+	
+e:
+	rm -rf bin
+	mkdir bin
+	javac -d bin -cp `find lib -name "*.jar" | tr "\n" ":"` -sourcepath src src/SeprDSA.java
+	java -cp `find lib -name "*.jar" | tr "\n" ":"`:bin -Dsun.awt.disableMixing=true -Djava.library.path=lib/native SeprDSA

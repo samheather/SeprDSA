@@ -39,5 +39,9 @@ public class FuturePlane {
 		}
 		return result;
 	}
+	
+	public String getFnumber() {
+		return this.fnumber;
+	}
 
 }

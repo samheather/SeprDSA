@@ -10,7 +10,7 @@ public class Planes {
 	static Random randomgen = new Random();
 	private static double spawnThreshhold = 300 + randomgen.nextInt(600);
 	private static double currTime = 0;
-	private static List<FuturePlane> planes;
+	public static List<FuturePlane> planes;
 	static {
 		planes = new ArrayList<FuturePlane>();
 	}

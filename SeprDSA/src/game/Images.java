@@ -37,4 +37,5 @@ public class Images {
 	public static Texture map = load("map.png");
 	public static Texture waypoints[] = new Texture[] { load("waypoint_aqua.png"), load("waypoint_blue.png"), load("waypoint_green.png"), load("waypoint_red.png"), load("waypoint_yellow.png")};
 	public static Texture entryExitPoint = load("exit.png");
+	public static Texture homeButton = load"
 }

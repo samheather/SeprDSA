@@ -9,4 +9,8 @@ public class Fonts {
 			12);
 	public static Font planeFont = new Font("Times New Roman", java.awt.Font.BOLD,
 			16);
+	public static Font sideMenuTitle = new Font("Times New Roman", java.awt.Font.BOLD,
+			16);
+	public static Font sideMenuText = new Font("Times New Roman", java.awt.Font.ITALIC,
+			16);
 }
