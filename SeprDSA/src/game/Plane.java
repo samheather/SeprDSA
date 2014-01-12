@@ -9,6 +9,7 @@ import org.la4j.vector.Vector;
 
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.*;
 import engine.input.Input;
@@ -33,7 +34,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private int randomImage = new Random().nextInt(Images.planes.length);
 	private int size = 60;
 	private String number;
-	private Texture numbertext;
+	private Text numbertext;
 
 	public Plane(int vel, float rota, String fnumber, Vector pos) {
 		rotation = rota;
@@ -45,7 +46,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		Physicals.add(this);
 		//Planes.add(this);
 		Input.addKeyboardable(this);
-		numbertext = new Texture(fnumber, Fonts.planeFont);
+		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 	}
 
 	@Override
@@ -71,8 +72,8 @@ public class Plane implements Drawable, Keyboardable, Physical {
 			 Sprite(Images.planes[randomImage])
 			.scale(size / Images.planes[randomImage].size().get(0))
 			.rotate(rotation)
-			.overlay (new
-				 Sprite(numbertext)
+			.overlay (
+				 numbertext
 				.red(1.0).blue(1.0).green(1.0).alpha(0.75)
 				.translate(new BasicVector(new double[] {0, -40}))
 			 )

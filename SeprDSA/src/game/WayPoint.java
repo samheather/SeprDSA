@@ -7,8 +7,10 @@ import org.la4j.vector.dense.BasicVector;
 
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
+import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.Sprite;
+import engine.graphics.drawing.primitives.Text;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
@@ -19,14 +21,14 @@ public class WayPoint implements Drawable, Physical {
 	private int size = 16;
 	private String number;
 	private int randomImage = new Random().nextInt(Images.waypoints.length);
-	private Texture numbertext;
+	private Text numbertext;
 
 	public WayPoint(Vector pos, String pointNumber) {
 		position = pos;
 		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
-		numbertext = new Texture(pointNumber, Fonts.smallFont);
+		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
 	}
 
 	@Override
@@ -38,8 +40,8 @@ public class WayPoint implements Drawable, Physical {
 		return new
 				 Sprite(Images.waypoints[randomImage])
 				.scale(size / Images.waypoints[randomImage].size().get(0))
-				.overlay (new
-				 Sprite(numbertext)
+				.overlay (
+				 numbertext
 				.red(0).blue(0).green(0).alpha(0.7)
 				.translate(new BasicVector(new double[] {0, 6}))
 				)
