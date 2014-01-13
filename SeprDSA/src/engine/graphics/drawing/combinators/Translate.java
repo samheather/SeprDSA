@@ -21,7 +21,7 @@ public class Translate extends Affine {
 
 	@Override
 	public boolean hit(Vector pos) {
-		return super.hit(pos.subtract(value));
+		return super.hit(pos.subtract(value.slice(0, 2)));
 	}
 
 }
