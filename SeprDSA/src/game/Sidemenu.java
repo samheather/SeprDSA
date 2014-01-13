@@ -35,7 +35,7 @@ public class Sidemenu implements Drawable, Clickable {
 
 	public Drawing draw() {
 		for (int i = 1; i <= Math.min(5, Planes.planes.size()); i++) {
-			String tempString = Planes.planes.get(i - 1).getFnumber() + "E/E"
+			String tempString = Planes.planes.get(i - 1).getFNumber() + "E/E"
 					+ "TIME";
 			upcomingFlights[i - 1] = new Text(tempString, Fonts.sideMenuText,
 					Alignment.CENTRED);

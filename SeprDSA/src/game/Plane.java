@@ -20,10 +20,12 @@ import engine.physics.Physicals;
 import org.la4j.vector.dense.*;
 
 public class Plane implements Drawable, Keyboardable, Physical {
-
+	
+	private Random randomgen = new Random();
 	private double x; // Should be pixel values for x,y
 	private double y;
 	private double z;
+	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
 	private float rotation;
 	private boolean left = false;
@@ -31,27 +33,35 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private boolean up = false;
 	private boolean down = false;
 	private double radius = 50;
-	private int randomImage = new Random().nextInt(Images.planes.length);
+	private int randomImage = randomgen.nextInt(Images.planes.length);
 	private int size = 60;
 	private String number;
 	private Text numbertext;
+	private int score;
+	private ArrayList <WayPoint> wayPointList;
+	private EntryExitPoint exitPoint;
+	private EntryExitPoint enterPoint;
 
-	public Plane(int vel, float rota, String fnumber, Vector pos) {
-		rotation = rota;
-		x = pos.get(0);
-		y = pos.get(1);
-		z = pos.get(2);
-		number = fnumber;
+	public Plane(String fnumber, ArrayList<WayPoint> pointList, EntryExitPoint startPoint, EntryExitPoint endPoint) {
 		Drawables.add(this);
 		Physicals.add(this);
-		//Planes.add(this);
+		Planes.add(this);
 		Input.addKeyboardable(this);
+		number = fnumber;
+		wayPointList = pointList;
+		exitPoint = endPoint;
+		enterPoint = startPoint;
+		position = enterPoint.getPos();
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 	}
 
 	@Override
 	public String toString() {
 		return "Plane" + number;
+	}
+	
+	public String getFNumber() {
+		return number;
 	}
 
 	public Drawing draw() {
@@ -116,11 +126,25 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	public float getBearing() {
 		return rotation;
 	};
+	
+	public void setBearing(float newBearing) throws InterruptedException {
+		float oldBearing = this.getBearing();
+		for (int i = 1; i < Math.abs(newBearing - oldBearing); i++){
+			if (newBearing > oldBearing){
+				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}));
+			} else{
+				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}));
+			}
+			Thread.sleep(50);
+		}
+	};
 
-	public void destroy() {
+	public void destroy() throws InterruptedException {
 		for (int i = size; i > 0; i--) {
 			size -= 1;
+			Thread.sleep(5);
 		}
+		Planes.remove(this);
 		Input.removeKeyboardable(this);
 		Physicals.remove(this);
 		Drawables.remove(this);
