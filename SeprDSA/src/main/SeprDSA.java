@@ -60,20 +60,23 @@ public class SeprDSA {
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 
 		for (int i = 1; i <= entryExitPointNumber; i++) { // Random EntryExits
-			new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
+			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
 					360, i);
+			entryExitPointList.add(newExit);
 		}
 
-		new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
+		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
 				10, 0); // Landing Strip
+		entryExitPointList.add(landingStrip);
 
 		for (Integer i = 0; i < wayPointNumber; i++) { // Random waypoints
-			new WayPoint(new BasicVector(new double[] {
+			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getHeight() - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
+			wayPointList.add(newWayPoint);
 		}
 		
 		while (true) {
