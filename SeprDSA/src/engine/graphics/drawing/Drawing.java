@@ -47,4 +47,6 @@ public abstract class Drawing {
 	public Drawing overlay(Drawing top) {
 		return new Overlay(this, top);
 	}
+	
+	public abstract boolean hit(Vector pos);
 }

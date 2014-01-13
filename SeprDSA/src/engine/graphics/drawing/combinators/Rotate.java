@@ -1,5 +1,7 @@
 package engine.graphics.drawing.combinators;
 
+import org.la4j.vector.Vector;
+import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
 
 import engine.graphics.drawing.Drawing;
@@ -21,5 +23,14 @@ public class Rotate extends Affine {
 
 	}
 
+	@Override
+	public boolean hit(Vector pos) {
+		double s = Math.sin(-degrees);
+		double c = Math.sin(-degrees);
+		double x = pos.get(0);
+		double y = pos.get(1);
+		return super.hit(new BasicVector(new double[] { x * c - y * s,
+				x * s - y * c }));
+	}
 
 }

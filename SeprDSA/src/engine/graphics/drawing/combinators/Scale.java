@@ -3,6 +3,7 @@ package engine.graphics.drawing.combinators;
 import engine.graphics.drawing.Drawing;
 
 import org.la4j.vector.*;
+import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
 
 public class Scale extends Affine {
@@ -22,6 +23,10 @@ public class Scale extends Affine {
 
 	}
 
-
+	@Override
+	public boolean hit(Vector pos) {
+		return super.hit(new BasicVector(new double[] {
+				pos.get(0) / value.get(0), pos.get(1) / value.get(1) }));
+	}
 
 }

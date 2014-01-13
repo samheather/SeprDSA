@@ -15,9 +15,11 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.LWJGLException;
 
 import engine.graphics.display.DisplayMode;
+import engine.graphics.drawing.Drawing;
 
 public class Drawables {
 	private static List<Drawable> drawables;
+	private static List<Drawing> drawings;
 	static {
 		drawables = new ArrayList<Drawable>();
 	}
@@ -27,15 +29,20 @@ public class Drawables {
 	}
 
 	public static void remove(Drawable d) {
-		drawables.remove(d);
+		for (int i = 0; i < drawables.size(); i++) {
+			if (drawables.get(i) == d) {
+				drawables.remove(i);
+				if (drawings.size() > i)
+					drawings.remove(i);
+			}
+		}
 	}
 
 	private static int width;
 	private static int height;
-	private static JPanel panel;
 
-	public static void initialise(DisplayMode d, int width, int height, Canvas canvas) {
-		Drawables.panel = panel;
+	public static void initialise(DisplayMode d, int width, int height,
+			Canvas canvas) {
 		Drawables.width = width;
 		Drawables.height = height;
 
@@ -49,16 +56,31 @@ public class Drawables {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		
+
 		GL11.glShadeModel(GL11.GL_SMOOTH);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		resize();
+	}
+
+	public static Vector windowCoords(Vector pos) {
+		int dw = Display.getWidth();
+		int dh = Display.getHeight();
+		double widthr = (double) (dw) / (double) (width);
+		double heightr = (double) (dh) / (double) (height);
+		if (heightr < widthr) {
+			widthr = heightr;
+		}
+		double x = Display.getX();
+		double y = Display.getY();
+		Vector ret = new BasicVector(new double[] {
+				(dw / 2.0) - (pos.get(0) - x), (dh / 2.0) - (pos.get(1) - y) });
+		return ret.divide(widthr);
 	}
 
 	private static void resize() {
@@ -69,7 +91,7 @@ public class Drawables {
 		GL11.glViewport(0, 0, dw, dh);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		//GL11.glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1, -1);
+		// GL11.glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1, -1);
 		GL11.glOrtho(-dw / 2, dw / 2, -dh / 2, dh / 2, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		double widthr = (double) (dw) / (double) (width);
@@ -79,13 +101,23 @@ public class Drawables {
 		}
 		GL11.glScaled(widthr, widthr, 0.0f);
 	}
-	
+
 	public static Vector virtualDisplaySize() {
-		return new BasicVector(new double[] {width, height});
+		return new BasicVector(new double[] { width, height });
 	}
 
 	public static void deinitialise() {
 		Display.destroy();
+	}
+
+	public static List<Drawable> collisions(Vector pos) {
+		List<Drawable> ret = new ArrayList<Drawable>();
+		for (int i = 0; i < drawings.size(); i++) {
+			if (drawings.get(i).hit(pos)) {
+				ret.add(drawables.get(i));
+			}
+		}
+		return ret;
 	}
 
 	public static void logic() {
@@ -94,9 +126,10 @@ public class Drawables {
 		}
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		Collections.sort(drawables);
+		drawings = new ArrayList<Drawing>();
 		for (int i = 0; i < drawables.size(); i++) {
-			drawables.get(i).draw().render();
-
+			drawings.add(drawables.get(i).draw());
+			drawings.get(i).render();
 		}
 		Display.update();
 	}

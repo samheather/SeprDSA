@@ -1,12 +1,12 @@
 package game;
 
+import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
-import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.Sprite;
 import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
@@ -46,14 +46,14 @@ public class Sidemenu implements Drawable, Clickable {
 				.blue(1.0)
 				.green(1.0)
 				.alpha(0.75)
-				// .translate(new BasicVector(new double[] {0, -40}))
+				.translate(new BasicVector(new double[] { 0, -40 }))
 				.overlay(
 						titleText.overlay(upcomingFlights[0])
-								 .overlay(upcomingFlights[1])
-								 .overlay(upcomingFlights[2])
-								 .overlay(upcomingFlights[3])
-								 .overlay(upcomingFlights[4]))
-				.translate(new BasicVector(new double[] { 500, 500 }));
+								.overlay(upcomingFlights[1])
+								.overlay(upcomingFlights[2])
+								.overlay(upcomingFlights[3])
+								.overlay(upcomingFlights[4]))
+		/* .translate(new BasicVector(new double[] { 500, 500 })) */;
 
 	}
 
@@ -70,7 +70,25 @@ public class Sidemenu implements Drawable, Clickable {
 	}
 
 	@Override
-	public void click(int button) {
+	public void clickDown(int button, Vector pos) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void clickUp(int button) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void clickAway() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void move(Vector newPos) {
 		// TODO Auto-generated method stub
 
 	}

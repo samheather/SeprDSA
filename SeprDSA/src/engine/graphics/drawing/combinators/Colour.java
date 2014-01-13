@@ -31,14 +31,17 @@ public class Colour extends UnaryCombinator {
 		return new Colour(arg, new BasicVector(new double[] { amount,
 				colour.get(1), colour.get(2), colour.get(3) }));
 	}
+
 	public Drawing green(double amount) {
 		return new Colour(arg, new BasicVector(new double[] { colour.get(0),
 				amount, colour.get(2), colour.get(3) }));
 	}
+
 	public Drawing blue(double amount) {
 		return new Colour(arg, new BasicVector(new double[] { colour.get(0),
 				colour.get(1), amount, colour.get(3) }));
 	}
+
 	public Drawing alpha(double amount) {
 		return new Colour(arg, new BasicVector(new double[] { colour.get(0),
 				colour.get(1), colour.get(2), amount }));

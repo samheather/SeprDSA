@@ -19,4 +19,9 @@ public class Translate extends Affine {
 		GL11.glTranslated(value.get(0), value.get(1), 0.0);
 	}
 
+	@Override
+	public boolean hit(Vector pos) {
+		return super.hit(pos.subtract(value));
+	}
+
 }
