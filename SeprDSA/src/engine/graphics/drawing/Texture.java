@@ -35,14 +35,14 @@ public class Texture {
 
 	private final int internal;
 	private final Vector size;
-
+/*
 	public Texture(String text, Font font) {
 		this(drawText(text, font));
 	}
 
 	private static BufferedImage drawText(String text, Font font) {
-		double x = Math.round(Drawables.virtualDisplaySize().get(0));
-		double y = Math.round(Drawables.virtualDisplaySize().get(1));
+		double x = Math.ceil(Drawables.virtualDisplaySize().get(0));
+		double y = Math.ceil(Drawables.virtualDisplaySize().get(1));
 		BufferedImage image = new BufferedImage((int) x, (int) y,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics = image.createGraphics();
@@ -81,7 +81,7 @@ public class Texture {
 				(int) ((y / 2.0) + (sizey / 2.0)));
 		return image;
 	}
-
+*/
 	public Texture(String filePath) throws IOException {
 		/*
 		 * BufferedImage image = null; try { image = ImageIO.read(new

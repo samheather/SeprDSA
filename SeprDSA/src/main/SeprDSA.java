@@ -1,3 +1,4 @@
+package main;
 import engine.graphics.Drawables;
 import engine.graphics.display.Window;
 import engine.input.Input;
@@ -10,6 +11,7 @@ import game.Planes;
 import game.Sidemenu;
 import game.WayPoint;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.la4j.vector.dense.BasicVector;
@@ -21,9 +23,20 @@ public class SeprDSA {
 	
 	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
+	private static int entryExitPointNumber = 5; // not including runway
+	private static int wayPointNumber = 10; 
+	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
+	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
+	
+	public static ArrayList<WayPoint> getWayPoints(){
+		return wayPointList;
+	}
+	
+	public static ArrayList<EntryExitPoint> getEntryExitPoints(){
+		return entryExitPointList;
+	}
 
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		MainMenu menu = new MainMenu();
 		menu.setVisible(true);
 		try {
@@ -46,21 +59,24 @@ public class SeprDSA {
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 
-		for (int i = 1; i <= 5; i++) { // Random EntryExits
-			new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
+		for (int i = 1; i <= entryExitPointNumber; i++) { // Random EntryExits
+			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
 					360, i);
+			entryExitPointList.add(newExit);
 		}
 
-		new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
+		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
 				10, 0); // Landing Strip
+		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 1; i <= 10; i++) { // Random waypoints
-			new WayPoint(new BasicVector(new double[] {
+		for (Integer i = 0; i < wayPointNumber; i++) { // Random waypoints
+			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getHeight() - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
+			wayPointList.add(newWayPoint);
 		}
 		
 		while (true) {

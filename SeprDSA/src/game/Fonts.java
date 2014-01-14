@@ -1,6 +1,6 @@
 package game;
 
-import java.awt.Font;
+import engine.graphics.drawing.Font;
 
 public class Fonts {
 	public static Font test = new Font("Times New Roman", java.awt.Font.BOLD,

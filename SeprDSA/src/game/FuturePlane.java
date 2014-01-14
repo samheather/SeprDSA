@@ -1,6 +1,9 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import main.SeprDSA;
 
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
@@ -10,38 +13,37 @@ public class FuturePlane {
 	private int velocity;
 	private float rotation;
 	private String fnumber;
-	private Vector position;
-	private String planename = "p" + (Planes.size()+1);
 	private static int pixelsFromEdge = 100;
-
-	Random randomgen = new Random(System.currentTimeMillis());
+	static Random randomgen = new Random(System.currentTimeMillis());
+	private EntryExitPoint enterPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
+	private EntryExitPoint exitPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
+	private static ArrayList <WayPoint> wayPointList = new ArrayList<WayPoint>();
 	
-	public FuturePlane() {
-		velocity = (250 + randomgen.nextInt(1105));
-		rotation = 90.0f;
+	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
-		position = new BasicVector(new double[] {
-				(randomgen.nextDouble() - 0.5)
-				* (Display.getWidth() - pixelsFromEdge),
-		(randomgen.nextDouble() - 0.5)
-				* (Display.getHeight() - pixelsFromEdge),
-		randomgen.nextDouble() * 20 });
-		Plane planename = new Plane(velocity, rotation, fnumber, position);
+		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
+		Thread.sleep(delayTime);
+		new Plane(fnumber, wayPointList, enterPoint, exitPoint);
 	}
 	
 	
 	public static String generateFlightNumber() {
-		String alphabet = new String("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		String alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String result = new String();
-		Random r = new Random();
 		for (int i = 0; i < 8; i++) {
-			result = result + alphabet.charAt(r.nextInt(alphabet.length()));
+			result = result + alphabet.charAt(randomgen.nextInt(alphabet.length()));
 		}
 		return result;
 	}
 	
 	public String getFnumber() {
-		return this.fnumber;
+		return fnumber;
+	}
+	
+	private static void main() {
+		for (int i = 0; i < 10; i++){
+			wayPointList.add( SeprDSA.getWayPoints().get( randomgen.nextInt( SeprDSA.getWayPoints().size() ) ) );
+		}
 	}
 
 }

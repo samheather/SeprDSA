@@ -37,4 +37,13 @@ public class Sprite extends Drawing {
 		GL11.glEnd();
 
 	}
+
+	@Override
+	public boolean hit(Vector pos) {
+		Vector size = texture.size();
+		return     (pos.get(0) > (-size.get(0) / 2))
+				&& (pos.get(0) < (size.get(0) / 2))
+				&& (pos.get(1) > (-size.get(1) / 2))
+				&& (pos.get(1) < (size.get(1) / 2));
+	}
 }
