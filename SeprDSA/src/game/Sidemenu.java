@@ -40,20 +40,18 @@ public class Sidemenu implements Drawable, Clickable {
 			upcomingFlights[i - 1] = new Text(tempString, Fonts.sideMenuText,
 					Alignment.CENTRED);
 		}
-		return new Sprite(Images.homeButton)
-				.scale(200 / Images.homeButton.size().get(0))
-				.red(1.0)
-				.blue(1.0)
-				.green(1.0)
-				.alpha(0.75)
-				.translate(new BasicVector(new double[] { 0, -40 }))
-				.overlay(
-						titleText.overlay(upcomingFlights[0])
-								.overlay(upcomingFlights[1])
-								.overlay(upcomingFlights[2])
-								.overlay(upcomingFlights[3])
-								.overlay(upcomingFlights[4]))
-		/* .translate(new BasicVector(new double[] { 500, 500 })) */;
+		return new
+			 Sprite(Images.homeButton)
+			.scale(200 / Images.homeButton.size().get(0))
+			.red(1.0).blue(1.0).green(1.0).alpha(0.75)
+//			.translate(new BasicVector(new double[] {0, -40}))
+			.overlay(titleText
+					.overlay(upcomingFlights[0]	
+					.overlay(upcomingFlights[1]
+					.overlay(upcomingFlights[2]
+					.overlay(upcomingFlights[3]
+					.overlay(upcomingFlights[4]))))))
+			.translate(new BasicVector(new double[] { 320, 320 }));
 
 	}
 
