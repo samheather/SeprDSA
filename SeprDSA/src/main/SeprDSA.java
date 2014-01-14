@@ -23,7 +23,7 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
 	
-	private static double timer = System.currentTimeMillis();
+	public static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10; 
@@ -83,7 +83,6 @@ public class SeprDSA {
 		}
 		
 		Plane p = new Plane("LOLCRAFT", wayPointList, entryExitPointList.get(1), entryExitPointList.get(0));
-		Thread.sleep(1000);
 		//p.setVel(new BasicVector(new double[] {10,10,0}));
 		p.setBearing(45.0f);
 		

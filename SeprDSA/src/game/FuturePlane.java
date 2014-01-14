@@ -21,8 +21,9 @@ public class FuturePlane {
 	
 	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
+		double localTime = 0;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
-		Thread.sleep(delayTime);
+		while (localTime < delayTime) {localTime += SeprDSA.timer;}
 		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
 		p.setBearing(randomgen.nextFloat()*360);
 	}
