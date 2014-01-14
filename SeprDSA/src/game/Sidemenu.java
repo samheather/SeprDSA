@@ -41,7 +41,7 @@ public class Sidemenu implements Drawable, Clickable{
 					.overlay(new Sprite(upcomingFlights[2])
 					.overlay(new Sprite(upcomingFlights[3])
 					.overlay(new Sprite(upcomingFlights[4])))))))
-			.translate(new BasicVector(new double[] { 500, 500 }));
+			.translate(new BasicVector(new double[] { 320, 320 }));
 
 	}
 
