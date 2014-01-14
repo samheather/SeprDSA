@@ -4,9 +4,11 @@ import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
+import game.FuturePlane;
 import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
+import game.Plane;
 import game.Planes;
 import game.Sidemenu;
 import game.WayPoint;
@@ -27,6 +29,7 @@ public class SeprDSA {
 	private static int wayPointNumber = 10; 
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
+	public Plane selectedPlane;
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;
@@ -53,7 +56,7 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Leaderboard l = new Leaderboard();
-		Sidemenu s = new Sidemenu();
+		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
@@ -78,6 +81,11 @@ public class SeprDSA {
 					randomgen.nextDouble() * 20 }),i.toString());
 			wayPointList.add(newWayPoint);
 		}
+		
+		Plane p = new Plane("LOLCRAFT", wayPointList, entryExitPointList.get(1), entryExitPointList.get(0));
+		Thread.sleep(1000);
+		//p.setVel(new BasicVector(new double[] {10,10,0}));
+		p.setBearing(45.0f);
 		
 		while (true) {
 			Physicals.logic(System.currentTimeMillis()-timer);

@@ -23,7 +23,8 @@ public class FuturePlane {
 		fnumber = generateFlightNumber();
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
 		Thread.sleep(delayTime);
-		new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		p.setBearing(randomgen.nextFloat()*360);
 	}
 	
 	
