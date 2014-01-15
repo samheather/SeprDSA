@@ -19,8 +19,11 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
+
+
+
 public class SeprDSA {
-	
+
 	private static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 	private static int entryExitPointNumber = 5; // not including runway
@@ -37,6 +40,7 @@ public class SeprDSA {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
+		Drawables c = new Drawables();
 		MainMenu menu = new MainMenu();
 		menu.setVisible(true);
 		try {

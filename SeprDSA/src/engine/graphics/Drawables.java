@@ -1,6 +1,8 @@
 package engine.graphics;
 
 import java.awt.Canvas;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,14 +16,22 @@ import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.LWJGLException;
 
+import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
+import de.matthiasmann.twl.theme.ThemeManager;
+
 import engine.graphics.display.DisplayMode;
 import engine.graphics.drawing.Drawing;
 
 public class Drawables {
 	private static List<Drawable> drawables;
 	private static List<Drawing> drawings;
+	private static List<GUI> widgets;
+	private static LWJGLRenderer renderer;
 	static {
 		drawables = new ArrayList<Drawable>();
+		widgets = new ArrayList<GUI>();
 	}
 
 	public static void add(Drawable d) {
@@ -36,6 +46,12 @@ public class Drawables {
 					drawings.remove(i);
 			}
 		}
+	}
+	public static void add(Widget w) throws IOException {
+		GUI gui = new GUI(w, renderer);
+		ThemeManager themeManager = ThemeManager.createThemeManager(new File("default.xml").toURI().toURL(), renderer);
+		gui.applyTheme(themeManager);
+		widgets.add(gui);
 	}
 
 	private static int width;
@@ -67,6 +83,11 @@ public class Drawables {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
+		try{
+		    renderer = new LWJGLRenderer();
+		}catch(LWJGLException e){
+		    e.printStackTrace();
+		}
 		
 	}
 
@@ -81,7 +102,7 @@ public class Drawables {
 		double x = Display.getX();
 		double y = Display.getY();
 		Vector ret = new BasicVector(new double[] {
-				(dw / 2.0) - (pos.get(0) - x), (dh / 2.0) - (pos.get(1) - y) });
+				(pos.get(0) - x) - (dw / 2.0), (pos.get(1) - y) - (dh / 2.0) });
 		return ret.divide(widthr);
 	}
 
@@ -133,6 +154,18 @@ public class Drawables {
 			drawings.add(drawables.get(i).draw());
 			drawings.get(i).render();
 		}
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+		GL11.glPushMatrix();
+		GL11.glDisable(GL31.GL_TEXTURE_RECTANGLE);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		for (int i = 0; i < widgets.size(); i++) {
+
+			widgets.get(i).update();
+		}
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
+		GL11.glPopMatrix();
+		GL11.glPopAttrib();
 		Display.update();
 	}
 }

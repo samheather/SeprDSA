@@ -10,6 +10,7 @@ import org.lwjgl.input.Mouse;
 
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
+import game.Plane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,12 +82,15 @@ public class Input {
 					List<Drawable> collisions = Drawables.collisions(pos);
 					Clickable c = null;
 					for (int i = collisions.size() - 1; i >= 0; i--) {
-						if(collisions.get(i) instanceof Clickable) {
-							c = (Clickable)collisions.get(i);
+						if (collisions.get(i) instanceof Clickable) {
+							c = (Clickable) collisions.get(i);
+							if(c instanceof Plane) {
+								System.out.println(((Plane) c).getFNumber());
+								System.out.println(pos);
+							}
 							if (c == current) {
 								c.clickDown(button, pos);
-							}
-							else {
+							} else {
 								if (current != null)
 									current.clickAway();
 								current = c;
@@ -96,19 +100,16 @@ public class Input {
 						}
 					}
 					if (c == null) {
-						if(current != null)
+						if (current != null)
 							current.clickAway();
 						current = null;
 					}
 
-				}
-				else {
-					if(current != null)
+				} else {
+					if (current != null)
 						current.clickUp(button);
 					current = null;
 				}
-				
-
 
 			}
 		}
