@@ -12,14 +12,14 @@ public class Audio {
 
 	public static void playSound(String path, boolean looping, float volume) {
 		try {
-			SoundStore.get().setSoundVolume(volume);
+			SoundStore.get().setSoundVolume(volume); // Have to set of everything to a specific volume
 			if (path.endsWith(".wav")) {
 				org.newdawn.slick.openal.Audio sound = SoundStore.get().getWAV(
-						path);
+						path); // Special method to play .wav sound, be afraid
 				sound.playAsSoundEffect(1, 1, looping); // (pitch gain looping)
 			} else if (path.endsWith(".ogg")) {
 				org.newdawn.slick.openal.Audio sound = SoundStore.get().getOgg(
-						path);
+						path); // Support for .ogg files.
 				sound.playAsSoundEffect(1, 1, looping);
 			}
 		} catch (IOException e) {

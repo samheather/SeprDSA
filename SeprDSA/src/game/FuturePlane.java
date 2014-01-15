@@ -22,9 +22,11 @@ public class FuturePlane {
 	
 	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
+		double localTime = 0;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
-		Thread.sleep(delayTime);
-		new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		while (localTime < delayTime) {localTime += SeprDSA.timer;}
+		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		p.setBearing(randomgen.nextFloat()*360);
 	}
 	
 	/** generateFlightNumber is used to create an eight digit string of letters and numbers (between 0-9)*/

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import main.SeprDSA;
+
 import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
@@ -12,6 +14,7 @@ import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.*;
+import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -19,15 +22,15 @@ import engine.physics.Physicals;
 
 import org.la4j.vector.dense.*;
 
-public class Plane implements Drawable, Keyboardable, Physical {
+public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	
-	private Random randomgen = new Random();
+	private static Random randomgen = new Random();
 	private double x; // Should be pixel values for x,y
 	private double y;
 	private double z;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
-	private float rotation;
+	private float rotation = 0.0f;
 	private boolean left = false;
 	private boolean right = false;
 	private boolean up = false;
@@ -38,6 +41,7 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private String number;
 	private Text numbertext;
 	private int score;
+	private int speed = randomgen.nextInt(10);
 	private ArrayList <WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
 	private EntryExitPoint enterPoint;
@@ -51,7 +55,8 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		wayPointList = pointList;
 		exitPoint = endPoint;
 		enterPoint = startPoint;
-		position = enterPoint.getPos();
+		//position = enterPoint.getPos();
+		setPos(enterPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 	}
 
@@ -102,14 +107,11 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	}
 
 	public Vector getVel() {
-		/*
-		 * TODO Implement z stuff, need more attributes.
-		 */
 		return velocity;
 	}
 
 	public void setVel(Vector newVel) {
-		rotation = (float) Math.atan(newVel.get(1) / newVel.get(0));
+		rotation = (float) Math.toDegrees(Math.atan(newVel.get(1) / newVel.get(0)));
 		velocity = newVel;
 	}
 
@@ -127,22 +129,28 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		return rotation;
 	};
 	
-	public void setBearing(float newBearing) throws InterruptedException {
-		float oldBearing = this.getBearing();
+	public void setBearing(float newBearing) throws InterruptedException{
+		float oldBearing = getBearing();
+		System.out.println("Rotation" + rotation);
+		System.out.println("Old "+oldBearing);
+		System.out.println("New "+newBearing);
+		System.out.println("BearingChange "+Math.abs(newBearing - oldBearing));
 		for (int i = 1; i < Math.abs(newBearing - oldBearing); i++){
+			double localTime = 0;
 			if (newBearing > oldBearing){
-				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}));
+				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}).multiply(10));
 			} else{
-				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}));
+				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}).multiply(10));
 			}
-			Thread.sleep(50);
+			while (localTime < 50) {localTime += SeprDSA.timer;}
 		}
 	};
 
 	public void destroy() throws InterruptedException {
 		for (int i = size; i > 0; i--) {
+			double localTime = 0;
 			size -= 1;
-			Thread.sleep(5);
+			while (localTime < 5) {localTime += SeprDSA.timer;}
 		}
 		Planes.remove(this);
 		Input.removeKeyboardable(this);
@@ -184,5 +192,25 @@ public class Plane implements Drawable, Keyboardable, Physical {
 
 	public int compareTo(Drawable o) {
 		return (int) (this.getZ() - o.getZ());
+	}
+
+	public void clickDown(int button, Vector pos) {
+		// TODO Auto-generated method stub
+		if (isCollidingPos(pos)){
+			System.out.println("lolwat");
+		}
+	}
+
+	public void clickUp(int button) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clickAway() {
+		
+	}
+
+	public void move(Vector newPos) {
+		
 	}
 }

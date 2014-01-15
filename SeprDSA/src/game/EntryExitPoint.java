@@ -65,7 +65,7 @@ public class EntryExitPoint implements Drawable, Physical {
 								randomgen.nextDouble() * 20 });
 				break;
 			default:
-				System.out.println("Lolwat");
+				System.out.println("Random is brokened");
 			}
 		}
 		tolerance = tolerances;
