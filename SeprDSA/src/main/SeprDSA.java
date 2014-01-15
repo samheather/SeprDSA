@@ -30,8 +30,12 @@ public class SeprDSA {
 	private static int wayPointNumber = 10; 
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
-	public static Plane selectedPlane;
 	public static double timer;
+	public Plane selectedPlane;
+	/**
+	 *Initialise leaderboard here so it can be accessed globally
+	 */
+	public static Leaderboard l = new Leaderboard();
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;
@@ -57,8 +61,6 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		Leaderboard l = new Leaderboard();
-		
 		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);

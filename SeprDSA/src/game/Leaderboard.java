@@ -25,6 +25,7 @@ public class Leaderboard /* implements Drawable */{
 	 * into data structure.
 	 */
 	public Leaderboard() {
+		System.out.println("Leaderboard init\n");
 		// Initialise
 		for (int i = 0; i < leaderboardEntries.length; i++) {
 			leaderboardEntries[i] = new LeaderboardEntry();
@@ -44,10 +45,12 @@ public class Leaderboard /* implements Drawable */{
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		} else {
-			addLeaderBoardEntries();
+			System.out.println("Loaded before - loading previous leaderboard.");
+			readLeaderboard(); // DO NOT change the leaderboard before this call
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
-				}
+			}
+		printLeaderboard(leaderboardEntries);
 		}
 		
 	//==========================================================================
@@ -60,8 +63,8 @@ public class Leaderboard /* implements Drawable */{
 			try{
 				addLeaderboardEntry("a", 17);
 				addLeaderboardEntry("b", 1);
-				addLeaderboardEntry("c", 5.5);
-				addLeaderboardEntry("d", 2.3);
+				addLeaderboardEntry("c", 0.6);
+				addLeaderboardEntry("d", 0.9);
 				addLeaderboardEntry("e", 6.2);
 				}
 			catch (Exception ex){
@@ -139,6 +142,17 @@ public class Leaderboard /* implements Drawable */{
 			ois.close();
 		} catch (Exception ex) {
 			System.out.println("Saving leaderboard raised exception.");
+		}
+	}
+	
+	/**
+	 * Private testing method to print a leaderboard
+	 * @param leaderboardArray
+	 */
+	private void printLeaderboard(LeaderboardEntry[] leaderboardArray) {
+		for (int i = 0; i < leaderboardArray.length; i++) {
+			System.out.println(leaderboardArray[i].getName() + " " + 
+					leaderboardArray[i].getScore());
 		}
 	}
 
