@@ -12,20 +12,24 @@ import org.lwjgl.opengl.Display;
 public class FuturePlane {
 	private int velocity;
 	private float rotation;
+	
 	/**
 	 * Stores the flight number of the plane
 	 */
 	private String fnumber;
 	private static int pixelsFromEdge = 100;
+	
 	/**
 	 * Creates a random number generator based on the current System Time
 	 */
 	static Random randomgen = new Random(System.currentTimeMillis());
+	
 	/**
 	 * Selects an EntryExitPoint to become the entry point for a created plane
 	 */
 	private EntryExitPoint enterPoint = SeprDSA.getEntryExitPoints()
 			.get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
+	
 	/**
 	 * Selects an EntryExitPoint to become the exit point for a created plane
 	 */
