@@ -41,7 +41,7 @@ public class FuturePlane {
 	 * @param delayTime
 	 * @throws InterruptedException
 	 */
-	public FuturePlane(int delayTime) throws InterruptedException {
+	public FuturePlane(int delayTime) {
 		fnumber = generateFlightNumber();
 		wayPointList = new ArrayList<WayPoint>();
 		int lastUsed = -1;
@@ -51,9 +51,9 @@ public class FuturePlane {
 			lastUsed = newNumber;
 		}
 		System.out.println(wayPointList.toString());
-		double localTime = 0;
+		double localTime = SeprDSA.timer;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
-		while (localTime < delayTime) {localTime += SeprDSA.timer;}
+		//while (localTime < localTime + delayTime) {localTime += SeprDSA.timer;}
 		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
 		p.setBearing(randomgen.nextFloat()*360);
 	}
