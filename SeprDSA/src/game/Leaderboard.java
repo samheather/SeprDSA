@@ -40,26 +40,6 @@ public class Leaderboard /* implements Drawable */{
 			for (int i = 0; i < leaderboardEntries.length; i++) {
 				leaderboardEntries[i].setName("Sam");
 				leaderboardEntries[i].setScore((double) 5 + i);	
-			}public void addLeaderBoardEntries(){
-				try{
-					addLeaderboardEntry("a", 17);
-					addLeaderboardEntry("b", 1);
-					addLeaderboardEntry("c", 0.6);
-					addLeaderboardEntry("d", 0.9);
-					addLeaderboardEntry("e", 6.2);
-					}
-				catch (Exception ex){
-					System.out.println("Adding leaderboard data caused error");}
-		
-				try{
-					for (int i=0; i<leaderboardEntries.length; i++){
-						System.out.println(leaderboardEntries[i].getName());
-						System.out.println(leaderboardEntries[i].getScore());
-						}
-					}
-				catch(Exception ex){
-					System.out.println("Error printing leaderboard data");}
-
 			}
 
 			sortLeaderboard(leaderboardEntries);
