@@ -64,7 +64,7 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		//Sidemenu s = new Sidemenu();
+		Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
@@ -92,7 +92,7 @@ public class SeprDSA {
 		
 		while (true) {
 			Physicals.logic(System.currentTimeMillis()-timer);
-			Input.logic();
+			//Input.logic();
 			Drawables.logic();
 			Planes.updateTimer(System.currentTimeMillis() - timer);
 
