@@ -14,6 +14,14 @@ public class Timing {
 
 	public static void doIn(double milliseconds, Runnable does) {
 		tasks.add(new Task(milliseconds + timeSinceStart, does));
+		System.out.println("Added async task");
+		System.out.println("nop");
+	}
+
+	public static void doNTimesIn(int n, double milliseconds, Runnable does) {
+		for (int i = 0; i < n; i++) {
+			doIn(i * milliseconds, does);
+		}
 	}
 
 	public static double timeSinceLastFrame() {
@@ -29,16 +37,15 @@ public class Timing {
 		timeSinceStart = System.currentTimeMillis() - startTime;
 		lastTimeSinceLastFrame = timeSinceLastFrame;
 		timeSinceLastFrame = System.nanoTime();
-		
 
 		Task next = null;
-		while (tasks.size() > 0) {
+		while (!tasks.isEmpty()) {
 			next = tasks.first();
-			if(next.milliseconds <= timeSinceStart) {
+			System.out.println(next == null);
+			if (next.milliseconds <= timeSinceStart) {
+				System.out.println(tasks.remove(tasks.first()));
 				next.does.run();
-				tasks.remove(next);
-			}
-			else {
+			} else {
 				break;
 			}
 		}
