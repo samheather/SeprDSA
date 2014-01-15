@@ -149,7 +149,7 @@ public class MainMenu extends JFrame {
 
 		// create an instance of Leaderboard class so data can be passed between
 		// MainMenu class and Leaderboard class
-		leaderboardInstance = main.SeprDSA.l;
+		Leaderboard leaderboardInstance = new Leaderboard();
 		int numberOfEntries = leaderboardInstance.leaderboardEntries.length;
 
 		// create JLabels that will display the leaderboard name and scores
