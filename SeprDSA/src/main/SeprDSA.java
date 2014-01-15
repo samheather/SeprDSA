@@ -23,13 +23,15 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
 	
-	public static double timer = System.currentTimeMillis();
+	public static long timer1 = System.nanoTime();
+	public static long timer2 = System.nanoTime();
 	private static int pixelsFromEdge = 100;
 	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10; 
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
-	public Plane selectedPlane;
+	public static Plane selectedPlane;
+	public static double timer;
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;
@@ -56,6 +58,7 @@ public class SeprDSA {
 
 		Map m = new Map();
 		Leaderboard l = new Leaderboard();
+		
 		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
@@ -81,19 +84,25 @@ public class SeprDSA {
 					randomgen.nextDouble() * 20 }),i.toString());
 			wayPointList.add(newWayPoint);
 		}
+		Plane p = new Plane("fdsf", wayPointList, landingStrip, landingStrip);
+		p.setBearing(180);
 		
 		while (true) {
-			Physicals.logic(System.currentTimeMillis()-timer);
+			timer2 = timer1;
+			timer1 = System.nanoTime();
+			double dtimer = Math.abs((timer1 - timer2) / 100000000.0);
+			dtimer = 0.1;
+			timer = dtimer;
+			Physicals.logic(dtimer);
 			Input.logic();
 			Drawables.logic();
-			Planes.updateTimer(System.currentTimeMillis() - timer);
+			Planes.updateTimer(dtimer);
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
-		timer = System.currentTimeMillis();
 		}
 	}
 

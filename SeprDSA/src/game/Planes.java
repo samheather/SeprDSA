@@ -60,10 +60,10 @@ public class Planes {
 	 * @param time
 	 * @throws InterruptedException
 	 */
-	public static void updateTimer(double time) throws InterruptedException{
+	public static void updateTimer(double time){
 		currTime += time;
 		if (currTime >= spawnThreshhold && planes.size() < maxplanenumb){
-			new FuturePlane(randomgen.nextInt(60000));
+			new FuturePlane(randomgen.nextInt(2000));
 			spawnThreshhold = 3000 + randomgen.nextInt(6000);
 			currTime = 0;
 		}
