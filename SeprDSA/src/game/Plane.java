@@ -62,7 +62,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		Input.addClickable(this);
 	}
 
-	@Override
 	public String toString() {
 		return "Plane" + number;
 	}
@@ -141,7 +140,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void setVel(Vector newVel) {
-		rotation = (float) Math.toDegrees(Math.atan(newVel.get(1) / newVel.get(0)));
 		velocity = newVel;
 	}
 
@@ -165,25 +163,27 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 //		System.out.println("Old "+oldBearing);
 //		System.out.println("New "+newBearing);
 //		System.out.println("BearingChange "+Math.abs(newBearing - oldBearing));
-		for (int i = 1; i < Math.abs(newBearing - oldBearing); i++){
-			double localTime = 0;
-			if (newBearing > oldBearing){
-				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}).multiply(50));
-			} else{
-				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}).multiply(50));
-			}
-			while (localTime < 100) {localTime += SeprDSA.timer;}
-		}
+//		for (int i = 1; i <= Math.abs(newBearing - oldBearing); i++){
+//			double localTime = 0;
+			//if (newBearing > oldBearing){
+				rotation = newBearing;
+				setVel(new BasicVector(new double[] {Math.cos(Math.toRadians(newBearing )),Math.sin(Math.toRadians(newBearing )),0}).multiply(0));
+//			} else{
+//				setVel(new BasicVector(new double[] {Math.cos(Math.toRadians(oldBearing + i)),Math.sin(Math.toRadians(oldBearing + i)),0}).multiply(50));
+//			}
+			//while (localTime < 100) {localTime += SeprDSA.timer;}
+//		}
 	};
 
 	public void destroy() {
 		for (int i = size; i > 0; i--) {
 			double localTime = 0;
 			size -= 1;
-			while (localTime < 5) {localTime += SeprDSA.timer;}
+			//while (localTime < 5) {localTime += SeprDSA.timer;}
 		}
 		Planes.remove(this);
 		Input.removeKeyboardable(this);
+		Input.removeClickable(this);
 		Physicals.remove(this);
 		Drawables.remove(this);
 	}
@@ -231,9 +231,12 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void clickUp(int button) {
-		//System.out.println("Click up");
 		lineExists = false;
-		
+		Vector planePos = new BasicVector( new double[]{getPos().get(0),getPos().get(1)});
+		Vector temp = planePos.subtract(endLine);
+		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)/temp.get(0)));
+		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
+		setBearing((float)angle);
 	}
 
 	public void clickAway() {
@@ -241,8 +244,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void move(Vector newPos) {
-		System.out.println("Move");
-		//planeHeadingLine = new Line(getPos(),newPos);
+		//System.out.println("Move");
 		endLine = newPos;
 	}
 }
