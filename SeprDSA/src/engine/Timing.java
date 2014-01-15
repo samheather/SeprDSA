@@ -9,15 +9,17 @@ public class Timing {
 	private static long timeSinceLastFrame = 0;
 	private static long lastTimeSinceLastFrame = 0;
 	private static PriorityQueue<Task> tasks = new PriorityQueue<Task>();
-
-	public static void doIn(double milliseconds, Runnable does) {
-		tasks.add(new Task(milliseconds + timeSinceStart, does));
+	
+	public interface NRunnable {
+		public void run (int n);
 	}
 
-	public static void doNTimesIn(int n, double milliseconds, Runnable does) {
-		for (int i = 0; i < n; i++) {
-			doIn(i * milliseconds, does);
-		}
+	public static void doIn(double milliseconds, NRunnable does) {
+		doNTimes(1, milliseconds, does);
+	}
+
+	public static void doNTimes(int n, double milliseconds, NRunnable does) {
+		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n, does));
 	}
 
 	public static double timeSinceLastFrame() {
@@ -33,10 +35,14 @@ public class Timing {
 		timeSinceStart = System.currentTimeMillis() - startTime;
 		lastTimeSinceLastFrame = timeSinceLastFrame;
 		timeSinceLastFrame = System.nanoTime();
-
+		Task next = null;
 		while(tasks.size() > 0) {
-			if(tasks.peek().milliseconds < timeSinceStart) {
-				tasks.poll().does.run();
+			if(tasks.peek().scheduled < timeSinceStart) {
+				next = tasks.poll();
+				next.does.run(next.times);
+				if(next.times > 0) {
+					doNTimes(next.times - 1, next.interval, next.does);
+				}
 			} else {
 				break;
 			}
