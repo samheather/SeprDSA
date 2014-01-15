@@ -33,7 +33,7 @@ public class SeprDSA {
 	/**
 	 *Initialise leaderboard here so it can be accessed globally
 	 */
-	public Leaderboard l = new Leaderboard();
+	public static Leaderboard l = new Leaderboard();
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;

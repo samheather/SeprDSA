@@ -161,7 +161,7 @@ public class MainMenu extends JFrame {
 			MainMenu class and Leaderboard class
 		 */
 	
-		Leaderboard leaderboardInstance = new Leaderboard();
+		Leaderboard leaderboardInstance = main.SeprDSA.l;
 		int numberOfEntries = leaderboardInstance.leaderboardEntries.length;
 
 		/**
