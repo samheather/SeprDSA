@@ -33,7 +33,7 @@ public class SeprDSA {
 	/**
 	 *Initialise leaderboard here so it can be accessed globally
 	 */
-	public Leaderboard l;
+	public Leaderboard l = new Leaderboard();
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;
@@ -59,7 +59,6 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		l = new Leaderboard();
 		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
