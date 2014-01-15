@@ -26,7 +26,7 @@ public class Rotate extends Affine {
 	@Override
 	public boolean hit(Vector pos) {
 		double s = Math.sin(-degrees);
-		double c = Math.sin(-degrees);
+		double c = Math.cos(-degrees);
 		double x = pos.get(0);
 		double y = pos.get(1);
 		return super.hit(new BasicVector(new double[] { x * c - y * s,

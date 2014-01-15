@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import main.SeprDSA;
+
 import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
@@ -12,6 +14,7 @@ import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.Texture;
 import engine.graphics.drawing.primitives.*;
+import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
@@ -19,15 +22,15 @@ import engine.physics.Physicals;
 
 import org.la4j.vector.dense.*;
 
-public class Plane implements Drawable, Keyboardable, Physical {
+public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	
-	private Random randomgen = new Random();
+	private static Random randomgen = new Random();
 	private double x; // Should be pixel values for x,y
 	private double y;
 	private double z;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
-	private float rotation;
+	private float rotation = 0.0f;
 	private boolean left = false;
 	private boolean right = false;
 	private boolean up = false;
@@ -37,27 +40,59 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	private int size = 60;
 	private String number;
 	private Text numbertext;
-	private int score;
+	private int speed = randomgen.nextInt(10);
 	private ArrayList <WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
-	private EntryExitPoint enterPoint;
+	private int score;
+	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
+	private boolean lineExists = false;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList, EntryExitPoint startPoint, EntryExitPoint endPoint) {
+		number = fnumber;
+		wayPointList = pointList;
+		exitPoint = endPoint;
+		score = wayPointList.size()*10;
+		//position = enterPoint.getPos();
+		setPos(startPoint.getPos());
+		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
 		Input.addKeyboardable(this);
-		number = fnumber;
-		wayPointList = pointList;
-		exitPoint = endPoint;
-		enterPoint = startPoint;
-		position = enterPoint.getPos();
-		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
+		Input.addClickable(this);
 	}
 
 	@Override
 	public String toString() {
 		return "Plane" + number;
+	}
+	
+	public void updateWaypoints() {
+		if (wayPointList.size() > 0){
+			System.out.println(wayPointList.get(0).toString());
+			wayPointList.remove(0);
+			// update flight plan stuff too at some point
+		}
+	}
+	
+	public WayPoint getNextWayPoint() {
+		if (wayPointList.size() > 0) {
+		return wayPointList.get(0);
+		} else{
+			return null;
+		}
+	}
+	
+	public EntryExitPoint getExitPoint() {
+		if (exitPoint != null) {
+			return exitPoint;
+		}else{
+			return null;
+		}
+	}
+	
+	public ArrayList<WayPoint> getWayPoints() {
+		return wayPointList;
 	}
 	
 	public String getFNumber() {
@@ -87,8 +122,8 @@ public class Plane implements Drawable, Keyboardable, Physical {
 				.red(1.0).blue(1.0).green(1.0).alpha(0.75)
 				.translate(new BasicVector(new double[] {0, -40}))
 			 )
-			.translate(new BasicVector(new double[] { x, y }));
-
+			.translate(new BasicVector(new double[] { x, y }))
+			.overlay ((lineExists ? new Line(getPos(),endLine) : new Identity()).alpha(1.0).red(1.0));
 	}
 
 	public Vector getPos() {
@@ -102,14 +137,11 @@ public class Plane implements Drawable, Keyboardable, Physical {
 	}
 
 	public Vector getVel() {
-		/*
-		 * TODO Implement z stuff, need more attributes.
-		 */
 		return velocity;
 	}
 
 	public void setVel(Vector newVel) {
-		rotation = (float) Math.atan(newVel.get(1) / newVel.get(0));
+		rotation = (float) Math.toDegrees(Math.atan(newVel.get(1) / newVel.get(0)));
 		velocity = newVel;
 	}
 
@@ -127,22 +159,28 @@ public class Plane implements Drawable, Keyboardable, Physical {
 		return rotation;
 	};
 	
-	public void setBearing(float newBearing) throws InterruptedException {
-		float oldBearing = this.getBearing();
+	public void setBearing(float newBearing){
+		float oldBearing = getBearing();
+//		System.out.println("Rotation" + rotation);
+//		System.out.println("Old "+oldBearing);
+//		System.out.println("New "+newBearing);
+//		System.out.println("BearingChange "+Math.abs(newBearing - oldBearing));
 		for (int i = 1; i < Math.abs(newBearing - oldBearing); i++){
+			double localTime = 0;
 			if (newBearing > oldBearing){
-				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}));
+				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}).multiply(50));
 			} else{
-				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}));
+				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}).multiply(50));
 			}
-			Thread.sleep(50);
+			while (localTime < 100) {localTime += SeprDSA.timer;}
 		}
 	};
 
-	public void destroy() throws InterruptedException {
+	public void destroy() {
 		for (int i = size; i > 0; i--) {
+			double localTime = 0;
 			size -= 1;
-			Thread.sleep(5);
+			while (localTime < 5) {localTime += SeprDSA.timer;}
 		}
 		Planes.remove(this);
 		Input.removeKeyboardable(this);
@@ -184,5 +222,27 @@ public class Plane implements Drawable, Keyboardable, Physical {
 
 	public int compareTo(Drawable o) {
 		return (int) (this.getZ() - o.getZ());
+	}
+
+	public void clickDown(int button, Vector pos) {
+		//System.out.println(number);
+		endLine = pos;
+		lineExists = true;
+	}
+
+	public void clickUp(int button) {
+		//System.out.println("Click up");
+		lineExists = false;
+		
+	}
+
+	public void clickAway() {
+		//System.out.println("Click away");
+	}
+
+	public void move(Vector newPos) {
+		System.out.println("Move");
+		//planeHeadingLine = new Line(getPos(),newPos);
+		endLine = newPos;
 	}
 }

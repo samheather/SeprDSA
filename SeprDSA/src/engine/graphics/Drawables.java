@@ -47,9 +47,11 @@ public class Drawables {
 			}
 		}
 	}
+
 	public static void add(Widget w) throws IOException {
 		GUI gui = new GUI(w, renderer);
-		ThemeManager themeManager = ThemeManager.createThemeManager(new File("default.xml").toURI().toURL(), renderer);
+		ThemeManager themeManager = ThemeManager.createThemeManager(new File(
+				"default.xml").toURI().toURL(), renderer);
 		gui.applyTheme(themeManager);
 		widgets.add(gui);
 	}
@@ -72,7 +74,7 @@ public class Drawables {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		
+
 		resize();
 		GL11.glShadeModel(GL11.GL_SMOOTH);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -83,12 +85,12 @@ public class Drawables {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
-		try{
-		    renderer = new LWJGLRenderer();
-		}catch(LWJGLException e){
-		    e.printStackTrace();
+		try {
+			renderer = new LWJGLRenderer();
+		} catch (LWJGLException e) {
+			e.printStackTrace();
 		}
-		
+
 	}
 
 	public static Vector windowCoords(Vector pos) {
@@ -103,6 +105,7 @@ public class Drawables {
 		double y = Display.getY();
 		Vector ret = new BasicVector(new double[] {
 				(pos.get(0) - x) - (dw / 2.0), (pos.get(1) - y) - (dh / 2.0) });
+
 		return ret.divide(widthr);
 	}
 

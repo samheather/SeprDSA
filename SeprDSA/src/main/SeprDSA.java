@@ -4,9 +4,11 @@ import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
+import game.FuturePlane;
 import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
+import game.Plane;
 import game.Planes;
 import game.Sidemenu;
 import game.WayPoint;
@@ -24,12 +26,18 @@ import org.newdawn.slick.openal.SoundStore;
 
 public class SeprDSA {
 
-	private static double timer = System.currentTimeMillis();
+	
+	public static double timer = System.currentTimeMillis();
 	private static int pixelsFromEdge = 100;
 	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10; 
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
+	public Plane selectedPlane;
+	/**
+	 *Initialise leaderboard here so it can be accessed globally
+	 */
+	public static Leaderboard l = new Leaderboard();
 	
 	public static ArrayList<WayPoint> getWayPoints(){
 		return wayPointList;
@@ -56,8 +64,7 @@ public class SeprDSA {
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
 		Map m = new Map();
-		Leaderboard l = new Leaderboard();
-		Sidemenu s = new Sidemenu();
+		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);

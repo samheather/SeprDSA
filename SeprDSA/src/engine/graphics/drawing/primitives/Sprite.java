@@ -13,9 +13,8 @@ public class Sprite extends Drawing {
 		this.texture = texture;
 	}
 
-	@Override
+	
 	public void render() {
-		// TODO Auto-generated method stub
 		Vector size = texture.size();
 		texture.bind();
 		double x = size.get(0);

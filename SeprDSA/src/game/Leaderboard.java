@@ -5,27 +5,27 @@ import game.LeaderboardEntry;
 import java.io.*;
 import java.util.Arrays;
 
+/**
+ * Leaderboard - holds / displays multiple LeaderboardEntries.
+ */
+
 public class Leaderboard /* implements Drawable */{
 
+	/**
+	 * Array containing the LeaderboardEntries
+	 */
 	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	/**
+	 * Path to the file in which leaderboardScores are stored.
+	 */
 	String leaderboardFile = "leaderboardscores.txt";
 
-	// From playing about with lwjgl text rendering.
-	// public TrueTypeFont font;
-	// public void writeStuff() {
-	// Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
-	// font = new TrueTypeFont(awtFont, false);
-	// }
-
-	// TODO(Jamaal) make leaderboard drawable, then re-enable and adjust this
-	// plus re-enable 'implements Drawable' in Class title at top.
-
-	// public Sprite draw() {
-	// return new Sprite(Images.map, new BasicVector(
-	// new double[] { x, y }), 1.0f, 0.0f);
-	// }
-
+	/**
+	 * Constructor - if first load, initialise file, else load values from file
+	 * into data structure.
+	 */
 	public Leaderboard() {
+		System.out.println("Leaderboard init\n");
 		// Initialise
 		for (int i = 0; i < leaderboardEntries.length; i++) {
 			leaderboardEntries[i] = new LeaderboardEntry();
@@ -33,6 +33,7 @@ public class Leaderboard /* implements Drawable */{
 
 		// Initialise values if first run.
 		File leaderboardFileCheckForFile = new File(leaderboardFile);
+		// If game run before and scores exist:
 		if (!leaderboardFileCheckForFile.exists()) {
 			System.out
 					.println("Is first load, initialising leaderboard values");
@@ -44,25 +45,26 @@ public class Leaderboard /* implements Drawable */{
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		} else {
-			//readLeaderboard();
-			addLeaderBoardEntries();				//ADDED FUNCTION TO ADD VALUES TO LEADERBOARD. VALUES ARE DISPALYED ON MAIN MENU
+			System.out.println("Loaded before - loading previous leaderboard.");
+			readLeaderboard(); // DO NOT change the leaderboard before this call
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
-				}
+			}
+		printLeaderboard(leaderboardEntries);
 		}
 		
-	//=====================================================================================
-			//This is a test of the leaderboard
-			// TODO(Dan) Turn this block into a test, so we can add these values and
-			// check we get the expected output array of LeaderboardEntries.
-		// printLeaderboard(); // Expect a 17, s 9, d 8.3, s 8, s 7*/
+	//==========================================================================
+	//This is a test of the leaderboard
+	// TODO(Dan) Turn this block into a test, so we can add these values and
+	// check we get the expected output array of LeaderboardEntries.
+	// printLeaderboard(); // Expect a 17, s 9, d 8.3, s 8, s 7*/
 
 	public void addLeaderBoardEntries(){
 			try{
 				addLeaderboardEntry("a", 17);
 				addLeaderboardEntry("b", 1);
-				addLeaderboardEntry("c", 5.5);
-				addLeaderboardEntry("d", 2.3);
+				addLeaderboardEntry("c", 0.6);
+				addLeaderboardEntry("d", 0.9);
 				addLeaderboardEntry("e", 6.2);
 				}
 			catch (Exception ex){
@@ -79,9 +81,13 @@ public class Leaderboard /* implements Drawable */{
 
 		}
 	
-	//======================================================================================
+	//==========================================================================
 	
-
+	/**
+	 * Add entry to the leaderboard - creates an instance of LeaderboardEntry
+	 * and adds it to the List.
+	 * @param String name, double score.
+	 */
 	public void addLeaderboardEntry(String name, double score) {
 		LeaderboardEntry[] tempLeaderboardEntries = new LeaderboardEntry[6];
 		System.arraycopy(leaderboardEntries, 0, tempLeaderboardEntries, 0,
@@ -93,10 +99,17 @@ public class Leaderboard /* implements Drawable */{
 		saveLeaderboard();
 	}
 
+	/**
+	 * Sorts the List of LeaderboardEntries according to their CompareTo method.
+	 * @param leaderboardToSort
+	 */
 	private void sortLeaderboard(LeaderboardEntry[] leaderboardToSort) {
 		Arrays.sort(leaderboardToSort);
 	}
 
+	/**
+	 * Save the leaderboard data to file using OutputStream (streams an Object).
+	 */
 	private void saveLeaderboard() {
 		try {
 			// create a new file with an ObjectOutputStream
@@ -108,13 +121,15 @@ public class Leaderboard /* implements Drawable */{
 				oout.writeObject(leaderboardEntries[i].getName());
 				oout.writeObject(leaderboardEntries[i].getScore());
 			}
-
 			oout.close();
 		} catch (Exception ex) {
 			System.out.println("Saving leaderboard raised exception.");
 		}
 	}
 
+	/**
+	 * Reads the leaderboard data from file using InputStream.
+	 */
 	private void readLeaderboard() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
@@ -127,6 +142,17 @@ public class Leaderboard /* implements Drawable */{
 			ois.close();
 		} catch (Exception ex) {
 			System.out.println("Saving leaderboard raised exception.");
+		}
+	}
+	
+	/**
+	 * Private testing method to print a leaderboard
+	 * @param leaderboardArray
+	 */
+	private void printLeaderboard(LeaderboardEntry[] leaderboardArray) {
+		for (int i = 0; i < leaderboardArray.length; i++) {
+			System.out.println(leaderboardArray[i].getName() + " " + 
+					leaderboardArray[i].getScore());
 		}
 	}
 
