@@ -19,6 +19,9 @@ public class Map implements Drawable {
 
 	private double x = 0;
 	private double y = 0;
+	/**
+	 * Necessary for layering of drawable objects.
+	 */
 	private double z = -1;
 
 	/**
