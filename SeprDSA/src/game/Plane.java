@@ -20,6 +20,8 @@ import engine.input.Keyboardable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
+import engine.Timing;
+
 import org.la4j.vector.dense.*;
 
 public class Plane implements Drawable, Keyboardable, Physical, Clickable {
@@ -166,12 +168,20 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 //		for (int i = 1; i <= Math.abs(newBearing - oldBearing); i++){
 //			double localTime = 0;
 			//if (newBearing > oldBearing){
+		/*
+		Timing.doNTimesIn(10, 1000, new Runnable(){
+			public void run() {
+				System.out.println("cat");
+			}
+		});
+		*/
 				rotation = newBearing;
 				setVel(new BasicVector(new double[] {Math.cos(Math.toRadians(newBearing )),Math.sin(Math.toRadians(newBearing )),0}).multiply(0));
 //			} else{
 //				setVel(new BasicVector(new double[] {Math.cos(Math.toRadians(oldBearing + i)),Math.sin(Math.toRadians(oldBearing + i)),0}).multiply(50));
 //			}
 			//while (localTime < 100) {localTime += SeprDSA.timer;}
+			
 //		}
 	};
 

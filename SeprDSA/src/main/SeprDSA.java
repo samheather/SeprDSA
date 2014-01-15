@@ -101,7 +101,8 @@ public class SeprDSA {
 			dtimer = 0.1;
 			timer = dtimer;
 			Physicals.logic(dtimer);
-			//Input.logic();
+			Input.logic();
+			engine.Timing.logic();
 			Drawables.logic();
 			Planes.updateTimer(dtimer);
 
