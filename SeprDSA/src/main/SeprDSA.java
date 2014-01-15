@@ -82,10 +82,6 @@ public class SeprDSA {
 			wayPointList.add(newWayPoint);
 		}
 		
-		Plane p = new Plane("LOLCRAFT", wayPointList, entryExitPointList.get(1), entryExitPointList.get(0));
-		//p.setVel(new BasicVector(new double[] {10,10,0}));
-		p.setBearing(45.0f);
-		
 		while (true) {
 			Physicals.logic(System.currentTimeMillis()-timer);
 			Input.logic();

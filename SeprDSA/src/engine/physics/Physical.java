@@ -1,5 +1,7 @@
 package engine.physics;
 
+import game.WayPoint;
+
 import org.la4j.vector.*;
 
 public interface Physical {

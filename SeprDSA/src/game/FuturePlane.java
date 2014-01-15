@@ -17,10 +17,18 @@ public class FuturePlane {
 	static Random randomgen = new Random(System.currentTimeMillis());
 	private EntryExitPoint enterPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
 	private EntryExitPoint exitPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
-	private static ArrayList <WayPoint> wayPointList = new ArrayList<WayPoint>();
+	private static ArrayList <WayPoint> wayPointList;
 	
 	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
+		wayPointList = new ArrayList<WayPoint>();
+		int lastUsed = -1;
+		for (int i = 0; i < 10; i++){
+			int newNumber = getWayPointNumber(lastUsed);
+			wayPointList.add( SeprDSA.getWayPoints().get( newNumber ) );
+			lastUsed = newNumber;
+		}
+		System.out.println(wayPointList.toString());
 		double localTime = 0;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
 		while (localTime < delayTime) {localTime += SeprDSA.timer;}
@@ -42,10 +50,13 @@ public class FuturePlane {
 		return fnumber;
 	}
 	
-	private static void main() {
-		for (int i = 0; i < 10; i++){
-			wayPointList.add( SeprDSA.getWayPoints().get( randomgen.nextInt( SeprDSA.getWayPoints().size() ) ) );
-		}
+private static int getWayPointNumber(int lastUsed){
+	int potentialNewNumber = randomgen.nextInt(SeprDSA.getWayPoints().size());
+	if (lastUsed == potentialNewNumber){
+		return getWayPointNumber(lastUsed);
+	} else {
+		return potentialNewNumber;
 	}
+}
 
 }

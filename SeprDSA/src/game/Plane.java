@@ -40,29 +40,59 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int size = 60;
 	private String number;
 	private Text numbertext;
-	private int score;
 	private int speed = randomgen.nextInt(10);
 	private ArrayList <WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
-	private EntryExitPoint enterPoint;
+	private int score;
+	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
+	private boolean lineExists = false;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList, EntryExitPoint startPoint, EntryExitPoint endPoint) {
+		number = fnumber;
+		wayPointList = pointList;
+		exitPoint = endPoint;
+		score = wayPointList.size()*10;
+		//position = enterPoint.getPos();
+		setPos(startPoint.getPos());
+		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
 		Input.addKeyboardable(this);
-		number = fnumber;
-		wayPointList = pointList;
-		exitPoint = endPoint;
-		enterPoint = startPoint;
-		//position = enterPoint.getPos();
-		setPos(enterPoint.getPos());
-		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
+		Input.addClickable(this);
 	}
 
 	@Override
 	public String toString() {
 		return "Plane" + number;
+	}
+	
+	public void updateWaypoints() {
+		if (wayPointList.size() > 0){
+			System.out.println(wayPointList.get(0).toString());
+			wayPointList.remove(0);
+			// update flight plan stuff too at some point
+		}
+	}
+	
+	public WayPoint getNextWayPoint() {
+		if (wayPointList.size() > 0) {
+		return wayPointList.get(0);
+		} else{
+			return null;
+		}
+	}
+	
+	public EntryExitPoint getExitPoint() {
+		if (exitPoint != null) {
+			return exitPoint;
+		}else{
+			return null;
+		}
+	}
+	
+	public ArrayList<WayPoint> getWayPoints() {
+		return wayPointList;
 	}
 	
 	public String getFNumber() {
@@ -92,8 +122,8 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 				.red(1.0).blue(1.0).green(1.0).alpha(0.75)
 				.translate(new BasicVector(new double[] {0, -40}))
 			 )
-			.translate(new BasicVector(new double[] { x, y }));
-
+			.translate(new BasicVector(new double[] { x, y }))
+			.overlay ((lineExists ? new Line(getPos(),endLine) : new Identity()).alpha(1.0).red(1.0));
 	}
 
 	public Vector getPos() {
@@ -129,24 +159,24 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		return rotation;
 	};
 	
-	public void setBearing(float newBearing) throws InterruptedException{
+	public void setBearing(float newBearing){
 		float oldBearing = getBearing();
-		System.out.println("Rotation" + rotation);
-		System.out.println("Old "+oldBearing);
-		System.out.println("New "+newBearing);
-		System.out.println("BearingChange "+Math.abs(newBearing - oldBearing));
+//		System.out.println("Rotation" + rotation);
+//		System.out.println("Old "+oldBearing);
+//		System.out.println("New "+newBearing);
+//		System.out.println("BearingChange "+Math.abs(newBearing - oldBearing));
 		for (int i = 1; i < Math.abs(newBearing - oldBearing); i++){
 			double localTime = 0;
 			if (newBearing > oldBearing){
-				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}).multiply(10));
+				setVel(new BasicVector(new double[] {Math.sin(newBearing + i),Math.cos(newBearing + i),0}).multiply(50));
 			} else{
-				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}).multiply(10));
+				setVel(new BasicVector(new double[] {Math.sin(oldBearing + i),Math.cos(oldBearing + i),0}).multiply(50));
 			}
-			while (localTime < 50) {localTime += SeprDSA.timer;}
+			while (localTime < 100) {localTime += SeprDSA.timer;}
 		}
 	};
 
-	public void destroy() throws InterruptedException {
+	public void destroy() {
 		for (int i = size; i > 0; i--) {
 			double localTime = 0;
 			size -= 1;
@@ -195,22 +225,24 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void clickDown(int button, Vector pos) {
-		// TODO Auto-generated method stub
-		if (isCollidingPos(pos)){
-			System.out.println("lolwat");
-		}
+		//System.out.println(number);
+		endLine = pos;
+		lineExists = true;
 	}
 
 	public void clickUp(int button) {
-		// TODO Auto-generated method stub
+		//System.out.println("Click up");
+		lineExists = false;
 		
 	}
 
 	public void clickAway() {
-		
+		//System.out.println("Click away");
 	}
 
 	public void move(Vector newPos) {
-		
+		System.out.println("Move");
+		//planeHeadingLine = new Line(getPos(),newPos);
+		endLine = newPos;
 	}
 }

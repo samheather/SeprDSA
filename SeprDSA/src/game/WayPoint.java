@@ -26,9 +26,9 @@ public class WayPoint implements Drawable, Physical {
 	public WayPoint(Vector pos, String pointNumber) {
 		position = pos;
 		number = pointNumber;
+		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
-		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
 	}
 
 	@Override
@@ -86,4 +86,5 @@ public class WayPoint implements Drawable, Physical {
 	public float getBearing() {
 		return 0;
 	}
+
 }

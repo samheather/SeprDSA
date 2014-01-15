@@ -81,7 +81,7 @@ public class Drawables {
 		double x = Display.getX();
 		double y = Display.getY();
 		Vector ret = new BasicVector(new double[] {
-				(dw / 2.0) - (pos.get(0) - x), (dh / 2.0) - (pos.get(1) - y) });
+				 (pos.get(0) - x) - (dw / 2.0), (pos.get(1) - y) - (dh / 2.0)  });
 		return ret.divide(widthr);
 	}
 
