@@ -12,13 +12,35 @@ import org.lwjgl.opengl.Display;
 public class FuturePlane {
 	private int velocity;
 	private float rotation;
+	
+	/**
+	 * Stores the flight number of the plane
+	 */
 	private String fnumber;
 	private static int pixelsFromEdge = 100;
-	static Random randomgen = new Random(System.currentTimeMillis());
-	private EntryExitPoint enterPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
-	private EntryExitPoint exitPoint = SeprDSA.getEntryExitPoints().get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
-	private static ArrayList <WayPoint> wayPointList;
 	
+	/**
+	 * Creates a random number generator based on the current System Time
+	 */
+	static Random randomgen = new Random(System.currentTimeMillis());
+	/**
+	 * Selects an EntryExitPoint to become the entry point for a created plane
+	 */
+	private EntryExitPoint enterPoint = SeprDSA.getEntryExitPoints()
+			.get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
+	
+	/**
+	 * Selects an EntryExitPoint to become the exit point for a created plane
+	 */
+	private EntryExitPoint exitPoint = SeprDSA.getEntryExitPoints()
+			.get(randomgen.nextInt(SeprDSA.getEntryExitPoints().size()));
+	private ArrayList <WayPoint> wayPointList = new ArrayList<WayPoint>();
+	
+	/** Constructor for FuturePlane
+	 * 
+	 * @param delayTime
+	 * @throws InterruptedException
+	 */
 	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
 		wayPointList = new ArrayList<WayPoint>();
@@ -36,7 +58,9 @@ public class FuturePlane {
 		p.setBearing(randomgen.nextFloat()*360);
 	}
 	
-	
+	/** 
+	 * Create an eight digit string of letters and numbers 
+	 */
 	public static String generateFlightNumber() {
 		String alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String result = new String();
@@ -46,10 +70,16 @@ public class FuturePlane {
 		return result;
 	}
 	
+	/** 
+	 * getFnumber is used to retrieve the flight number
+	 */
 	public String getFnumber() {
 		return fnumber;
 	}
 	
+/**
+ * Creates a list of waypoints that will be used for the current plane
+ */
 private static int getWayPointNumber(int lastUsed){
 	int potentialNewNumber = randomgen.nextInt(SeprDSA.getWayPoints().size());
 	if (lastUsed == potentialNewNumber){
