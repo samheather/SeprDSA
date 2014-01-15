@@ -46,12 +46,11 @@ public class Leaderboard /* implements Drawable */{
 			saveLeaderboard();
 		} else {
 			System.out.println("Loaded before - loading previous leaderboard.");
-//			addLeaderBoardEntries();
-			readLeaderboard();
+			readLeaderboard(); // DO NOT change the leaderboard before this call
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 			}
-		printLeaderboard();
+		printLeaderboard(leaderboardEntries);
 		}
 		
 	//==========================================================================
@@ -146,10 +145,14 @@ public class Leaderboard /* implements Drawable */{
 		}
 	}
 	
-	private void printLeaderboard() {
-		for (int i = 0; i < leaderboardEntries.length; i++) {
-			System.out.println(leaderboardEntries[i].getName() + " " + 
-					leaderboardEntries[i].getScore());
+	/**
+	 * Private testing method to print a leaderboard
+	 * @param leaderboardArray
+	 */
+	private void printLeaderboard(LeaderboardEntry[] leaderboardArray) {
+		for (int i = 0; i < leaderboardArray.length; i++) {
+			System.out.println(leaderboardArray[i].getName() + " " + 
+					leaderboardArray[i].getScore());
 		}
 	}
 
