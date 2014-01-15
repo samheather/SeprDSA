@@ -5,7 +5,7 @@ import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
 
 /**
- * Clasas for the map image to be drawn.
+ * Class for the map image to be drawn.
  * @author sbh514
  */
 

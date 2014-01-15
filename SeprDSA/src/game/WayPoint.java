@@ -23,12 +23,17 @@ public class WayPoint implements Drawable, Physical {
 	private int randomImage = new Random().nextInt(Images.waypoints.length);
 	private Text numbertext;
 
+	/**Adds a way point to the list of drawables and physicals
+	 * to be placed
+	 * @param pos
+	 * @param pointNumber
+	 */
 	public WayPoint(Vector pos, String pointNumber) {
 		position = pos;
 		number = pointNumber;
+		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
-		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
 	}
 
 	@Override
@@ -36,6 +41,10 @@ public class WayPoint implements Drawable, Physical {
 		return "WayPoint" + number;
 	}
 
+	/**Adds the way point to the GUI
+	 * 
+	 */
+	
 	public Drawing draw() {
 		return new
 				 Sprite(Images.waypoints[randomImage])
@@ -86,4 +95,5 @@ public class WayPoint implements Drawable, Physical {
 	public float getBearing() {
 		return 0;
 	}
+
 }
