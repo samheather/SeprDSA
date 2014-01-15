@@ -38,13 +38,13 @@ public class Timing {
 		lastTimeSinceLastFrame = timeSinceLastFrame;
 		timeSinceLastFrame = System.nanoTime();
 
-		Task next = null;
+		Task next;
 		while (!tasks.isEmpty()) {
 			next = tasks.first();
-			System.out.println(next == null);
+			System.out.println(next.id);
 			if (next.milliseconds <= timeSinceStart) {
 				System.out.println(tasks.remove(tasks.first()));
-				next.does.run();
+				//next.does.run();
 			} else {
 				break;
 			}
