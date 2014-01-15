@@ -1,8 +1,6 @@
 package engine;
 
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.PriorityQueue;
 
 public class Timing {
 
@@ -10,12 +8,10 @@ public class Timing {
 	private static long startTime = System.currentTimeMillis();
 	private static long timeSinceLastFrame = 0;
 	private static long lastTimeSinceLastFrame = 0;
-	private static SortedSet<Task> tasks = new TreeSet<Task>();
+	private static PriorityQueue<Task> tasks = new PriorityQueue<Task>();
 
 	public static void doIn(double milliseconds, Runnable does) {
 		tasks.add(new Task(milliseconds + timeSinceStart, does));
-		System.out.println("Added async task");
-		System.out.println("nop");
 	}
 
 	public static void doNTimesIn(int n, double milliseconds, Runnable does) {
@@ -38,13 +34,9 @@ public class Timing {
 		lastTimeSinceLastFrame = timeSinceLastFrame;
 		timeSinceLastFrame = System.nanoTime();
 
-		Task next = null;
-		while (!tasks.isEmpty()) {
-			next = tasks.first();
-			System.out.println(next == null);
-			if (next.milliseconds <= timeSinceStart) {
-				System.out.println(tasks.remove(tasks.first()));
-				next.does.run();
+		while(tasks.size() > 0) {
+			if(tasks.peek().milliseconds < timeSinceStart) {
+				tasks.poll().does.run();
 			} else {
 				break;
 			}
