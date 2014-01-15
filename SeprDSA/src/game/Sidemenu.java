@@ -23,6 +23,7 @@ public class Sidemenu extends Widget {
 	private Text titleText;
 	private Text[] upcomingFlights = new Text[5];
 	private Button button;
+	private Label label;
 	private DialogLayout helloPanel;
 	
 	private void createButton() {
@@ -34,19 +35,22 @@ public class Sidemenu extends Widget {
             }
 	    });
 	    add(button);
+	    
+	    label = new Label();
+		label.setText("Hello world");
+		add(label);
 	}
 
 	private void createHelloPanel() {
-		helloPanel = new DialogLayout();
+//		helloPanel = new DialogLayout();
 		//helloPanel.setTheme("panel");
 
-		Label label = new Label();
-		label.setText("Hello world Panelcxvcxvxcvcvcxvxvxcv\nsdsadsad");
-
-		helloPanel.setHorizontalGroup(helloPanel.createParallelGroup(label));
-		helloPanel.setVerticalGroup(helloPanel.createParallelGroup(label));
-		helloPanel.setVisible(true);
-		//add(helloPanel);
+		System.out.println("This is a stub");
+		
+//		helloPanel.setHorizontalGroup(helloPanel.createParallelGroup(label));
+//		helloPanel.setVerticalGroup(helloPanel.createParallelGroup(label));
+//		helloPanel.setVisible(true);
+//		add(helloPanel);
 	}
 	protected void layout(){
 		//helloPanel.setPosition(0, 0);
@@ -54,6 +58,8 @@ public class Sidemenu extends Widget {
 		//helloPanel.adjustSize();
 	    button.setPosition(0, 0);
 	    button.setSize(100, 100);
+	    label.setPosition(100, 100);
+	    label.setSize(100, 100);
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
 	}
 	
@@ -79,7 +85,7 @@ public class Sidemenu extends Widget {
 		upcomingFlights[4] = new Text("abc", Fonts.sideMenuText,
 				Alignment.CENTRED);
 		createButton();
-		createHelloPanel();
+		//createHelloPanel();
 	}
 
 	public Drawing draw() {

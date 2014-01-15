@@ -169,11 +169,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 //			double localTime = 0;
 			//if (newBearing > oldBearing){
 
-		Timing.doNTimesIn(10, 1000, new Runnable(){
-			public void run() {
-				System.out.println("cat");
-			}
-		});
+
 
 				rotation = newBearing;
 				setVel(new BasicVector(new double[] {Math.cos(Math.toRadians(newBearing )),Math.sin(Math.toRadians(newBearing )),0}).multiply(0));
