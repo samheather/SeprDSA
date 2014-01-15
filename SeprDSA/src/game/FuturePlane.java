@@ -9,6 +9,7 @@ import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
 
+/** FuturePlane creates planes but does not draw them, which are then stored in the Planes class*/
 public class FuturePlane {
 	private int velocity;
 	private float rotation;
@@ -21,12 +22,14 @@ public class FuturePlane {
 	
 	public FuturePlane(int delayTime) throws InterruptedException {
 		fnumber = generateFlightNumber();
+		double localTime = 0;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
-		Thread.sleep(delayTime);
-		new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		while (localTime < delayTime) {localTime += SeprDSA.timer;}
+		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+		p.setBearing(randomgen.nextFloat()*360);
 	}
 	
-	
+	/** generateFlightNumber is used to create an eight digit string of letters and numbers (between 0-9)*/
 	public static String generateFlightNumber() {
 		String alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String result = new String();
@@ -36,9 +39,11 @@ public class FuturePlane {
 		return result;
 	}
 	
+	/** getFnumber is used to access the private variable fnumber */
 	public String getFnumber() {
 		return fnumber;
 	}
+	
 	
 	private static void main() {
 		for (int i = 0; i < 10; i++){
