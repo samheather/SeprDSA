@@ -74,7 +74,7 @@ public class SeprDSA {
 			e.printStackTrace();
 		}
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1024, 640), 1024, 640, menu.canvas, new File(
+		Drawables.initialise(new Window(1024, 640), 824, 640, menu.canvas, new File(
 				"default.xml").toURI().toURL());
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
@@ -99,9 +99,9 @@ public class SeprDSA {
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
-							* (Display.getWidth() - pixelsFromEdge),
+							* (Drawables.virtualDisplaySize().get(0) - pixelsFromEdge),
 					(randomgen.nextDouble() - 0.5)
-							* (Display.getHeight() - pixelsFromEdge),
+							* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
 			wayPointList.add(newWayPoint);
 		}

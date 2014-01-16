@@ -1,5 +1,7 @@
 package game;
 
+import org.la4j.vector.dense.BasicVector;
+
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
@@ -17,8 +19,6 @@ public class Map implements Drawable {
 		Drawables.add(this);
 	}
 
-	private double x = 0;
-	private double y = 0;
 	/**
 	 * Necessary for layering of drawable objects.
 	 */
@@ -28,7 +28,8 @@ public class Map implements Drawable {
 	 * What to draw when instances of Map are drawn.
 	 */
 	public Drawing draw() {
-		return new Sprite(Images.map);
+		return new Sprite(Images.map_crop).translate(new BasicVector(
+				new double[] {-100, 0}));
 	}
 
 	/**

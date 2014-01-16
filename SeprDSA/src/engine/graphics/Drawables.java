@@ -171,7 +171,9 @@ public class Drawables {
 		 */
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
 		
-		
+		/**
+		 * Sets background colour.
+		 */
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		/** Setup alpha blending */

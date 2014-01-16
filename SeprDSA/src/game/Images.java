@@ -39,6 +39,7 @@ public class Images {
 	 * from image file map.png.
 	 */
 	public static Texture map = load("map.png");
+	public static Texture map_crop = load("map_crop.png");
 	/**
 	 * Array of plane textures (to save creating multiple un-ordered objects.
 	 */
