@@ -3,8 +3,6 @@ import engine.graphics.Drawables;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
-import game.BackgroundGradient;
-//import game.BackgroundGradient;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
@@ -71,7 +69,6 @@ public class SeprDSA {
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
-		BackgroundGradient b = new BackgroundGradient();
 		Map m = new Map();
 		Sidemenu s = new Sidemenu();
 

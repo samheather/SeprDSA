@@ -22,7 +22,7 @@ public class Sidemenu extends Widget {
 	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
-	public int startOfSideMenuX = 824;
+	public int startOfSideMenuX = 0;
 	
 	private void createButton() {
 	    exitGameButton = new Button("Exit Game");
@@ -65,8 +65,8 @@ public class Sidemenu extends Widget {
 	    
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
 	    for (int i = 0; i<labelArray.length; i++) {
-	    	labelArray[i].setPosition(startOfSideMenuX, 100+40*i);
-	    	labelArray[i].setSize(200,30);
+	    	labelArray[i].setPosition(startOfSideMenuX, 130+40*i);
+	    	labelArray[i].setSize(200,20);
 	    }
 	    
 	    newAltitudeField.setPosition(startOfSideMenuX, 360);
