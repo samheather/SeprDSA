@@ -45,7 +45,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int size = 60;
 	private String number;
 	private Text numbertext;
-	private int speed = randomgen.nextInt(30);
+	private int speed = 15 + randomgen.nextInt(15);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
 	private int score;
@@ -170,12 +170,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 
 	public void setBearing(final float newBearing) {
 		final float oldBearing = getBearing();
-		// System.out.println("Rotation" + rotation);
-		// System.out.println("Old "+oldBearing);
-		// System.out.println("New "+newBearing);
-		// System.out.println("BearingChange "+Math.abs(newBearing -
-		// oldBearing));
-		System.out.println((int) Math.abs(oldBearing - newBearing));
+		//System.out.println((int) Math.abs(oldBearing - newBearing));
 		if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing > newBearing) {
 			taskList.add(Timing.doNTimes(
@@ -309,6 +304,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
+		
 		for (TaskCanceller t : taskList){
 			t.cancel();
 		}
