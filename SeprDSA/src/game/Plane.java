@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import main.SeprDSA;
 
@@ -13,8 +12,10 @@ import org.la4j.vector.Vector;
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
-import engine.graphics.drawing.Texture;
-import engine.graphics.drawing.primitives.*;
+import engine.graphics.drawing.primitives.Identity;
+import engine.graphics.drawing.primitives.Line;
+import engine.graphics.drawing.primitives.Sprite;
+import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;

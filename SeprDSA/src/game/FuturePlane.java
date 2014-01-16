@@ -5,10 +5,6 @@ import java.util.Random;
 
 import main.SeprDSA;
 
-import org.la4j.vector.Vector;
-import org.la4j.vector.dense.BasicVector;
-import org.lwjgl.opengl.Display;
-
 public class FuturePlane {
 	
 	/**

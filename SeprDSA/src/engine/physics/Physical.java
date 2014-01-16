@@ -1,8 +1,8 @@
 package engine.physics;
 
-import game.WayPoint;
+import org.la4j.vector.Vector;
 
-import org.la4j.vector.*;
+
 /**
  * Interface for objects that implement Physical
  * @author sbh514

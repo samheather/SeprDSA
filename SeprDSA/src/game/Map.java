@@ -1,8 +1,8 @@
 package game;
 
 import org.la4j.vector.dense.BasicVector;
-
-import engine.graphics.*;
+import engine.graphics.Drawable;
+import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
 
