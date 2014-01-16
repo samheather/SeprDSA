@@ -9,7 +9,7 @@ public class Planes {
 	/** 
 	 * A limit to how many planes can be created at one time
 	 */
-	private static int maxplanenumb = 1;
+	private static int maxplanenumb = 2;
 	
 	/**
 	 * Creates a random number generator
@@ -64,7 +64,7 @@ public class Planes {
 		currTime += time;
 		if (currTime >= spawnThreshhold && planes.size() < maxplanenumb){
 			new FuturePlane(randomgen.nextInt(2000));
-			spawnThreshhold = 3000 + randomgen.nextInt(6000);
+			spawnThreshhold = 2000 + randomgen.nextInt(6000);
 			currTime = 0;
 		}
 	}

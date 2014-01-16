@@ -97,7 +97,6 @@ public class Sidemenu extends Widget {
 			e.printStackTrace();
 			System.exit(1);
 		}
-				
 		createButton();
 		setupLabels();
 		setupTextField();
