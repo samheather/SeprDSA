@@ -50,7 +50,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private boolean overide = false;
 	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
@@ -239,6 +238,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 			public void run(int i) {
 				size -= 1;
 				if (size == 0) {
+					SeprDSA.updateScore(score);
 					Planes.remove(plane);
 					Input.removeKeyboardable(plane);
 					Input.removeClickable(plane);

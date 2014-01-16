@@ -39,6 +39,7 @@ public class SeprDSA {
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
 	public static double timer;
+	private static int score = 0;
 	public Plane selectedPlane;
 	/**
 	 *Initialise leaderboard here so it can be accessed globally
@@ -51,6 +52,11 @@ public class SeprDSA {
 	
 	public static ArrayList<EntryExitPoint> getEntryExitPoints(){
 		return entryExitPointList;
+	}
+	
+	public static void updateScore(int scoreToAdd){
+		score += scoreToAdd;
+		System.out.println(score);
 	}
 	
 //	public static Vector getWeightedVector() {
@@ -90,7 +96,7 @@ public class SeprDSA {
 				10, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 5; i < wayPointNumber; i++) { // Random waypoints
+		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
@@ -109,7 +115,7 @@ public class SeprDSA {
 			dtimer = 0.1;
 			timer = dtimer;
 			Physicals.logic(dtimer);
-			//Input.logic();
+			Input.logic();
 			engine.Timing.logic();
 			Drawables.logic();
 			Planes.updateTimer(dtimer);
