@@ -13,9 +13,6 @@ import static org.lwjgl.opengl.GL11.glGenTextures;
 import static org.lwjgl.opengl.GL11.glTexImage2D;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +25,6 @@ import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL31;
-
-import engine.graphics.Drawables;
 
 public class Texture {
 

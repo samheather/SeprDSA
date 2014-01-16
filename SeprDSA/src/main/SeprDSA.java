@@ -19,7 +19,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;

@@ -1,12 +1,15 @@
 package game;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.*;
-import javax.swing.*;
 import game.Leaderboard;
 import java.awt.Canvas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class MainMenu extends JFrame {
 
