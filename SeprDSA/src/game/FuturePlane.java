@@ -10,14 +10,11 @@ import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
 
 public class FuturePlane {
-	private int velocity;
-	private float rotation;
 	
 	/**
 	 * Stores the flight number of the plane
 	 */
 	private String fnumber;
-	private static int pixelsFromEdge = 100;
 	
 	/**
 	 * Creates a random number generator based on the current System Time
@@ -51,7 +48,6 @@ public class FuturePlane {
 			lastUsed = newNumber;
 		}
 		System.out.println(wayPointList.toString());
-		double localTime = SeprDSA.timer;
 		//DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
 		//while (localTime < localTime + delayTime) {localTime += SeprDSA.timer;}
 		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
