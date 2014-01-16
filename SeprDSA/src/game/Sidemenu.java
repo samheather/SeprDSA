@@ -64,13 +64,7 @@ public class Sidemenu extends Widget {
 	}
 	
 	public Sidemenu() {
-		try {
-			Drawables.add(this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
-		}
+		Drawables.add(this);
 		this.titleText = new Text("Number - Entry Point - Time",
 				Fonts.sideMenuTitle, Alignment.CENTRED);
 
