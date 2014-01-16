@@ -23,32 +23,27 @@ public class Sidemenu extends Widget {
 
 	private Text titleText;
 	private Text[] upcomingFlights = new Text[5];
-	private Button button;
-	private Label label;
+	private Button exitGameButton;
 	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
 	public int startOfSideMenuX = 820;
 	
 	private void createButton() {
-	    button = new Button("Epic button");
-	    button.setTheme("button");
-	    button.addCallback(new Runnable() {
+	    exitGameButton = new Button("Exit Game");
+	    exitGameButton.setTheme("button");
+	    exitGameButton.addCallback(new Runnable() {
             public void run() {
-                    System.out.println("some action!");
+                    System.out.println("Game should exit here.");
             }
 	    });
-	    add(button);
-	    
-	    label = new Label();
-		label.setText("Hello world");
-		add(label);
+	    add(exitGameButton);
 	}
 	
 	private void setupLabels() {
 		for (int i = 0; i<labelArray.length; i++) {
 			labelArray[i] = new Label();
-			labelArray[i].setText("abc");
+			labelArray[i].setText("Will auto-populate from Planes Array");
 			add(labelArray[i]);
 		}
 	}
@@ -70,14 +65,8 @@ public class Sidemenu extends Widget {
 //		add(helloPanel);
 	}
 	protected void layout(){
-		//helloPanel.setPosition(0, 0);
-		//helloPanel.setSize(1000, 1000);
-		//helloPanel.adjustSize();
-	    button.setPosition(0, 0);
-	    button.setSize(100, 100);
-	    
-	    label.setPosition(100, 100);
-	    label.setSize(100, 100);
+	    exitGameButton.setPosition(startOfSideMenuX, 410);
+	    exitGameButton.setSize(200,30);
 	    
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
 	    for (int i = 0; i<labelArray.length; i++) {
@@ -90,13 +79,9 @@ public class Sidemenu extends Widget {
 	}
 	
 	public Sidemenu() {
-		try {
-			Drawables.add(this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
-		}
+		
+		Drawables.add(this);
+
 		createButton();
 		setupLabels();
 		setupTextField();
