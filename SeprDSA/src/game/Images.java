@@ -64,6 +64,7 @@ public class Images {
 		load("waypoint_green.png"), 
 		load("waypoint_red.png"), 
 		load("waypoint_yellow.png")};
+	public static Texture backgroundGradient = load("gradient.png");
 	public static Texture entryExitPoint = load("exit.png");
 	public static Texture homeButton = load("homeButton.png");
 }
