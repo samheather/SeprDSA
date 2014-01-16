@@ -25,6 +25,12 @@ public class Timing {
 				does, c));
 		return c;
 	}
+	
+	public static void doNTimes(int n, double milliseconds,
+			NRunnable does, TaskCanceller c) {
+		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n,
+				does, c));
+	}
 
 	public static double timeSinceLastFrame() {
 		return Math
