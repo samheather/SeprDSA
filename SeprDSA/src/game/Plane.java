@@ -27,7 +27,7 @@ import engine.Timing;
 
 import org.la4j.vector.dense.*;
 
-public class Plane implements Drawable, Keyboardable, Physical, Clickable {
+public class Plane implements Drawable, Physical, Clickable {
 
 	private static Random randomgen = new Random();
 	private double x; // Should be pixel values for x,y
@@ -65,7 +65,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
-		Input.addKeyboardable(this);
+		//Input.addKeyboardable(this);
 		Input.addClickable(this);
 	}
 
@@ -104,6 +104,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	public String getFNumber() {
 		return number;
 	}
+	
 
 	public Drawing draw() {
 		if (left) {
@@ -169,6 +170,12 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	};
 
 	public void setBearing(final float newBearing) {
+		rotation = newBearing;
+		setVel(new BasicVector(new double[] {
+				Math.cos(Math.toRadians(rotation)),
+				Math.sin(Math.toRadians(rotation)), 0 })
+				.multiply(speed));
+		/*
 		final float oldBearing = getBearing();
 		//System.out.println((int) Math.abs(oldBearing - newBearing));
 		if ((int) Math.abs(oldBearing - newBearing) > 180
@@ -226,6 +233,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 						}
 					}));
 		}
+		*/
 	};
 
 	public void destroy() {
@@ -236,7 +244,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 				if (size == 0) {
 					SeprDSA.updateScore(score);
 					Planes.remove(plane);
-					Input.removeKeyboardable(plane);
+	//				Input.removeKeyboardable(plane);
 					Input.removeClickable(plane);
 					Physicals.remove(plane);
 					Drawables.remove(plane);
@@ -244,7 +252,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 			}
 		});
 	}
-
+/*
 	@Override
 	public void handleKeyboard(int key, boolean pressed) {
 
@@ -272,7 +280,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		result.add(Keyboard.KEY_D);
 		return result;
 	}
-
+*/
 	public double getZ() {
 		return z;
 	}
@@ -294,13 +302,14 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
-		
+		/*
 		for (TaskCanceller t : taskList){
 			t.cancel();
 			System.out.println(t.cancel);
 		}
 		taskList.clear();
-		setBearing((float) angle);
+		//setBearing((float) angle); */
+		targetBearing = angle;
 	}
 
 	public void clickAway() {
@@ -310,5 +319,17 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	public void move(Vector newPos) {
 		// System.out.println("Move");
 		endLine = newPos;
+	}
+	
+	private float targetBearing = 0.0f;
+
+	@Override
+	public float targetBearing() {
+		return targetBearing;
+	}
+
+	@Override
+	public float rotVel() {
+		return 1.0f;
 	}
 }

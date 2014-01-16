@@ -61,15 +61,13 @@ public class Planes {
 	 * @param time
 	 * @throws InterruptedException
 	 */
-	public static void updateTimer(double time){
-		currTime += time;
+	public static void updateTimer(){
 		if (Timing.timeSinceStart() >= spawnThreshhold && planes.size() < maxplanenumb){
 			System.out.println("Added plane");
 			FuturePlane tempFuturePlane = 
 					new FuturePlane(randomgen.nextInt(2000));
 			FuturePlanes.add(tempFuturePlane);
 			spawnThreshhold = 2000 + randomgen.nextInt(6000);
-			currTime = 0;
 		}
 	}
 	

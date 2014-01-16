@@ -94,4 +94,22 @@ public class WayPoint implements Drawable, Physical {
 		return 0;
 	}
 
+	@Override
+	public void setBearing(float newBearing) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float targetBearing() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float rotVel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
