@@ -125,10 +125,11 @@ public class SeprDSA {
 			dtimer = 0.1;
 			timer = dtimer;
 			engine.Timing.logic();
-			Input.logic();
+			//Input.logic();
 			Planes.updateTimer(dtimer);
 			Physicals.logic(dtimer);
 			Drawables.logic();
+			s.drawSidemenu();
 
 
 			if (Display.isCloseRequested()) { // If x is clicked you should

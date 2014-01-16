@@ -69,7 +69,7 @@
     	<theme name="editfield" ref="-defaults">
         	<param name="background"><image>button.background</image></param>
         	<!--<param name="fonts"><font>normal</font></param>-->
-        	<param name="cursor"><image>button.background</image></param>
+        	<param name="cursor"><image>label.background</image></param>
         	<param name="autocompletion-height"><int>10</int></param>
         	<param name="columns"><int>10</int></param>
         	<param name="passwordChar"><int>1</int></param>

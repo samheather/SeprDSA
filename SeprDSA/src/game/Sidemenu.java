@@ -20,6 +20,7 @@ public class Sidemenu extends Widget {
 	private Text[] upcomingFlights = new Text[5];
 	private Button exitGameButton;
 	private Label[] labelArray = new Label[6];
+	private Label changeAltitudeLabel;
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
 	public int startOfSideMenuX = 0;
@@ -41,6 +42,10 @@ public class Sidemenu extends Widget {
 			labelArray[i].setText("Will auto-populate from Planes Array");
 			add(labelArray[i]);
 		}
+		
+		changeAltitudeLabel = new Label();
+		changeAltitudeLabel.setText("New Altitude:");
+		add(changeAltitudeLabel);
 	}
 	
 	private void setupTextField() {
@@ -59,18 +64,22 @@ public class Sidemenu extends Widget {
 //		helloPanel.setVisible(true);
 //		add(helloPanel);
 	}
-	protected void layout(){
-	    exitGameButton.setPosition(startOfSideMenuX, 410);
-	    exitGameButton.setSize(200,30);
-	    
+	protected void layout(){  
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
 	    for (int i = 0; i<labelArray.length; i++) {
-	    	labelArray[i].setPosition(startOfSideMenuX, 130+40*i);
+	    	labelArray[i].setPosition(startOfSideMenuX, 130+30*i);
 	    	labelArray[i].setSize(200,20);
 	    }
 	    
-	    newAltitudeField.setPosition(startOfSideMenuX, 360);
-	    newAltitudeField.setSize(200,30);
+	    int altitudeControls = 360;
+	    changeAltitudeLabel.setPosition(startOfSideMenuX, altitudeControls);
+	    changeAltitudeLabel.setSize(200, 20);
+	    
+	    newAltitudeField.setPosition(startOfSideMenuX+50, altitudeControls+25);
+	    newAltitudeField.setSize(100,30);
+	    
+	    exitGameButton.setPosition(startOfSideMenuX+25, altitudeControls+85);
+	    exitGameButton.setSize(150,30);
 	}
 	
 	public Sidemenu() {
@@ -85,25 +94,19 @@ public class Sidemenu extends Widget {
 		labelArray[0].setText("Number - Entry Point - Time");
 	}
 
-	public Drawing draw() {
-		for (int i = 0; i <= Math.min(5, Planes.planes.size()); i++) {
-			String tempString = Planes.planes.get(i).getFNumber() + "E/E"
-					+ "TIME";
+	public void drawSidemenu() {
+		//System.out.println("Sidemenu draw ran " + FuturePlanes.futurePlanes.size());
+		int numberOfFuturePlanes = FuturePlanes.futurePlanes.size();
+		for (int i = 0; i < 5; i++) {
+			String tempString = "";
+			if (i < numberOfFuturePlanes) {
+				tempString = FuturePlanes.futurePlanes.get(i).
+						getFnumber() + "E/E" + "TIME";
+				
+			}
 			labelArray[i+1].setText(tempString);
+			
 		}
-		return new
-			 Sprite(Images.homeButton)
-			.scale(200 / Images.homeButton.size().get(0))
-			.red(1.0).blue(1.0).green(1.0).alpha(0.75)
-//			.translate(new BasicVector(new double[] {0, -40}))
-			.overlay(titleText
-					.overlay(upcomingFlights[0]	
-					.overlay(upcomingFlights[1]
-					.overlay(upcomingFlights[2]
-					.overlay(upcomingFlights[3]
-					.overlay(upcomingFlights[4]))))))
-			.translate(new BasicVector(new double[] { 320, 320 }));
-
 	}
 /*
 	@Override
