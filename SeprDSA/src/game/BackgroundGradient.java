@@ -1,35 +1,39 @@
+/**
+ * 
+ */
 package game;
 
 import org.la4j.vector.dense.BasicVector;
+import org.lwjgl.opengl.Display;
+
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
 
 /**
- * Class for the map image to be drawn.
  * @author sbh514
+ * 
  */
+public class BackgroundGradient implements Drawable {
 
-public class Map implements Drawable {
 	/**
-	 * Constructor - add this class to Drawables so it's drawn.
+	 * 
 	 */
-	public Map() {
+	public BackgroundGradient() {
 		Drawables.add(this);
 	}
 
-	/**
-	 * Necessary for layering of drawable objects.
-	 */
 	private double z = -1;
 
 	/**
 	 * What to draw when instances of Map are drawn.
 	 */
 	public Drawing draw() {
-		return new Sprite(Images.map_crop).translate(new BasicVector(
-				new double[] {-100, 0}));
+		return new Sprite(Images.backgroundGradient)
+				.scale(new BasicVector(new double[] {
+						Display.getWidth()
+								/ Images.backgroundGradient.size().get(0), 1 }));
 	}
 
 	/**
@@ -41,13 +45,13 @@ public class Map implements Drawable {
 
 	/**
 	 * Allow sorting of drawables to support ordering of objects for drawing
-	 * (i.e. for layers - make sure instances of Map aren't drawn on top of
-	 * planes).
+	 * (i.e. for layers - make sure instances of BackgroundGradient aren't drawn
+	 * on top of anything.
 	 */
-	@Override
 	public int compareTo(Drawable o) {
 		// Compare to other drawables to establsih draw order.
 		// TODO Auto-generated method stub
 		return (int) (z - o.getZ());
 	}
+
 }

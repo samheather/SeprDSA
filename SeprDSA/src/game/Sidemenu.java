@@ -22,7 +22,7 @@ public class Sidemenu extends Widget {
 	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
-	public int startOfSideMenuX = 820;
+	public int startOfSideMenuX = 824;
 	
 	private void createButton() {
 	    exitGameButton = new Button("Exit Game");

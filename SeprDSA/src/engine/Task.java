@@ -34,7 +34,7 @@ class Task implements Comparable<Task> {
 	}
 
 	public void doAgainIfRequired() {
-		if (times > 0) {
+		if (times > 1) {
 			Timing.doNTimes(times - 1, interval, does);
 		}
 	}

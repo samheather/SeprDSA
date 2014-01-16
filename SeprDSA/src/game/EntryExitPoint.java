@@ -39,30 +39,30 @@ public class EntryExitPoint implements Drawable, Physical {
 			switch (randomgen.nextInt(4)) {
 			case 0: // Right side
 				position = new BasicVector(new double[] {
-						Display.getWidth() / 2,
-						(randomgen.nextDouble() - 0.5) * Display.getHeight()
+						Drawables.virtualDisplaySize().get(0) / 2,
+						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
 								/ 2, randomgen.nextDouble() * 20 });
 				break;
 			case 1: // Left side
 				position = new BasicVector(new double[] {
-						-Display.getWidth() / 2,
-						(randomgen.nextDouble() - 0.5) * Display.getHeight()
+						-Drawables.virtualDisplaySize().get(0) / 2,
+						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
 								/ 2, randomgen.nextDouble() * 20 });
 				break;
 			case 2: // Top side
 				position = new BasicVector(
 						new double[] {
 								(randomgen.nextDouble() - 0.5)
-										* Display.getWidth() / 2,
-								Display.getHeight() / 2,
+										* Drawables.virtualDisplaySize().get(0) / 2,
+										Drawables.virtualDisplaySize().get(1) / 2,
 								randomgen.nextDouble() * 20 });
 				break;
 			case 3: // Bottom side
 				position = new BasicVector(
 						new double[] {
 								(randomgen.nextDouble() - 0.5)
-										* Display.getWidth() / 2,
-								-Display.getHeight() / 2,
+										* Drawables.virtualDisplaySize().get(0) / 2,
+								-Drawables.virtualDisplaySize().get(1) / 2,
 								randomgen.nextDouble() * 20 });
 				break;
 			default:
