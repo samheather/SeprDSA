@@ -1,7 +1,7 @@
 package engine;
 
 public class TaskCanceller {
-	private boolean cancel = false;
+	public boolean cancel = false;
 
 	public void cancel() {
 		cancel = true;

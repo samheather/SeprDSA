@@ -86,8 +86,39 @@ public class EntryExitPoint implements Drawable, Physical {
 		Physicals.add(this);
 		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
 			position = pos;
-		} else { 
-			position = getEntryExitPointPos(0);
+		} else {
+			switch (randomgen.nextInt(4)) {
+			case 0: // Right side
+				position = new BasicVector(new double[] {
+						Drawables.virtualDisplaySize().get(0) / 2,
+						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
+								/ 2, randomgen.nextDouble() * 20 });
+				break;
+			case 1: // Left side
+				position = new BasicVector(new double[] {
+						-Drawables.virtualDisplaySize().get(0) / 2,
+						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
+								/ 2, randomgen.nextDouble() * 20 });
+				break;
+			case 2: // Top side
+				position = new BasicVector(
+						new double[] {
+								(randomgen.nextDouble() - 0.5)
+										* Drawables.virtualDisplaySize().get(0) / 2,
+										Drawables.virtualDisplaySize().get(1) / 2,
+								randomgen.nextDouble() * 20 });
+				break;
+			case 3: // Bottom side
+				position = new BasicVector(
+						new double[] {
+								(randomgen.nextDouble() - 0.5)
+										* Drawables.virtualDisplaySize().get(0) / 2,
+								-Drawables.virtualDisplaySize().get(1) / 2,
+								randomgen.nextDouble() * 20 });
+				break;
+			default:
+				System.out.println("Random is brokened");
+			}
 		}
 		tolerance = tolerances;
 	}

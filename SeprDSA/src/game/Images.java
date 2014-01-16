@@ -39,6 +39,7 @@ public class Images {
 	 * from image file map.png.
 	 */
 	public static Texture map = load("map.png");
+	public static Texture map_crop = load("map_crop.png");
 	/**
 	 * Array of plane textures (to save creating multiple un-ordered objects.
 	 */
@@ -63,6 +64,7 @@ public class Images {
 		load("waypoint_green.png"), 
 		load("waypoint_red.png"), 
 		load("waypoint_yellow.png")};
+	public static Texture backgroundGradient = load("gradient.png");
 	public static Texture entryExitPoint = load("exit.png");
 	public static Texture homeButton = load("homeButton.png");
 }

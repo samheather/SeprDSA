@@ -243,15 +243,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 				}
 			}
 		});
-		// for (int i = size; i > 0; i--) {
-		// size -= 1;
-		// }
-		// s.cancel();
-		// Planes.remove(this);
-		// Input.removeKeyboardable(this);
-		// Input.removeClickable(this);
-		// Physicals.remove(this);
-		// Drawables.remove(this);
 	}
 
 	@Override
@@ -291,7 +282,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void clickDown(int button, Vector pos) {
-		// System.out.println(number);
 		endLine = pos;
 		lineExists = true;
 	}
@@ -307,6 +297,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		
 		for (TaskCanceller t : taskList){
 			t.cancel();
+			System.out.println(t.cancel);
 		}
 		taskList.clear();
 		setBearing((float) angle);

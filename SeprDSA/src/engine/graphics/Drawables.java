@@ -1,6 +1,6 @@
 package engine.graphics;
 
-import java.awt.Canvas;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -130,16 +130,12 @@ public class Drawables {
 	 *             read theme.
 	 */
 	public static void initialise(DisplayMode d, int width, int height,
-			Canvas canvas, URL theme) throws IOException {
+			URL theme) throws IOException {
 
 		Drawables.width = width;
 		Drawables.height = height;
 
-		
-
 		try {
-			/** jpanels i hate you */
-			Display.setParent(canvas);
 
 			/** Set the display mode specified by d */
 			d.set();
@@ -166,10 +162,10 @@ public class Drawables {
 		 * length or height
 		 */
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
-		
-		
+
+		/** Sets blanking colour */
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		
+
 		/** Setup alpha blending */
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -179,6 +175,7 @@ public class Drawables {
 			themeManager = ThemeManager.createThemeManager(theme, renderer);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 
 	}
@@ -194,7 +191,7 @@ public class Drawables {
 		double x = Display.getX();
 		double y = Display.getY();
 		Vector ret = new BasicVector(new double[] {
-				(pos.get(0) - x) - (dw / 2.0), (pos.get(1) - y) - (dh / 2.0) });
+				(pos.get(0)) - (dw / 2.0), (pos.get(1)) - (dh / 2.0) });
 
 		return ret.divide(widthr);
 	}
