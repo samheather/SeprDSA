@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
@@ -51,6 +52,10 @@ public class SeprDSA {
 	public static ArrayList<EntryExitPoint> getEntryExitPoints(){
 		return entryExitPointList;
 	}
+	
+//	public static Vector getWeightedVector() {
+//		
+//	}
 
 	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
 		Drawables c = new Drawables();
@@ -75,7 +80,6 @@ public class SeprDSA {
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
-
 		for (int i = 1; i <= entryExitPointNumber; i++) { // Random EntryExits
 			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
 					360, i);
@@ -86,7 +90,7 @@ public class SeprDSA {
 				10, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 0; i < wayPointNumber; i++) { // Random waypoints
+		for (Integer i = 5; i < wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),

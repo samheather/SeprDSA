@@ -139,7 +139,7 @@ public class Drawables {
 		Drawables.width = width;
 		Drawables.height = height;
 
-		themeManager = ThemeManager.createThemeManager(theme, renderer);
+		
 
 		try {
 			/** jpanels i hate you */
@@ -180,6 +180,7 @@ public class Drawables {
 		GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
 		try {
 			renderer = new LWJGLRenderer();
+			themeManager = ThemeManager.createThemeManager(theme, renderer);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
