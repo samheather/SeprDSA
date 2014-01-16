@@ -82,7 +82,7 @@ public class SeprDSA {
 				10, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 0; i < wayPointNumber; i++) { // Random waypoints
+		for (Integer i = 5; i < wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
