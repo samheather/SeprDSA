@@ -72,7 +72,7 @@ public class SeprDSA {
 
 		//BackgroundGradient b = new BackgroundGradient();
 		Map m = new Map();
-		Sidemenu s = new Sidemenu();
+		//Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);

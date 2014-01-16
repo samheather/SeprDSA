@@ -17,7 +17,7 @@
         </select>
     </images>
 
-    <fontDef name="normal" filename="font.fnt" color="black">
+    <fontDef name="normal" filename="font.fnt" color="white" style="bold">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="blue"/>
