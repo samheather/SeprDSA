@@ -16,8 +16,25 @@
             <alias ref="-frameB"/>
         </select>
     </images>
+    
+    <images file="transparent.png" format="RGBA">
+        <area name="-frame1" xywh="0,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame2" xywh="10,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame3" xywh="20,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame4" xywh="30,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame5" xywh="40,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame6" xywh="50,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame7" xywh="60,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        <area name="-frame8" xywh="70,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+        
+        <select name="label.background">
+            <alias ref="-frame2" if="disabled" tint="#8fff"/>
+            <alias ref="-frame5" if="armed"/>
+            <alias ref="-frame2"/>
+        </select>
+    </images>
 
-    <fontDef name="normal" filename="font.fnt" color="white" style="bold">
+    <fontDef name="normal" filename="font.fnt" color="white">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="blue"/>
@@ -47,7 +64,7 @@
             <param name="background"><image>button.background</image></param>
         </theme>
         <theme name="label" ref="-defaults">
-        	<param name="background"><image>button.background</image></param>
+        	<param name="background"><image>label.background</image></param>
     	</theme>
     	<theme name="editfield" ref="-defaults">
         	<param name="background"><image>button.background</image></param>
