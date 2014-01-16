@@ -99,8 +99,8 @@ public class SeprDSA {
 					randomgen.nextDouble() * 20 }),i.toString());
 			wayPointList.add(newWayPoint);
 		}
-		Plane p = new Plane("fdsf", wayPointList, landingStrip, landingStrip);
-		p.setBearing(180);
+		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList, landingStrip, landingStrip);
+		p.setBearing(0);
 		
 		while (true) {
 			timer2 = timer1;
