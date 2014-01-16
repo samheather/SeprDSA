@@ -3,6 +3,7 @@ import engine.graphics.Drawables;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
+import game.BackgroundGradient;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
@@ -19,7 +20,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
@@ -39,6 +39,7 @@ public class SeprDSA {
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
 	public static double timer;
+	private static int score = 0;
 	public Plane selectedPlane;
 	/**
 	 *Initialise leaderboard here so it can be accessed globally
@@ -51,6 +52,11 @@ public class SeprDSA {
 	
 	public static ArrayList<EntryExitPoint> getEntryExitPoints(){
 		return entryExitPointList;
+	}
+	
+	public static void updateScore(int scoreToAdd){
+		score += scoreToAdd;
+		System.out.println(score);
 	}
 	
 //	public static Vector getWeightedVector() {
@@ -68,12 +74,13 @@ public class SeprDSA {
 			e.printStackTrace();
 		}
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1024, 640), 1024, 640, menu.canvas, new File(
+		Drawables.initialise(new Window(1024, 640), 824, 640, menu.canvas, new File(
 				"default.xml").toURI().toURL());
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
+		BackgroundGradient b = new BackgroundGradient();
 		Map m = new Map();
 		//Sidemenu s = new Sidemenu();
 
@@ -90,12 +97,12 @@ public class SeprDSA {
 				10, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 5; i < wayPointNumber; i++) { // Random waypoints
+		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
-							* (Display.getWidth() - pixelsFromEdge),
+							* (Drawables.virtualDisplaySize().get(0) - pixelsFromEdge),
 					(randomgen.nextDouble() - 0.5)
-							* (Display.getHeight() - pixelsFromEdge),
+							* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
 					randomgen.nextDouble() * 20 }),i.toString());
 			wayPointList.add(newWayPoint);
 		}

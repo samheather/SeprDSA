@@ -1,6 +1,6 @@
 package engine.graphics.drawing.combinators;
 
-import org.la4j.vector.*;
+import org.la4j.vector.Vector;
 import org.lwjgl.opengl.GL11;
 
 import engine.graphics.drawing.Drawing;

@@ -1,8 +1,6 @@
 package game;
 
-import java.io.IOException;
 
-import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
 import de.matthiasmann.twl.Button;
@@ -11,13 +9,10 @@ import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.EditField;
 
-import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
-import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.primitives.Sprite;
 import engine.graphics.drawing.primitives.Text;
-import engine.input.Clickable;
 
 public class Sidemenu extends Widget {
 
@@ -27,7 +22,7 @@ public class Sidemenu extends Widget {
 	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
-	public int startOfSideMenuX = 820;
+	public int startOfSideMenuX = 824;
 	
 	private void createButton() {
 	    exitGameButton = new Button("Exit Game");

@@ -2,7 +2,7 @@ package engine.graphics.drawing.combinators;
 
 import engine.graphics.drawing.Drawing;
 
-import org.la4j.vector.*;
+import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
 

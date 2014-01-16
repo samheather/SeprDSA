@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import main.SeprDSA;
 
@@ -13,8 +12,10 @@ import org.la4j.vector.Vector;
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
-import engine.graphics.drawing.Texture;
-import engine.graphics.drawing.primitives.*;
+import engine.graphics.drawing.primitives.Identity;
+import engine.graphics.drawing.primitives.Line;
+import engine.graphics.drawing.primitives.Sprite;
+import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;
@@ -50,7 +51,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private boolean overide = false;
 	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
@@ -239,6 +239,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 			public void run(int i) {
 				size -= 1;
 				if (size == 0) {
+					SeprDSA.updateScore(score);
 					Planes.remove(plane);
 					Input.removeKeyboardable(plane);
 					Input.removeClickable(plane);
