@@ -3,7 +3,7 @@ import engine.graphics.Drawables;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
-import game.BackgroundGradient;
+//import game.BackgroundGradient;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
@@ -74,13 +74,13 @@ public class SeprDSA {
 			e.printStackTrace();
 		}
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1024, 640), 824, 640, menu.canvas, new File(
+		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
 				"default.xml").toURI().toURL());
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
-		BackgroundGradient b = new BackgroundGradient();
+		//BackgroundGradient b = new BackgroundGradient();
 		Map m = new Map();
 		Sidemenu s = new Sidemenu();
 
