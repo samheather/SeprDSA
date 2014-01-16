@@ -9,6 +9,7 @@ import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DialogLayout;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.EditField;
 
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
@@ -24,7 +25,10 @@ public class Sidemenu extends Widget {
 	private Text[] upcomingFlights = new Text[5];
 	private Button button;
 	private Label label;
+	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
+	private EditField newAltitudeField;
+	public int startOfSideMenuX = 820;
 	
 	private void createButton() {
 	    button = new Button("Epic button");
@@ -39,6 +43,19 @@ public class Sidemenu extends Widget {
 	    label = new Label();
 		label.setText("Hello world");
 		add(label);
+	}
+	
+	private void setupLabels() {
+		for (int i = 0; i<labelArray.length; i++) {
+			labelArray[i] = new Label();
+			labelArray[i].setText("abc");
+			add(labelArray[i]);
+		}
+	}
+	
+	private void setupTextField() {
+		newAltitudeField = new EditField();
+		add(newAltitudeField);
 	}
 
 	private void createHelloPanel() {
@@ -58,9 +75,18 @@ public class Sidemenu extends Widget {
 		//helloPanel.adjustSize();
 	    button.setPosition(0, 0);
 	    button.setSize(100, 100);
+	    
 	    label.setPosition(100, 100);
 	    label.setSize(100, 100);
+	    
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
+	    for (int i = 0; i<labelArray.length; i++) {
+	    	labelArray[i].setPosition(startOfSideMenuX, 100+40*i);
+	    	labelArray[i].setSize(200,30);
+	    }
+	    
+	    newAltitudeField.setPosition(startOfSideMenuX, 360);
+	    newAltitudeField.setSize(200,30);
 	}
 	
 	public Sidemenu() {
@@ -71,29 +97,20 @@ public class Sidemenu extends Widget {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		this.titleText = new Text("Number - Entry Point - Time",
-				Fonts.sideMenuTitle, Alignment.CENTRED);
-
-		upcomingFlights[0] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[1] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[2] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[3] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[4] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
+				
 		createButton();
+		setupLabels();
+		setupTextField();
 		//createHelloPanel();
+		
+		labelArray[0].setText("Number - Entry Point - Time");
 	}
 
 	public Drawing draw() {
-		for (int i = 1; i <= Math.min(5, Planes.planes.size()); i++) {
-			String tempString = Planes.planes.get(i - 1).getFNumber() + "E/E"
+		for (int i = 0; i <= Math.min(5, Planes.planes.size()); i++) {
+			String tempString = Planes.planes.get(i).getFNumber() + "E/E"
 					+ "TIME";
-			upcomingFlights[i - 1] = new Text(tempString, Fonts.sideMenuText,
-					Alignment.CENTRED);
+			labelArray[i+1].setText(tempString);
 		}
 		return new
 			 Sprite(Images.homeButton)
