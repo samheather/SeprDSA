@@ -1,6 +1,6 @@
 package engine.graphics;
 
-import java.awt.Canvas;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -163,7 +163,7 @@ public class Drawables {
 		 */
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
 
-		/** Sets background colour */
+		/** Sets blanking colour */
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		/** Setup alpha blending */
@@ -175,6 +175,7 @@ public class Drawables {
 			themeManager = ThemeManager.createThemeManager(theme, renderer);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 
 	}

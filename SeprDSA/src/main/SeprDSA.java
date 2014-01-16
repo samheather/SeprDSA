@@ -64,18 +64,9 @@ public class SeprDSA {
 //	}
 
 	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
-		//MainMenu menu = new MainMenu();
-		//menu.setVisible(true);
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Random randomgen = new Random(System.currentTimeMillis());
 		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
 				"default.xml").toURI().toURL());
-		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 
@@ -114,11 +105,12 @@ public class SeprDSA {
 			double dtimer = Math.abs((timer1 - timer2) / 100000000.0);
 			dtimer = 0.1;
 			timer = dtimer;
-			Physicals.logic(dtimer);
-			Input.logic();
 			engine.Timing.logic();
-			Drawables.logic();
+			Input.logic();
 			Planes.updateTimer(dtimer);
+			Physicals.logic(dtimer);
+			Drawables.logic();
+
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.
