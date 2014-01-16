@@ -9,17 +9,21 @@ public class Timing {
 	private static long timeSinceLastFrame = 0;
 	private static long lastTimeSinceLastFrame = 0;
 	private static PriorityQueue<Task> tasks = new PriorityQueue<Task>();
-	
+
 	public interface NRunnable {
-		public void run (int n);
+		public void run(int n);
 	}
 
-	public static void doIn(double milliseconds, NRunnable does) {
-		doNTimes(1, milliseconds, does);
+	public static TaskCanceller doIn(double milliseconds, NRunnable does) {
+		return doNTimes(1, milliseconds, does);
 	}
 
-	public static void doNTimes(int n, double milliseconds, NRunnable does) {
-		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n, does));
+	public static TaskCanceller doNTimes(int n, double milliseconds,
+			NRunnable does) {
+		TaskCanceller c = new TaskCanceller();
+		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n,
+				does, c));
+		return c;
 	}
 
 	public static double timeSinceLastFrame() {
@@ -36,12 +40,12 @@ public class Timing {
 		lastTimeSinceLastFrame = timeSinceLastFrame;
 		timeSinceLastFrame = System.nanoTime();
 		Task next = null;
-		while(tasks.size() > 0) {
-			if(tasks.peek().scheduled < timeSinceStart) {
+		while (tasks.size() > 0) {
+			if (tasks.peek().theTimeHasCome()) {
 				next = tasks.poll();
-				next.does.run(next.times);
-				if(next.times > 0) {
-					doNTimes(next.times - 1, next.interval, next.does);
+				if (!next.isCancelled()) {
+					next.doOnce();
+					next.doAgainIfRequired();
 				}
 			} else {
 				break;
