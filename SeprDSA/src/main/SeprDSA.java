@@ -64,9 +64,8 @@ public class SeprDSA {
 //	}
 
 	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
-		Drawables c = new Drawables();
-		MainMenu menu = new MainMenu();
-		menu.setVisible(true);
+		//MainMenu menu = new MainMenu();
+		//menu.setVisible(true);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
