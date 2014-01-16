@@ -3,4 +3,4 @@ leaderboardscores.txt
 *.class
 *~
 \#*\#
-
+.DS_Store
