@@ -1,5 +1,7 @@
 package game;
 
+import main.SeprDSA;
+
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
@@ -15,7 +17,7 @@ import engine.physics.Physicals;
 
 public class EntryExitPoint implements Drawable, Physical {
 
-	private Random randomgen = new Random();
+	private static Random randomgen = new Random();
 	private float bearingNeeded;
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
@@ -28,6 +30,55 @@ public class EntryExitPoint implements Drawable, Physical {
 		return "EntryExitPoint" + number;
 	}
 
+	public static Vector getEntryExitPointPos(int counter) {
+		boolean isValid = true;
+		Vector testVector = new BasicVector(new double[]{0,0,0});
+		switch (randomgen.nextInt(4)) {
+		case 0: // Right side
+			testVector = new BasicVector(new double[] {
+					Display.getWidth() / 2,
+					(randomgen.nextDouble() - 0.5) * Display.getHeight()
+							/ 2, randomgen.nextDouble() * 20 });
+			break;
+		case 1: // Left side
+			testVector = new BasicVector(new double[] {
+					-Display.getWidth() / 2,
+					(randomgen.nextDouble() - 0.5) * Display.getHeight()
+							/ 2, randomgen.nextDouble() * 20 });
+			break;
+		case 2: // Top side
+			testVector = new BasicVector(
+					new double[] {
+							(randomgen.nextDouble() - 0.5)
+									* Display.getWidth() / 2,
+							Display.getHeight() / 2,
+							randomgen.nextDouble() * 20 });
+			break;
+		case 3: // Bottom side
+			testVector = new BasicVector(
+					new double[] {
+							(randomgen.nextDouble() - 0.5)
+									* Display.getWidth() / 2,
+							-Display.getHeight() / 2,
+							randomgen.nextDouble() * 20 });
+			break;
+		default:
+			System.out.println("Random is brokened");
+		}
+		
+		for (EntryExitPoint entryExitPoint : SeprDSA.getEntryExitPoints()){
+			if (SeprDSA.getMagnitude(entryExitPoint.getPos(),testVector) < 200.0f){
+				isValid = false;
+			}
+		}
+		if (isValid || counter > 50) {
+			System.out.println(counter);
+			return testVector;
+		} else {
+			return getEntryExitPointPos(counter + 1);
+		}
+	}
+	
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
 		number = pointNumber;
@@ -101,19 +152,6 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {
-		/*
-		 * System.out.println("Distance: " + (Math.sqrt(Math.pow(position.get(0)
-		 * - checkObj.getPos().get(0), 2) + Math.pow(position.get(1) -
-		 * checkObj.getPos().get(1), 2)) < radius));
-		 * System.out.println("Within negative Tolerance: " +
-		 * (checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance)%
-		 * 360 > bearingNeeded - tolerance : checkObj.getBearing() >
-		 * bearingNeeded - tolerance ));
-		 * System.out.println("Within positive Tolerance: " +
-		 * (checkObj.getBearing() > 180 ? (checkObj.getBearing() + tolerance)%
-		 * 360 < bearingNeeded + tolerance : checkObj.getBearing() <
-		 * bearingNeeded + tolerance ));
-		 */
 		return (Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0),
 				2) + Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius)
 

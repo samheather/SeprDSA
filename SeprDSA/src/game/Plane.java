@@ -170,12 +170,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 
 	public void setBearing(final float newBearing) {
 		final float oldBearing = getBearing();
-		// System.out.println("Rotation" + rotation);
-		// System.out.println("Old "+oldBearing);
-		// System.out.println("New "+newBearing);
-		// System.out.println("BearingChange "+Math.abs(newBearing -
-		// oldBearing));
-		System.out.println((int) Math.abs(oldBearing - newBearing));
+		//System.out.println((int) Math.abs(oldBearing - newBearing));
 		if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing > newBearing) {
 			taskList.add(Timing.doNTimes(
@@ -248,15 +243,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 				}
 			}
 		});
-		// for (int i = size; i > 0; i--) {
-		// size -= 1;
-		// }
-		// s.cancel();
-		// Planes.remove(this);
-		// Input.removeKeyboardable(this);
-		// Input.removeClickable(this);
-		// Physicals.remove(this);
-		// Drawables.remove(this);
 	}
 
 	@Override
@@ -296,7 +282,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	}
 
 	public void clickDown(int button, Vector pos) {
-		// System.out.println(number);
 		endLine = pos;
 		lineExists = true;
 	}
@@ -309,8 +294,10 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
+		
 		for (TaskCanceller t : taskList){
 			t.cancel();
+			System.out.println(t.cancel);
 		}
 		taskList.clear();
 		setBearing((float) angle);

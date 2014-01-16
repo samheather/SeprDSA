@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
@@ -39,6 +40,7 @@ public class SeprDSA {
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
 	public static double timer;
 	private static int score = 0;
+	private static Random randomgen = new Random();
 	public Plane selectedPlane;
 	/**
 	 *Initialise leaderboard here so it can be accessed globally
@@ -58,12 +60,34 @@ public class SeprDSA {
 		System.out.println(score);
 	}
 	
-//	public static Vector getWeightedVector() {
-//		
-//	}
-
+	public static float getMagnitude(Vector vecA, Vector vecB){
+		Vector vecC = vecA.subtract(vecB);
+		return (float) Math.sqrt(Math.pow(vecC.get(0), 2) + Math.pow(vecC.get(1), 2) + Math.pow(vecC.get(2), 2));
+	}
+	
+	public static Vector getWayPointPos(int counter) {
+		boolean isValid = true;
+		BasicVector testVector = new BasicVector(new double[] {
+				(randomgen.nextDouble() - 0.5)
+				* (Display.getWidth() - pixelsFromEdge),
+		(randomgen.nextDouble() - 0.5)
+				* (Display.getHeight() - pixelsFromEdge),
+		randomgen.nextDouble() * 20 });
+		
+		for (WayPoint waypoint : wayPointList){
+			if (getMagnitude(waypoint.getPos(),testVector) < 200.0f){
+				isValid = false;
+			}
+		}
+		if (isValid || counter > 50) {
+			System.out.println(counter);
+			return testVector;
+		} else {
+			return getWayPointPos(counter + 1);
+		}
+	}
+	
 	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
-		Random randomgen = new Random(System.currentTimeMillis());
 		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
@@ -82,18 +106,15 @@ public class SeprDSA {
 		}
 
 		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
-				10, 0); // Landing Strip
+				5, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
-			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
-					(randomgen.nextDouble() - 0.5)
-							* (Drawables.virtualDisplaySize().get(0) - pixelsFromEdge),
-					(randomgen.nextDouble() - 0.5)
-							* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
-					randomgen.nextDouble() * 20 }),i.toString());
+			WayPoint newWayPoint = new WayPoint(getWayPointPos(0),i.toString());
 			wayPointList.add(newWayPoint);
 		}
+		
+		//TEST PLANE
 		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList, landingStrip, landingStrip);
 		p.setBearing(0);
 		
