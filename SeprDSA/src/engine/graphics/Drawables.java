@@ -1,15 +1,11 @@
 package engine.graphics;
 
 import java.awt.Canvas;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.swing.JPanel;
 
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
@@ -167,6 +163,7 @@ public class Drawables {
 		 */
 		GL11.glEnable(GL31.GL_TEXTURE_RECTANGLE);
 
+		/** Sets background colour */
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		/** Setup alpha blending */

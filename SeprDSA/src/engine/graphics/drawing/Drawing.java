@@ -3,7 +3,12 @@ package engine.graphics.drawing;
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
-import engine.graphics.drawing.combinators.*;
+import engine.graphics.drawing.combinators.Colour;
+import engine.graphics.drawing.combinators.Overlay;
+import engine.graphics.drawing.combinators.Rotate;
+import engine.graphics.drawing.combinators.Scale;
+import engine.graphics.drawing.combinators.Translate;
+
 
 public abstract class Drawing {
 	public abstract void render();

@@ -1,44 +1,51 @@
 package game;
 
-import java.io.IOException;
 
-import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DialogLayout;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.EditField;
 
-import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
-import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.primitives.Sprite;
 import engine.graphics.drawing.primitives.Text;
-import engine.input.Clickable;
 
 public class Sidemenu extends Widget {
 
 	private Text titleText;
 	private Text[] upcomingFlights = new Text[5];
-	private Button button;
-	private Label label;
+	private Button exitGameButton;
+	private Label[] labelArray = new Label[6];
 	private DialogLayout helloPanel;
+	private EditField newAltitudeField;
+	public int startOfSideMenuX = 824;
 	
 	private void createButton() {
-	    button = new Button("Epic button");
-	    button.setTheme("button");
-	    button.addCallback(new Runnable() {
+	    exitGameButton = new Button("Exit Game");
+	    exitGameButton.setTheme("button");
+	    exitGameButton.addCallback(new Runnable() {
             public void run() {
-                    System.out.println("some action!");
+                    System.out.println("Game should exit here.");
             }
 	    });
-	    add(button);
-	    
-	    label = new Label();
-		label.setText("Hello world");
-		add(label);
+	    add(exitGameButton);
+	}
+	
+	private void setupLabels() {
+		for (int i = 0; i<labelArray.length; i++) {
+			labelArray[i] = new Label();
+			labelArray[i].setText("Will auto-populate from Planes Array");
+			add(labelArray[i]);
+		}
+	}
+	
+	private void setupTextField() {
+		newAltitudeField = new EditField();
+		add(newAltitudeField);
 	}
 
 	private void createHelloPanel() {
@@ -53,41 +60,36 @@ public class Sidemenu extends Widget {
 //		add(helloPanel);
 	}
 	protected void layout(){
-		//helloPanel.setPosition(0, 0);
-		//helloPanel.setSize(1000, 1000);
-		//helloPanel.adjustSize();
-	    button.setPosition(0, 0);
-	    button.setSize(100, 100);
-	    label.setPosition(100, 100);
-	    label.setSize(100, 100);
+	    exitGameButton.setPosition(startOfSideMenuX, 410);
+	    exitGameButton.setSize(200,30);
+	    
 	    //button.adjustSize(); //Calculate optimal size instead of manually setting it
+	    for (int i = 0; i<labelArray.length; i++) {
+	    	labelArray[i].setPosition(startOfSideMenuX, 100+40*i);
+	    	labelArray[i].setSize(200,30);
+	    }
+	    
+	    newAltitudeField.setPosition(startOfSideMenuX, 360);
+	    newAltitudeField.setSize(200,30);
 	}
 	
 	public Sidemenu() {
+		
 		Drawables.add(this);
-		this.titleText = new Text("Number - Entry Point - Time",
-				Fonts.sideMenuTitle, Alignment.CENTRED);
 
-		upcomingFlights[0] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[1] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[2] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[3] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
-		upcomingFlights[4] = new Text("abc", Fonts.sideMenuText,
-				Alignment.CENTRED);
 		createButton();
+		setupLabels();
+		setupTextField();
 		//createHelloPanel();
+		
+		labelArray[0].setText("Number - Entry Point - Time");
 	}
 
 	public Drawing draw() {
-		for (int i = 1; i <= Math.min(5, Planes.planes.size()); i++) {
-			String tempString = Planes.planes.get(i - 1).getFNumber() + "E/E"
+		for (int i = 0; i <= Math.min(5, Planes.planes.size()); i++) {
+			String tempString = Planes.planes.get(i).getFNumber() + "E/E"
 					+ "TIME";
-			upcomingFlights[i - 1] = new Text(tempString, Fonts.sideMenuText,
-					Alignment.CENTRED);
+			labelArray[i+1].setText(tempString);
 		}
 		return new
 			 Sprite(Images.homeButton)

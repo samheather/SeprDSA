@@ -12,14 +12,17 @@ import org.la4j.vector.Vector;
 import engine.graphics.*;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
-import engine.graphics.drawing.Texture;
-import engine.graphics.drawing.primitives.*;
+import engine.graphics.drawing.primitives.Identity;
+import engine.graphics.drawing.primitives.Line;
+import engine.graphics.drawing.primitives.Sprite;
+import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
+import engine.TaskCanceller;
 import engine.Timing;
 
 import org.la4j.vector.dense.*;
@@ -42,13 +45,13 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int size = 60;
 	private String number;
 	private Text numbertext;
-	private int speed = randomgen.nextInt(10);
+	private int speed = randomgen.nextInt(30);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private boolean overide = false;
+	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint) {
@@ -172,82 +175,88 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		// System.out.println("New "+newBearing);
 		// System.out.println("BearingChange "+Math.abs(newBearing -
 		// oldBearing));
-		System.out.println((int)Math.abs(oldBearing - newBearing));
-		if ((int)Math.abs(oldBearing - newBearing) > 180 && oldBearing > newBearing){
-			Timing.doNTimes((int)Math.abs(oldBearing - newBearing-360), 10,
+		System.out.println((int) Math.abs(oldBearing - newBearing));
+		if ((int) Math.abs(oldBearing - newBearing) > 180
+				&& oldBearing > newBearing) {
+			taskList.add(Timing.doNTimes(
+					(int) Math.abs(oldBearing - newBearing - 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
-							//System.out.println("rotated left long");
-							rotation = (rotation + 1)%360;
+							// System.out.println("rotated left long");
+							rotation = (rotation + 1) % 360;
 							setVel(new BasicVector(new double[] {
 									Math.cos(Math.toRadians(rotation)),
 									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(0));
+									.multiply(speed));
 						}
-					});
-		}else if ((int)Math.abs(oldBearing - newBearing) > 180 && oldBearing < newBearing){
-			Timing.doNTimes((int)Math.abs(oldBearing - newBearing-360), 10,
+					}));
+		} else if ((int) Math.abs(oldBearing - newBearing) > 180
+				&& oldBearing < newBearing) {
+			taskList.add(Timing.doNTimes(
+					(int) Math.abs(oldBearing - newBearing + 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
-							//System.out.println("rotated right long");
-							rotation = (rotation - 1)%360;
+							// System.out.println("rotated right long");
+							rotation = (rotation - 1) % 360;
 							setVel(new BasicVector(new double[] {
 									Math.cos(Math.toRadians(rotation)),
 									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(0));
+									.multiply(speed));
 						}
-					});
+					}));
 		} else if (oldBearing > newBearing) {
-			Timing.doNTimes((int)Math.abs(oldBearing - newBearing), 10,
+			taskList.add(Timing.doNTimes(
+					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
-							//System.out.println("rotated right");
-							rotation = (rotation - 1)%360;
+							// System.out.println("rotated right");
+							rotation = (rotation - 1) % 360;
 							setVel(new BasicVector(new double[] {
 									Math.cos(Math.toRadians(rotation)),
 									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(0));
+									.multiply(speed));
 						}
-					});
+					}));
 		} else {
-			Timing.doNTimes((int)Math.abs(oldBearing - newBearing), 10,
+			taskList.add(Timing.doNTimes(
+					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
-							//System.out.println("rotated left");
-							rotation = (rotation + 1)%360;
+							// System.out.println("rotated left");
+							rotation = (rotation + 1) % 360;
 							setVel(new BasicVector(new double[] {
 									Math.cos(Math.toRadians(rotation)),
 									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(0));
+									.multiply(speed));
 						}
-					});
+					}));
 		}
 	};
 
 	public void destroy() {
 		final Plane plane = this;
-		Timing.doNTimes(size, 50,
-				new Timing.NRunnable() {
-					public void run(int i) {
-						size -= 1;
-						if (size == 0) {
-							Planes.remove(plane);
-							Input.removeKeyboardable(plane);
-							Input.removeClickable(plane);
-							Physicals.remove(plane);
-							Drawables.remove(plane);
-						}
-					}
+		Timing.doNTimes(size, 50, new Timing.NRunnable() {
+			public void run(int i) {
+				size -= 1;
+				if (size == 0) {
+					SeprDSA.updateScore(score);
+					Planes.remove(plane);
+					Input.removeKeyboardable(plane);
+					Input.removeClickable(plane);
+					Physicals.remove(plane);
+					Drawables.remove(plane);
+				}
+			}
 		});
-//		for (int i = size; i > 0; i--) {
-//			size -= 1;
-//		}
-//		s.cancel();
-//		Planes.remove(this);
-//		Input.removeKeyboardable(this);
-//		Input.removeClickable(this);
-//		Physicals.remove(this);
-//		Drawables.remove(this);
+		// for (int i = size; i > 0; i--) {
+		// size -= 1;
+		// }
+		// s.cancel();
+		// Planes.remove(this);
+		// Input.removeKeyboardable(this);
+		// Input.removeClickable(this);
+		// Physicals.remove(this);
+		// Drawables.remove(this);
 	}
 
 	@Override
@@ -290,7 +299,6 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		// System.out.println(number);
 		endLine = pos;
 		lineExists = true;
-		overide = true;
 	}
 
 	public void clickUp(int button) {
@@ -301,8 +309,11 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
+		for (TaskCanceller t : taskList){
+			t.cancel();
+		}
+		taskList.clear();
 		setBearing((float) angle);
-		overide = false;
 	}
 
 	public void clickAway() {

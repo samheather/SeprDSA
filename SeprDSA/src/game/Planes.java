@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Planes {
@@ -9,7 +8,7 @@ public class Planes {
 	/** 
 	 * A limit to how many planes can be created at one time
 	 */
-	private static int maxplanenumb = 2;
+	private static int maxplanenumb = 4;
 	
 	/**
 	 * Creates a random number generator
