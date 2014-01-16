@@ -13,6 +13,9 @@ import game.Planes;
 import game.Sidemenu;
 import game.WayPoint;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -49,7 +52,7 @@ public class SeprDSA {
 		return entryExitPointList;
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
 		Drawables c = new Drawables();
 		MainMenu menu = new MainMenu();
 		menu.setVisible(true);
@@ -60,7 +63,8 @@ public class SeprDSA {
 			e.printStackTrace();
 		}
 		Random randomgen = new Random(System.currentTimeMillis());
-		Drawables.initialise(new Window(1024, 640), 1024, 640, menu.canvas);
+		Drawables.initialise(new Window(1024, 640), 1024, 640, menu.canvas, new File(
+				"default.xml").toURI().toURL());
 		Display.setTitle("Dat flying game");
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
@@ -82,7 +86,7 @@ public class SeprDSA {
 				10, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
-		for (Integer i = 0; i < wayPointNumber; i++) { // Random waypoints
+		for (Integer i = 5; i < wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(new BasicVector(new double[] {
 					(randomgen.nextDouble() - 0.5)
 							* (Display.getWidth() - pixelsFromEdge),
@@ -113,5 +117,4 @@ public class SeprDSA {
 			}
 		}
 	}
-
 }

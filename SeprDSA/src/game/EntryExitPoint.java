@@ -29,7 +29,7 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
-
+		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
 		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
