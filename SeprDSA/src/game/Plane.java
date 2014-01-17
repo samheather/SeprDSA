@@ -182,7 +182,7 @@ public class Plane implements Drawable, Physical, Clickable {
 			taskList.add(Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing - 360) % 360, 10,
 					new Timing.NRunnable() {
-						public void run(int i) {
+						public void run(int i) {test1
 							// System.out.println("rotated left long");
 							rotation = (rotation + 1) % 360;
 							setVel(new BasicVector(new double[] {

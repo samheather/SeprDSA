@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import game.EntryExitPoint;
 
 import org.junit.Test;
-import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
 public class EntryExitPointTest {
