@@ -20,7 +20,8 @@ public class WaypointTest {
 				"default.xml").toURI().toURL());
 		
 		WayPoint test1 = new WayPoint(new BasicVector(new double[] { 0, 0, 0 }), "1");
-		assertEquals("The test should return Waypoint1","Waypoint1",test1.toString());
+		System.out.print(test1.toString());
+		assertEquals("The test should return WayPoint1", "WayPoint1", test1.toString());
 	}
 
 
