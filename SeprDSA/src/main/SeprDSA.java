@@ -119,12 +119,7 @@ public class SeprDSA {
 		p.setBearing(0);
 		
 		while (true) {
-			timer2 = timer1;
-			timer1 = System.nanoTime();
-			double dtimer = Math.abs((timer1 - timer2) / 100000000.0);
-			dtimer = 0.1;
-			timer = dtimer;
-			engine.Timing.logic();
+			engine.timing.Timing.logic();
 			Input.logic();
 			Planes.updateTimer();
 			Physicals.logic();

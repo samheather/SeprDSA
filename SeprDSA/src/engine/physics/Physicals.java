@@ -1,6 +1,6 @@
 package engine.physics;
 
-import engine.Timing;
+import engine.timing.*;
 import game.EntryExitPoint;
 import game.Plane;
 import game.WayPoint;

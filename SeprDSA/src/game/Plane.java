@@ -24,8 +24,7 @@ import engine.input.Keyboardable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
-import engine.TaskCanceller;
-import engine.Timing;
+import engine.timing.*;
 
 import org.la4j.vector.dense.*;
 
