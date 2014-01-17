@@ -193,7 +193,7 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}, null);
+					});
 		} else if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing < newBearing) {
 			currTask = Timing.doNTimes(
@@ -207,7 +207,7 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}, null);
+					});
 		} else if (oldBearing > newBearing) {
 			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
@@ -220,7 +220,7 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}, null);
+					});
 		} else {
 			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
@@ -233,7 +233,7 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}, null);
+					});
 		}
 		
 	};

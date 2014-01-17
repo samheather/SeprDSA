@@ -12,7 +12,7 @@ class Task implements Comparable<Task> {
 	private double scheduled;
 	private int times;
 	private Timing.NRunnable does;
-	public TaskCanceller canceller;
+	private TaskCanceller canceller;
 
 	public Task(double interval, double scheduled, int times,
 			Timing.NRunnable does, TaskCanceller canceller) {
@@ -33,9 +33,9 @@ class Task implements Comparable<Task> {
 		return canceller.isCancelled();
 	}
 
-	public void doAgainIfRequired(TaskCanceller c) {
+	public void doAgainIfRequired() {
 		if (times > 1) {
-			Timing.doNTimes(times - 1, interval, does, c);
+			Timing.doNTimes(times - 1, interval, does, canceller);
 		}
 	}
 
