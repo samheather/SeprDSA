@@ -14,13 +14,15 @@ public class Timing {
 		public void run(int n);
 	}
 
-	public static TaskCanceller doIn(double milliseconds, NRunnable does) {
-		return doNTimes(1, milliseconds, does);
+	public static TaskCanceller doIn(double milliseconds, NRunnable does, TaskCanceller c) {
+		return doNTimes(1, milliseconds, does, c);
 	}
 
 	public static TaskCanceller doNTimes(int n, double milliseconds,
-			NRunnable does) {
-		TaskCanceller c = new TaskCanceller();
+			NRunnable does, TaskCanceller c) {
+		if (c == null){
+			c = new TaskCanceller();
+		}
 		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n,
 				does, c));
 		return c;
@@ -44,8 +46,9 @@ public class Timing {
 			if (tasks.peek().theTimeHasCome()) {
 				next = tasks.poll();
 				if (!next.isCancelled()) {
+					//System.out.println(next.isCancelled());
 					next.doOnce();
-					next.doAgainIfRequired();
+					next.doAgainIfRequired(next.canceller);
 				}
 			} else {
 				break;

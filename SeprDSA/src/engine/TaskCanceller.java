@@ -1,13 +1,19 @@
 package engine;
 
 public class TaskCanceller {
-	public boolean cancel = false;
+	public class Holder {
+		Holder() {
+			value = false;
+		}
+	    public boolean value;
+	}
+	public Holder cancel = new Holder();
 
 	public void cancel() {
-		cancel = true;
+		cancel.value = true;
 	}
 
 	public boolean isCancelled() {
-		return cancel;
+		return cancel.value;
 	}
 }

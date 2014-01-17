@@ -1,6 +1,8 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -51,7 +53,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
+	private TaskCanceller currTask;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint) {
@@ -173,7 +175,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 		//System.out.println((int) Math.abs(oldBearing - newBearing));
 		if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing > newBearing) {
-			taskList.add(Timing.doNTimes(
+			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing - 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -184,10 +186,10 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}));
+					}, null);
 		} else if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing < newBearing) {
-			taskList.add(Timing.doNTimes(
+			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing + 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -198,9 +200,9 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}));
+					}, null);
 		} else if (oldBearing > newBearing) {
-			taskList.add(Timing.doNTimes(
+			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -211,9 +213,9 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}));
+					}, null);
 		} else {
-			taskList.add(Timing.doNTimes(
+			currTask = Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -224,7 +226,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					}));
+					}, null);
 		}
 	};
 
@@ -242,7 +244,7 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 					Drawables.remove(plane);
 				}
 			}
-		});
+		}, currTask);
 	}
 
 	@Override
@@ -295,11 +297,9 @@ public class Plane implements Drawable, Keyboardable, Physical, Clickable {
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
 		
-		for (TaskCanceller t : taskList){
-			t.cancel();
-			System.out.println(t.cancel);
-		}
-		taskList.clear();
+		System.out.println(currTask.isCancelled());
+		currTask.cancel();
+		
 		setBearing((float) angle);
 	}
 

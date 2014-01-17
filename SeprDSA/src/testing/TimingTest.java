@@ -17,18 +17,20 @@ public class TimingTest {
 	
 	@Test
 	public void testLogic() {
-		tc1 = Timing.doIn(10000, new NRunnable() {
+		tc1 = Timing.doIn(51, new NRunnable() {
 			public void run (int n) {
 				System.out.println("fail");
+				tc2.cancel();
 			}
-		});
-		tc2 = Timing.doIn(20000, new NRunnable() {
+		}, null);
+		tc2 = Timing.doNTimes(10, 10, new NRunnable() {
 			public void run (int n) {
 				System.out.println("win");
+				//System.out.println(tc2.cancel.value);
 			}
-		});
-		tc1.cancel();
-		while((System.currentTimeMillis() - startTime) <= 40000) {
+		}, null);
+		//tc1.cancel();
+		while((System.currentTimeMillis() - startTime) <= 1000) {
 			Timing.logic();
 		}
 		
