@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import engine.Timing;
+
 public class Planes {
 	
 	/** 
@@ -59,12 +61,13 @@ public class Planes {
 	 * @param time
 	 * @throws InterruptedException
 	 */
-	public static void updateTimer(double time){
-		currTime += time;
-		if (currTime >= spawnThreshhold && planes.size() < maxplanenumb){
-			new FuturePlane(randomgen.nextInt(2000));
+	public static void updateTimer(){
+		if (Timing.timeSinceStart() >= spawnThreshhold && planes.size() < maxplanenumb){
+			System.out.println("Added plane");
+			FuturePlane tempFuturePlane = 
+					new FuturePlane(randomgen.nextInt(2000));
+			FuturePlanes.add(tempFuturePlane);
 			spawnThreshhold = 2000 + randomgen.nextInt(6000);
-			currTime = 0;
 		}
 	}
 	

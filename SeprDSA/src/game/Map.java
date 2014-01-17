@@ -28,8 +28,7 @@ public class Map implements Drawable {
 	 * What to draw when instances of Map are drawn.
 	 */
 	public Drawing draw() {
-		return new Sprite(Images.map_crop).translate(new BasicVector(
-				new double[] {-100, 0}));
+		return new Sprite(Images.map_crop);
 	}
 
 	/**

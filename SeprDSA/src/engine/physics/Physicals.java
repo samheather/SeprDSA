@@ -1,5 +1,6 @@
 package engine.physics;
 
+import engine.Timing;
 import game.EntryExitPoint;
 import game.Plane;
 import game.WayPoint;
@@ -20,13 +21,24 @@ public class Physicals {
 		physicals.remove(d);
 	}
 
-	public static ArrayList<Physical[]> logic(double time) {
+	public static ArrayList<Physical[]> logic() {
 		ArrayList<Physical[]> colliding = new ArrayList<Physical[]>();
+		double time = Timing.timeSinceLastFrame() / 1000;
 
 		for (int i = 0; i < physicals.size(); i++) {
 			Physical phys = physicals.get(i);
 			// Update physical object's positions
 			phys.setPos(phys.getPos().add((phys.getVel().multiply(time))));
+			//phys.setBearing(phys.getBearing() + ((float)(phys.rotVel() * time * (phys.targetBearing() - phys.getBearing()))));
+			/*
+			if((phys.targetBearing() - phys.getBearing()) == 0.0f) {
+				
+			} else if (phys.targetBearing() < phys.getBearing()) {
+				phys.setBearing((float)(-phys.rotVel() * time * * (phys.targetBearing() - phys.getBearing())));
+			} else {
+				phys.setBearing((float)(phys.rotVel() * time * 1000));
+			} */
+			
 
 			// This for loop will iterate all physicals to check for collisions
 			for (int j = 0; j < physicals.size(); j++) {
