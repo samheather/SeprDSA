@@ -7,23 +7,10 @@ import org.junit.Test;
 public class PlanesTest {
 
 	@Test
-	public void testAdd() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemove() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSize() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testUpdateTimer() {
-		fail("Not yet implemented");
+		game.Planes.updateTimer();
+		//assertNotNull("Checks if the futurePlane array is empty. Which it shouldn't be.",)
+		//fail("Not yet implemented");
 	}
 
 }
