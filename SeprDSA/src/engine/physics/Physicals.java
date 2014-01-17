@@ -29,16 +29,21 @@ public class Physicals {
 			Physical phys = physicals.get(i);
 			// Update physical object's positions
 			phys.setPos(phys.getPos().add((phys.getVel().multiply(time))));
-			//phys.setBearing(phys.getBearing() + ((float)(phys.rotVel() * time * (phys.targetBearing() - phys.getBearing()))));
-			/*
+			float sign = Math.signum(phys.targetBearing() - phys.getBearing());
+			if (Math.abs(phys.targetBearing() - phys.getBearing()) < (50 * phys.rotVel() * time)) {
+                                phys.setBearing(phys.targetBearing());
+                        } else {
+				phys.setBearing(phys.getBearing() + ((float)(phys.rotVel() * time * 50 * Math.signum(((Math.abs(phys.targetBearing() - phys.getBearing()) % 360) < 180) ? (phys.targetBearing() - phys.getBearing()) : (phys.getBearing() - phys.targetBearing())) )));
+			}
+			/*if (Math.signum(phys.targetBearing() - phys.getBearing()) != sign) {
+				phys.setBearing(phys.targetBearing());
+			}
 			if((phys.targetBearing() - phys.getBearing()) == 0.0f) {
-				
 			} else if (phys.targetBearing() < phys.getBearing()) {
 				phys.setBearing((float)(-phys.rotVel() * time * * (phys.targetBearing() - phys.getBearing())));
 			} else {
 				phys.setBearing((float)(phys.rotVel() * time * 1000));
 			} */
-			
 
 			// This for loop will iterate all physicals to check for collisions
 			for (int j = 0; j < physicals.size(); j++) {

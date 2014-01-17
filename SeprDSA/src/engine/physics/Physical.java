@@ -52,4 +52,9 @@ public interface Physical {
 	 * @return
 	 */
 	float getBearing();
+	
+	public void setBearing(final float newBearing);
+	
+	float targetBearing();
+	float rotVel();
 }

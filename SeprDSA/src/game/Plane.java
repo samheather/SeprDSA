@@ -1,8 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -52,7 +50,7 @@ public class Plane implements Drawable, Physical, Clickable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private TaskCanceller currTask;
+	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint) {
@@ -171,17 +169,17 @@ public class Plane implements Drawable, Physical, Clickable {
 	};
 
 	public void setBearing(final float newBearing) {
-//		rotation = newBearing;
-//		setVel(new BasicVector(new double[] {
-//				Math.cos(Math.toRadians(rotation)),
-//				Math.sin(Math.toRadians(rotation)), 0 })
-//				.multiply(speed));
-		
+		rotation = newBearing % 360;
+		setVel(new BasicVector(new double[] {
+				Math.cos(Math.toRadians(rotation)),
+				Math.sin(Math.toRadians(rotation)), 0 })
+				.multiply(speed));
+		/*
 		final float oldBearing = getBearing();
 		//System.out.println((int) Math.abs(oldBearing - newBearing));
 		if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing > newBearing) {
-			currTask = Timing.doNTimes(
+			taskList.add(Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing - 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -192,10 +190,10 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					});
+					}));
 		} else if ((int) Math.abs(oldBearing - newBearing) > 180
 				&& oldBearing < newBearing) {
-			currTask = Timing.doNTimes(
+			taskList.add(Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing + 360) % 360, 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -206,9 +204,9 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					});
+					}));
 		} else if (oldBearing > newBearing) {
-			currTask = Timing.doNTimes(
+			taskList.add(Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -219,9 +217,9 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					});
+					}));
 		} else {
-			currTask = Timing.doNTimes(
+			taskList.add(Timing.doNTimes(
 					(int) Math.abs(oldBearing - newBearing), 10,
 					new Timing.NRunnable() {
 						public void run(int i) {
@@ -232,9 +230,9 @@ public class Plane implements Drawable, Physical, Clickable {
 									Math.sin(Math.toRadians(rotation)), 0 })
 									.multiply(speed));
 						}
-					});
+					}));
 		}
-		
+		*/
 	};
 
 	public void destroy() {
@@ -251,7 +249,7 @@ public class Plane implements Drawable, Physical, Clickable {
 					Drawables.remove(plane);
 				}
 			}
-		}, currTask);
+		});
 	}
 /*
 	@Override
@@ -303,11 +301,14 @@ public class Plane implements Drawable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
-		
-		System.out.println(currTask.isCancelled());
-		currTask.cancel();
-		
-		setBearing((float) angle);
+		/*
+		for (TaskCanceller t : taskList){
+			t.cancel();
+			System.out.println(t.cancel);
+		}
+		taskList.clear();
+		//setBearing((float) angle); */
+		targetBearing = angle;
 	}
 
 	public void clickAway() {
@@ -317,5 +318,17 @@ public class Plane implements Drawable, Physical, Clickable {
 	public void move(Vector newPos) {
 		// System.out.println("Move");
 		endLine = newPos;
+	}
+	
+	private float targetBearing = 0.0f;
+
+	@Override
+	public float targetBearing() {
+		return targetBearing;
+	}
+
+	@Override
+	public float rotVel() {
+		return 1.0f;
 	}
 }
