@@ -38,8 +38,7 @@ public class Images {
 	 * Example call: Creates Texture with name map, where texture is generated
 	 * from image file map.png.
 	 */
-	public static Texture map = load("map.png");
-	public static Texture map_crop = load("new_map.png");
+	public static Texture map = load("new_map.png");
 	/**
 	 * Array of plane textures (to save creating multiple un-ordered objects.
 	 */
@@ -49,7 +48,5 @@ public class Images {
 		load("many_planes/nPlane3.png") };
 	public static Texture waypoints[] = new Texture[] { 
 		load("checkpoint.png")};
-	public static Texture backgroundGradient = load("gradient.png");
 	public static Texture entryExitPoint = load("exit.png");
-	public static Texture homeButton = load("homeButton.png");
 }
