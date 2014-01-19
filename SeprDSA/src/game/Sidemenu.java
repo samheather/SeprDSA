@@ -19,9 +19,6 @@ public class Sidemenu extends Widget {
 	private Text[] upcomingFlights = new Text[5];
 	private Button exitGameButton;
 	private Label[] labelArray = new Label[6];
-	private Label changeAltitudeLabel;
-	private DialogLayout helloPanel;
-	private EditField newAltitudeField;
 	public int startOfSideMenuX = 0;
 	public static final int width = 800;
 
@@ -46,27 +43,6 @@ public class Sidemenu extends Widget {
 			labelArray[i].setText("Will auto-populate from Planes Array");
 			add(labelArray[i]);
 		}
-
-		changeAltitudeLabel = new Label();
-		changeAltitudeLabel.setText("New Altitude:");
-		add(changeAltitudeLabel);
-	}
-
-	private void setupTextField() {
-		newAltitudeField = new EditField();
-		add(newAltitudeField);
-	}
-
-	private void createHelloPanel() {
-		// helloPanel = new DialogLayout();
-		// helloPanel.setTheme("panel");
-
-		System.out.println("This is a stub");
-
-		// helloPanel.setHorizontalGroup(helloPanel.createParallelGroup(label));
-		// helloPanel.setVerticalGroup(helloPanel.createParallelGroup(label));
-		// helloPanel.setVisible(true);
-		// add(helloPanel);
 	}
 
 	protected void layout() {
@@ -76,14 +52,6 @@ public class Sidemenu extends Widget {
 			labelArray[i].setPosition(startOfSideMenuX, 110 + 20 * i);
 			labelArray[i].setSize(200, 20);
 		}
-
-		int altitudeControls = 360;
-		changeAltitudeLabel.setPosition(startOfSideMenuX, altitudeControls);
-		changeAltitudeLabel.setSize(200, 20);
-
-		newAltitudeField.setPosition(startOfSideMenuX + 50,
-				altitudeControls + 25);
-		newAltitudeField.setSize(100, 30);
 
 		exitGameButton.setPosition(startOfSideMenuX + 35, 554);
 		exitGameButton.setSize(130, 45);
@@ -96,7 +64,6 @@ public class Sidemenu extends Widget {
 		createButton();
 		setupLabels();
 		setupTextField();
-		// createHelloPanel();
 
 		labelArray[0].setText("Number - Entry - Time");
 	}
