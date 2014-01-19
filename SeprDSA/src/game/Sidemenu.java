@@ -84,30 +84,4 @@ public class Sidemenu extends Widget {
 
 		}
 	}
-	/*
-	 * @Override public double getZ() { // TODO Auto-generated method stub
-	 * return 0; }
-	 * 
-	 * @Override public int compareTo(Drawable o) { // TODO Auto-generated
-	 * method stub return 0; }
-	 * 
-	 * @Override public void clickDown(int button, Vector pos) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void clickUp(int button) { // TODO Auto-generated method
-	 * stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void clickAway() { // TODO Auto-generated method stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void move(Vector newPos) { // TODO Auto-generated method
-	 * stub
-	 * 
-	 * }
-	 */
 }
