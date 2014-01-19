@@ -10,17 +10,41 @@ public class LeaderboardTest {
 
 	@Test
 	public void testAddLeaderBoardEntries() {
-		LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
-		for (int i = 0; i < leaderboardEntries.length; i++) {
-			leaderboardEntries[i] = new LeaderboardEntry();
-		}
+		LeaderboardEntry[] testLeaderboardEntries1 = new LeaderboardEntry[5];
+		Leaderboard testLB = new Leaderboard();
 		
-		
-	}
-
-	@Test
-	public void testAddLeaderboardEntry() {
-		fail("Not yet implemented");
+		for (int i = 0; i < testLeaderboardEntries1.length; i++) {
+			testLeaderboardEntries1[i] = new LeaderboardEntry();
+		}	
+			
+			testLeaderboardEntries1[0].setName("d");
+			testLeaderboardEntries1[0].setScore(45);
+			testLeaderboardEntries1[1].setName("b");
+			testLeaderboardEntries1[1].setScore(44);
+			testLeaderboardEntries1[2].setName("a");
+			testLeaderboardEntries1[2].setScore(43);
+			testLeaderboardEntries1[3].setName("c");
+			testLeaderboardEntries1[3].setScore(42);
+			testLeaderboardEntries1[4].setName("e");
+			testLeaderboardEntries1[4].setScore(41);
+			
+			
+			testLB.addLeaderBoardEntries();
+			
+			testLB.printLeaderboard(testLB.leaderboardEntries);
+			testLB.printLeaderboard(testLeaderboardEntries1);
+			
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[0].getName(), testLB.leaderboardEntries[0].getName());
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[0].getScore(), testLB.leaderboardEntries[0].getScore(), 0.001);
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[1].getName(), testLB.leaderboardEntries[1].getName());
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[1].getScore(), testLB.leaderboardEntries[1].getScore(), 0.001);
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[2].getName(), testLB.leaderboardEntries[2].getName());
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[2].getScore(), testLB.leaderboardEntries[2].getScore(), 0.001);
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[3].getName(), testLB.leaderboardEntries[3].getName());
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[3].getScore(), testLB.leaderboardEntries[3].getScore(), 0.001);
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[4].getName(), testLB.leaderboardEntries[4].getName());
+			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[4].getScore(), testLB.leaderboardEntries[4].getScore(), 0.001);
+			
 	}
 
 }
