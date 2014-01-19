@@ -42,6 +42,7 @@ public class Plane implements Drawable, Physical, Clickable {
 	private int size = 60;
 	private String number;
 	private Text numbertext;
+	private Text altitudeText;
 	private int speed = 15 + randomgen.nextInt(15);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
@@ -58,6 +59,7 @@ public class Plane implements Drawable, Physical, Clickable {
 		// position = enterPoint.getPos();
 		setPos(startPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
+		altitudeText = new Text(String.valueOf(z), Fonts.planeFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
@@ -126,6 +128,14 @@ public class Plane implements Drawable, Physical, Clickable {
 								.alpha(0.75)
 								.translate(
 										new BasicVector(new double[] { 0, -40 })))
+				.overlay(
+						altitudeText
+								.red(1.0)
+								.blue(1.0)
+								.green(1.0)
+								.alpha(0.75)
+								.translate(
+									new BasicVector(new double[] { 0, -60 })))
 				.translate(new BasicVector(new double[] { x, y }))
 				.overlay(
 						(lineExists ? new Line(getPos(), endLine)

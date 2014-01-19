@@ -22,7 +22,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private double radius = 200;
-	private int size = 16; // Size in pixels (Square)
+	private int size = 25; // Size in pixels (Square)
 	private int number;
 
 	@Override
