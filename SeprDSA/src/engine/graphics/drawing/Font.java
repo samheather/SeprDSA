@@ -12,13 +12,19 @@ import engine.graphics.Drawables;
 
 /**
  * Represents a font, used for fast text drawing. Caches a rendering of every
- * ascii character on an OpenGL texture so that they can be drawn to screen
- * quickly.
+ * printable ascii character on an OpenGL texture so that they can be drawn to
+ * screen quickly.
  */
 public class Font extends java.awt.Font {
 
+	/* **** REMEMBER TO REGENERATE THIS **** */
 	private static final long serialVersionUID = -5891137966186672170L;
 
+	/*
+	 * These constructors mimic the constructors of java.awt.Font. They call the
+	 * superconstructor with their arguments and then call buildcache, which
+	 * creates the render cache of the font
+	 */
 	public Font(java.awt.Font font) {
 		super(font);
 		buildCache();
@@ -35,9 +41,23 @@ public class Font extends java.awt.Font {
 		buildCache();
 	}
 
+	/* The render cache */
 	private Texture cache;
+
+	/*
+	 * This stores the x positions of each character in the cache texture.
+	 * charOffset[i+1] will give the x position (in the cache texture) of the
+	 * rightmost part of the character with the ascii code i + 32. charOffset
+	 * [0] is 0.
+	 */
 	private int charOffsets[];
 
+	/*
+	 * This derives a graphics2d object from a bufferedimage object. Its main
+	 * purpose is to set the current font of the graphics2d object to this, and
+	 * set up rendering hints to give the highest quality rendering possible,
+	 * since we do not need to render quickly.
+	 */
 	private Graphics2D setupGraphics(BufferedImage image) {
 		Graphics2D graphics = image.createGraphics();
 		graphics.setFont(this);
@@ -72,11 +92,27 @@ public class Font extends java.awt.Font {
 		return graphics;
 	}
 
+	/* The descent, ascent and leading of the font in pixels. */
 	private int descent;
 	private int ascent;
 	private int leading;
 
+	public int ascent() {
+		return ascent;
+	}
+
+	public int descent() {
+		return descent;
+	}
+
+	public int leading() {
+		return leading;
+	}
+
+	/* Build the render cache */
 	private void buildCache() {
+		
+		/* There are 95 printable ascii characters */
 		charOffsets = new int[96];
 		charOffsets[0] = 0;
 
