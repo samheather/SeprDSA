@@ -38,6 +38,19 @@ public class Input {
 		clickables.remove(x);
 	}
 
+	private static List<Scrollable> scrollables;
+	static {
+		scrollables = new ArrayList<Scrollable>();
+	}
+
+	public static void addScrollable(Scrollable x) {
+		scrollables.add(x);
+	}
+
+	public static void removeScrollable(Scrollable x) {
+		scrollables.remove(x);
+	}
+
 	private static ArrayList<MouseEvent> mouseEvents = new ArrayList<MouseEvent>();
 
 	public static ArrayList<MouseEvent> mouseEvents() {
@@ -93,8 +106,16 @@ public class Input {
 			Vector pos = Drawables.windowCoords(new BasicVector(new double[] {
 					Mouse.getEventX(), Mouse.getEventY() }));
 			if ((button = Mouse.getEventButton()) == -1) {
-				if (current != null) {
-					current.move(pos);
+
+				int scroll = Mouse.getEventDWheel();
+				if (scroll != 0) {
+					for (Scrollable i : scrollables) {
+						i.scroll(scroll);
+					}
+				} else {
+					if (current != null) {
+						current.move(pos);
+					}
 				}
 			} else {
 				boolean down = Mouse.getEventButtonState();
