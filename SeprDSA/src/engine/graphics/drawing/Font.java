@@ -10,9 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.Drawables;
 
+/**
+ * Represents a font, used for fast text drawing. Caches a rendering of every
+ * ascii character on an OpenGL texture so that they can be drawn to screen
+ * quickly.
+ */
 public class Font extends java.awt.Font {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5891137966186672170L;
 
 	public Font(java.awt.Font font) {
 		super(font);
@@ -30,8 +35,8 @@ public class Font extends java.awt.Font {
 		buildCache();
 	}
 
-	private int charOffsets[];
 	private Texture cache;
+	private int charOffsets[];
 
 	private Graphics2D setupGraphics(BufferedImage image) {
 		Graphics2D graphics = image.createGraphics();
