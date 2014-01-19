@@ -8,8 +8,6 @@ import java.text.AttributedCharacterIterator;
 import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
-import engine.graphics.Drawables;
-
 /**
  * Represents a font, used for fast text drawing. Caches a rendering of every
  * printable ascii character on an OpenGL texture so that they can be drawn to
@@ -97,14 +95,23 @@ public class Font extends java.awt.Font {
 	private int ascent;
 	private int leading;
 
+	/**
+	 * @return The ascent of this font
+	 */
 	public int ascent() {
 		return ascent;
 	}
 
+	/**
+	 * @return The descent of this font
+	 */
 	public int descent() {
 		return descent;
 	}
 
+	/**
+	 * @return The leading of this font
+	 */
 	public int leading() {
 		return leading;
 	}
@@ -116,41 +123,78 @@ public class Font extends java.awt.Font {
 		charOffsets = new int[96];
 		charOffsets[0] = 0;
 
+		/*
+		 * We create this image to get the statistics of rendered characters for
+		 * this font
+		 */
 		BufferedImage image = new BufferedImage(1, 1,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics = setupGraphics(image);
 
+		/* Get descent, ascent and leading */
 		FontMetrics metrics = graphics.getFontMetrics();
 		descent = metrics.getMaxDescent();
 		ascent = metrics.getMaxAscent();
 		leading = metrics.getLeading();
 
+		/* Set charOffsets by getting rendered character widths in pixels */
 		for (int i = 1; i < 96; i++) {
 			char c = (char) (i + 31);
 			charOffsets[i] = charOffsets[i - 1] + metrics.charWidth(c);
 		}
 
+		/*
+		 * Create the actual image that will be used for the cache. Use
+		 * charOffsets[95] to get the position of the rightmost part of the last
+		 * character, and thus the required width of the image
+		 */
 		image = new BufferedImage(charOffsets[95], descent + ascent,
 				BufferedImage.TYPE_INT_ARGB);
 		graphics = setupGraphics(image);
 
+		/* Draw each printable ascii character onto the image */
 		for (int i = 0; i < 95; i++) {
 			String c = new String(new char[] { (char) (i + 32) });
 			graphics.drawString(c, charOffsets[i], ascent);
 		}
 
+		/* Create the texture */
 		cache = new Texture(image);
-
 	}
 
+	/**
+	 * Represents a text alignment. If text is drawn at some position (x, y),
+	 * and the alignment is CENTRED, the middle of the text will be at (x, y).
+	 * If the alignment is LEFT, the leftmost part of the text will be at (x,
+	 * y).
+	 */
 	public enum Alignment {
 		CENTRED, LEFT
 	}
 
+	/**
+	 * Renders str onto the centre of the screen with this font, and alignment
+	 * a.
+	 * 
+	 * @param str
+	 *            The string to render
+	 * @param a
+	 *            The alignment that str is to be drawn with
+	 */
 	public void drawString(String str, Alignment a) {
+
+		/* Store the current viewmodel matrix because we are going to mess it up */
 		GL11.glPushMatrix();
 
+		/* We need to use the cache texture */
 		cache.bind();
+
+		/*
+		 * If the alignment is centred, calculate how long the string will be,
+		 * and translate us to where the leftmost part of the text is. If the
+		 * alignment is left, we are already at the place where the text will
+		 * start, so we do nothing.
+		 */
 		if (a == Alignment.CENTRED) {
 			int length = 0;
 			for (int i = 0; i < str.length(); i++) {
@@ -159,20 +203,31 @@ public class Font extends java.awt.Font {
 			}
 			GL11.glTranslated(-(length / 2), 0, 0);
 		}
+
+		/* For each character in str */
 		for (int i = 0; i < str.length(); i++) {
+
+			/*
+			 * Draw the character, using charOffsets, descent and ascent to get
+			 * its dimensions
+			 */
 			GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
 
+			/* The bottom left vertex */
 			GL11.glTexCoord2d(charOffsets[str.charAt(i) - 32], 0);
 			GL11.glVertex2d(0, -descent);
 
+			/* The bottom right vertex */
 			GL11.glTexCoord2d(charOffsets[str.charAt(i) - 31], 0);
 			GL11.glVertex2d(
 					charOffsets[str.charAt(i) - 31]
 							- charOffsets[str.charAt(i) - 32], -descent);
 
+			/* The top left vertex */
 			GL11.glTexCoord2d(charOffsets[str.charAt(i) - 32], descent + ascent);
 			GL11.glVertex2d(0, ascent);
 
+			/* The top right vertex */
 			GL11.glTexCoord2d(charOffsets[str.charAt(i) - 31], descent + ascent);
 			GL11.glVertex2d(
 					charOffsets[str.charAt(i) - 31]
@@ -180,11 +235,14 @@ public class Font extends java.awt.Font {
 
 			GL11.glEnd();
 
+			/* Shift to the position of the next character */
 			GL11.glTranslated(
 					charOffsets[str.charAt(i) - 31]
 							- charOffsets[str.charAt(i) - 32], 0, 0);
 
 		}
+
+		/* Restore the old matrix */
 		GL11.glPopMatrix();
 	}
 
