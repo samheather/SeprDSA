@@ -111,14 +111,12 @@ public class Font extends java.awt.Font {
 
 	/* Build the render cache */
 	private void buildCache() {
-		
+
 		/* There are 95 printable ascii characters */
 		charOffsets = new int[96];
 		charOffsets[0] = 0;
 
-		double x = Math.ceil(Drawables.virtualDisplaySize().get(0));
-		double y = Math.ceil(Drawables.virtualDisplaySize().get(1));
-		BufferedImage image = new BufferedImage((int) x, (int) y,
+		BufferedImage image = new BufferedImage(1, 1,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics = setupGraphics(image);
 
