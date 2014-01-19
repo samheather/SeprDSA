@@ -1,5 +1,6 @@
 package main;
 import engine.graphics.Drawables;
+import engine.graphics.display.Fullscreen;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
@@ -88,7 +89,7 @@ public class SeprDSA {
 	}
 	
 	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
+		Drawables.initialise(new Fullscreen(), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);

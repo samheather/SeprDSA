@@ -38,7 +38,7 @@ public class Images {
 	 * Example call: Creates Texture with name map, where texture is generated
 	 * from image file map.png.
 	 */
-	public static Texture map = load("new_map.png");
+	public static Texture map = load("new_map_4K.png");
 	/**
 	 * Array of plane textures (to save creating multiple un-ordered objects.
 	 */
