@@ -45,7 +45,8 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private Text numbertext;
 	private Text altitudeText;
 	private Text nextWaypointText;
-	private int speed = 15 + randomgen.nextInt(15);
+	private double baseSpeed = ((15.0/640.0) * Drawables.virtualDisplaySize().get(1));
+	private int speed = (int)(baseSpeed + randomgen.nextDouble() * baseSpeed);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
 	private int score;

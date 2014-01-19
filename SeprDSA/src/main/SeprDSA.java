@@ -75,7 +75,7 @@ public class SeprDSA {
 						randomgen.nextDouble() * 20 });
 
 		for (WayPoint waypoint : wayPointList) {
-			if (getMagnitude(waypoint.getPos(), testVector) < 100.0f) {
+			if (getMagnitude(waypoint.getPos(), testVector) < 400.0f) {
 				isValid = false;
 			}
 		}
