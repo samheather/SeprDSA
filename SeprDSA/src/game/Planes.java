@@ -66,7 +66,7 @@ public class Planes {
 	 * @throws InterruptedException
 	 */
 	public static void updateTimer() {
-		if (FuturePlanes.size() == 0) {
+		if (FuturePlanes.size() == 0 && planes.size() < maxplanenumb) {
 			FuturePlane tempFuturePlane = new FuturePlane(randomgen.nextInt(2000));
 			FuturePlanes.add(tempFuturePlane);
 		} else {
