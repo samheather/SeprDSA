@@ -9,7 +9,6 @@ public abstract class Affine extends UnaryCombinator {
 		super(arg);
 	}
 
-
 	protected abstract void transform();
 
 	public void render() {

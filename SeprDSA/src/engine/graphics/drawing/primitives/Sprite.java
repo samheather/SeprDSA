@@ -1,6 +1,5 @@
 package engine.graphics.drawing.primitives;
 
-
 import org.la4j.vector.Vector;
 import org.lwjgl.opengl.GL11;
 
@@ -14,7 +13,6 @@ public class Sprite extends Drawing {
 		this.texture = texture;
 	}
 
-	
 	public void render() {
 		Vector size = texture.size();
 		texture.bind();
@@ -41,7 +39,7 @@ public class Sprite extends Drawing {
 	@Override
 	public boolean hit(Vector pos) {
 		Vector size = texture.size();
-		return     (pos.get(0) > (-size.get(0) / 2))
+		return (pos.get(0) > (-size.get(0) / 2))
 				&& (pos.get(0) < (size.get(0) / 2))
 				&& (pos.get(1) > (-size.get(1) / 2))
 				&& (pos.get(1) < (size.get(1) / 2));

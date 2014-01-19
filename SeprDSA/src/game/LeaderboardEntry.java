@@ -1,18 +1,20 @@
 package game;
 
 /**
- * LeaderboardEntry - represents a single entry in the leaderboard, with 
- * @param String name, and double score.  
+ * LeaderboardEntry - represents a single entry in the leaderboard, with
+ * 
+ * @param String
+ *            name, and double score.
  */
 
 public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 
 	/**
-	* Name of person in leaderboard
+	 * Name of person in leaderboard
 	 */
 	private String name;
 	/**
-	 * Score of this person. 
+	 * Score of this person.
 	 */
 	private double score;
 
@@ -25,7 +27,9 @@ public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 
 	/**
 	 * LeaderboardEntry constructor
-	 * @param String name, double score
+	 * 
+	 * @param String
+	 *            name, double score
 	 */
 	public LeaderboardEntry(String name, double score) {
 		this.name = name;
@@ -34,6 +38,7 @@ public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 
 	/**
 	 * Accessor for score
+	 * 
 	 * @param double score
 	 */
 	public double getScore() {
@@ -42,7 +47,9 @@ public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 
 	/**
 	 * Accessor for Name
-	 * @param String name
+	 * 
+	 * @param String
+	 *            name
 	 */
 	public String getName() {
 		return name;
@@ -64,6 +71,7 @@ public class LeaderboardEntry implements Comparable<LeaderboardEntry> {
 
 	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(LeaderboardEntry other) {

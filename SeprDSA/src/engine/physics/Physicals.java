@@ -30,20 +30,25 @@ public class Physicals {
 			// Update physical object's positions
 			phys.setPos(phys.getPos().add((phys.getVel().multiply(time))));
 			float sign = Math.signum(phys.targetBearing() - phys.getBearing());
-			if (Math.abs(phys.targetBearing() - phys.getBearing()) < (50 * phys.rotVel() * time)) {
-                                phys.setBearing(phys.targetBearing());
-                        } else {
-				phys.setBearing(phys.getBearing() + ((float)(phys.rotVel() * time * 50 * Math.signum(((Math.abs(phys.targetBearing() - phys.getBearing()) % 360) < 180) ? (phys.targetBearing() - phys.getBearing()) : (phys.getBearing() - phys.targetBearing())) )));
-			}
-			/*if (Math.signum(phys.targetBearing() - phys.getBearing()) != sign) {
+			if (Math.abs(phys.targetBearing() - phys.getBearing()) < (50 * phys
+					.rotVel() * time)) {
 				phys.setBearing(phys.targetBearing());
-			}
-			if((phys.targetBearing() - phys.getBearing()) == 0.0f) {
-			} else if (phys.targetBearing() < phys.getBearing()) {
-				phys.setBearing((float)(-phys.rotVel() * time * * (phys.targetBearing() - phys.getBearing())));
 			} else {
-				phys.setBearing((float)(phys.rotVel() * time * 1000));
-			} */
+				phys.setBearing(phys.getBearing()
+						+ ((float) (phys.rotVel() * time * 50 * Math.signum(((Math
+								.abs(phys.targetBearing() - phys.getBearing()) % 360) < 180) ? (phys
+								.targetBearing() - phys.getBearing()) : (phys
+								.getBearing() - phys.targetBearing())))));
+			}
+			/*
+			 * if (Math.signum(phys.targetBearing() - phys.getBearing()) !=
+			 * sign) { phys.setBearing(phys.targetBearing()); }
+			 * if((phys.targetBearing() - phys.getBearing()) == 0.0f) { } else
+			 * if (phys.targetBearing() < phys.getBearing()) {
+			 * phys.setBearing((float)(-phys.rotVel() * time * *
+			 * (phys.targetBearing() - phys.getBearing()))); } else {
+			 * phys.setBearing((float)(phys.rotVel() * time * 1000)); }
+			 */
 
 			// This for loop will iterate all physicals to check for collisions
 			for (int j = 0; j < physicals.size(); j++) {
@@ -58,16 +63,21 @@ public class Physicals {
 			}
 		}
 		// System.out.println(colliding);
-		if (colliding.size() > 0){
+		if (colliding.size() > 0) {
 			for (Physical[] physicalPair : colliding) {
-				if (physicalPair[0] instanceof Plane){
-					if ((physicalPair[1] instanceof WayPoint) && physicalPair[1] == ((Plane)physicalPair[0]).getNextWayPoint()){
+				if (physicalPair[0] instanceof Plane) {
+					if ((physicalPair[1] instanceof WayPoint)
+							&& physicalPair[1] == ((Plane) physicalPair[0])
+									.getNextWayPoint()) {
 						// plane with waypoint collision
-						((Plane)physicalPair[0]).updateWaypoints();
-					}else if(physicalPair[1] instanceof EntryExitPoint && ((Plane)physicalPair[0]).getWayPoints().size() == 0  && physicalPair[1] == ((Plane)physicalPair[0]).getExitPoint()){
+						((Plane) physicalPair[0]).updateWaypoints();
+					} else if (physicalPair[1] instanceof EntryExitPoint
+							&& ((Plane) physicalPair[0]).getWayPoints().size() == 0
+							&& physicalPair[1] == ((Plane) physicalPair[0])
+									.getExitPoint()) {
 						// plane with entryexit collision
-						((Plane)physicalPair[0]).destroy();
-					}else if(physicalPair[1] instanceof Plane){
+						((Plane) physicalPair[0]).destroy();
+					} else if (physicalPair[1] instanceof Plane) {
 						// plane with plane collision
 						// CLEANUP AND PUT BACK TO MAIN MENU
 					}

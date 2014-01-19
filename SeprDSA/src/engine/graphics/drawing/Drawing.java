@@ -9,12 +9,12 @@ import engine.graphics.drawing.combinators.Rotate;
 import engine.graphics.drawing.combinators.Scale;
 import engine.graphics.drawing.combinators.Translate;
 
-
 public abstract class Drawing {
 	public abstract void render();
 
 	/**
 	 * Scales a drawing by a Vector amount.
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -24,6 +24,7 @@ public abstract class Drawing {
 
 	/**
 	 * Scales a drawing by a scalar amount.
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -33,6 +34,7 @@ public abstract class Drawing {
 
 	/**
 	 * Rotates a drawing anti-clockwise by amount in degrees.
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -42,6 +44,7 @@ public abstract class Drawing {
 
 	/**
 	 * Translates a drawing by vector.
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -51,6 +54,7 @@ public abstract class Drawing {
 
 	/**
 	 * Changes the colour of a drawing by an RGBa Vector.
+	 * 
 	 * @param colour
 	 * @return
 	 */
@@ -60,6 +64,7 @@ public abstract class Drawing {
 
 	/**
 	 * Sets the red amount of a drawing (range: 0<x<1).
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -69,6 +74,7 @@ public abstract class Drawing {
 
 	/**
 	 * Sets the green amount of a drawing (range: 0<x<1).
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -78,6 +84,7 @@ public abstract class Drawing {
 
 	/**
 	 * Sets the blue amount of a drawing (range: 0<x<1).
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -86,8 +93,9 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Sets the alpha amount (transparency, 1 = opaque, 0 = transparent)
-	 * of a drawing.
+	 * Sets the alpha amount (transparency, 1 = opaque, 0 = transparent) of a
+	 * drawing.
+	 * 
 	 * @param amount
 	 * @return
 	 */
@@ -97,15 +105,17 @@ public abstract class Drawing {
 
 	/**
 	 * Overlays a drawing over the top of another drawing.
+	 * 
 	 * @param top
 	 * @return
 	 */
 	public Drawing overlay(Drawing top) {
 		return new Overlay(this, top);
 	}
-	
+
 	/**
 	 * Tells you whether Vector pos collides with the drawing.
+	 * 
 	 * @param pos
 	 * @return
 	 */

@@ -8,6 +8,7 @@ import engine.graphics.drawing.primitives.Sprite;
 
 /**
  * Class for the map image to be drawn.
+ * 
  * @author sbh514
  */
 

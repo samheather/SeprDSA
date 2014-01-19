@@ -42,7 +42,7 @@ class Task implements Comparable<Task> {
 	public void doOnce() {
 		does.run(times);
 	}
-	
+
 	public boolean theTimeHasCome() {
 		return scheduled < Timing.timeSinceStart();
 	}

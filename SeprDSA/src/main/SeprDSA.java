@@ -1,4 +1,5 @@
 package main;
+
 import engine.graphics.Drawables;
 import engine.graphics.display.Fullscreen;
 import engine.graphics.display.Window;
@@ -26,17 +27,13 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.openal.SoundStore;
 
-
-
-
 public class SeprDSA {
 
-	
 	public static long timer1 = System.nanoTime();
 	public static long timer2 = System.nanoTime();
 	private static int pixelsFromEdge = 100;
 	private static int entryExitPointNumber = 5; // not including runway
-	private static int wayPointNumber = 10; 
+	private static int wayPointNumber = 10;
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
 	public static double timer;
@@ -44,39 +41,40 @@ public class SeprDSA {
 	private static Random randomgen = new Random();
 	public Plane selectedPlane;
 	/**
-	 *Initialise leaderboard here so it can be accessed globally
+	 * Initialise leaderboard here so it can be accessed globally
 	 */
 	public static Leaderboard l = new Leaderboard();
-	
-	public static ArrayList<WayPoint> getWayPoints(){
+
+	public static ArrayList<WayPoint> getWayPoints() {
 		return wayPointList;
 	}
-	
-	public static ArrayList<EntryExitPoint> getEntryExitPoints(){
+
+	public static ArrayList<EntryExitPoint> getEntryExitPoints() {
 		return entryExitPointList;
 	}
-	
-	public static void updateScore(int scoreToAdd){
+
+	public static void updateScore(int scoreToAdd) {
 		score += scoreToAdd;
 		System.out.println(score);
 	}
-	
-	public static float getMagnitude(Vector vecA, Vector vecB){
+
+	public static float getMagnitude(Vector vecA, Vector vecB) {
 		Vector vecC = vecA.subtract(vecB);
-		return (float) Math.sqrt(Math.pow(vecC.get(0), 2) + Math.pow(vecC.get(1), 2) + Math.pow(vecC.get(2), 2));
+		return (float) Math.sqrt(Math.pow(vecC.get(0), 2)
+				+ Math.pow(vecC.get(1), 2) + Math.pow(vecC.get(2), 2));
 	}
-	
+
 	public static Vector getWayPointPos(int counter) {
 		boolean isValid = true;
 		BasicVector testVector = new BasicVector(new double[] {
 				(randomgen.nextDouble() - 0.5)
-				* (Display.getWidth() - pixelsFromEdge),
-		(randomgen.nextDouble() - 0.5)
-				* (Display.getHeight() - pixelsFromEdge),
-		randomgen.nextDouble() * 20 });
-		
-		for (WayPoint waypoint : wayPointList){
-			if (getMagnitude(waypoint.getPos(),testVector) < 200.0f){
+						* (Display.getWidth() - pixelsFromEdge),
+				(randomgen.nextDouble() - 0.5)
+						* (Display.getHeight() - pixelsFromEdge),
+				randomgen.nextDouble() * 20 });
+
+		for (WayPoint waypoint : wayPointList) {
+			if (getMagnitude(waypoint.getPos(), testVector) < 200.0f) {
 				isValid = false;
 			}
 		}
@@ -87,8 +85,9 @@ public class SeprDSA {
 			return getWayPointPos(counter + 1);
 		}
 	}
-	
-	public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException {
+
+	public static void main(String[] args) throws InterruptedException,
+			MalformedURLException, IOException {
 		Drawables.initialise(new Fullscreen(), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
@@ -101,24 +100,25 @@ public class SeprDSA {
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 		for (int i = 1; i <= entryExitPointNumber; i++) { // Random EntryExits
-			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(new double[] { 0, 0, 0 }), 0,
-					360, i);
+			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(
+					new double[] { 0, 0, 0 }), 0, 360, i);
 			entryExitPointList.add(newExit);
 		}
 
-		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(new double[] { -170, -48, 0 }), 0,
-				5, 0); // Landing Strip
+		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(
+				new double[] { -170, -48, 0 }), 0, 5, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
-			WayPoint newWayPoint = new WayPoint(getWayPointPos(0),i.toString());
+			WayPoint newWayPoint = new WayPoint(getWayPointPos(0), i.toString());
 			wayPointList.add(newWayPoint);
 		}
-		
-		//TEST PLANE
-		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList, landingStrip, landingStrip);
+
+		// TEST PLANE
+		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList,
+				landingStrip, landingStrip);
 		p.setBearing(0);
-		
+
 		while (true) {
 			engine.timing.Timing.logic();
 			Input.logic();
@@ -126,7 +126,6 @@ public class SeprDSA {
 			Physicals.logic();
 			Drawables.logic();
 			s.drawSidemenu();
-
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.

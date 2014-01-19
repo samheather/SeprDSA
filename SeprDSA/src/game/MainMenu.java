@@ -15,64 +15,57 @@ public class MainMenu extends JFrame {
 
 	public Canvas canvas;
 	public JPanel mainMenuPanel;
-	
+
 	public MainMenu() {
-        setSize(1024, 640);
-        setVisible(true);
+		setSize(1024, 640);
+		setVisible(true);
 		mainMenuPanel = new JPanel();
-		
+
 		/**
-		 *  disables layout manager so buttons/panels can be placed using 
-		 *  coordinates
+		 * disables layout manager so buttons/panels can be placed using
+		 * coordinates
 		 */
-		
+
 		mainMenuPanel.setLayout(null);
 		add(mainMenuPanel);
 
 		canvas = new Canvas();
 		canvas.setVisible(false);
-        //canvas.setFocusTraversalKeysEnabled(false);
+		// canvas.setFocusTraversalKeysEnabled(false);
 		canvas.setIgnoreRepaint(true);
-        canvas.setSize(1024, 640);
-        mainMenuPanel.add(canvas);
-        
+		canvas.setSize(1024, 640);
+		mainMenuPanel.add(canvas);
 
-        /*
-        canvas.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                newCanvasSize.set(canvas.getSize());
-            }
-        });
-        */
+		/*
+		 * canvas.addComponentListener(new ComponentAdapter() {
+		 * 
+		 * @Override public void componentResized(ComponentEvent e) {
+		 * newCanvasSize.set(canvas.getSize()); } });
+		 */
 
-        //mainMenuPanel.add(canvas);
-        //createGUI();
-        
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("icon16.png")));
+		// mainMenuPanel.add(canvas);
+		// createGUI();
 
-        // on Windows we need to transfer focus to the Canvas
-        // otherwise keyboard input does not work when using alt-tab
-        /*
-        if(LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_WINDOWS) {
-            addWindowFocusListener(new WindowAdapter() {
-                @Override
-                public void windowGainedFocus(WindowEvent e) {
-                    canvas.requestFocusInWindow();
-                }
-            });
-        }
+		// setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("icon16.png")));
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                closeRequested = true;
-            }
-        });
-        */
-        createGUI();
+		// on Windows we need to transfer focus to the Canvas
+		// otherwise keyboard input does not work when using alt-tab
+		/*
+		 * if(LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_WINDOWS) {
+		 * addWindowFocusListener(new WindowAdapter() {
+		 * 
+		 * @Override public void windowGainedFocus(WindowEvent e) {
+		 * canvas.requestFocusInWindow(); } }); }
+		 * 
+		 * addWindowListener(new WindowAdapter() {
+		 * 
+		 * @Override public void windowClosing(WindowEvent e) { closeRequested =
+		 * true; } });
+		 */
+		createGUI();
 
 	}
+
 	public void createGUI() {
 
 		int widthMainMenu = 1024;
@@ -82,11 +75,12 @@ public class MainMenu extends JFrame {
 		int widthButton = 100;
 
 		/**
-		 *  create "Start" button at coordinates (x, y, width, height)
+		 * create "Start" button at coordinates (x, y, width, height)
 		 */
 		JButton startGame = new JButton("Start");
 
-		/** buttons are placed relatively to the size of the screen
+		/**
+		 * buttons are placed relatively to the size of the screen
 		 * 
 		 */
 		startGame.setBounds((widthMainMenu / 3) - (widthButton / 3),
@@ -94,13 +88,13 @@ public class MainMenu extends JFrame {
 				heightButton);
 
 		/**
-		 *  defines what the "Start" button will do when pressed
+		 * defines what the "Start" button will do when pressed
 		 */
 		startGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				canvas.setVisible(true);
-				//mainMenuPanel.setBounds(0, 0, 0, 0);
+				// mainMenuPanel.setBounds(0, 0, 0, 0);
 			}
 		});
 
@@ -125,28 +119,28 @@ public class MainMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				/**
-				 *  Closes the game
+				 * Closes the game
 				 */
 				System.exit(0);
 			}
 		});
 
 		/**
-		 *  add the "Start" button to the panel
+		 * add the "Start" button to the panel
 		 */
 		mainMenuPanel.add(startGame);
 		mainMenuPanel.add(help);
 		mainMenuPanel.add(exitGame);
 
 		/**
-		 *  display leaderboard
+		 * display leaderboard
 		 */
 		JLabel leaderboardLabel = new JLabel("Leaderboard");
 		JLabel nameLabel = new JLabel("Name");
 		JLabel scoreLabel = new JLabel("Score");
 
 		/**
-		 *  place leaderboard label 2/3 across, 1/10 down the screen
+		 * place leaderboard label 2/3 across, 1/10 down the screen
 		 */
 		leaderboardLabel.setBounds((2 * widthMainMenu / 3),
 				(heightMainMenu / 10), 75, 25);
@@ -159,23 +153,23 @@ public class MainMenu extends JFrame {
 		mainMenuPanel.add(nameLabel);
 		mainMenuPanel.add(scoreLabel);
 
-		/** 
+		/**
 		 * create an instance of Leaderboard class so data can be passed between
-			MainMenu class and Leaderboard class
+		 * MainMenu class and Leaderboard class
 		 */
-	
+
 		Leaderboard leaderboardInstance = main.SeprDSA.l;
 		int numberOfEntries = leaderboardInstance.leaderboardEntries.length;
 
 		/**
-		 *  create JLabels that will display the leaderboard name and scores
+		 * create JLabels that will display the leaderboard name and scores
 		 */
 		for (int i = 0; i < numberOfEntries; i++) {
 			JLabel nameOfScorer = new JLabel(
 					leaderboardInstance.leaderboardEntries[i].getName());
 
 			/**
-			 *  turns the double type to a string via (+"")
+			 * turns the double type to a string via (+"")
 			 */
 			JLabel score = new JLabel(
 					leaderboardInstance.leaderboardEntries[i].getScore() + "");
@@ -190,18 +184,18 @@ public class MainMenu extends JFrame {
 		}
 
 		/**
-		 *  sets frame variables
+		 * sets frame variables
 		 */
 		setTitle("Air Traffic Control Game: Main Menu");
-		//setResizable(false);
-		//setLocationRelativeTo(null);
+		// setResizable(false);
+		// setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//mainMenuPanel.setBackground(Color.green);
-		//mainMenuPanel.setOpaque(false);
-		//mainMenuPanel.setVisible(false);
+		// mainMenuPanel.setBackground(Color.green);
+		// mainMenuPanel.setOpaque(false);
+		// mainMenuPanel.setVisible(false);
 
 		/**
-		 *  set the background for the leaderboard
+		 * set the background for the leaderboard
 		 */
 		JPanel leaderboardBackground = new JPanel();
 		leaderboardBackground.setLayout(null);
@@ -211,16 +205,12 @@ public class MainMenu extends JFrame {
 		leaderboardBackground.setBackground(Color.gray);
 
 	}
-/*
-	public static void main(String[] args) {
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMenu menu = new MainMenu();
-				menu.setVisible(true);
-			}
-		});
-	}
-	*/
+	/*
+	 * public static void main(String[] args) {
+	 * 
+	 * SwingUtilities.invokeLater(new Runnable() {
+	 * 
+	 * @Override public void run() { MainMenu menu = new MainMenu();
+	 * menu.setVisible(true); } }); }
+	 */
 }

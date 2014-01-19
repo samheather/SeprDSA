@@ -141,7 +141,6 @@ public class Font extends java.awt.Font {
 
 			GL11.glEnd();
 
-
 			GL11.glTranslated(
 					charOffsets[str.charAt(i) - 31]
 							- charOffsets[str.charAt(i) - 32], 0, 0);

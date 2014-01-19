@@ -32,42 +32,35 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	public static Vector getEntryExitPointPos(int counter) {
 		boolean isValid = true;
-		Vector testVector = new BasicVector(new double[]{0,0,0});
+		Vector testVector = new BasicVector(new double[] { 0, 0, 0 });
 		switch (randomgen.nextInt(4)) {
 		case 0: // Right side
-			testVector = new BasicVector(new double[] {
-					Display.getWidth() / 2,
-					(randomgen.nextDouble() - 0.5) * Display.getHeight()
-							/ 2, randomgen.nextDouble() * 20 });
+			testVector = new BasicVector(new double[] { Display.getWidth() / 2,
+					(randomgen.nextDouble() - 0.5) * Display.getHeight() / 2,
+					randomgen.nextDouble() * 20 });
 			break;
 		case 1: // Left side
 			testVector = new BasicVector(new double[] {
 					-Display.getWidth() / 2,
-					(randomgen.nextDouble() - 0.5) * Display.getHeight()
-							/ 2, randomgen.nextDouble() * 20 });
+					(randomgen.nextDouble() - 0.5) * Display.getHeight() / 2,
+					randomgen.nextDouble() * 20 });
 			break;
 		case 2: // Top side
-			testVector = new BasicVector(
-					new double[] {
-							(randomgen.nextDouble() - 0.5)
-									* Display.getWidth() / 2,
-							Display.getHeight() / 2,
-							randomgen.nextDouble() * 20 });
+			testVector = new BasicVector(new double[] {
+					(randomgen.nextDouble() - 0.5) * Display.getWidth() / 2,
+					Display.getHeight() / 2, randomgen.nextDouble() * 20 });
 			break;
 		case 3: // Bottom side
-			testVector = new BasicVector(
-					new double[] {
-							(randomgen.nextDouble() - 0.5)
-									* Display.getWidth() / 2,
-							-Display.getHeight() / 2,
-							randomgen.nextDouble() * 20 });
+			testVector = new BasicVector(new double[] {
+					(randomgen.nextDouble() - 0.5) * Display.getWidth() / 2,
+					-Display.getHeight() / 2, randomgen.nextDouble() * 20 });
 			break;
 		default:
 			System.out.println("Random is brokened");
 		}
-		
-		for (EntryExitPoint entryExitPoint : SeprDSA.getEntryExitPoints()){
-			if (SeprDSA.getMagnitude(entryExitPoint.getPos(),testVector) < 200.0f){
+
+		for (EntryExitPoint entryExitPoint : SeprDSA.getEntryExitPoints()) {
+			if (SeprDSA.getMagnitude(entryExitPoint.getPos(), testVector) < 200.0f) {
 				isValid = false;
 			}
 		}
@@ -78,7 +71,7 @@ public class EntryExitPoint implements Drawable, Physical {
 			return getEntryExitPointPos(counter + 1);
 		}
 	}
-	
+
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
 		number = pointNumber;
@@ -91,30 +84,30 @@ public class EntryExitPoint implements Drawable, Physical {
 			case 0: // Right side
 				position = new BasicVector(new double[] {
 						Drawables.virtualDisplaySize().get(0) / 2,
-						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
-								/ 2, randomgen.nextDouble() * 20 });
+						(randomgen.nextDouble() - 0.5)
+								* Drawables.virtualDisplaySize().get(1) / 2,
+						randomgen.nextDouble() * 20 });
 				break;
 			case 1: // Left side
 				position = new BasicVector(new double[] {
 						-Drawables.virtualDisplaySize().get(0) / 2,
-						(randomgen.nextDouble() - 0.5) * Drawables.virtualDisplaySize().get(1)
-								/ 2, randomgen.nextDouble() * 20 });
+						(randomgen.nextDouble() - 0.5)
+								* Drawables.virtualDisplaySize().get(1) / 2,
+						randomgen.nextDouble() * 20 });
 				break;
 			case 2: // Top side
-				position = new BasicVector(
-						new double[] {
-								(randomgen.nextDouble() - 0.5)
-										* Drawables.virtualDisplaySize().get(0) / 2,
-										Drawables.virtualDisplaySize().get(1) / 2,
-								randomgen.nextDouble() * 20 });
+				position = new BasicVector(new double[] {
+						(randomgen.nextDouble() - 0.5)
+								* Drawables.virtualDisplaySize().get(0) / 2,
+						Drawables.virtualDisplaySize().get(1) / 2,
+						randomgen.nextDouble() * 20 });
 				break;
 			case 3: // Bottom side
-				position = new BasicVector(
-						new double[] {
-								(randomgen.nextDouble() - 0.5)
-										* Drawables.virtualDisplaySize().get(0) / 2,
-								-Drawables.virtualDisplaySize().get(1) / 2,
-								randomgen.nextDouble() * 20 });
+				position = new BasicVector(new double[] {
+						(randomgen.nextDouble() - 0.5)
+								* Drawables.virtualDisplaySize().get(0) / 2,
+						-Drawables.virtualDisplaySize().get(1) / 2,
+						randomgen.nextDouble() * 20 });
 				break;
 			default:
 				System.out.println("Random is brokened");
@@ -124,10 +117,8 @@ public class EntryExitPoint implements Drawable, Physical {
 	}
 
 	public Drawing draw() {
-		return new
-				 Sprite(Images.entryExitPoint)
-				.scale(size / Images.entryExitPoint.size().get(0))
-				.translate(position);
+		return new Sprite(Images.entryExitPoint).scale(
+				size / Images.entryExitPoint.size().get(0)).translate(position);
 	}
 
 	public Vector getPos() {
@@ -178,7 +169,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	@Override
 	public void setBearing(float newBearing) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

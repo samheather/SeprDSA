@@ -9,8 +9,8 @@ public class FuturePlaneTest {
 
 	@Test
 	public void testGenerateFlightNumber() throws InterruptedException {
-		assertTrue("Checks that the Flight Number is equal to 8", FuturePlane.generateFlightNumber().length() == 8); 
+		assertTrue("Checks that the Flight Number is equal to 8", FuturePlane
+				.generateFlightNumber().length() == 8);
 	}
-
 
 }

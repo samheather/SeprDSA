@@ -22,8 +22,9 @@ public class WayPoint implements Drawable, Physical {
 	private int randomImage = new Random().nextInt(Images.waypoints.length);
 	private Text numbertext;
 
-	/**Adds a way point to the list of drawables and physicals
-	 * to be placed
+	/**
+	 * Adds a way point to the list of drawables and physicals to be placed
+	 * 
 	 * @param pos
 	 * @param pointNumber
 	 */
@@ -40,20 +41,23 @@ public class WayPoint implements Drawable, Physical {
 		return "WayPoint" + number;
 	}
 
-	/**Adds the way point to the GUI
+	/**
+	 * Adds the way point to the GUI
 	 * 
 	 */
-	
+
 	public Drawing draw() {
-		return new
-				 Sprite(Images.waypoints[randomImage])
+		return new Sprite(Images.waypoints[randomImage])
 				.scale(size / Images.waypoints[randomImage].size().get(0))
-				.overlay (
-				 numbertext
-				.red(0).blue(0).green(0).alpha(0.7)
-				.translate(new BasicVector(new double[] {0, 6}))
-				)
-				.translate( position);
+				.overlay(
+						numbertext
+								.red(0)
+								.blue(0)
+								.green(0)
+								.alpha(0.7)
+								.translate(
+										new BasicVector(new double[] { 0, 6 })))
+				.translate(position);
 	}
 
 	public Vector getPos() {
@@ -97,7 +101,7 @@ public class WayPoint implements Drawable, Physical {
 	@Override
 	public void setBearing(float newBearing) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

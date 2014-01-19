@@ -13,6 +13,7 @@ public class Line extends Drawing {
 		this.start = start;
 		this.end = end;
 	}
+
 	Vector start;
 	Vector end;
 

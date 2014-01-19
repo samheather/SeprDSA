@@ -64,7 +64,7 @@ public class Plane implements Drawable, Physical, Clickable {
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
-		//Input.addKeyboardable(this);
+		// Input.addKeyboardable(this);
 		Input.addClickable(this);
 	}
 
@@ -103,7 +103,6 @@ public class Plane implements Drawable, Physical, Clickable {
 	public String getFNumber() {
 		return number;
 	}
-	
 
 	public Drawing draw() {
 		if (left) {
@@ -172,67 +171,38 @@ public class Plane implements Drawable, Physical, Clickable {
 		rotation = newBearing % 360;
 		setVel(new BasicVector(new double[] {
 				Math.cos(Math.toRadians(rotation)),
-				Math.sin(Math.toRadians(rotation)), 0 })
-				.multiply(speed));
+				Math.sin(Math.toRadians(rotation)), 0 }).multiply(speed));
 		/*
-		final float oldBearing = getBearing();
-		//System.out.println((int) Math.abs(oldBearing - newBearing));
-		if ((int) Math.abs(oldBearing - newBearing) > 180
-				&& oldBearing > newBearing) {
-			taskList.add(Timing.doNTimes(
-					(int) Math.abs(oldBearing - newBearing - 360) % 360, 10,
-					new Timing.NRunnable() {
-						public void run(int i) {test1
-							// System.out.println("rotated left long");
-							rotation = (rotation + 1) % 360;
-							setVel(new BasicVector(new double[] {
-									Math.cos(Math.toRadians(rotation)),
-									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(speed));
-						}
-					}));
-		} else if ((int) Math.abs(oldBearing - newBearing) > 180
-				&& oldBearing < newBearing) {
-			taskList.add(Timing.doNTimes(
-					(int) Math.abs(oldBearing - newBearing + 360) % 360, 10,
-					new Timing.NRunnable() {
-						public void run(int i) {
-							// System.out.println("rotated right long");
-							rotation = (rotation - 1) % 360;
-							setVel(new BasicVector(new double[] {
-									Math.cos(Math.toRadians(rotation)),
-									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(speed));
-						}
-					}));
-		} else if (oldBearing > newBearing) {
-			taskList.add(Timing.doNTimes(
-					(int) Math.abs(oldBearing - newBearing), 10,
-					new Timing.NRunnable() {
-						public void run(int i) {
-							// System.out.println("rotated right");
-							rotation = (rotation - 1) % 360;
-							setVel(new BasicVector(new double[] {
-									Math.cos(Math.toRadians(rotation)),
-									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(speed));
-						}
-					}));
-		} else {
-			taskList.add(Timing.doNTimes(
-					(int) Math.abs(oldBearing - newBearing), 10,
-					new Timing.NRunnable() {
-						public void run(int i) {
-							// System.out.println("rotated left");
-							rotation = (rotation + 1) % 360;
-							setVel(new BasicVector(new double[] {
-									Math.cos(Math.toRadians(rotation)),
-									Math.sin(Math.toRadians(rotation)), 0 })
-									.multiply(speed));
-						}
-					}));
-		}
-		*/
+		 * final float oldBearing = getBearing(); //System.out.println((int)
+		 * Math.abs(oldBearing - newBearing)); if ((int) Math.abs(oldBearing -
+		 * newBearing) > 180 && oldBearing > newBearing) {
+		 * taskList.add(Timing.doNTimes( (int) Math.abs(oldBearing - newBearing
+		 * - 360) % 360, 10, new Timing.NRunnable() { public void run(int i)
+		 * {test1 // System.out.println("rotated left long"); rotation =
+		 * (rotation + 1) % 360; setVel(new BasicVector(new double[] {
+		 * Math.cos(Math.toRadians(rotation)),
+		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
+		 * else if ((int) Math.abs(oldBearing - newBearing) > 180 && oldBearing
+		 * < newBearing) { taskList.add(Timing.doNTimes( (int)
+		 * Math.abs(oldBearing - newBearing + 360) % 360, 10, new
+		 * Timing.NRunnable() { public void run(int i) { //
+		 * System.out.println("rotated right long"); rotation = (rotation - 1) %
+		 * 360; setVel(new BasicVector(new double[] {
+		 * Math.cos(Math.toRadians(rotation)),
+		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
+		 * else if (oldBearing > newBearing) { taskList.add(Timing.doNTimes(
+		 * (int) Math.abs(oldBearing - newBearing), 10, new Timing.NRunnable() {
+		 * public void run(int i) { // System.out.println("rotated right");
+		 * rotation = (rotation - 1) % 360; setVel(new BasicVector(new double[]
+		 * { Math.cos(Math.toRadians(rotation)),
+		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
+		 * else { taskList.add(Timing.doNTimes( (int) Math.abs(oldBearing -
+		 * newBearing), 10, new Timing.NRunnable() { public void run(int i) { //
+		 * System.out.println("rotated left"); rotation = (rotation + 1) % 360;
+		 * setVel(new BasicVector(new double[] {
+		 * Math.cos(Math.toRadians(rotation)),
+		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
+		 */
 	};
 
 	public void destroy() {
@@ -243,7 +213,7 @@ public class Plane implements Drawable, Physical, Clickable {
 				if (size == 0) {
 					SeprDSA.updateScore(score);
 					Planes.remove(plane);
-	//				Input.removeKeyboardable(plane);
+					// Input.removeKeyboardable(plane);
 					Input.removeClickable(plane);
 					Physicals.remove(plane);
 					Drawables.remove(plane);
@@ -251,35 +221,23 @@ public class Plane implements Drawable, Physical, Clickable {
 			}
 		});
 	}
-/*
-	@Override
-	public void handleKeyboard(int key, boolean pressed) {
 
-		if (key == Keyboard.KEY_LEFT || key == Keyboard.KEY_A) {
-			left = pressed;
-		} else if (key == Keyboard.KEY_RIGHT || key == Keyboard.KEY_D) {
-			right = pressed;
-		} else if (key == Keyboard.KEY_UP || key == Keyboard.KEY_W) {
-			up = pressed;
-		} else if (key == Keyboard.KEY_DOWN || key == Keyboard.KEY_S) {
-			down = pressed;
-		}
-	}
-
-	@Override
-	public List<Integer> keys() {
-		List<Integer> result = new ArrayList<Integer>();
-		result.add(Keyboard.KEY_LEFT);
-		result.add(Keyboard.KEY_RIGHT);
-		result.add(Keyboard.KEY_UP);
-		result.add(Keyboard.KEY_DOWN);
-		result.add(Keyboard.KEY_W);
-		result.add(Keyboard.KEY_A);
-		result.add(Keyboard.KEY_S);
-		result.add(Keyboard.KEY_D);
-		return result;
-	}
-*/
+	/*
+	 * @Override public void handleKeyboard(int key, boolean pressed) {
+	 * 
+	 * if (key == Keyboard.KEY_LEFT || key == Keyboard.KEY_A) { left = pressed;
+	 * } else if (key == Keyboard.KEY_RIGHT || key == Keyboard.KEY_D) { right =
+	 * pressed; } else if (key == Keyboard.KEY_UP || key == Keyboard.KEY_W) { up
+	 * = pressed; } else if (key == Keyboard.KEY_DOWN || key == Keyboard.KEY_S)
+	 * { down = pressed; } }
+	 * 
+	 * @Override public List<Integer> keys() { List<Integer> result = new
+	 * ArrayList<Integer>(); result.add(Keyboard.KEY_LEFT);
+	 * result.add(Keyboard.KEY_RIGHT); result.add(Keyboard.KEY_UP);
+	 * result.add(Keyboard.KEY_DOWN); result.add(Keyboard.KEY_W);
+	 * result.add(Keyboard.KEY_A); result.add(Keyboard.KEY_S);
+	 * result.add(Keyboard.KEY_D); return result; }
+	 */
 	public double getZ() {
 		return z;
 	}
@@ -302,12 +260,10 @@ public class Plane implements Drawable, Physical, Clickable {
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
 		/*
-		for (TaskCanceller t : taskList){
-			t.cancel();
-			System.out.println(t.cancel);
-		}
-		taskList.clear();
-		//setBearing((float) angle); */
+		 * for (TaskCanceller t : taskList){ t.cancel();
+		 * System.out.println(t.cancel); } taskList.clear();
+		 * //setBearing((float) angle);
+		 */
 		targetBearing = angle;
 	}
 
@@ -319,7 +275,7 @@ public class Plane implements Drawable, Physical, Clickable {
 		// System.out.println("Move");
 		endLine = newPos;
 	}
-	
+
 	private float targetBearing = 0.0f;
 
 	@Override
