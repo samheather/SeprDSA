@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import main.SeprDSA;
@@ -21,7 +20,6 @@ import engine.input.Input;
 import engine.input.Keyboardable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
-
 import engine.timing.*;
 
 import org.la4j.vector.dense.*;
@@ -50,7 +48,6 @@ public class Plane implements Drawable, Physical, Clickable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
-	private ArrayList<TaskCanceller> taskList = new ArrayList<TaskCanceller>();
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint) {
@@ -172,37 +169,6 @@ public class Plane implements Drawable, Physical, Clickable {
 		setVel(new BasicVector(new double[] {
 				Math.cos(Math.toRadians(rotation)),
 				Math.sin(Math.toRadians(rotation)), 0 }).multiply(speed));
-		/*
-		 * final float oldBearing = getBearing(); //System.out.println((int)
-		 * Math.abs(oldBearing - newBearing)); if ((int) Math.abs(oldBearing -
-		 * newBearing) > 180 && oldBearing > newBearing) {
-		 * taskList.add(Timing.doNTimes( (int) Math.abs(oldBearing - newBearing
-		 * - 360) % 360, 10, new Timing.NRunnable() { public void run(int i)
-		 * {test1 // System.out.println("rotated left long"); rotation =
-		 * (rotation + 1) % 360; setVel(new BasicVector(new double[] {
-		 * Math.cos(Math.toRadians(rotation)),
-		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
-		 * else if ((int) Math.abs(oldBearing - newBearing) > 180 && oldBearing
-		 * < newBearing) { taskList.add(Timing.doNTimes( (int)
-		 * Math.abs(oldBearing - newBearing + 360) % 360, 10, new
-		 * Timing.NRunnable() { public void run(int i) { //
-		 * System.out.println("rotated right long"); rotation = (rotation - 1) %
-		 * 360; setVel(new BasicVector(new double[] {
-		 * Math.cos(Math.toRadians(rotation)),
-		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
-		 * else if (oldBearing > newBearing) { taskList.add(Timing.doNTimes(
-		 * (int) Math.abs(oldBearing - newBearing), 10, new Timing.NRunnable() {
-		 * public void run(int i) { // System.out.println("rotated right");
-		 * rotation = (rotation - 1) % 360; setVel(new BasicVector(new double[]
-		 * { Math.cos(Math.toRadians(rotation)),
-		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
-		 * else { taskList.add(Timing.doNTimes( (int) Math.abs(oldBearing -
-		 * newBearing), 10, new Timing.NRunnable() { public void run(int i) { //
-		 * System.out.println("rotated left"); rotation = (rotation + 1) % 360;
-		 * setVel(new BasicVector(new double[] {
-		 * Math.cos(Math.toRadians(rotation)),
-		 * Math.sin(Math.toRadians(rotation)), 0 }) .multiply(speed)); } })); }
-		 */
 	};
 
 	public void destroy() {
@@ -222,22 +188,6 @@ public class Plane implements Drawable, Physical, Clickable {
 		});
 	}
 
-	/*
-	 * @Override public void handleKeyboard(int key, boolean pressed) {
-	 * 
-	 * if (key == Keyboard.KEY_LEFT || key == Keyboard.KEY_A) { left = pressed;
-	 * } else if (key == Keyboard.KEY_RIGHT || key == Keyboard.KEY_D) { right =
-	 * pressed; } else if (key == Keyboard.KEY_UP || key == Keyboard.KEY_W) { up
-	 * = pressed; } else if (key == Keyboard.KEY_DOWN || key == Keyboard.KEY_S)
-	 * { down = pressed; } }
-	 * 
-	 * @Override public List<Integer> keys() { List<Integer> result = new
-	 * ArrayList<Integer>(); result.add(Keyboard.KEY_LEFT);
-	 * result.add(Keyboard.KEY_RIGHT); result.add(Keyboard.KEY_UP);
-	 * result.add(Keyboard.KEY_DOWN); result.add(Keyboard.KEY_W);
-	 * result.add(Keyboard.KEY_A); result.add(Keyboard.KEY_S);
-	 * result.add(Keyboard.KEY_D); return result; }
-	 */
 	public double getZ() {
 		return z;
 	}
@@ -259,11 +209,6 @@ public class Plane implements Drawable, Physical, Clickable {
 		float angle = (float) Math.toDegrees(Math.atan(temp.get(1)
 				/ temp.get(0)));
 		angle = planePos.get(0) < endLine.get(0) ? angle : angle + 180;
-		/*
-		 * for (TaskCanceller t : taskList){ t.cancel();
-		 * System.out.println(t.cancel); } taskList.clear();
-		 * //setBearing((float) angle);
-		 */
 		targetBearing = angle;
 	}
 
