@@ -18,13 +18,14 @@ import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
 import engine.input.Input;
 import engine.input.Keyboardable;
+import engine.input.Scrollable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 import engine.timing.*;
 
 import org.la4j.vector.dense.*;
 
-public class Plane implements Drawable, Physical, Clickable {
+public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	private static Random randomgen = new Random();
 	private double x; // Should be pixel values for x,y
@@ -60,13 +61,17 @@ public class Plane implements Drawable, Physical, Clickable {
 		// position = enterPoint.getPos();
 		setPos(startPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
-		altitudeText = new Text("Altitude: " + String.valueOf(Math.round(z*1000)), Fonts.planeFont, Alignment.CENTRED);
-		nextWaypointText = new Text("Next Waypoint: ", Fonts.planeFont, Alignment.CENTRED);
+		altitudeText = new Text("Altitude: "
+				+ String.valueOf(Math.round(z * 1000)), Fonts.planeFont,
+				Alignment.CENTRED);
+		nextWaypointText = new Text("Next Waypoint: ", Fonts.planeFont,
+				Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
 		// Input.addKeyboardable(this);
 		Input.addClickable(this);
+		Input.addScrollable(this);
 	}
 
 	public String toString() {
@@ -120,6 +125,9 @@ public class Plane implements Drawable, Physical, Clickable {
 		}
 
 		return new Sprite(Images.planes[randomImage])
+				.red(1.0)
+				.blue(SeprDSA.selectedPlane == this ? 0.0 : 1.0)
+				.green(SeprDSA.selectedPlane == this ? 0.0 : 1.0)
 				.scale(size / Images.planes[randomImage].size().get(0))
 				.rotate(rotation)
 				.overlay(
@@ -131,13 +139,15 @@ public class Plane implements Drawable, Physical, Clickable {
 								.translate(
 										new BasicVector(new double[] { 0, -40 })))
 				.overlay(
-						altitudeText
+						new Text("Altitude: "
+								+ String.valueOf(Math.round(z * 1000)),
+								Fonts.planeFont, Alignment.CENTRED)
 								.red(1.0)
 								.blue(1.0)
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-									new BasicVector(new double[] { 0, -60 })))
+										new BasicVector(new double[] { 0, -60 })))
 				.overlay(
 						nextWaypointText
 								.red(1.0)
@@ -145,7 +155,7 @@ public class Plane implements Drawable, Physical, Clickable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-									new BasicVector(new double[] { 0, -80 })))
+										new BasicVector(new double[] { 0, -80 })))
 				.translate(new BasicVector(new double[] { x, y }))
 				.overlay(
 						(lineExists ? new Line(getPos(), endLine)
@@ -199,7 +209,7 @@ public class Plane implements Drawable, Physical, Clickable {
 				if (size == 0) {
 					SeprDSA.updateScore(score);
 					Planes.remove(plane);
-					// Input.removeKeyboardable(plane);
+					Input.removeScrollable(plane);
 					Input.removeClickable(plane);
 					Physicals.remove(plane);
 					Drawables.remove(plane);
@@ -217,11 +227,16 @@ public class Plane implements Drawable, Physical, Clickable {
 	}
 
 	public void clickDown(int button, Vector pos) {
-		endLine = pos;
-		lineExists = true;
+		if (button == 0) {
+			endLine = pos;
+			lineExists = true;
+		}
+		SeprDSA.selectedPlane = this;
 	}
 
 	public void clickUp(int button) {
+		if (button != 0)
+			return;
 		lineExists = false;
 		Vector planePos = new BasicVector(new double[] { getPos().get(0),
 				getPos().get(1) });
@@ -251,5 +266,16 @@ public class Plane implements Drawable, Physical, Clickable {
 	@Override
 	public float rotVel() {
 		return 1.0f;
+	}
+
+	@Override
+	public void scroll(int amount) {
+		// TODO Auto-generated method stub
+		if (SeprDSA.selectedPlane == this) {
+			z += amount * 0.005;
+		}
+		if (z > 14 || z < 0) {
+			destroy();
+		}
 	}
 }
