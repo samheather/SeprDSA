@@ -43,9 +43,6 @@ public class Texture {
 	public Texture(BufferedImage image) {
 		double xs = image.getWidth();
 		double ys = image.getHeight();
-		int[] pixels = new int[image.getWidth() * image.getHeight()];
-		image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0,
-				image.getWidth());
 
 		ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth()
 				* image.getHeight() * 4);
