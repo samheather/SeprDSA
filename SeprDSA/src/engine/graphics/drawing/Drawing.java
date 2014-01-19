@@ -9,6 +9,16 @@ import engine.graphics.drawing.combinators.Rotate;
 import engine.graphics.drawing.combinators.Scale;
 import engine.graphics.drawing.combinators.Translate;
 
+/**
+ * Drawings are used by drawable objects to specify how they should be rendered
+ * on screen. There are some primitive drawings
+ * (engine.graphics.drawing.primitives.*) and some combinators
+ * (engine.graphics.drawing.combinators.*) which can be used to modify or
+ * combine drawings. This class contains convenience methods for using the
+ * combinators and you probably shouldn't be using any of the combinators
+ * directly, if you are just trying to draw things.
+ */
+
 public abstract class Drawing {
 	public abstract void render();
 
@@ -43,7 +53,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Translates a drawing by vector.
+	 * Translates a drawing by vector amount.
 	 * 
 	 * @param amount
 	 * @return
@@ -63,7 +73,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Sets the red amount of a drawing (range: 0<x<1).
+	 * Sets the red amount of a drawing (range: 0<=x<=1).
 	 * 
 	 * @param amount
 	 * @return
@@ -73,7 +83,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Sets the green amount of a drawing (range: 0<x<1).
+	 * Sets the green amount of a drawing (range: 0<=x<=1).
 	 * 
 	 * @param amount
 	 * @return
@@ -83,7 +93,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Sets the blue amount of a drawing (range: 0<x<1).
+	 * Sets the blue amount of a drawing (range: 0<=x<=1).
 	 * 
 	 * @param amount
 	 * @return
@@ -114,7 +124,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Tells you whether Vector pos collides with the drawing.
+	 * Tells you whether Vector pos collides with this drawing.
 	 * 
 	 * @param pos
 	 * @return
