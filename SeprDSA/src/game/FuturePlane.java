@@ -48,8 +48,11 @@ public class FuturePlane {
 		// DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
 		// while (localTime < localTime + delayTime) {localTime +=
 		// SeprDSA.timer;}
-		Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
-		p.setBearing(randomgen.nextFloat() * 360);
+		if (randomgen.nextDouble() > 0.9999) {
+			Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+			p.setBearing(randomgen.nextFloat() * 360);
+			FuturePlanes.remove(this);
+		}
 	}
 
 	/**
