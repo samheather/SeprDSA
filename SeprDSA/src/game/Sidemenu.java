@@ -63,7 +63,6 @@ public class Sidemenu extends Widget {
 
 		createButton();
 		setupLabels();
-		setupTextField();
 
 		labelArray[0].setText("Number - Entry - Time");
 	}
