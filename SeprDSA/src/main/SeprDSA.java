@@ -66,12 +66,13 @@ public class SeprDSA {
 
 	public static Vector getWayPointPos(int counter) {
 		boolean isValid = true;
-		BasicVector testVector = new BasicVector(new double[] {
-				(randomgen.nextDouble() - 0.5)
-						* (Display.getWidth() - pixelsFromEdge),
-				(randomgen.nextDouble() - 0.5)
-						* (Display.getHeight() - pixelsFromEdge),
-				randomgen.nextDouble() * 20 });
+		BasicVector testVector = new BasicVector(
+				new double[] {
+						((randomgen.nextDouble() - 0.5) * ((Display.getWidth() - pixelsFromEdge) - Sidemenu.width))
+								+ Sidemenu.width / 2.0,
+						(randomgen.nextDouble() - 0.5)
+								* (Display.getHeight() - pixelsFromEdge),
+						randomgen.nextDouble() * 20 });
 
 		for (WayPoint waypoint : wayPointList) {
 			if (getMagnitude(waypoint.getPos(), testVector) < 200.0f) {
