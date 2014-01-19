@@ -3,17 +3,19 @@ package testing;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import game.Leaderboard;
+import game.LeaderboardEntry;
 
 public class LeaderboardTest {
 
 	@Test
-	public void testLeaderboard() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testAddLeaderBoardEntries() {
-		fail("Not yet implemented");
+		LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+		for (int i = 0; i < leaderboardEntries.length; i++) {
+			leaderboardEntries[i] = new LeaderboardEntry();
+		}
+		
+		
 	}
 
 	@Test
