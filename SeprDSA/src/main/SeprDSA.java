@@ -89,7 +89,7 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
+		Drawables.initialise(new Window(1024, 640), 1024, 640, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
@@ -100,14 +100,41 @@ public class SeprDSA {
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
-		for (int i = 1; i <= entryExitPointNumber; i++) { // Random EntryExits
-			EntryExitPoint newExit = new EntryExitPoint(new BasicVector(
-					new double[] { 0, 0, 0 }), 0, 360, i);
-			entryExitPointList.add(newExit);
-		}
+		
+		// EntryExit Points 1..4 are for top, right, bottom, left, 0 is airport
+		// Top
+		EntryExitPoint newExit1 = new EntryExitPoint(
+				new BasicVector(new double[] {
+				Sidemenu.width/2,
+				Drawables.virtualDisplaySize().get(1) / 2,
+				10000 } //this is altitude
+				), 0, 360, 1);
+		// Right
+		EntryExitPoint newExit2 = new EntryExitPoint(
+				new BasicVector(new double[] {
+				Sidemenu.width/2 + Sidemenu.remainingDisplayWidth()/2,
+				0,
+				10000 } //this is altitude
+				), 0, 360, 2);
+		EntryExitPoint newExit3 = new EntryExitPoint(
+				new BasicVector(new double[] {
+				Sidemenu.width/2,
+				-Drawables.virtualDisplaySize().get(1) / 2,
+				10000 } //this is altitude
+				), 0, 360, 3);
+		EntryExitPoint newExit4 = new EntryExitPoint(
+				new BasicVector(new double[] {
+				Sidemenu.width/2 - Sidemenu.remainingDisplayWidth()/2,
+				0,
+				10000 } //this is altitude
+				), 0, 360, 4);
+		entryExitPointList.add(newExit1);
+		entryExitPointList.add(newExit2);
+		entryExitPointList.add(newExit3);
+		entryExitPointList.add(newExit4);
 
 		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(
-				new double[] { -170, -48, 0 }), 0, 5, 0); // Landing Strip
+				new double[] { -10, -125, 0 }), 0, 5, 0); // Landing Strip
 		entryExitPointList.add(landingStrip);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints

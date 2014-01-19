@@ -29,46 +29,21 @@ public class EntryExitPoint implements Drawable, Physical {
 	public String toString() {
 		return "EntryExitPoint" + number;
 	}
-
-	public static Vector getEntryExitPointPos(int counter) {
-		boolean isValid = true;
-		Vector testVector = new BasicVector(new double[] { 0, 0, 0 });
-		switch (randomgen.nextInt(4)) {
-		case 0: // Right side
-			testVector = new BasicVector(new double[] { Display.getWidth() / 2,
-					(randomgen.nextDouble() - 0.5) * Display.getHeight() / 2,
-					randomgen.nextDouble() * 20 });
-			break;
-		case 1: // Left side
-			testVector = new BasicVector(new double[] {
-					-Display.getWidth() / 2,
-					(randomgen.nextDouble() - 0.5) * Display.getHeight() / 2,
-					randomgen.nextDouble() * 20 });
-			break;
-		case 2: // Top side
-			testVector = new BasicVector(new double[] {
-					(randomgen.nextDouble() - 0.5) * Display.getWidth() / 2,
-					Display.getHeight() / 2, randomgen.nextDouble() * 20 });
-			break;
-		case 3: // Bottom side
-			testVector = new BasicVector(new double[] {
-					(randomgen.nextDouble() - 0.5) * Display.getWidth() / 2,
-					-Display.getHeight() / 2, randomgen.nextDouble() * 20 });
-			break;
+	
+	public String sidemenuString() {
+		switch (number) {
+		case 0:
+			return "Airport";
+		case 1:
+			return "N";
+		case 2:
+			return "E";
+		case 3:
+			return "S";
+		case 4:
+			return "W";
 		default:
-			System.out.println("Random is brokened");
-		}
-
-		for (EntryExitPoint entryExitPoint : SeprDSA.getEntryExitPoints()) {
-			if (SeprDSA.getMagnitude(entryExitPoint.getPos(), testVector) < 200.0f) {
-				isValid = false;
-			}
-		}
-		if (isValid || counter > 50) {
-			System.out.println(counter);
-			return testVector;
-		} else {
-			return getEntryExitPointPos(counter + 1);
+			return "?";
 		}
 	}
 
@@ -77,42 +52,43 @@ public class EntryExitPoint implements Drawable, Physical {
 		number = pointNumber;
 		Drawables.add(this);
 		Physicals.add(this);
-		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
-			position = pos;
-		} else {
-			switch (randomgen.nextInt(4)) {
-			case 0: // Right side
-				position = new BasicVector(new double[] {
-						Drawables.virtualDisplaySize().get(0) / 2,
-						(randomgen.nextDouble() - 0.5)
-								* Drawables.virtualDisplaySize().get(1) / 2,
-						randomgen.nextDouble() * 20 });
-				break;
-			case 1: // Left side
-				position = new BasicVector(new double[] {
-						-Drawables.virtualDisplaySize().get(0) / 2,
-						(randomgen.nextDouble() - 0.5)
-								* Drawables.virtualDisplaySize().get(1) / 2,
-						randomgen.nextDouble() * 20 });
-				break;
-			case 2: // Top side
-				position = new BasicVector(new double[] {
-						(randomgen.nextDouble() - 0.5)
-								* Drawables.virtualDisplaySize().get(0) / 2,
-						Drawables.virtualDisplaySize().get(1) / 2,
-						randomgen.nextDouble() * 20 });
-				break;
-			case 3: // Bottom side
-				position = new BasicVector(new double[] {
-						(randomgen.nextDouble() - 0.5)
-								* Drawables.virtualDisplaySize().get(0) / 2,
-						-Drawables.virtualDisplaySize().get(1) / 2,
-						randomgen.nextDouble() * 20 });
-				break;
-			default:
-				System.out.println("Random is brokened");
-			}
-		}
+		position = pos;
+//		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
+//			position = pos;
+//		} else {
+//			switch (randomgen.nextInt(4)) {
+//			case 0: // Right side
+//				position = new BasicVector(new double[] {
+//						Drawables.virtualDisplaySize().get(0) / 2,
+//						(randomgen.nextDouble() - 0.5)
+//								* Drawables.virtualDisplaySize().get(1) / 2,
+//						randomgen.nextDouble() * 20 });
+//				break;
+//			case 1: // Left side
+//				position = new BasicVector(new double[] {
+//						-Drawables.virtualDisplaySize().get(0) / 2,
+//						(randomgen.nextDouble() - 0.5)
+//								* Drawables.virtualDisplaySize().get(1) / 2,
+//						randomgen.nextDouble() * 20 });
+//				break;
+//			case 2: // Top side
+//				position = new BasicVector(new double[] {
+//						(randomgen.nextDouble() - 0.5)
+//								* Drawables.virtualDisplaySize().get(0) / 2,
+//						Drawables.virtualDisplaySize().get(1) / 2,
+//						randomgen.nextDouble() * 20 });
+//				break;
+//			case 3: // Bottom side
+//				position = new BasicVector(new double[] {
+//						(randomgen.nextDouble() - 0.5)
+//								* Drawables.virtualDisplaySize().get(0) / 2,
+//						-Drawables.virtualDisplaySize().get(1) / 2,
+//						randomgen.nextDouble() * 20 });
+//				break;
+//			default:
+//				System.out.println("Random is broken.");
+//			}
+//		}
 		tolerance = tolerances;
 	}
 

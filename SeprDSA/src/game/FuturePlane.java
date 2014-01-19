@@ -107,5 +107,9 @@ public class FuturePlane {
 			return potentialNewNumber;
 		}
 	}
+	
+	public EntryExitPoint getEntryPoint() {
+		return enterPoint;
+	}
 
 }
