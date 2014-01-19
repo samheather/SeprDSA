@@ -66,15 +66,22 @@ public class Planes {
 	 * @throws InterruptedException
 	 */
 	public static void updateTimer() {
-		if (Timing.timeSinceStart() >= spawnThreshhold
-				&& planes.size() < maxplanenumb) {
-			System.out.println("Added plane");
-			FuturePlane tempFuturePlane = new FuturePlane(
-					randomgen.nextInt(2000));
+		if (FuturePlanes.size() == 0) {
+			FuturePlane tempFuturePlane = new FuturePlane(randomgen.nextInt(2000));
 			FuturePlanes.add(tempFuturePlane);
-			// Add next plane in between 2 and 8 seconds.
-			spawnThreshhold += 2000 + randomgen.nextInt(6000);
+		} else {
+			if (Timing.timeSinceStart() >= spawnThreshhold
+					&& planes.size() < maxplanenumb) {
+				System.out.println(planes.size());
+				System.out.println("Added plane");
+				FuturePlane tempFuturePlane = new FuturePlane(
+						randomgen.nextInt(2000));
+				FuturePlanes.add(tempFuturePlane);
+				// Add next plane in between 2 and 8 seconds.
+				spawnThreshhold += 2000 + randomgen.nextInt(6000);
+			}
 		}
+		
 	}
 
 }

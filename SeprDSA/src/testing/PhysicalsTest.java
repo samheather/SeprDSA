@@ -8,7 +8,7 @@ public class PhysicalsTest {
 
 	@Test
 	public void testLogic() {
-		fail("Not yet implemented");
+		
 	}
 
 }
