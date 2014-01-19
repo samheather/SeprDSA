@@ -57,10 +57,9 @@ public class LWJGLInput implements Input {
 		wasActive = active;
 
 		if (Keyboard.isCreated()) {
-			while (Keyboard.next()) {
-				gui.handleKey(Keyboard.getEventKey(),
-						Keyboard.getEventCharacter(),
-						Keyboard.getEventKeyState());
+			ArrayList<KeyboardEvent> ke = engine.input.Input.keyboardEvents();
+			for (KeyboardEvent i : ke) {
+				gui.handleKey(i.keyCode(), i.keyChar(), i.pressed());
 			}
 		}
 		if (Mouse.isCreated()) {
@@ -77,5 +76,4 @@ public class LWJGLInput implements Input {
 		}
 		return true;
 	}
-
 }

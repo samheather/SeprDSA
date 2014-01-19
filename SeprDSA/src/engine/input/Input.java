@@ -38,10 +38,16 @@ public class Input {
 		clickables.remove(x);
 	}
 
-	private static ArrayList<MouseEvent> mouseEvents;
+	private static ArrayList<MouseEvent> mouseEvents = new ArrayList<MouseEvent>();
 
 	public static ArrayList<MouseEvent> mouseEvents() {
 		return mouseEvents;
+	}
+
+	private static ArrayList<KeyboardEvent> keyboardEvents = new ArrayList<KeyboardEvent>();
+
+	public static ArrayList<KeyboardEvent> keyboardEvents() {
+		return keyboardEvents;
 	}
 
 	public static void addKeyboardable(Keyboardable x) {
@@ -63,7 +69,10 @@ public class Input {
 	}
 
 	public static void logic() {
+		ArrayList<KeyboardEvent> ke = new ArrayList<KeyboardEvent>();
 		while (Keyboard.next()) {
+			ke.add(new KeyboardEvent(Keyboard.getEventKey(), Keyboard
+					.getEventCharacter(), Keyboard.getEventKeyState()));
 			int key = Keyboard.getEventKey();
 			List<Keyboardable> handlers = map.get(key);
 			if (handlers == null) {
@@ -74,6 +83,8 @@ public class Input {
 						.handleKeyboard(key, Keyboard.getEventKeyState());
 			}
 		}
+		keyboardEvents = ke;
+
 		ArrayList<MouseEvent> me = new ArrayList<MouseEvent>();
 		while (Mouse.next()) {
 			me.add(new MouseEvent(Mouse.getEventX(), Mouse.getEventY(), Mouse
