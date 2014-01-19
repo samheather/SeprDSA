@@ -40,6 +40,10 @@ public class WayPoint implements Drawable, Physical {
 	public String toString() {
 		return "WayPoint" + number;
 	}
+	
+	public String getNumber() {
+		return number;
+	}
 
 	/**
 	 * Adds the way point to the GUI
