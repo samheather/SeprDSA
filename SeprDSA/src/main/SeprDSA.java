@@ -136,11 +136,11 @@ public class SeprDSA {
 		entryExitPointList.add(newExit4);
 
 		EntryExitPoint landingStripRight = new EntryExitPoint(new BasicVector(
-				new double[] { -10, -125, 0 }), 0, 15, 0); // Landing Strip
+				new double[] { -40, -500, 0 }), 0, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripRight);
 		
 		EntryExitPoint landingStripLeft = new EntryExitPoint(new BasicVector(
-				new double[] { -10, -125, 0 }), 180, 15, 0); // Landing Strip
+				new double[] { -40, -500, 0 }), 180, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripLeft);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
