@@ -39,7 +39,7 @@ public class SeprDSA {
 	public static double timer;
 	private static int score = 0;
 	private static Random randomgen = new Random();
-	public Plane selectedPlane;
+	public static Plane selectedPlane;
 	/**
 	 * Initialise leaderboard here so it can be accessed globally
 	 */

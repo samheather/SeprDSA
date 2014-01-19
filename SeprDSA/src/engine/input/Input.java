@@ -38,10 +38,29 @@ public class Input {
 		clickables.remove(x);
 	}
 
-	private static ArrayList<MouseEvent> mouseEvents;
+	private static List<Scrollable> scrollables;
+	static {
+		scrollables = new ArrayList<Scrollable>();
+	}
+
+	public static void addScrollable(Scrollable x) {
+		scrollables.add(x);
+	}
+
+	public static void removeScrollable(Scrollable x) {
+		scrollables.remove(x);
+	}
+
+	private static ArrayList<MouseEvent> mouseEvents = new ArrayList<MouseEvent>();
 
 	public static ArrayList<MouseEvent> mouseEvents() {
 		return mouseEvents;
+	}
+
+	private static ArrayList<KeyboardEvent> keyboardEvents = new ArrayList<KeyboardEvent>();
+
+	public static ArrayList<KeyboardEvent> keyboardEvents() {
+		return keyboardEvents;
 	}
 
 	public static void addKeyboardable(Keyboardable x) {
@@ -63,7 +82,10 @@ public class Input {
 	}
 
 	public static void logic() {
+		ArrayList<KeyboardEvent> ke = new ArrayList<KeyboardEvent>();
 		while (Keyboard.next()) {
+			ke.add(new KeyboardEvent(Keyboard.getEventKey(), Keyboard
+					.getEventCharacter(), Keyboard.getEventKeyState()));
 			int key = Keyboard.getEventKey();
 			List<Keyboardable> handlers = map.get(key);
 			if (handlers == null) {
@@ -74,6 +96,8 @@ public class Input {
 						.handleKeyboard(key, Keyboard.getEventKeyState());
 			}
 		}
+		keyboardEvents = ke;
+
 		ArrayList<MouseEvent> me = new ArrayList<MouseEvent>();
 		while (Mouse.next()) {
 			me.add(new MouseEvent(Mouse.getEventX(), Mouse.getEventY(), Mouse
@@ -82,8 +106,16 @@ public class Input {
 			Vector pos = Drawables.windowCoords(new BasicVector(new double[] {
 					Mouse.getEventX(), Mouse.getEventY() }));
 			if ((button = Mouse.getEventButton()) == -1) {
-				if (current != null) {
-					current.move(pos);
+
+				int scroll = Mouse.getEventDWheel();
+				if (scroll != 0) {
+					for (Scrollable i : scrollables) {
+						i.scroll(scroll);
+					}
+				} else {
+					if (current != null) {
+						current.move(pos);
+					}
 				}
 			} else {
 				boolean down = Mouse.getEventButtonState();

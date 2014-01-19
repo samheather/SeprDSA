@@ -18,7 +18,7 @@ public class Leaderboard /* implements Drawable */{
 	/**
 	 * Array containing the LeaderboardEntries
 	 */
-	LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	public LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
 	/**
 	 * Path to the file in which leaderboardScores are stored.
 	 */
@@ -29,7 +29,7 @@ public class Leaderboard /* implements Drawable */{
 	 * into data structure.
 	 */
 	public Leaderboard() {
-		System.out.println("Leaderboard init\n");
+		// System.out.println("Leaderboard init\n");
 		// Initialise
 		for (int i = 0; i < leaderboardEntries.length; i++) {
 			leaderboardEntries[i] = new LeaderboardEntry();
@@ -39,8 +39,8 @@ public class Leaderboard /* implements Drawable */{
 		File leaderboardFileCheckForFile = new File(leaderboardFile);
 		// If game run before and scores exist:
 		if (!leaderboardFileCheckForFile.exists()) {
-			System.out
-					.println("Is first load, initialising leaderboard values");
+		//	System.out
+		//			.println("Is first load, initialising leaderboard values");
 			for (int i = 0; i < leaderboardEntries.length; i++) {
 				leaderboardEntries[i].setName("Sam");
 				leaderboardEntries[i].setScore((double) 5 + i);
@@ -54,7 +54,7 @@ public class Leaderboard /* implements Drawable */{
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		}
-		printLeaderboard(leaderboardEntries);
+		// printLeaderboard(leaderboardEntries);
 	}
 
 	// ==========================================================================
@@ -65,19 +65,19 @@ public class Leaderboard /* implements Drawable */{
 
 	public void addLeaderBoardEntries() {
 		try {
-			addLeaderboardEntry("a", 17);
-			addLeaderboardEntry("b", 1);
-			addLeaderboardEntry("c", 0.6);
-			addLeaderboardEntry("d", 0.9);
-			addLeaderboardEntry("e", 6.2);
+			addLeaderboardEntry("a", 43);
+			addLeaderboardEntry("b", 44);
+			addLeaderboardEntry("c", 42);
+			addLeaderboardEntry("d", 45);
+			addLeaderboardEntry("e", 41);
 		} catch (Exception ex) {
 			System.out.println("Adding leaderboard data caused error");
 		}
 
 		try {
 			for (int i = 0; i < leaderboardEntries.length; i++) {
-				System.out.println(leaderboardEntries[i].getName());
-				System.out.println(leaderboardEntries[i].getScore());
+				// System.out.println(leaderboardEntries[i].getName());
+				// System.out.println(leaderboardEntries[i].getScore());
 			}
 		} catch (Exception ex) {
 			System.out.println("Error printing leaderboard data");
@@ -157,7 +157,7 @@ public class Leaderboard /* implements Drawable */{
 	 * 
 	 * @param leaderboardArray
 	 */
-	private void printLeaderboard(LeaderboardEntry[] leaderboardArray) {
+	public void printLeaderboard(LeaderboardEntry[] leaderboardArray) {
 		for (int i = 0; i < leaderboardArray.length; i++) {
 			System.out.println(leaderboardArray[i].getName() + " "
 					+ leaderboardArray[i].getScore());
