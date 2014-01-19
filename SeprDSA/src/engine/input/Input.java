@@ -38,6 +38,12 @@ public class Input {
 		clickables.remove(x);
 	}
 
+	private static ArrayList<MouseEvent> mouseEvents;
+
+	public static ArrayList<MouseEvent> mouseEvents() {
+		return mouseEvents;
+	}
+
 	public static void addKeyboardable(Keyboardable x) {
 		keyboardables.add(x);
 		List<Integer> keys = x.keys();
@@ -68,7 +74,10 @@ public class Input {
 						.handleKeyboard(key, Keyboard.getEventKeyState());
 			}
 		}
+		ArrayList<MouseEvent> me = new ArrayList<MouseEvent>();
 		while (Mouse.next()) {
+			me.add(new MouseEvent(Mouse.getEventX(), Mouse.getEventY(), Mouse
+					.getEventButton(), Mouse.getEventButtonState()));
 			int button = -1;
 			Vector pos = Drawables.windowCoords(new BasicVector(new double[] {
 					Mouse.getEventX(), Mouse.getEventY() }));
@@ -113,5 +122,6 @@ public class Input {
 
 			}
 		}
+		mouseEvents = me;
 	}
 }
