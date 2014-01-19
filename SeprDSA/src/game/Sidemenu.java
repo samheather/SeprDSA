@@ -25,7 +25,7 @@ public class Sidemenu extends Widget {
 	public int startOfSideMenuX = 0;
 
 	private void createButton() {
-		exitGameButton = new Button("Exit Game");
+		exitGameButton = new Button("");
 		exitGameButton.setTheme("button");
 		exitGameButton.addCallback(new Runnable() {
 			public void run() {
@@ -68,7 +68,7 @@ public class Sidemenu extends Widget {
 		// button.adjustSize(); //Calculate optimal size instead of manually
 		// setting it
 		for (int i = 0; i < labelArray.length; i++) {
-			labelArray[i].setPosition(startOfSideMenuX, 130 + 30 * i);
+			labelArray[i].setPosition(startOfSideMenuX, 110 + 20 * i);
 			labelArray[i].setSize(200, 20);
 		}
 
@@ -81,8 +81,8 @@ public class Sidemenu extends Widget {
 		newAltitudeField.setSize(100, 30);
 
 		exitGameButton
-				.setPosition(startOfSideMenuX + 25, altitudeControls + 85);
-		exitGameButton.setSize(150, 30);
+				.setPosition(startOfSideMenuX + 35, 554);
+		exitGameButton.setSize(130, 45);
 	}
 
 	public Sidemenu() {
@@ -94,7 +94,7 @@ public class Sidemenu extends Widget {
 		setupTextField();
 		// createHelloPanel();
 
-		labelArray[0].setText("Number - Entry Point - Time");
+		labelArray[0].setText("Number - Entry - Time");
 	}
 
 	public void drawSidemenu() {
