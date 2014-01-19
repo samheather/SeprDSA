@@ -31,7 +31,7 @@ public class WayPoint implements Drawable, Physical {
 	public WayPoint(Vector pos, String pointNumber) {
 		position = pos;
 		number = pointNumber;
-		numbertext = new Text(pointNumber, Fonts.smallFont, Alignment.CENTRED);
+		numbertext = new Text(pointNumber, Fonts.wayPointFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 	}
@@ -45,18 +45,17 @@ public class WayPoint implements Drawable, Physical {
 	 * Adds the way point to the GUI
 	 * 
 	 */
-
 	public Drawing draw() {
 		return new Sprite(Images.waypoints[randomImage])
 				.scale(size / Images.waypoints[randomImage].size().get(0))
 				.overlay(
 						numbertext
-								.red(0)
-								.blue(0)
-								.green(0)
-								.alpha(0.7)
+								.red(1.0)
+								.blue(1.0)
+								.green(1.0)
+								.alpha(1.0)
 								.translate(
-										new BasicVector(new double[] { 0, 6 })))
+										new BasicVector(new double[] { 0, -28 })))
 				.translate(position);
 	}
 
