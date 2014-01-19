@@ -3,9 +3,15 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import engine.timing.Timing;
+import engine.timing.Timing.NRunnable;
+
 import main.SeprDSA;
 
 public class FuturePlane {
+	
+	public int delayTillFuturePlanesBecomePlanes = 10;
+	public int timeTillAppears;
 
 	/**
 	 * Stores the flight number of the plane
@@ -48,11 +54,25 @@ public class FuturePlane {
 		// DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
 		// while (localTime < localTime + delayTime) {localTime +=
 		// SeprDSA.timer;}
-		if (randomgen.nextDouble() > 0.9999) {
-			Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
-			p.setBearing(randomgen.nextFloat() * 360);
-			FuturePlanes.remove(this);
-		}
+		timeTillAppears = delayTillFuturePlanesBecomePlanes;
+		Timing.doNTimes(delayTillFuturePlanesBecomePlanes, 1000, new NRunnable() {
+			@Override
+			public void run(int n) {
+				if (n == 1) {
+					Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
+					p.setBearing(randomgen.nextFloat() * 360);
+					FuturePlanes.pop();
+				}
+				else {
+					timeTillAppears -= 1;
+				}
+				
+			}
+		});
+	}
+	
+	public void createPlaneFromFuturePlane() {
+		
 	}
 
 	/**

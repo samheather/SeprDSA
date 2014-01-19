@@ -27,6 +27,10 @@ public class FuturePlanes {
 	public static void remove(FuturePlane p) {
 		futurePlanes.remove(p);
 	}
+	
+	public static void pop() {
+		futurePlanes.remove(0);
+	}
 
 	/**
 	 * This method returns the number of FuturePlanes in the list

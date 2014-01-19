@@ -110,7 +110,7 @@ public class Sidemenu extends Widget {
 			String tempString = "";
 			if (i < numberOfFuturePlanes) {
 				tempString = FuturePlanes.futurePlanes.get(i).getFnumber()
-						+ "E/E" + "TIME";
+						+ "E/E" + " " + FuturePlanes.futurePlanes.get(i).timeTillAppears;
 
 			}
 			labelArray[i + 1].setText(tempString);
