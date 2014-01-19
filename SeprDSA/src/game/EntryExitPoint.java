@@ -22,7 +22,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private double radius = 200;
-	private int size = 25; // Size in pixels (Square)
+	private int size = (int)((25.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private int number;
 
 	@Override
@@ -168,5 +168,4 @@ public class EntryExitPoint implements Drawable, Physical {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

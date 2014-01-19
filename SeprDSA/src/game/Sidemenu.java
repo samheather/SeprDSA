@@ -23,7 +23,7 @@ public class Sidemenu extends Widget {
 	private DialogLayout helloPanel;
 	private EditField newAltitudeField;
 	public int startOfSideMenuX = 0;
-	public static final int width = 200;
+	public static final int width = 800;
 
 	public static double remainingDisplayWidth() {
 		return Drawables.virtualDisplaySize().get(0) - width;
