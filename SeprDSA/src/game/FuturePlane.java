@@ -10,7 +10,7 @@ import main.SeprDSA;
 
 public class FuturePlane {
 	
-	public int delayTillFuturePlanesBecomePlanes = 10;
+	public int delayTillFuturePlanesBecomePlanes = 5;
 	public int timeTillAppears;
 
 	/**
