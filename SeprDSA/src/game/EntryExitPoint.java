@@ -30,6 +30,14 @@ public class EntryExitPoint implements Drawable, Physical {
 		return "EntryExitPoint" + number;
 	}
 	
+	public float getTolerance() {
+		return tolerance;
+	}
+	
+	public float getBearingNeeded() {
+		return bearingNeeded;
+	}
+	
 	public String sidemenuString() {
 		switch (number) {
 		case 0:
@@ -89,6 +97,7 @@ public class EntryExitPoint implements Drawable, Physical {
 //				System.out.println("Random is broken.");
 //			}
 //		}
+		bearingNeeded = bearing;
 		tolerance = tolerances;
 	}
 

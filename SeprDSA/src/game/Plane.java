@@ -53,11 +53,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean lineExists = false;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
-			EntryExitPoint startPoint, EntryExitPoint endPoint) {
+			EntryExitPoint startPoint, EntryExitPoint endPoint, float bearing) {
 		number = fnumber;
 		wayPointList = pointList;
 		exitPoint = endPoint;
 		score = wayPointList.size() * 10;
+		rotation = bearing;
+		targetBearing = bearing;
 		// position = enterPoint.getPos();
 		setPos(startPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);

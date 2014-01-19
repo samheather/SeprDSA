@@ -61,7 +61,7 @@ public class SeprDSA {
 	public static float getMagnitude(Vector vecA, Vector vecB) {
 		Vector vecC = vecA.subtract(vecB);
 		return (float) Math.sqrt(Math.pow(vecC.get(0), 2)
-				+ Math.pow(vecC.get(1), 2) + Math.pow(vecC.get(2), 2));
+				+ Math.pow(vecC.get(1), 2) );
 	}
 
 	public static Vector getWayPointPos(int counter) {
@@ -75,11 +75,11 @@ public class SeprDSA {
 						randomgen.nextDouble() * 20 });
 
 		for (WayPoint waypoint : wayPointList) {
-			if (getMagnitude(waypoint.getPos(), testVector) < 200.0f) {
+			if (getMagnitude(waypoint.getPos(), testVector) < 100.0f) {
 				isValid = false;
 			}
 		}
-		if (isValid || counter > 50) {
+		if (isValid) {
 			System.out.println(counter);
 			return testVector;
 		} else {
@@ -107,45 +107,46 @@ public class SeprDSA {
 				new BasicVector(new double[] {
 				Sidemenu.width/2,
 				Drawables.virtualDisplaySize().get(1) / 2,
-				10000 } //this is altitude
-				), 0, 360, 1);
+				10 } //this is altitude
+				), -90, 85, 1);
 		// Right
 		EntryExitPoint newExit2 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2 + Sidemenu.remainingDisplayWidth()/2,
 				0,
-				10000 } //this is altitude
-				), 0, 360, 2);
+				10 } //this is altitude
+				), -180, 85, 2);
+		// Bottom
 		EntryExitPoint newExit3 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2,
 				-Drawables.virtualDisplaySize().get(1) / 2,
-				10000 } //this is altitude
-				), 0, 360, 3);
+				10 } //this is altitude
+				), 90, 85, 3);
+		// Left
 		EntryExitPoint newExit4 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2 - Sidemenu.remainingDisplayWidth()/2,
 				0,
-				10000 } //this is altitude
-				), 0, 360, 4);
+				10 } //this is altitude
+				), 0, 85, 4);
 		entryExitPointList.add(newExit1);
 		entryExitPointList.add(newExit2);
 		entryExitPointList.add(newExit3);
 		entryExitPointList.add(newExit4);
 
-		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(
-				new double[] { -10, -125, 0 }), 0, 5, 0); // Landing Strip
-		entryExitPointList.add(landingStrip);
+		EntryExitPoint landingStripRight = new EntryExitPoint(new BasicVector(
+				new double[] { -10, -125, 0 }), 0, 15, 0); // Landing Strip
+		entryExitPointList.add(landingStripRight);
+		
+		EntryExitPoint landingStripLeft = new EntryExitPoint(new BasicVector(
+				new double[] { -10, -125, 0 }), 180, 15, 0); // Landing Strip
+		entryExitPointList.add(landingStripLeft);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(getWayPointPos(0), i.toString());
 			wayPointList.add(newWayPoint);
 		}
-
-		// TEST PLANE
-		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList,
-				landingStrip, landingStrip);
-		p.setBearing(0);
 
 		while (true) {
 			engine.timing.Timing.logic();
