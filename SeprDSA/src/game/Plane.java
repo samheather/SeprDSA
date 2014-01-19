@@ -40,7 +40,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean down = false;
 	private double radius = 50;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
-	private int size = 60;
+	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
 	private Text numbertext;
 	private Text altitudeText;
@@ -146,7 +146,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -40 })))
+										new BasicVector(new double[] { 0, -160 })))
 				.overlay(
 						new Text("Altitude: "
 								+ String.valueOf(Math.round(z * 1000)),
@@ -156,7 +156,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -60 })))
+										new BasicVector(new double[] { 0, -240 })))
 				.overlay(
 						nextWaypointText
 								.red(1.0)
@@ -164,7 +164,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -80 })))
+										new BasicVector(new double[] { 0, -320 })))
 				.translate(new BasicVector(new double[] { x, y }))
 				.overlay(
 						(lineExists ? new Line(getPos(), endLine)

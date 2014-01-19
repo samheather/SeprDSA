@@ -31,7 +31,7 @@ public class SeprDSA {
 
 	public static long timer1 = System.nanoTime();
 	public static long timer2 = System.nanoTime();
-	private static int pixelsFromEdge = 100;
+	private static int pixelsFromEdge = 400;
 	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10;
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
@@ -68,10 +68,10 @@ public class SeprDSA {
 		boolean isValid = true;
 		BasicVector testVector = new BasicVector(
 				new double[] {
-						((randomgen.nextDouble() - 0.5) * ((Display.getWidth() - pixelsFromEdge) - Sidemenu.width))
+						((randomgen.nextDouble() - 0.5) * ((Drawables.virtualDisplaySize().get(0) - pixelsFromEdge) - Sidemenu.width))
 								+ Sidemenu.width / 2.0,
 						(randomgen.nextDouble() - 0.5)
-								* (Display.getHeight() - pixelsFromEdge),
+								* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
 						randomgen.nextDouble() * 20 });
 
 		for (WayPoint waypoint : wayPointList) {
@@ -89,7 +89,7 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 1024, 640, new File(
+		Drawables.initialise(new Window(1024, 640), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
