@@ -72,7 +72,8 @@ public class Planes {
 			FuturePlane tempFuturePlane = new FuturePlane(
 					randomgen.nextInt(2000));
 			FuturePlanes.add(tempFuturePlane);
-			spawnThreshhold = 2000 + randomgen.nextInt(6000);
+			// Add next plane in between 2 and 8 seconds.
+			spawnThreshhold += 2000 + randomgen.nextInt(6000);
 		}
 	}
 
