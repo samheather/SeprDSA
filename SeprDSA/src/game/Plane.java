@@ -62,9 +62,9 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		setPos(startPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 		altitudeText = new Text("Altitude: "
-				+ String.valueOf(Math.round(z * 1000)), Fonts.planeFont,
+				+ String.valueOf(Math.round(z * 1000)) + "m", Fonts.planeFont,
 				Alignment.CENTRED);
-		nextWaypointText = new Text("Next Waypoint: ", Fonts.planeFont,
+		nextWaypointText = new Text(getNextWayPointText(), Fonts.planeFont,
 				Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
@@ -91,6 +91,15 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 			return wayPointList.get(0);
 		} else {
 			return null;
+		}
+	}
+	
+	public String getNextWayPointText() {
+		if (getNextWayPoint() != null) {
+			return "Next Waypoint: " + getNextWayPoint().getNumber();
+		}
+		else {
+			return "Now Exit!";
 		}
 	}
 

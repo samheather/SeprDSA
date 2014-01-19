@@ -24,7 +24,7 @@ public class Sidemenu extends Widget {
 	private EditField newAltitudeField;
 	public int startOfSideMenuX = 0;
 	public static final int width = 200;
-	
+
 	public static double remainingDisplayWidth() {
 		return Drawables.virtualDisplaySize().get(0) - width;
 	}
@@ -85,8 +85,7 @@ public class Sidemenu extends Widget {
 				altitudeControls + 25);
 		newAltitudeField.setSize(100, 30);
 
-		exitGameButton
-				.setPosition(startOfSideMenuX + 35, 554);
+		exitGameButton.setPosition(startOfSideMenuX + 35, 554);
 		exitGameButton.setSize(130, 45);
 	}
 
@@ -110,8 +109,10 @@ public class Sidemenu extends Widget {
 			String tempString = "";
 			if (i < numberOfFuturePlanes) {
 				tempString = FuturePlanes.futurePlanes.get(i).getFnumber()
-						+ "E/E" + " " + FuturePlanes.futurePlanes.get(i).timeTillAppears;
-
+						+ " - "
+						+ FuturePlanes.futurePlanes.get(i).getEntryPoint()
+								.sidemenuString() + " - "
+						+ FuturePlanes.futurePlanes.get(i).timeTillAppears;
 			}
 			labelArray[i + 1].setText(tempString);
 
