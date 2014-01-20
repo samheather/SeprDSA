@@ -45,6 +45,7 @@ public class Images {
 	 * from image file map.png.
 	 */
 	public static Texture map = load("new_map.png");
+	public static Texture mainMenu = load("menu_background.png");
 	/**
 	 * Array of plane textures (to save creating multiple un-ordered objects.
 	 */

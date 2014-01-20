@@ -72,7 +72,7 @@ public class SeprDSA {
 								+ Sidemenu.width / 2.0,
 						(randomgen.nextDouble() - 0.5)
 								* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
-						randomgen.nextDouble() * 20 });
+						randomgen.nextDouble() * 13 });
 
 		for (WayPoint waypoint : wayPointList) {
 			if (getMagnitude(waypoint.getPos(), testVector) < 400.0f) {
@@ -96,6 +96,7 @@ public class SeprDSA {
 		Display.setTitle("Dat Flying Game");
 
 		Map m = new Map();
+		MainMenu me = new MainMenu();
 		Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
