@@ -22,12 +22,20 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private double radius = 200;
-	private int size = 25; // Size in pixels (Square)
+	private int size = (int)((25.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private int number;
 
 	@Override
 	public String toString() {
 		return "EntryExitPoint" + number;
+	}
+	
+	public float getTolerance() {
+		return tolerance;
+	}
+	
+	public float getBearingNeeded() {
+		return bearingNeeded;
 	}
 	
 	public String sidemenuString() {
@@ -53,42 +61,7 @@ public class EntryExitPoint implements Drawable, Physical {
 		Drawables.add(this);
 		Physicals.add(this);
 		position = pos;
-//		if (!(pos.equals(new BasicVector(new double[] { 0, 0, 0 })))) {
-//			position = pos;
-//		} else {
-//			switch (randomgen.nextInt(4)) {
-//			case 0: // Right side
-//				position = new BasicVector(new double[] {
-//						Drawables.virtualDisplaySize().get(0) / 2,
-//						(randomgen.nextDouble() - 0.5)
-//								* Drawables.virtualDisplaySize().get(1) / 2,
-//						randomgen.nextDouble() * 20 });
-//				break;
-//			case 1: // Left side
-//				position = new BasicVector(new double[] {
-//						-Drawables.virtualDisplaySize().get(0) / 2,
-//						(randomgen.nextDouble() - 0.5)
-//								* Drawables.virtualDisplaySize().get(1) / 2,
-//						randomgen.nextDouble() * 20 });
-//				break;
-//			case 2: // Top side
-//				position = new BasicVector(new double[] {
-//						(randomgen.nextDouble() - 0.5)
-//								* Drawables.virtualDisplaySize().get(0) / 2,
-//						Drawables.virtualDisplaySize().get(1) / 2,
-//						randomgen.nextDouble() * 20 });
-//				break;
-//			case 3: // Bottom side
-//				position = new BasicVector(new double[] {
-//						(randomgen.nextDouble() - 0.5)
-//								* Drawables.virtualDisplaySize().get(0) / 2,
-//						-Drawables.virtualDisplaySize().get(1) / 2,
-//						randomgen.nextDouble() * 20 });
-//				break;
-//			default:
-//				System.out.println("Random is broken.");
-//			}
-//		}
+		bearingNeeded = bearing;
 		tolerance = tolerances;
 	}
 
@@ -159,5 +132,4 @@ public class EntryExitPoint implements Drawable, Physical {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

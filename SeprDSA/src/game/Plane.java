@@ -40,12 +40,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean down = false;
 	private double radius = 50;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
-	private int size = 60;
+	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
 	private Text numbertext;
 	private Text altitudeText;
 	private Text nextWaypointText;
-	private int speed = 15 + randomgen.nextInt(15);
+	private double baseSpeed = ((15.0/640.0) * Drawables.virtualDisplaySize().get(1));
+	private int speed = (int)(baseSpeed + randomgen.nextDouble() * baseSpeed);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
 	private int score;
@@ -53,11 +54,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean lineExists = false;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
-			EntryExitPoint startPoint, EntryExitPoint endPoint) {
+			EntryExitPoint startPoint, EntryExitPoint endPoint, float bearing) {
 		number = fnumber;
 		wayPointList = pointList;
 		exitPoint = endPoint;
 		score = wayPointList.size() * 10;
+		rotation = bearing;
+		targetBearing = bearing;
 		// position = enterPoint.getPos();
 		setPos(startPoint.getPos());
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
@@ -146,7 +149,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -40 })))
+										new BasicVector(new double[] { 0, -160 })))
 				.overlay(
 						new Text("Altitude: "
 								+ String.valueOf(Math.round(z * 1000)),
@@ -156,7 +159,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -60 })))
+										new BasicVector(new double[] { 0, -240 })))
 				.overlay(
 						nextWaypointText
 								.red(1.0)
@@ -164,7 +167,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.green(1.0)
 								.alpha(0.75)
 								.translate(
-										new BasicVector(new double[] { 0, -80 })))
+										new BasicVector(new double[] { 0, -320 })))
 				.translate(new BasicVector(new double[] { x, y }))
 				.overlay(
 						(lineExists ? new Line(getPos(), endLine)

@@ -17,7 +17,7 @@ import engine.physics.Physicals;
 public class WayPoint implements Drawable, Physical {
 
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
-	private int size = 25;
+	private int size = (int)((25.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
 	private int randomImage = new Random().nextInt(Images.waypoints.length);
 	private Text numbertext;

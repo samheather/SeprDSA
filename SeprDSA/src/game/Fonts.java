@@ -12,15 +12,18 @@ import engine.graphics.drawing.Font;
  */
 public class Fonts {
 	public static Font test = new Font("Times New Roman", java.awt.Font.BOLD,
-			36);
+			144);
 	public static Font smallFont = new Font("Times New Roman",
-			java.awt.Font.BOLD, 12);
+			java.awt.Font.BOLD, 48);
 	public static Font planeFont = new Font("Times New Roman",
-			java.awt.Font.BOLD, 16);
+			java.awt.Font.BOLD, 64);
 	public static Font wayPointFont = new Font("Times New Roman",
-			java.awt.Font.BOLD, 20);
+			java.awt.Font.BOLD, 80);
 	public static Font sideMenuTitle = new Font("Times New Roman",
-			java.awt.Font.BOLD, 16);
+			java.awt.Font.BOLD, 64);
 	public static Font sideMenuText = new Font("Times New Roman",
-			java.awt.Font.ITALIC, 16);
+			java.awt.Font.ITALIC, 64);
 }
+
+
+// Switch to Tahoma Bold font if font rendering problem.

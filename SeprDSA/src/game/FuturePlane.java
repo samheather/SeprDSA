@@ -11,6 +11,7 @@ import main.SeprDSA;
 public class FuturePlane {
 	
 	public int delayTillFuturePlanesBecomePlanes = 15;
+
 	public int timeTillAppears;
 
 	/**
@@ -55,24 +56,29 @@ public class FuturePlane {
 		// while (localTime < localTime + delayTime) {localTime +=
 		// SeprDSA.timer;}
 		timeTillAppears = delayTillFuturePlanesBecomePlanes;
-		Timing.doNTimes(delayTillFuturePlanesBecomePlanes, 1000, new NRunnable() {
-			@Override
-			public void run(int n) {
-				if (n == 1) {
-					Plane p = new Plane(fnumber, wayPointList, enterPoint, exitPoint);
-					p.setBearing(randomgen.nextFloat() * 360);
-					FuturePlanes.pop();
-				}
-				else {
-					timeTillAppears -= 1;
-				}
-				
-			}
-		});
+		Timing.doNTimes(delayTillFuturePlanesBecomePlanes, 1000,
+				new NRunnable() {
+					@Override
+					public void run(int n) {
+						if (n == 1) {
+							System.out.println(enterPoint.getTolerance() + " " + enterPoint.getBearingNeeded());
+							Plane p = new Plane(fnumber, wayPointList,
+									enterPoint, exitPoint, (float) ((randomgen
+											.nextDouble() - 0.5)
+											* 2.0
+											* enterPoint.getTolerance()
+											+ enterPoint.getBearingNeeded()));
+							FuturePlanes.pop();
+						} else {
+							timeTillAppears -= 1;
+						}
+
+					}
+				});
 	}
-	
+
 	public void createPlaneFromFuturePlane() {
-		
+
 	}
 
 	/**
@@ -107,7 +113,7 @@ public class FuturePlane {
 			return potentialNewNumber;
 		}
 	}
-	
+
 	public EntryExitPoint getEntryPoint() {
 		return enterPoint;
 	}

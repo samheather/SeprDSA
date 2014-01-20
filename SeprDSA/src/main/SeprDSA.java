@@ -31,7 +31,7 @@ public class SeprDSA {
 
 	public static long timer1 = System.nanoTime();
 	public static long timer2 = System.nanoTime();
-	private static int pixelsFromEdge = 100;
+	private static int pixelsFromEdge = 400;
 	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10;
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
@@ -61,25 +61,25 @@ public class SeprDSA {
 	public static float getMagnitude(Vector vecA, Vector vecB) {
 		Vector vecC = vecA.subtract(vecB);
 		return (float) Math.sqrt(Math.pow(vecC.get(0), 2)
-				+ Math.pow(vecC.get(1), 2) + Math.pow(vecC.get(2), 2));
+				+ Math.pow(vecC.get(1), 2) );
 	}
 
 	public static Vector getWayPointPos(int counter) {
 		boolean isValid = true;
 		BasicVector testVector = new BasicVector(
 				new double[] {
-						((randomgen.nextDouble() - 0.5) * ((Display.getWidth() - pixelsFromEdge) - Sidemenu.width))
+						((randomgen.nextDouble() - 0.5) * ((Drawables.virtualDisplaySize().get(0) - pixelsFromEdge) - Sidemenu.width))
 								+ Sidemenu.width / 2.0,
 						(randomgen.nextDouble() - 0.5)
-								* (Display.getHeight() - pixelsFromEdge),
+								* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
 						randomgen.nextDouble() * 20 });
 
 		for (WayPoint waypoint : wayPointList) {
-			if (getMagnitude(waypoint.getPos(), testVector) < 200.0f) {
+			if (getMagnitude(waypoint.getPos(), testVector) < 400.0f) {
 				isValid = false;
 			}
 		}
-		if (isValid || counter > 50) {
+		if (isValid) {
 			System.out.println(counter);
 			return testVector;
 		} else {
@@ -89,7 +89,7 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 1024, 640, new File(
+		Drawables.initialise(new Window(1024, 640), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
@@ -107,45 +107,46 @@ public class SeprDSA {
 				new BasicVector(new double[] {
 				Sidemenu.width/2,
 				Drawables.virtualDisplaySize().get(1) / 2,
-				10000 } //this is altitude
-				), 0, 360, 1);
+				10 } //this is altitude
+				), -90, 85, 1);
 		// Right
 		EntryExitPoint newExit2 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2 + Sidemenu.remainingDisplayWidth()/2,
 				0,
-				10000 } //this is altitude
-				), 0, 360, 2);
+				10 } //this is altitude
+				), -180, 85, 2);
+		// Bottom
 		EntryExitPoint newExit3 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2,
 				-Drawables.virtualDisplaySize().get(1) / 2,
-				10000 } //this is altitude
-				), 0, 360, 3);
+				10 } //this is altitude
+				), 90, 85, 3);
+		// Left
 		EntryExitPoint newExit4 = new EntryExitPoint(
 				new BasicVector(new double[] {
 				Sidemenu.width/2 - Sidemenu.remainingDisplayWidth()/2,
 				0,
-				10000 } //this is altitude
-				), 0, 360, 4);
+				10 } //this is altitude
+				), 0, 85, 4);
 		entryExitPointList.add(newExit1);
 		entryExitPointList.add(newExit2);
 		entryExitPointList.add(newExit3);
 		entryExitPointList.add(newExit4);
 
-		EntryExitPoint landingStrip = new EntryExitPoint(new BasicVector(
-				new double[] { -10, -125, 0 }), 0, 5, 0); // Landing Strip
-		entryExitPointList.add(landingStrip);
+		EntryExitPoint landingStripRight = new EntryExitPoint(new BasicVector(
+				new double[] { -40, -500, 0 }), 0, 15, 0); // Landing Strip
+		entryExitPointList.add(landingStripRight);
+		
+		EntryExitPoint landingStripLeft = new EntryExitPoint(new BasicVector(
+				new double[] { -40, -500, 0 }), 180, 15, 0); // Landing Strip
+		entryExitPointList.add(landingStripLeft);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
 			WayPoint newWayPoint = new WayPoint(getWayPointPos(0), i.toString());
 			wayPointList.add(newWayPoint);
 		}
-
-		// TEST PLANE
-		Plane p = new Plane(FuturePlane.generateFlightNumber(), wayPointList,
-				landingStrip, landingStrip);
-		p.setBearing(0);
 
 		while (true) {
 			engine.timing.Timing.logic();

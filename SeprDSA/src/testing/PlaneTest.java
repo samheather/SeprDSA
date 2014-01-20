@@ -39,7 +39,7 @@ public class PlaneTest {
 
 		wayPointList = new ArrayList<WayPoint>();
 
-		Plane test1 = new Plane("12345678", wayPointList, enterPoint, exitPoint);
+		Plane test1 = new Plane("12345678", wayPointList, enterPoint, exitPoint, 0);
 		assertEquals("This should return the string Plane12345678",
 				"Plane12345678", test1.toString());
 	}
@@ -62,9 +62,9 @@ public class PlaneTest {
 		wayPointList = new ArrayList<WayPoint>();
 
 		Plane test1 = new Plane("ABCDEFGH", wayPointList, enterPoint1,
-				exitPoint2);
+				exitPoint2, 0);
 		Plane test2 = new Plane("abcdefgh", wayPointList, enterPoint2,
-				exitPoint1);
+				exitPoint1, 0);
 		assertEquals("This should return true as as the points are colliding",
 				true, test1.isCollidingPos(test2.getPos()));
 	}
@@ -87,9 +87,9 @@ public class PlaneTest {
 		wayPointList = new ArrayList<WayPoint>();
 
 		Plane test1 = new Plane("ABCDEFGH", wayPointList, enterPoint1,
-				exitPoint2);
+				exitPoint2, 0);
 		Plane test2 = new Plane("abcdefgh", wayPointList, enterPoint2,
-				exitPoint1);
+				exitPoint1, 0);
 		assertEquals("This should return true as as the points are colliding",
 				true, test1.isCollidingObj(test2));
 	}
