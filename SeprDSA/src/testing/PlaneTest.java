@@ -19,7 +19,7 @@ import org.la4j.vector.dense.BasicVector;
 
 public class PlaneTest {
 	private ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
-
+	
 	@BeforeClass
 	public static void setUp() throws MalformedURLException, IOException {
 		Drawables.initialise(new Window(1024, 640), 824, 640, new File(

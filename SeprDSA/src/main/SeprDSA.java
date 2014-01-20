@@ -100,10 +100,7 @@ public class SeprDSA {
 		Map m = new Map();
 		MainMenu mm = new MainMenu();
 		Sidemenu s = new Sidemenu();
-
-		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
 		Audio.playSound("res/sounds/BGM.wav", true, 0.5f);
-		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 		
 		// EntryExit Points 1..4 are for top, right, bottom, left, 0 is airport
 		// Top
