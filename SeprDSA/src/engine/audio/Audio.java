@@ -17,9 +17,9 @@ public class Audio {
 	 * using appropriate loader. Sound then played using external soundLibrary,
 	 * passing parameters originally passed in.
 	 * 
-	 * @param path
-	 * @param looping
-	 * @param volume
+	 * @param path A path from root to sounds to the file
+	 * @param looping Whether or not the sound will loop
+	 * @param volume Volume at which the sound will be played between 0.0 and 1.0 inclusive
 	 */
 	public static void playSound(String path, boolean looping, float volume) {
 		try {
