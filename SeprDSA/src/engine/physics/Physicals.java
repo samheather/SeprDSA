@@ -1,5 +1,6 @@
 package engine.physics;
 
+import engine.audio.Audio;
 import engine.graphics.Drawables;
 import engine.timing.Timing;
 import game.EntryExitPoint;
@@ -62,7 +63,8 @@ public class Physicals {
 					|| phys.getPos().get(1) < -Drawables.
 					virtualDisplaySize().get(1) / 2) {
 				//plane with edge of screen collision
-				
+				Audio.playSound("res/sounds/Explode.wav", false, 0.7f);
+				((Plane) phys).destroy();
 			}
 		}
 		// System.out.println(colliding);
@@ -84,6 +86,7 @@ public class Physicals {
 					} else if (physicalPair[1] instanceof Plane) {
 						// plane with plane collision
 						// CLEANUP AND PUT BACK TO MAIN MENU
+						Audio.playSound("res/sounds/Explode.wav", false, 0.7f);
 					}  
 				}
 			}
