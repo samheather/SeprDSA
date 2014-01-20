@@ -20,7 +20,7 @@ public class Planes {
 	/**
 	 * Creates a random time for plane spawning in milliseconds
 	 */
-	private static double spawnThreshhold = 3000 + randomgen.nextInt(6000);
+	private static double spawnThreshhold = 6000 + randomgen.nextInt(6000);
 	private static double currTime = 0;
 
 	/**
