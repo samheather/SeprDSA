@@ -10,7 +10,6 @@ import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
 import game.MainMenu;
-import game.MainMenuBackground;
 import game.Map;
 import game.Plane;
 import game.Planes;
@@ -41,7 +40,7 @@ public class SeprDSA {
 	private static int score = 0;
 	private static Random randomgen = new Random();
 	public static Plane selectedPlane;
-	public static boolean gameCurrentlyPlaying;
+	public static boolean gameCurrentlyPlaying = false;
 	/**
 	 * Initialise leaderboard here so it can be accessed globally
 	 */
@@ -150,10 +149,12 @@ public class SeprDSA {
 		}
 
 		while (true) {
-			engine.timing.Timing.logic();
+			if (gameCurrentlyPlaying) {
+				engine.timing.Timing.logic();
+				Planes.updateTimer();
+				Physicals.logic();
+			}
 			Input.logic();
-			Planes.updateTimer();
-			Physicals.logic();
 			Drawables.logic();
 			s.drawSidemenu();
 //			mm.redraw();

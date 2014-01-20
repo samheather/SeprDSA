@@ -22,7 +22,7 @@ public class MainMenu extends Widget {
 	private Button startButton;
 	private Button helpButton;
 	private Button exitButton;
-	private MainMenuBackground mmb = new MainMenuBackground();
+	private MainMenuBackground mmb;
 	
 	private void createButtons() {
 		startButton = new Button(" ");
@@ -69,7 +69,7 @@ public class MainMenu extends Widget {
 	}
 	
 	public void show() {
-		main.SeprDSA.gameCurrentlyPlaying = false;
+		main.SeprDSA.gameCurrentlyPlaying = true;
 		mmb.show();
 		layout();
 	}

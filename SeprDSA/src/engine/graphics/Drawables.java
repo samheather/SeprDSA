@@ -37,7 +37,7 @@ import engine.graphics.drawing.Drawing;
 public class Drawables {
 
 	/* The list of Drawable objects */
-	private static List<Drawable> drawables;
+	public static List<Drawable> drawables;
 
 	/* The list of Drawings that were generated from the Drawable objects */
 	private static List<Drawing> drawings;
@@ -79,14 +79,13 @@ public class Drawables {
 	 *            The Drawable to be removed
 	 */
 	public static void remove(Drawable d) {
-//		for (int i = 0; i < drawables.size(); i++) {
-//			if (drawables.get(i) == d) {
-//				drawables.remove(i);
-//				if (drawings.size() > i)
-//					drawings.remove(i);
-//			}
-//		}
-		drawables.remove(d);
+		for (int i = 0; i < drawables.size(); i++) {
+			if (drawables.get(i) == d) {
+				drawables.remove(i);
+				if (drawings.size() > i)
+					drawings.remove(i);
+			}
+		}
 	}
 
 	/**
