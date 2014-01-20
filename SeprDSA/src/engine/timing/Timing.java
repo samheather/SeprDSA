@@ -18,6 +18,14 @@ public class Timing {
 		return doNTimes(1, milliseconds, does);
 	}
 
+	
+	/**
+	 * 
+	 * @param n Number of times to repeat 'does'
+	 * @param milliseconds Interval between iterations of 'does' in milliseconds
+	 * @param does Subroutine that performs n times
+	 * @return TaskCanceller class that is used internally to check for cancellations of tasks
+	 */
 	public static TaskCanceller doNTimes(int n, double milliseconds,
 			NRunnable does) {
 		TaskCanceller c = new TaskCanceller();
@@ -26,6 +34,13 @@ public class Timing {
 		return c;
 	}
 
+	/**
+	 * 
+	 * @param n Number of times to repeat 'does'
+	 * @param milliseconds Time between each iteration of 'does' in milliseconds
+	 * @param does Subroutine that performs n times
+	 * @param c Class used to cancel the scheduled task
+	 */
 	public static void doNTimes(int n, double milliseconds, NRunnable does,
 			TaskCanceller c) {
 		tasks.add(new Task(milliseconds, milliseconds + timeSinceStart, n,
@@ -41,6 +56,10 @@ public class Timing {
 		return timeSinceStart;
 	}
 
+	
+	/**
+	 *  (Needs to run every frame) Will schedule and perform tasks based on a PriorityQueue
+	 */
 	public static void logic() {
 		timeSinceStart = System.currentTimeMillis() - startTime;
 		lastTimeSinceLastFrame = timeSinceLastFrame;

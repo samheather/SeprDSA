@@ -14,6 +14,14 @@ class Task implements Comparable<Task> {
 	private Timing.NRunnable does;
 	private TaskCanceller canceller;
 
+	
+	/**
+	 * @param interval Will set the interval at which the Task is repeated
+	 * @param scheduled time at which the Task will perform
+	 * @param times Number of times that the task is yet to run
+	 * @param does The subroutine that is run after the scheduled time
+	 * @param canceller The TaskCanceller class to allow cancelling of scheduled Tasks
+	 */
 	public Task(double interval, double scheduled, int times,
 			Timing.NRunnable does, TaskCanceller canceller) {
 		this.interval = interval;

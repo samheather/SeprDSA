@@ -1,13 +1,13 @@
 package game;
 
 import org.la4j.vector.dense.BasicVector;
+import org.lwjgl.opengl.Display;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DialogLayout;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.EditField;
-
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
@@ -76,11 +76,11 @@ public class Sidemenu extends Widget {
 	protected void layout() {
 		// button.adjustSize(); //Calculate optimal size instead of manually
 		// setting it
+		System.out.println(Drawables.virtualDisplaySize().get(0) + " " + Display.getWidth());
 		for (int i = 0; i < labelArray.length; i++) {
-			labelArray[i].setPosition(0, 110 + 20 * i);
-			labelArray[i].setSize(200, 20);
+            labelArray[i].setPosition(0, 110 + 20 * i);
+            labelArray[i].setSize(200, 20);
 		}
-
 		exitGameButton.setPosition(35, 554);
 		exitGameButton.setSize(130, 45);
 	}
@@ -104,8 +104,6 @@ public class Sidemenu extends Widget {
 	 * side menu which contain the information on when a plane is incoming.
 	 */
 	public void drawSidemenu() {
-		// System.out.println("Sidemenu draw ran " +
-		// FuturePlanes.futurePlanes.size());
 		int numberOfFuturePlanes = FuturePlanes.futurePlanes.size();
 		for (int i = 0; i < 5; i++) {
 			String tempString = "";
