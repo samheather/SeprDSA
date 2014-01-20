@@ -118,7 +118,7 @@ public class Drawables {
 	 * @param height
 	 *            The height of the virtual display
 	 * @param canvas
-	 *            Fucking jpanels
+	 *            Jpanels
 	 * @param theme
 	 *            A URL pointing to the xml file specifying the theme to be used
 	 *            for TWL UI elements
@@ -138,7 +138,7 @@ public class Drawables {
 			d.set();
 			Display.create();
 			Display.setVSyncEnabled(true);
-			Display.setResizable(true);
+			Display.setResizable(false);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 			System.exit(0);
