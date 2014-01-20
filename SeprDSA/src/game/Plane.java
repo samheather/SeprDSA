@@ -291,8 +291,11 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		if (SeprDSA.selectedPlane == this) {
 			z += amount * 0.001;
 		}
-		if (z > 14 || z < 0) {
-			destroy();
+		if (z > 14.0) {
+			z = 14.0;
+		}
+		if (z < 0.1) {
+			z = 0.1
 		}
 	}
 }
