@@ -63,6 +63,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		targetBearing = bearing;
 		// position = enterPoint.getPos();
 		setPos(startPoint.getPos());
+		// Add line here using setPos to randomise initial altitude.
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 		altitudeText = new Text("Altitude: "
 				+ String.valueOf(Math.round(z * 1000)) + "m", Fonts.planeFont,
@@ -280,11 +281,14 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		return 1.0f;
 	}
 
+	/**
+	 * Called when scroll performed on this item - adjust the altitude of plane.
+	 */
 	@Override
 	public void scroll(int amount) {
 		// TODO Auto-generated method stub
 		if (SeprDSA.selectedPlane == this) {
-			z += amount * 0.005;
+			z += amount * 0.001;
 		}
 		if (z > 14 || z < 0) {
 			destroy();
