@@ -1,5 +1,6 @@
 package main;
 
+import engine.audio.Audio;
 import engine.graphics.Drawables;
 import engine.graphics.display.Fullscreen;
 import engine.graphics.display.Window;
@@ -32,7 +33,6 @@ public class SeprDSA {
 	public static long timer1 = System.nanoTime();
 	public static long timer2 = System.nanoTime();
 	private static int pixelsFromEdge = 400;
-	private static int entryExitPointNumber = 5; // not including runway
 	private static int wayPointNumber = 10;
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
@@ -93,12 +93,13 @@ public class SeprDSA {
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
+		Display.setTitle("Dat Flying Game");
 
 		Map m = new Map();
 		Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
-		// Audible.playSound("sounds/Booboo.wav", true, 0.5f);
+		Audio.playSound("res/sounds/BGM.wav", true, 0.5f);
 		// Audible.playSound("sounds/Arf.ogg", true, 0.5f);
 		
 		// EntryExit Points 1..4 are for top, right, bottom, left, 0 is airport

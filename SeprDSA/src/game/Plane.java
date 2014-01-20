@@ -99,7 +99,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	
 	public String getNextWayPointText() {
 		if (getNextWayPoint() != null) {
-			return "Next Waypoint: " + getNextWayPoint().getNumber();
+			return "Next " + getNextWayPoint().toString();
 		}
 		else {
 			return "Now Exit!";
@@ -161,7 +161,8 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.translate(
 										new BasicVector(new double[] { 0, -240 })))
 				.overlay(
-						nextWaypointText
+						new Text(getNextWayPointText(), Fonts.planeFont,
+								Alignment.CENTRED)
 								.red(1.0)
 								.blue(1.0)
 								.green(1.0)
