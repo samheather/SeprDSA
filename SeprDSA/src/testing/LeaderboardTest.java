@@ -19,20 +19,16 @@ public class LeaderboardTest {
 			
 			testLeaderboardEntries1[0].setName("d");
 			testLeaderboardEntries1[0].setScore(45);
-			testLeaderboardEntries1[1].setName("b");
-			testLeaderboardEntries1[1].setScore(44);
-			testLeaderboardEntries1[2].setName("a");
-			testLeaderboardEntries1[2].setScore(43);
-			testLeaderboardEntries1[3].setName("c");
-			testLeaderboardEntries1[3].setScore(42);
-			testLeaderboardEntries1[4].setName("e");
-			testLeaderboardEntries1[4].setScore(41);
-			
+			testLeaderboardEntries1[1].setName("d");
+			testLeaderboardEntries1[1].setScore(45);
+			testLeaderboardEntries1[2].setName("d");
+			testLeaderboardEntries1[2].setScore(45);
+			testLeaderboardEntries1[3].setName("d");
+			testLeaderboardEntries1[3].setScore(45);
+			testLeaderboardEntries1[4].setName("d");
+			testLeaderboardEntries1[4].setScore(45);
 			
 			testLB.addLeaderBoardEntries();
-			
-			testLB.printLeaderboard(testLB.leaderboardEntries);
-			testLB.printLeaderboard(testLeaderboardEntries1);
 			
 			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[0].getName(), testLB.leaderboardEntries[0].getName());
 			assertEquals("Tests that the array that is created matches the array that I created", testLeaderboardEntries1[0].getScore(), testLB.leaderboardEntries[0].getScore(), 0.001);
