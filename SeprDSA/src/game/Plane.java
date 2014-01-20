@@ -229,7 +229,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 	
 	public void quickRemove() {
-		Planes.remove(this);
+		//Planes.remove(this);
 		Input.removeScrollable(this);
 		Input.removeClickable(this);
 		Physicals.remove(this);

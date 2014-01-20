@@ -173,9 +173,10 @@ public class SeprDSA {
 				resetGame = false;
 				gameCurrentlyPlaying = false;
 				FuturePlanes.futurePlanes.clear();
-				for (Plane p : Planes.planes) {
+				for (Plane p : Planes.planes){
 					p.quickRemove();
 				}
+				Planes.planes.clear();
 				Timing.clearAllTasks();
 				mm.show();
 			}
