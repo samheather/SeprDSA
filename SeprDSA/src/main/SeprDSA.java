@@ -46,6 +46,11 @@ public class SeprDSA {
 	public static boolean gameCurrentlyPlaying = false;
 	public static boolean resetGame = false;
 	/**
+	 * Use to increase the size of the game window and to scale everything as
+	 * such.
+	 */
+	public static double resizeWindowScaleFactor = 1.25;
+	/**
 	 * Initialise leaderboard here so it can be accessed globally
 	 */
 	public static Leaderboard l = new Leaderboard();
@@ -66,14 +71,15 @@ public class SeprDSA {
 	public static float getMagnitude(Vector vecA, Vector vecB) {
 		Vector vecC = vecA.subtract(vecB);
 		return (float) Math.sqrt(Math.pow(vecC.get(0), 2)
-				+ Math.pow(vecC.get(1), 2) );
+				+ Math.pow(vecC.get(1), 2));
 	}
 
 	public static Vector getWayPointPos(int counter) {
 		boolean isValid = true;
 		BasicVector testVector = new BasicVector(
 				new double[] {
-						((randomgen.nextDouble() - 0.5) * ((Drawables.virtualDisplaySize().get(0) - pixelsFromEdge) - Sidemenu.width))
+						((randomgen.nextDouble() - 0.5) * ((Drawables
+								.virtualDisplaySize().get(0) - pixelsFromEdge) - Sidemenu.width))
 								+ Sidemenu.width / 2.0,
 						(randomgen.nextDouble() - 0.5)
 								* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
@@ -94,7 +100,8 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 4096, 2560, new File(
+		Drawables.initialise(new Window((int) (1024 * resizeWindowScaleFactor),
+				(int) (640 * resizeWindowScaleFactor)), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
@@ -104,35 +111,33 @@ public class SeprDSA {
 		MainMenu mm = new MainMenu();
 		Sidemenu s = new Sidemenu();
 		Audio.playSound("res/sounds/BGM.wav", true, 0.3f);
-		
+
 		// EntryExit Points 1..4 are for top, right, bottom, left, 0 is airport
 		// Top
-		EntryExitPoint newExit1 = new EntryExitPoint(
-				new BasicVector(new double[] {
-				Sidemenu.width/2,
-				Drawables.virtualDisplaySize().get(1) / 2,
-				11 } //this is altitude
+		EntryExitPoint newExit1 = new EntryExitPoint(new BasicVector(
+				new double[] { Sidemenu.width / 2,
+						Drawables.virtualDisplaySize().get(1) / 2, 11 } // this
+																		// is
+																		// altitude
 				), -90, 85, 1);
 		// Right
-		EntryExitPoint newExit2 = new EntryExitPoint(
-				new BasicVector(new double[] {
-				Sidemenu.width/2 + Sidemenu.remainingDisplayWidth()/2,
-				0,
-				8 } //this is altitude
+		EntryExitPoint newExit2 = new EntryExitPoint(new BasicVector(
+				new double[] {
+						Sidemenu.width / 2 + Sidemenu.remainingDisplayWidth()
+								/ 2, 0, 8 } // this is altitude
 				), -180, 85, 2);
 		// Bottom
-		EntryExitPoint newExit3 = new EntryExitPoint(
-				new BasicVector(new double[] {
-				Sidemenu.width/2,
-				-Drawables.virtualDisplaySize().get(1) / 2,
-				2 } //this is altitude
+		EntryExitPoint newExit3 = new EntryExitPoint(new BasicVector(
+				new double[] { Sidemenu.width / 2,
+						-Drawables.virtualDisplaySize().get(1) / 2, 2 } // this
+																		// is
+																		// altitude
 				), 90, 85, 3);
 		// Left
-		EntryExitPoint newExit4 = new EntryExitPoint(
-				new BasicVector(new double[] {
-				Sidemenu.width/2 - Sidemenu.remainingDisplayWidth()/2,
-				0,
-				5 } //this is altitude
+		EntryExitPoint newExit4 = new EntryExitPoint(new BasicVector(
+				new double[] {
+						Sidemenu.width / 2 - Sidemenu.remainingDisplayWidth()
+								/ 2, 0, 5 } // this is altitude
 				), 0, 85, 4);
 		entryExitPointList.add(newExit1);
 		entryExitPointList.add(newExit2);
@@ -142,7 +147,7 @@ public class SeprDSA {
 		EntryExitPoint landingStripRight = new EntryExitPoint(new BasicVector(
 				new double[] { -40, -500, 0.1 }), 0, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripRight);
-		
+
 		EntryExitPoint landingStripLeft = new EntryExitPoint(new BasicVector(
 				new double[] { -40, -500, 0.1 }), 180, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripLeft);
@@ -161,19 +166,18 @@ public class SeprDSA {
 			Input.logic();
 			Drawables.logic();
 			s.drawSidemenu();
-//			mm.redraw();
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
 			}
-			
+
 			if (resetGame) {
 				resetGame = false;
 				gameCurrentlyPlaying = false;
 				FuturePlanes.futurePlanes.clear();
-				for (Plane p : Planes.planes){
+				for (Plane p : Planes.planes) {
 					p.quickRemove();
 				}
 				Planes.planes.clear();
@@ -182,7 +186,7 @@ public class SeprDSA {
 			}
 		}
 	}
-	
+
 	public static void resetGame() {
 		resetGame = true;
 	}
