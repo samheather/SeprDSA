@@ -8,6 +8,7 @@ import engine.input.Input;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.FuturePlane;
+import game.FuturePlanes;
 import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
@@ -41,6 +42,7 @@ public class SeprDSA {
 	private static Random randomgen = new Random();
 	public static Plane selectedPlane;
 	public static boolean gameCurrentlyPlaying = false;
+	public static boolean resetGame = false;
 	/**
 	 * Initialise leaderboard here so it can be accessed globally
 	 */
@@ -163,6 +165,14 @@ public class SeprDSA {
 				AL.destroy(); // clear your things.
 				Display.destroy();
 				System.exit(0);
+			}
+			
+			if (resetGame) {
+				resetGame = false;
+				Drawables.drawables.clear();
+				FuturePlanes.futurePlanes.clear();
+				Planes.planes.clear();
+				mm.show();
 			}
 		}
 	}

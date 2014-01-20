@@ -1,5 +1,7 @@
 package game;
 
+import main.SeprDSA;
+
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.Display;
 
@@ -51,7 +53,7 @@ public class Sidemenu extends Widget {
 		exitGameButton.setTheme("button");
 		exitGameButton.addCallback(new Runnable() {
 			public void run() {
-				System.out.println("Game should exit here.");
+				main.SeprDSA.resetGame = true;
 			}
 		});
 		add(exitGameButton);

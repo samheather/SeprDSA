@@ -295,7 +295,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 			z = 14.0;
 		}
 		if (z < 0.1) {
-			z = 0.1
+			z = 0.1;
 		}
 	}
 }
