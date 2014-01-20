@@ -9,8 +9,8 @@ import engine.timing.Timing.NRunnable;
 import main.SeprDSA;
 
 public class FuturePlane {
-	
-	public int delayTillFuturePlanesBecomePlanes = 15;
+
+	public int delayTillFuturePlanesBecomePlanes = 5;
 
 	public int timeTillAppears;
 
@@ -46,35 +46,48 @@ public class FuturePlane {
 		fnumber = generateFlightNumber();
 		wayPointList = new ArrayList<WayPoint>();
 		int lastUsed = -1;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3 + randomgen.nextInt(3); i++) {
 			int newNumber = getWayPointNumber(lastUsed);
 			wayPointList.add(SeprDSA.getWayPoints().get(newNumber));
 			lastUsed = newNumber;
 		}
 		System.out.println(wayPointList.toString());
-		// DELAYTIME COULD BE USED IN THE SCHEDULER SOMEHOW
-		// while (localTime < localTime + delayTime) {localTime +=
-		// SeprDSA.timer;}
 		timeTillAppears = delayTillFuturePlanesBecomePlanes;
-		Timing.doNTimes(delayTillFuturePlanesBecomePlanes, 1000,
-				new NRunnable() {
-					@Override
-					public void run(int n) {
-						if (n == 1) {
-							System.out.println(enterPoint.getTolerance() + " " + enterPoint.getBearingNeeded());
-							Plane p = new Plane(fnumber, wayPointList,
-									enterPoint, exitPoint, (float) ((randomgen
-											.nextDouble() - 0.5)
-											* 2.0
-											* enterPoint.getTolerance()
-											+ enterPoint.getBearingNeeded()));
-							FuturePlanes.pop();
-						} else {
-							timeTillAppears -= 1;
+		if (Planes.planes.size() == 0) {
+			Timing.doIn(100, new NRunnable() {
+				@Override
+				public void run(int n) {
+				System.out.println("Lal");
+				Plane p = new Plane(fnumber, wayPointList,
+						enterPoint, exitPoint, (float) ((randomgen
+								.nextDouble() - 0.5)
+								* 2.0
+								* enterPoint.getTolerance()
+								+ enterPoint.getBearingNeeded()));
+				FuturePlanes.pop();
+				}
+			});
+		}else{
+			Timing.doNTimes(delayTillFuturePlanesBecomePlanes, 1000,
+					new NRunnable() {
+						@Override
+						public void run(int n) {
+							if (n == 1) {
+								//System.out.println(enterPoint.getTolerance() + " " + enterPoint.getBearingNeeded());
+								Plane p = new Plane(fnumber, wayPointList,
+										enterPoint, exitPoint, (float) ((randomgen
+												.nextDouble() - 0.5)
+												* 2.0
+												* enterPoint.getTolerance()
+												+ enterPoint.getBearingNeeded()));
+								FuturePlanes.pop();
+							} else {
+								timeTillAppears -= 1;
+							}
+	
 						}
-
-					}
-				});
+					});
+		}
 	}
 
 	public void createPlaneFromFuturePlane() {
