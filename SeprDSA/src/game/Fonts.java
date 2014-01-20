@@ -24,3 +24,6 @@ public class Fonts {
 	public static Font sideMenuText = new Font("Times New Roman",
 			java.awt.Font.ITALIC, 64);
 }
+
+
+// Switch to Tahoma Bold font if font rendering problem.
