@@ -76,7 +76,6 @@ public class Sidemenu extends Widget {
 	protected void layout() {
 		// button.adjustSize(); //Calculate optimal size instead of manually
 		// setting it
-		System.out.println(Drawables.virtualDisplaySize().get(0) + " " + Display.getWidth());
 		for (int i = 0; i < labelArray.length; i++) {
             labelArray[i].setPosition(0, 110 + 20 * i);
             labelArray[i].setSize(200, 20);

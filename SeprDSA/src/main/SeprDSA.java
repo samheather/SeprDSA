@@ -10,6 +10,7 @@ import game.EntryExitPoint;
 import game.FuturePlane;
 import game.Leaderboard;
 import game.MainMenu;
+import game.MainMenuBackground;
 import game.Map;
 import game.Plane;
 import game.Planes;
@@ -40,6 +41,7 @@ public class SeprDSA {
 	private static int score = 0;
 	private static Random randomgen = new Random();
 	public static Plane selectedPlane;
+	public static boolean gameCurrentlyPlaying;
 	/**
 	 * Initialise leaderboard here so it can be accessed globally
 	 */
@@ -96,7 +98,7 @@ public class SeprDSA {
 		Display.setTitle("Dat Flying Game");
 
 		Map m = new Map();
-		MainMenu me = new MainMenu();
+		MainMenu mm = new MainMenu();
 		Sidemenu s = new Sidemenu();
 
 		// Audible.playSound("sounds/arribba.wav", true, 0.1f);
@@ -157,6 +159,7 @@ public class SeprDSA {
 			Physicals.logic();
 			Drawables.logic();
 			s.drawSidemenu();
+//			mm.redraw();
 
 			if (Display.isCloseRequested()) { // If x is clicked you should
 				AL.destroy(); // clear your things.

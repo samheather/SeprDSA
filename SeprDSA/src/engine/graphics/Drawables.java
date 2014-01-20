@@ -79,18 +79,19 @@ public class Drawables {
 	 *            The Drawable to be removed
 	 */
 	public static void remove(Drawable d) {
-		for (int i = 0; i < drawables.size(); i++) {
-			if (drawables.get(i) == d) {
-				drawables.remove(i);
-				if (drawings.size() > i)
-					drawings.remove(i);
-			}
-		}
+//		for (int i = 0; i < drawables.size(); i++) {
+//			if (drawables.get(i) == d) {
+//				drawables.remove(i);
+//				if (drawings.size() > i)
+//					drawings.remove(i);
+//			}
+//		}
+		drawables.remove(d);
 	}
 
 	/**
 	 * Adds w to the list of TWL UI elements. w will appear on screen the next
-	 * time the screne is redrawn after this function is called.
+	 * time the screen is redrawn after this function is called.
 	 * 
 	 * @param w
 	 *            The widget to be added

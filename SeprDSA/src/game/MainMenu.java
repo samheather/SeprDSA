@@ -1,14 +1,15 @@
 package game;
 
-import org.la4j.vector.dense.BasicVector;
+import java.awt.Desktop;
+import java.net.*;
+
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Widget;
-import engine.graphics.Drawable;
 import engine.graphics.Drawables;
-import engine.graphics.drawing.Drawing;
-import engine.graphics.drawing.primitives.Sprite;
+
 
 /**
  * Class for the map image to be drawn.
@@ -16,48 +17,72 @@ import engine.graphics.drawing.primitives.Sprite;
  * @author sbh514
  */
 
-public class MainMenu extends Widget /*implements Drawable*/ {
+public class MainMenu extends Widget {
 	
 	private Button startButton;
 	private Button helpButton;
 	private Button exitButton;
+	private MainMenuBackground mmb = new MainMenuBackground();
 	
 	private void createButtons() {
-		startButton = new Button("");
+		startButton = new Button(" ");
 		startButton.setTheme("button");
 		startButton.addCallback(new Runnable() {
 			public void run() {
-				System.out.println("Start game");
+				hide();
 			}
 		});
 		add(startButton);
 		
-		helpButton = new Button("");
+		helpButton = new Button(" ");
 		helpButton.setTheme("button");
 		helpButton.addCallback(new Runnable() {
 			public void run() {
-				System.out.println("Show Help");
+				try {
+			        Desktop.getDesktop().browse(new URL("http://atcga.me/manual.html").toURI());
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
 			}
 		});
 		add(helpButton);
 		
-		exitButton = new Button("");
+		exitButton = new Button(" ");
 		exitButton.setTheme("button");
 		exitButton.addCallback(new Runnable() {
 			public void run() {
-				System.out.println("Exit game");
+				AL.destroy(); // clear your things.
+				Display.destroy();
+				System.exit(0);
 			}
 		});
 		add(exitButton);
 	}
 	
 	protected void layout() {
-		startButton.setPosition(10, 10);
-		startButton.setSize(10,10);
-		helpButton.setPosition(10, 10);
-		helpButton.setSize(10,10);
-		exitButton.setPosition(10, 10);
-		exitButton.setSize(10,10);
+		startButton.setPosition(446, 194);
+		startButton.setSize(130,45);
+		helpButton.setPosition(446, 260);
+		helpButton.setSize(130,45);
+		exitButton.setPosition(446, 324);
+		exitButton.setSize(130,45);
+	}
+	
+	public void show() {
+		main.SeprDSA.gameCurrentlyPlaying = false;
+		mmb.show();
+		layout();
+	}
+	
+	public void hide() {
+		mmb.hide();
+		startButton.setPosition(0, 0);
+		startButton.setSize(0, 0);
+		helpButton.setPosition(0, 0);
+		helpButton.setSize(0, 0);
+		exitButton.setPosition(0, 0);
+		exitButton.setSize(0, 0);
+		main.SeprDSA.gameCurrentlyPlaying = true;
 	}
 	
 	/**
@@ -66,37 +91,9 @@ public class MainMenu extends Widget /*implements Drawable*/ {
 	public MainMenu() {
 		Drawables.add(this);
 		
+		mmb = new MainMenuBackground();
+		
 		createButtons();
+		layout();
 	}
-
-	/**
-	 * Necessary for layering of drawable objects.
-	 */
-	private double z = 100000000;
-
-	/**
-	 * What to draw when instances of Map are drawn.
-	 */
-	public Drawing draw() {
-		return new Sprite(Images.mainMenu);
-	}
-
-	/**
-	 * Z-value may be necessary depending on draw order.
-	 */
-	public double getZ() {
-		return z;
-	}
-
-//	/**
-//	 * Allow sorting of drawables to support ordering of objects for drawing
-//	 * (i.e. for layers - make sure instances of Map aren't drawn on top of
-//	 * planes).
-//	 */
-//	@Override
-//	public int compareTo(Drawable o) {
-//		// Compare to other drawables to establsih draw order.
-//		// TODO Auto-generated method stub
-//		return (int) (z - o.getZ());
-//	}
 }
