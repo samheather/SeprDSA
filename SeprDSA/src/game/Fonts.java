@@ -18,7 +18,7 @@ public class Fonts {
 	public static Font planeFont = new Font("Tahoma Bold",
 			java.awt.Font.BOLD, 64);
 	public static Font wayPointFont = new Font("Tahoma Bold",
-			java.awt.Font.BOLD, 80);
+			java.awt.Font.BOLD, 72);
 	public static Font sideMenuTitle = new Font("Tahoma Bold",
 			java.awt.Font.BOLD, 64);
 	public static Font sideMenuText = new Font("Tahoma Bold",

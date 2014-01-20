@@ -6,6 +6,11 @@ import org.lwjgl.opengl.GL11;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Texture;
 
+/**
+ * 
+ * The generic image loading class for rendering almost everything
+ *
+ */
 public class Sprite extends Drawing {
 	private final Texture texture;
 
