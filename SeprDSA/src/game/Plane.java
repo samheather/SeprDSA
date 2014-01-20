@@ -38,7 +38,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean right = false;
 	private boolean up = false;
 	private boolean down = false;
-	private double radius = 50;
+	private double radius = 200;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
 	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
@@ -222,14 +222,18 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 				size -= 1;
 				if (size == 0) {
 					SeprDSA.updateScore(score);
-					Planes.remove(plane);
-					Input.removeScrollable(plane);
-					Input.removeClickable(plane);
-					Physicals.remove(plane);
-					Drawables.remove(plane);
+					quickRemove();
 				}
 			}
 		});
+	}
+	
+	public void quickRemove() {
+		Planes.remove(this);
+		Input.removeScrollable(this);
+		Input.removeClickable(this);
+		Physicals.remove(this);
+		Drawables.remove(this);
 	}
 
 	public double getZ() {

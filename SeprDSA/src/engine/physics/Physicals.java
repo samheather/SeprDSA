@@ -11,7 +11,7 @@ import game.WayPoint;
 import java.util.ArrayList;
 
 public class Physicals {
-	private static ArrayList<Physical> physicals;
+	public static ArrayList<Physical> physicals;
 	static {
 		physicals = new ArrayList<Physical>();
 	}
@@ -64,7 +64,7 @@ public class Physicals {
 					virtualDisplaySize().get(1) / 2) {
 				//plane with edge of screen collision
 				Audio.playSound("res/sounds/Explode.wav", false, 0.7f);
-				((Plane) phys).destroy();
+				main.SeprDSA.resetGame();
 			}
 		}
 		// System.out.println(colliding);
@@ -87,6 +87,7 @@ public class Physicals {
 						// plane with plane collision
 						// CLEANUP AND PUT BACK TO MAIN MENU
 						Audio.playSound("res/sounds/Explode.wav", false, 0.7f);
+						main.SeprDSA.resetGame();
 					}  
 				}
 			}

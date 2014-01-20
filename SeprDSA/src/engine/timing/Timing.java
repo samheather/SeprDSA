@@ -17,6 +17,10 @@ public class Timing {
 	public static TaskCanceller doIn(double milliseconds, NRunnable does) {
 		return doNTimes(1, milliseconds, does);
 	}
+	
+	public static void clearAllTasks() {
+		tasks.clear();
+	}
 
 	
 	/**

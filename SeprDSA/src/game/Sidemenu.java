@@ -53,7 +53,9 @@ public class Sidemenu extends Widget {
 		exitGameButton.setTheme("button");
 		exitGameButton.addCallback(new Runnable() {
 			public void run() {
-				main.SeprDSA.resetGame = true;
+				if (main.SeprDSA.gameCurrentlyPlaying) {
+					main.SeprDSA.resetGame();
+				}
 			}
 		});
 		add(exitGameButton);
@@ -116,7 +118,12 @@ public class Sidemenu extends Widget {
 						+ FuturePlanes.futurePlanes.get(i).timeTillAppears;
 			}
 			labelArray[i + 1].setText(tempString);
-
+		}
+		if (main.SeprDSA.gameCurrentlyPlaying) {
+			labelArray[0].setText("Number - Entry - Time");
+		}
+		else {
+			labelArray[0].setText("");
 		}
 	}
 }

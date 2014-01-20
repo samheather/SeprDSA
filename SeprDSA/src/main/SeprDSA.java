@@ -1,11 +1,13 @@
 package main;
 
 import engine.audio.Audio;
+import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.display.Fullscreen;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
+import engine.timing.Timing;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.FuturePlanes;
@@ -101,7 +103,7 @@ public class SeprDSA {
 		Map m = new Map();
 		MainMenu mm = new MainMenu();
 		Sidemenu s = new Sidemenu();
-		Audio.playSound("res/sounds/BGM.wav", true, 0.5f);
+		Audio.playSound("res/sounds/BGM.wav", true, 0.3f);
 		
 		// EntryExit Points 1..4 are for top, right, bottom, left, 0 is airport
 		// Top
@@ -169,11 +171,18 @@ public class SeprDSA {
 			
 			if (resetGame) {
 				resetGame = false;
-				Drawables.drawables.clear();
+				gameCurrentlyPlaying = false;
 				FuturePlanes.futurePlanes.clear();
-				Planes.planes.clear();
+				for (Plane p : Planes.planes) {
+					p.quickRemove();
+				}
+				Timing.clearAllTasks();
 				mm.show();
 			}
 		}
+	}
+	
+	public static void resetGame() {
+		resetGame = true;
 	}
 }

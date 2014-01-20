@@ -69,7 +69,7 @@ public class MainMenu extends Widget {
 	}
 	
 	public void show() {
-		main.SeprDSA.gameCurrentlyPlaying = true;
+		main.SeprDSA.gameCurrentlyPlaying = false;
 		mmb.show();
 		layout();
 	}
