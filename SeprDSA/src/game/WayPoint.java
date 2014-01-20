@@ -38,7 +38,7 @@ public class WayPoint implements Drawable, Physical {
 
 	@Override
 	public String toString() {
-		return "WayPoint" + number;
+		return "WayPoint: " + number;
 	}
 	
 	public String getNumber() {

@@ -14,7 +14,7 @@ public class Audio {
 	 * Plays sound with path based on path to file, whether to loop, and volume
 	 * <p>
 	 * First configures volume. Then, depending on .wav or .ogg, loads the file
-	 * using apporpriate loader. Sound then played using external soundLibrary,
+	 * using appropriate loader. Sound then played using external soundLibrary,
 	 * passing parameters originally passed in.
 	 * 
 	 * @param path

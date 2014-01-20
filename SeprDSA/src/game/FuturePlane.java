@@ -9,8 +9,9 @@ import engine.timing.Timing.NRunnable;
 import main.SeprDSA;
 
 public class FuturePlane {
+	
+	public int delayTillFuturePlanesBecomePlanes = 15;
 
-	public int delayTillFuturePlanesBecomePlanes = 5;
 	public int timeTillAppears;
 
 	/**

@@ -1,8 +1,10 @@
 package engine.physics;
 
-import engine.timing.*;
+import engine.graphics.Drawables;
+import engine.timing.Timing;
 import game.EntryExitPoint;
 import game.Plane;
+import game.Sidemenu;
 import game.WayPoint;
 
 import java.util.ArrayList;
@@ -48,29 +50,41 @@ public class Physicals {
 				if (!(phys.equals(checkOther))
 						&& (phys.isCollidingObj(checkOther))) {
 					colliding.add(new Physical[] { phys, checkOther });
-				}
+				} 
 
+			}
+			if (phys instanceof Plane && phys.getPos().get(0) > Sidemenu.
+					width/2 + Sidemenu.remainingDisplayWidth()/2 
+					|| phys.getPos().get(0) < Sidemenu.
+					width/2 - Sidemenu.remainingDisplayWidth()/2 
+					|| phys.getPos().get(1) > Drawables.
+					virtualDisplaySize().get(1) / 2 
+					|| phys.getPos().get(1) < -Drawables.
+					virtualDisplaySize().get(1) / 2) {
+				//plane with edge of screen collision
+				
 			}
 		}
 		// System.out.println(colliding);
 		if (colliding.size() > 0) {
 			for (Physical[] physicalPair : colliding) {
 				if (physicalPair[0] instanceof Plane) {
+					Plane checkPlane = (Plane) physicalPair[0];
 					if ((physicalPair[1] instanceof WayPoint)
-							&& physicalPair[1] == ((Plane) physicalPair[0])
+							&& physicalPair[1] == checkPlane
 									.getNextWayPoint()) {
 						// plane with waypoint collision
-						((Plane) physicalPair[0]).updateWaypoints();
+						checkPlane.updateWaypoints();
 					} else if (physicalPair[1] instanceof EntryExitPoint
-							&& ((Plane) physicalPair[0]).getWayPoints().size() == 0
-							&& physicalPair[1] == ((Plane) physicalPair[0])
+							&& checkPlane.getWayPoints().size() == 0
+							&& physicalPair[1] == checkPlane
 									.getExitPoint()) {
 						// plane with entryexit collision
-						((Plane) physicalPair[0]).destroy();
+						checkPlane.destroy();
 					} else if (physicalPair[1] instanceof Plane) {
 						// plane with plane collision
 						// CLEANUP AND PUT BACK TO MAIN MENU
-					}
+					}  
 				}
 			}
 		}
