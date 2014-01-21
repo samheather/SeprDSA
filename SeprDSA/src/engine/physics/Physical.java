@@ -12,7 +12,7 @@ public interface Physical {
 	/**
 	 * Get position Vector of this Physical object.
 	 * 
-	 * @return
+	 * @return Vector
 	 */
 	Vector getPos();
 
@@ -26,7 +26,7 @@ public interface Physical {
 	/**
 	 * Get Velocity of this Physical object.
 	 * 
-	 * @return
+	 * @return Vector
 	 */
 	Vector getVel();
 
@@ -56,7 +56,7 @@ public interface Physical {
 	/**
 	 * Get current bearing of Physical object.
 	 * 
-	 * @return
+	 * @return float
 	 */
 	float getBearing();
 

@@ -97,7 +97,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	/**
 	 * Used to work out what the next way point will be for a plane (i.e. after
 	 * it has gone through one).
-	 * @return
+	 * @return WayPoint
 	 */
 	public WayPoint getNextWayPoint() {
 		if (wayPointList.size() > 0) {
@@ -122,7 +122,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	/**
 	 * Returns the exit point of a plane.
-	 * @return
+	 * @return EntryExitPoint
 	 */
 	public EntryExitPoint getExitPoint() {
 		if (exitPoint != null) {
@@ -134,7 +134,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	/**
 	 * Returns the array of way points a plane must go through.
-	 * @return
+	 * @return ArrayList<WayPoint>
 	 */
 	public ArrayList<WayPoint> getWayPoints() {
 		return wayPointList;
@@ -142,7 +142,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	/**
 	 * Returns the Flight Number of this plane.
-	 * @return
+	 * @return String
 	 */
 	public String getFNumber() {
 		return number;
