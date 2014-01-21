@@ -3,12 +3,16 @@ package engine.graphics.drawing.primitives;
 import org.la4j.vector.Vector;
 
 import engine.graphics.drawing.Drawing;
+
 /**
- * Placeholder for when you want nothing drawn, used in line drawing.
- *
+ * The identity of the monoid formed by the binary operation Overlay and the set
+ * of all drawings.
  */
 public class Identity extends Drawing {
 
+	/**
+	 * Constructs the identity drawing.
+	 */
 	public Identity() {
 	}
 

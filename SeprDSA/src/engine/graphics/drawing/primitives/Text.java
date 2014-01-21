@@ -7,19 +7,22 @@ import engine.graphics.drawing.Font;
 import engine.graphics.drawing.Font.Alignment;
 
 /**
- * 
- * Creates a renderable object that displays text
- *
+ * Represents text to be drawn onto the screen.
  */
 public class Text extends Drawing {
 	String text;
 	Font font;
 	Alignment alignment;
+
 	/**
+	 * Constructs Text.
 	 * 
-	 * @param text Text you wish to display
-	 * @param font The font which you wish the text to display with
-	 * @param alignment The side you want 
+	 * @param text
+	 *            Text to display
+	 * @param font
+	 *            The font of the text to display
+	 * @param alignment
+	 *            The alignment of the text to display
 	 */
 	public Text(String text, Font font, Alignment alignment) {
 		this.text = text;

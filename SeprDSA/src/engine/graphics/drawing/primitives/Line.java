@@ -7,14 +7,17 @@ import org.lwjgl.opengl.GL31;
 import engine.graphics.drawing.Drawing;
 
 /**
- * Will draw a line based on 2 Vectors
+ * Represents a line.
  */
 public class Line extends Drawing {
 
 	/**
+	 * Constructs a line.
 	 * 
-	 * @param start Vector for the start of the line
-	 * @param end Vector for end of the line
+	 * @param start
+	 *            The point the line starts at
+	 * @param end
+	 *            The point the line ends at
 	 */
 	public Line(Vector start, Vector end) {
 		this.start = start;
@@ -23,10 +26,7 @@ public class Line extends Drawing {
 
 	Vector start;
 	Vector end;
-	
-	/**
-	 * Will draw a line between the 2 Vectors given
-	 */
+
 	@Override
 	public void render() {
 		GL11.glDisable(GL31.GL_TEXTURE_RECTANGLE);

@@ -7,13 +7,16 @@ import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Texture;
 
 /**
- * 
- * The generic image loading class for rendering almost everything
- *
+ * Represents a texture to be drawn onto the screen.
  */
 public class Sprite extends Drawing {
 	private final Texture texture;
 
+	/**
+	 * Constructs a sprite that draws texture onto the screen.
+	 * 
+	 * @param texture
+	 */
 	public Sprite(Texture texture) {
 		this.texture = texture;
 	}
