@@ -158,6 +158,8 @@ public class SeprDSA {
 				Planes.updateTimer();
 				Physicals.logic();
 			}
+			// Uncomment for frame counter
+			//System.out.println(1000.0/engine.timing.Timing.timeSinceLastFrame());
 			Input.logic();
 			Drawables.logic();
 			s.drawSidemenu();

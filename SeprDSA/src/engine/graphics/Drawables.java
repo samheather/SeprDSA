@@ -137,7 +137,7 @@ public class Drawables {
 			/* Set the display mode specified by d */
 			d.set();
 			Display.create();
-			Display.setVSyncEnabled(true);
+			Display.setVSyncEnabled(false);
 			Display.setResizable(false);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
