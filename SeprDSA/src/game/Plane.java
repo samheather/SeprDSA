@@ -167,13 +167,11 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 
 	public boolean isCollidingPos(Vector checkPos) {
-		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
-				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
+		return position.subtract(checkPos).norm() < radius;
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {
-		return Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0), 2)
-				+ Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius;
+		return isCollidingPos(checkObj.getPos());
 	}
 
 	public float getBearing() {
