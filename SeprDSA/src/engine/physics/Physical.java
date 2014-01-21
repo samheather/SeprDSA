@@ -41,7 +41,7 @@ public interface Physical {
 	 * Check if Physical object is colliding with position in Vector.
 	 * 
 	 * @param checkPos
-	 * @return
+	 * @return boolean indicating wheter the Physical is colliding with a Vector point
 	 */
 	boolean isCollidingPos(Vector checkPos);
 
@@ -49,7 +49,7 @@ public interface Physical {
 	 * Check if Physical object is colliding with other Physical object.
 	 * 
 	 * @param checkObj
-	 * @return
+	 * @return boolean that indicated if Physical and checkObj are colliding
 	 */
 	boolean isCollidingObj(Physical checkObj);
 

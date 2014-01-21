@@ -65,7 +65,6 @@ public class SeprDSA {
 
 	public static void updateScore(int scoreToAdd) {
 		score += scoreToAdd;
-		System.out.println(score);
 	}
 
 	public static float getMagnitude(Vector vecA, Vector vecB) {
@@ -91,7 +90,6 @@ public class SeprDSA {
 			}
 		}
 		if (isValid) {
-			System.out.println(counter);
 			return testVector;
 		} else {
 			return getWayPointPos(counter + 1);

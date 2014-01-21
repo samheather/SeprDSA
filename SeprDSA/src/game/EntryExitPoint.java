@@ -1,12 +1,8 @@
 package game;
 
-import main.SeprDSA;
 
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
-import org.lwjgl.opengl.Display;
-
-import java.util.Random;
 
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
@@ -15,9 +11,12 @@ import engine.graphics.drawing.primitives.Sprite;
 import engine.physics.Physical;
 import engine.physics.Physicals;
 
+/**
+ * A point at which Planes can enter or exit the game
+ *
+ */
 public class EntryExitPoint implements Drawable, Physical {
 
-	private static Random randomgen = new Random();
 	private float bearingNeeded;
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
@@ -25,19 +24,51 @@ public class EntryExitPoint implements Drawable, Physical {
 	private int size = (int)((25.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private int number;
 
+	/**
+	 * Constructor for EntryExitPoint
+	 * @param pos Position for the EntryExitPoint to be drawn
+	 * @param bearing Bearing at which Planes can successfully collide with EntryExitPoint
+	 * @param tolerances Tolerance of +- angle(degrees) from bearing to which the plane can still collide
+	 * @param pointNumber An assigned number for EntryExitPoint used as a UID.
+	 */
+	public EntryExitPoint(Vector pos, float bearing, float tolerances,
+			int pointNumber) {
+		number = pointNumber;
+		Drawables.add(this);
+		Physicals.add(this);
+		position = pos;
+		bearingNeeded = bearing;
+		tolerance = tolerances;
+	}
+	
+	/**
+	 * Returns a readable string for debugging
+	 */
 	@Override
 	public String toString() {
 		return "EntryExitPoint" + number;
 	}
 	
+	/**
+	 * Getter for EntryExitPoint tolerance
+	 * @return tolerance of EntryExitPoint
+	 */
 	public float getTolerance() {
 		return tolerance;
 	}
 	
+	/**
+	 * Getter for EntryExitPoint bearing
+	 * @return bearing of EntryExitPoint
+	 */
 	public float getBearingNeeded() {
 		return bearingNeeded;
 	}
 	
+	/**
+	 * Gets a descriptive name for EntryExitPointfor use in SideMenu
+	 * @return A string to use for SideMenu plane list
+	 */
 	public String sidemenuString() {
 		switch (number) {
 		case 0:
@@ -55,25 +86,26 @@ public class EntryExitPoint implements Drawable, Physical {
 		}
 	}
 
-	public EntryExitPoint(Vector pos, float bearing, float tolerances,
-			int pointNumber) {
-		number = pointNumber;
-		Drawables.add(this);
-		Physicals.add(this);
-		position = pos;
-		bearingNeeded = bearing;
-		tolerance = tolerances;
-	}
-
+	/**
+	 * Allows for the object to be drawn
+	 * @return A Sprite that is used for drawing
+	 */
 	public Drawing draw() {
 		return new Sprite(Images.entryExitPoint).scale(
 				size / Images.entryExitPoint.size().get(0)).translate(position);
 	}
 
+	/**
+	 * Getter for EntryExitPoint position
+	 * @return Position of EntryExitPoint
+	 */
 	public Vector getPos() {
 		return position;
 	}
 
+	/**
+	 * Setter for EntryExitPoint position
+	 */
 	public void setPos(Vector newPos) {
 		position = newPos;
 	}
@@ -86,11 +118,21 @@ public class EntryExitPoint implements Drawable, Physical {
 		System.out.println("No setting velocity");
 	}
 
+	/**
+	 * Method that detects collisions between this and a Vector point
+	 * @param checkPos A Vector point to check collision with
+	 * @return A boolean that indicates if an this is colliding with a Vector point
+	 */
 	public boolean isCollidingPos(Vector checkPos) {
 		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
 				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
 	}
 
+	/**
+	 * Method that indicates if this is colliding with another object based on radius variable
+	 * @param checkObj A Physical object to check collision with
+	 * @return A boolean that indicates if an object is colliding with another Physical
+	 */
 	public boolean isCollidingObj(Physical checkObj) {
 		return (Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0),
 				2) + Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius)
@@ -103,6 +145,9 @@ public class EntryExitPoint implements Drawable, Physical {
 						: checkObj.getBearing() < bearingNeeded + tolerance));
 	}
 
+	/**
+	 * Getter for z used in ZIndexing of drawables
+	 */
 	public double getZ() {
 		return position.get(2);
 	}
@@ -117,19 +162,15 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	@Override
 	public void setBearing(float newBearing) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public float targetBearing() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float rotVel() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

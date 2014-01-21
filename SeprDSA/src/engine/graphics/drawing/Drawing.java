@@ -63,7 +63,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Changes the colour of a drawing by an RGBa Vector.
+	 * Changes the colour of a drawing by an RGBA Vector.
 	 * 
 	 * @param colour
 	 * @return
@@ -103,7 +103,7 @@ public abstract class Drawing {
 	}
 
 	/**
-	 * Sets the alpha amount (transparency, 1 = opaque, 0 = transparent) of a
+	 * Sets the alpha component (transparency, 1 = opaque, 0 = transparent) of a
 	 * drawing.
 	 * 
 	 * @param amount
