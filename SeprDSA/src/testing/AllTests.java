@@ -13,11 +13,11 @@ import engine.graphics.Drawables;
 import engine.graphics.display.Window;
 
 
-
+//If running test separately you may need to uncomment the BeforeClass methods
 @RunWith(Suite.class)
 @SuiteClasses({ EntryExitPointTest.class, FuturePlaneTest.class,
-		LeaderboardTest.class, PhysicalsTest.class, PlanesTest.class,
-		PlaneTest.class, TimingTest.class, WaypointTest.class })
+		PhysicalsTest.class, PlanesTest.class, PlaneTest.class,
+		TimingTest.class, WaypointTest.class })
 public class AllTests {
 	 @BeforeClass 
 	    public static void setUpClass() throws MalformedURLException, IOException {      

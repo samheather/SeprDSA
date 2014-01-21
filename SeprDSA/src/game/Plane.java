@@ -40,7 +40,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private int speed = (int)(baseSpeed + randomgen.nextDouble() * baseSpeed);
 	private ArrayList<WayPoint> wayPointList;
 	private EntryExitPoint exitPoint;
-	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
 	private float targetBearing = 0.0f;
@@ -50,7 +49,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		number = fnumber;
 		wayPointList = pointList;
 		exitPoint = endPoint;
-		score = wayPointList.size() * 10;
 		rotation = bearing;
 		targetBearing = bearing;
 		// position = enterPoint.getPos();
@@ -190,7 +188,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 			public void run(int i) {
 				size -= 1;
 				if (size == 0) {
-					SeprDSA.updateScore(score);
 					quickRemove();
 				}
 			}
