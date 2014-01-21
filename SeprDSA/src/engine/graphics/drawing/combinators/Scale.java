@@ -6,8 +6,17 @@ import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * Scales a drawing from the origin.
+ */
 public class Scale extends Affine {
 
+	/**
+	 * Scale arg by value from the origin.
+	 * 
+	 * @param arg
+	 * @param value
+	 */
 	public Scale(Drawing arg, Vector value) {
 		super(arg);
 		// TODO Auto-generated constructor stub

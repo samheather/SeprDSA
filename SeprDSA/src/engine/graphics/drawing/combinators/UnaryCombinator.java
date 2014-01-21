@@ -4,8 +4,17 @@ import org.la4j.vector.Vector;
 
 import engine.graphics.drawing.Drawing;
 
+/**
+ * Represents a combinator of one drawing that returns another. Unary
+ * combinators on drawings such as Colour should subclass this class.
+ */
 public abstract class UnaryCombinator extends Drawing {
 
+	/**
+	 * Transform arg with the combinator this class represents.
+	 * 
+	 * @param arg
+	 */
 	public UnaryCombinator(Drawing arg) {
 		// TODO Auto-generated constructor stub
 		this.arg = arg;

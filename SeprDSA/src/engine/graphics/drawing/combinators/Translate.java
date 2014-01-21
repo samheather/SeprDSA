@@ -5,8 +5,17 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.drawing.Drawing;
 
+/**
+ * Translates a drawing.
+ */
 public class Translate extends Affine {
 
+	/**
+	 * Translates arg by value.
+	 * 
+	 * @param arg
+	 * @param value
+	 */
 	public Translate(Drawing arg, Vector value) {
 		super(arg);
 		this.value = value;

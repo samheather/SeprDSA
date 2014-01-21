@@ -4,8 +4,18 @@ import org.la4j.vector.Vector;
 
 import engine.graphics.drawing.Drawing;
 
+/**
+ * Represents a combinator of two drawings that returns another. Binary
+ * combinators on drawings such as overlay should subclass this class.
+ */
 public abstract class BinaryCombinator extends Drawing {
 
+	/**
+	 * Combine arg1 and arg2 with the combinator this class represents.
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 */
 	public BinaryCombinator(Drawing arg1, Drawing arg2) {
 		this.arg1 = arg1;
 		this.arg2 = arg2;

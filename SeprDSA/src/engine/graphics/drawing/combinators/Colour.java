@@ -6,10 +6,19 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.drawing.Drawing;
 
+/**
+ * Changes the colour of a drawing.
+ */
 public class Colour extends UnaryCombinator {
 
 	private final Vector colour;
 
+	/**
+	 * Sets the colour of arg to colour.
+	 * 
+	 * @param arg
+	 * @param colour
+	 */
 	public Colour(Drawing arg, Vector colour) {
 		// TODO Auto-generated constructor stub
 		super(arg);

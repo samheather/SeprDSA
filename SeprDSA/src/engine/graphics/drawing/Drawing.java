@@ -20,6 +20,10 @@ import engine.graphics.drawing.combinators.Translate;
  */
 
 public abstract class Drawing {
+
+	/**
+	 * Render this drawing onto the screen.
+	 */
 	public abstract void render();
 
 	/**

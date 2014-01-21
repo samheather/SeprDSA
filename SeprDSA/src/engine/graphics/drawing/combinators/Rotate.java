@@ -6,8 +6,17 @@ import org.lwjgl.opengl.GL11;
 
 import engine.graphics.drawing.Drawing;
 
+/**
+ * Rotates a drawing around the origin.
+ */
 public class Rotate extends Affine {
 
+	/**
+	 * Rotates arg by degrees anticlockwise around the origin.
+	 * 
+	 * @param arg
+	 * @param degrees
+	 */
 	public Rotate(Drawing arg, double degrees) {
 		super(arg);
 		this.degrees = degrees;
