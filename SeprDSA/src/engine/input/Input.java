@@ -10,7 +10,6 @@ import org.lwjgl.input.Mouse;
 
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
-import game.Plane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,10 +150,7 @@ public class Input {
 					for (int i = collisions.size() - 1; i >= 0; i--) {
 						if (collisions.get(i) instanceof Clickable) {
 							c = (Clickable) collisions.get(i);
-							/*if (c instanceof Plane) {
-								System.out.println(((Plane) c).getFNumber());
-								System.out.println(pos);
-							}*/
+
 							if (c == current) {
 								c.clickDown(button, pos);
 							} else {
