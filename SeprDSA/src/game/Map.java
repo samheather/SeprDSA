@@ -1,6 +1,5 @@
 package game;
 
-import org.la4j.vector.dense.BasicVector;
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
@@ -33,7 +32,7 @@ public class Map implements Drawable {
 	}
 
 	/**
-	 * Z-value may be necessary depending on draw order.
+	 * Z-value is necessary for draw order.
 	 */
 	public double getZ() {
 		return z;

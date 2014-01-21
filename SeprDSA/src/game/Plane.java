@@ -5,10 +5,11 @@ import java.util.Random;
 
 import main.SeprDSA;
 
-import org.lwjgl.input.Keyboard;
 import org.la4j.vector.Vector;
 
-import engine.graphics.*;
+
+import engine.graphics.Drawable;
+import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.Font.Alignment;
 import engine.graphics.drawing.primitives.Identity;
@@ -17,7 +18,6 @@ import engine.graphics.drawing.primitives.Sprite;
 import engine.graphics.drawing.primitives.Text;
 import engine.input.Clickable;
 import engine.input.Input;
-import engine.input.Keyboardable;
 import engine.input.Scrollable;
 import engine.physics.Physical;
 import engine.physics.Physicals;
@@ -31,13 +31,11 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
 	private float rotation = 0.0f;
-	private double radius = 200;
+	private double radius = 175;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
 	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
 	private Text numbertext;
-	private Text altitudeText;
-	private Text nextWaypointText;
 	private double baseSpeed = ((15.0/640.0) * Drawables.virtualDisplaySize().get(1));
 	private int speed = (int)(baseSpeed + randomgen.nextDouble() * baseSpeed);
 	private ArrayList<WayPoint> wayPointList;
@@ -45,6 +43,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private int score;
 	private Vector endLine = new BasicVector(new double[] { 0, 0, 0 });
 	private boolean lineExists = false;
+	private float targetBearing = 0.0f;
 
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint, float bearing) {
@@ -58,11 +57,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		setPos(startPoint.getPos());
 		// Add line here using setPos to randomise initial altitude.
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
-		altitudeText = new Text("Altitude: "
-				+ String.valueOf(Math.round(position.get(2) * 1000)) + "m", Fonts.planeFont,
-				Alignment.CENTRED);
-		nextWaypointText = new Text(getNextWayPointText(), Fonts.planeFont,
-				Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 		Planes.add(this);
@@ -77,7 +71,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	public void updateWaypoints() {
 		if (wayPointList.size() > 0) {
-			System.out.println(wayPointList.get(0).toString());
+			//System.out.println(wayPointList.get(0).toString());
 			wayPointList.remove(0);
 			// update flight plan stuff too at some point
 		}
@@ -194,7 +188,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	};
 
 	public void destroy() {
-		final Plane plane = this;
 		Timing.doNTimes(size, 50, new Timing.NRunnable() {
 			public void run(int i) {
 				size -= 1;
@@ -206,6 +199,9 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		});
 	}
 	
+	/**
+	 * Removes all pointers from planes
+	 */
 	public void quickRemove() {
 		//Planes.remove(this);
 		Input.removeScrollable(this);
@@ -214,14 +210,25 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		Drawables.remove(this);
 	}
 
+	/**
+	 * get Z value for drawing
+	 */
 	public double getZ() {
 		return getPos().get(2);
 	}
 
+	/**
+	 * Gets a comparison used in painter's algorithm
+	 */
 	public int compareTo(Drawable o) {
 		return (int) (this.getZ() - o.getZ());
 	}
 
+	/**
+	 * Fired when mouse button 1 is pressed down
+	 * <p>
+	 * Will update the selected plane and start line drawing
+	 */
 	public void clickDown(int button, Vector pos) {
 		if (button == 0) {
 			endLine = pos;
@@ -230,6 +237,9 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		SeprDSA.selectedPlane = this;
 	}
 
+	/**
+	 * Fired when mouse button 1 is pressed up
+	 */
 	public void clickUp(int button) {
 		if (button != 0)
 			return;
@@ -247,18 +257,26 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		// System.out.println("Click away");
 	}
 
+	/**
+	 * Fired when the mouse is moved
+	 */
 	public void move(Vector newPos) {
 		// System.out.println("Move");
 		endLine = newPos;
 	}
 
-	private float targetBearing = 0.0f;
-
+	/**
+	 * Getter for the bearing that the plane wishes to reach
+	 * @return Desired bearing of the plane
+	 */
 	@Override
 	public float targetBearing() {
 		return targetBearing;
 	}
 
+	/**
+	 * @return returns the rotational velocity of the Plane
+	 */
 	@Override
 	public float rotVel() {
 		return 1.0f;
