@@ -127,7 +127,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 										new BasicVector(new double[] { 0, -160 })))
 				.overlay(
 						new Text("Altitude: "
-								+ String.valueOf(Math.round(position.get(2) * 1000)),
+								+ String.valueOf(Math.round(position.get(2))),
 								Fonts.planeFont, Alignment.CENTRED)
 								.red(1.0)
 								.blue(1.0)
@@ -167,13 +167,11 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 
 	public boolean isCollidingPos(Vector checkPos) {
-		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
-				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
+		return position.subtract(checkPos).norm() < radius;
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {
-		return Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0), 2)
-				+ Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius;
+		return isCollidingPos(checkObj.getPos());
 	}
 
 	public float getBearing() {
@@ -288,13 +286,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	@Override
 	public void scroll(int amount) {
 		if (SeprDSA.selectedPlane == this) {
-			position.set(2, position.get(2) + amount * 0.001);
+			position.set(2, position.get(2) + amount);
 		}
-		if (position.get(2) > 14.0) {
-			position.set(2, 14.0);
+		if (position.get(2) > 14000.0) {
+			position.set(2, 14000.0);
 		}
-		if (position.get(2) < 0.1) {
-			position.set(2, 0.1);
+		if (position.get(2) < 100) {
+			position.set(2, 100);
 		}
 	}
 }

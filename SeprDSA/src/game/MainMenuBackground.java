@@ -31,7 +31,7 @@ public class MainMenuBackground implements Drawable {
 	/**
 	 * Necessary for layering of drawable objects.
 	 */
-	private double z = 10000;
+	private double z = 15000;
 
 	/**
 	 * What to draw when instances of MainMenuBackground are drawn.

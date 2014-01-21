@@ -124,8 +124,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	 * @return A boolean that indicates if an this is colliding with a Vector point
 	 */
 	public boolean isCollidingPos(Vector checkPos) {
-		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
-				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
+		return position.subtract(checkPos).norm() < radius;
 	}
 
 	/**
@@ -134,8 +133,7 @@ public class EntryExitPoint implements Drawable, Physical {
 	 * @return A boolean that indicates if an object is colliding with another Physical
 	 */
 	public boolean isCollidingObj(Physical checkObj) {
-		return (Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0),
-				2) + Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius)
+		return isCollidingPos(checkObj.getPos())
 
 				&& ((checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance) % 360 > bearingNeeded
 						- tolerance
