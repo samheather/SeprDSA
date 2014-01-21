@@ -12,19 +12,28 @@ import engine.graphics.Drawables;
 
 
 /**
- * Class for the map image to be drawn.
+ * Class for creating and showing the invisible menu buttons.
  * 
  * @author sbh514
  */
-
 public class MainMenu extends Widget {
 	
 	private Button startButton;
 	private Button helpButton;
 	private Button exitButton;
+	/**
+	 * Instance of MainMenuBackground - the layer containing the background 
+	 * image with button images.
+	 */
 	private MainMenuBackground mmb;
+	/**
+	 * Scale factor for making the window bigger, set from SeprDSA.java.
+	 */
 	private double resizeWindowScaleFactor = 1;
 	
+	/**
+	 * Create instances of buttons and add to TWL.
+	 */
 	private void createButtons() {
 		startButton = new Button(" ");
 		startButton.setTheme("button");
@@ -60,6 +69,9 @@ public class MainMenu extends Widget {
 		add(exitButton);
 	}
 	
+	/**
+	 * Layout the transparent buttons to match the images of buttons beneath.
+	 */
 	protected void layout() {
 		startButton.setPosition((int)(446*resizeWindowScaleFactor), (int)(194*resizeWindowScaleFactor));
 		startButton.setSize((int)(130*resizeWindowScaleFactor),(int)(45*resizeWindowScaleFactor));
@@ -69,12 +81,20 @@ public class MainMenu extends Widget {
 		exitButton.setSize((int)(130*resizeWindowScaleFactor),(int)(45*resizeWindowScaleFactor));
 	}
 	
+	/**
+	 * Show this main menu (i.e. create the invisible buttons and show the 
+	 * background image from MainMenuBackground class.
+	 */
 	public void show() {
 		main.SeprDSA.gameCurrentlyPlaying = false;
 		mmb.show();
 		layout();
 	}
 	
+	/**
+	 * Hide this main menu (i.e. hide these buttons by setting them to (0,0,0,0)
+	 * and by calling hide on the MainMenuBackground instance.
+	 */
 	public void hide() {
 		mmb.hide();
 		startButton.setPosition(0, 0);

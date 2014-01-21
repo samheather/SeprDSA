@@ -1,17 +1,16 @@
 package game;
 
-import org.la4j.vector.dense.BasicVector;
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
 import engine.graphics.drawing.primitives.Sprite;
 
 /**
- * Class for the map image to be drawn.
+ * Class for the main menu background image to be drawn (which includes blue
+ * buttons drawn on the orignal image file).
  * 
  * @author sbh514
  */
-
 public class MainMenuBackground implements Drawable {
 	/**
 	 * Constructor - add this class to Drawables so it's drawn.
@@ -35,7 +34,7 @@ public class MainMenuBackground implements Drawable {
 	private double z = 10000;
 
 	/**
-	 * What to draw when instances of Map are drawn.
+	 * What to draw when instances of MainMenuBackground are drawn.
 	 */
 	public Drawing draw() {
 		return new Sprite(Images.mainMenu);
@@ -50,8 +49,8 @@ public class MainMenuBackground implements Drawable {
 
 	/**
 	 * Allow sorting of drawables to support ordering of objects for drawing
-	 * (i.e. for layers - make sure instances of Map aren't drawn on top of
-	 * planes).
+	 * (i.e. for layers - make sure instances of MainMenuBackground aren't drawn
+	 *  beneath any planes.
 	 */
 	@Override
 	public int compareTo(Drawable o) {
