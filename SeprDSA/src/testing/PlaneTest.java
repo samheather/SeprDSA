@@ -2,30 +2,18 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import engine.graphics.Drawables;
-import engine.graphics.display.Window;
 import game.EntryExitPoint;
 import game.Plane;
 import game.WayPoint;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.la4j.vector.dense.BasicVector;
 
 public class PlaneTest {
 	private ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	
-	@BeforeClass
-	public static void setUp() throws MalformedURLException, IOException {
-		Drawables.initialise(new Window(1024, 640), 824, 640, new File(
-				"default.xml").toURI().toURL());
-	}
-
 	@Test
 	public void testToString() {
 		EntryExitPoint testEEP1 = new EntryExitPoint(new BasicVector(
