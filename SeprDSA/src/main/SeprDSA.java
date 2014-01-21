@@ -114,26 +114,26 @@ public class SeprDSA {
 						Drawables.virtualDisplaySize().get(1) / 2, 11000 } // this
 																			// is
 																			// altitude
-				), -90, 85, 1);
+				), -90, 360, 1);
 		// Right
 		EntryExitPoint newExit2 = new EntryExitPoint(new BasicVector(
 				new double[] {
 						Sidemenu.width / 2 + Sidemenu.remainingDisplayWidth()
 								/ 2, 0, 8000 } // this is altitude
-				), -180, 85, 2);
+				), -180, 360, 2);
 		// Bottom
 		EntryExitPoint newExit3 = new EntryExitPoint(new BasicVector(
 				new double[] { Sidemenu.width / 2,
 						-Drawables.virtualDisplaySize().get(1) / 2, 2000 } // this
 																			// is
 																			// altitude
-				), 90, 85, 3);
+				), 90, 360, 3);
 		// Left
 		EntryExitPoint newExit4 = new EntryExitPoint(new BasicVector(
 				new double[] {
 						Sidemenu.width / 2 - Sidemenu.remainingDisplayWidth()
 								/ 2, 0, 5000 } // this is altitude
-				), 0, 85, 4);
+				), 0, 360, 4);
 		entryExitPointList.add(newExit1);
 		entryExitPointList.add(newExit2);
 		entryExitPointList.add(newExit3);

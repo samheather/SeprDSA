@@ -86,18 +86,17 @@ public class Physicals {
 									.getNextWayPoint()) {
 						// plane with waypoint collision
 						checkPlane.updateWaypoints();
-					} else if (physicalPair[1] instanceof EntryExitPoint
-							&& checkPlane.getWayPoints().size() == 0
-							&& physicalPair[1] == checkPlane
-									.getExitPoint()) {
-						// plane with entryexit collision
-						checkPlane.destroy();
 					} else if (physicalPair[1] instanceof Plane) {
 						// plane with plane collision
 						// CLEANUP AND PUT BACK TO MAIN MENU
 						Audio.playSound("res/sounds/Explode.wav", false, 0.7f);
 						main.SeprDSA.resetGame();
 					}  
+				} else if (physicalPair[0] instanceof EntryExitPoint && physicalPair[1] instanceof Plane
+						&& ((Plane)physicalPair[1]).getWayPoints().size() == 0
+						&& physicalPair[0] == ((Plane)physicalPair[1]).getExitPoint()) {
+					// entryexit with plane collision
+					((Plane)physicalPair[1]).destroy();
 				}
 			}
 		}

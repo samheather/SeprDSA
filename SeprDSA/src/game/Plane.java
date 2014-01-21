@@ -254,11 +254,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	 * Destroys this and removes it from appropriate lists.
 	 */
 	public void destroy() {
+		final Plane p = this;
 		Timing.doNTimes(size, 50, new Timing.NRunnable() {
 			public void run(int i) {
 				size -= 1;
 				if (size == 0) {
 					quickRemove();
+					Planes.remove(p);
 				}
 			}
 		});
@@ -268,7 +270,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	 * Removes all pointers from planes
 	 */
 	public void quickRemove() {
-		//Planes.remove(this);
 		Input.removeScrollable(this);
 		Input.removeClickable(this);
 		Physicals.remove(this);
