@@ -15,54 +15,71 @@ import game.Plane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Will handle input from mouse and keyboard with Logic method
+ */
 public class Input {
 
-	private static List<Keyboardable> keyboardables;
-	private static Map<Integer, List<Keyboardable>> map;
+	private static List<Keyboardable> keyboardables = new ArrayList<Keyboardable>();
+	private static Map<Integer, List<Keyboardable>> map = new HashMap<Integer, List<Keyboardable>>();
 	private static Clickable current;
-	static {
-		keyboardables = new ArrayList<Keyboardable>();
-		map = new HashMap<Integer, List<Keyboardable>>();
-	}
-
-	private static List<Clickable> clickables;
-	static {
-		clickables = new ArrayList<Clickable>();
-	}
-
+	private static List<Clickable> clickables = new ArrayList<Clickable>();
+	private static List<Scrollable> scrollables = new ArrayList<Scrollable>();
+	private static ArrayList<MouseEvent> mouseEvents = new ArrayList<MouseEvent>();
+	private static ArrayList<KeyboardEvent> keyboardEvents = new ArrayList<KeyboardEvent>();
+	
+	/**
+	 * Adds a Clickable object to an ArrayList to handle mouse input
+	 * @param x A Clickable object that will have clicking events
+	 */
 	public static void addClickable(Clickable x) {
 		clickables.add(x);
 	}
-
+	
+	/**
+	 * Stops x from having the mouse interact with it with buttons
+	 * @param x Clickable to stop having mouse button interaction
+	 */
 	public static void removeClickable(Clickable x) {
 		clickables.remove(x);
 	}
 
-	private static List<Scrollable> scrollables;
-	static {
-		scrollables = new ArrayList<Scrollable>();
-	}
-
+	/**
+	 * Allow x to interact with mouse wheel
+	 * @param x A Scrollable that you want to respond to mouse wheel events
+	 */
 	public static void addScrollable(Scrollable x) {
 		scrollables.add(x);
 	}
 
+	/**
+	 * Stops x from responding to mouse wheel
+	 * @param x Scrollable object to stop responding to mouse wheel
+	 */
 	public static void removeScrollable(Scrollable x) {
 		scrollables.remove(x);
 	}
 
-	private static ArrayList<MouseEvent> mouseEvents = new ArrayList<MouseEvent>();
-
+	/**
+	 * Getter for mouse events
+	 * @return A list of mouse events
+	 */
 	public static ArrayList<MouseEvent> mouseEvents() {
 		return mouseEvents;
 	}
 
-	private static ArrayList<KeyboardEvent> keyboardEvents = new ArrayList<KeyboardEvent>();
-
+	/**
+	 * Getter for keyboard events
+	 * @return An ArrayList of keyboard events
+	 */
 	public static ArrayList<KeyboardEvent> keyboardEvents() {
 		return keyboardEvents;
 	}
 
+	/**
+	 * Adds a Keyboardable object to ArrayList of objects that respond to keyboard
+	 * @param x a Keyboardable object that is to respond to keyboard input
+	 */
 	public static void addKeyboardable(Keyboardable x) {
 		keyboardables.add(x);
 		List<Integer> keys = x.keys();
@@ -77,10 +94,19 @@ public class Input {
 
 	}
 
+	/**
+	 * Stops x from responding to keyboard input
+	 * @param x Keyboardable object to stop responding to input from keyboard
+	 */
 	public static void removeKeyboardable(Keyboardable x) {
 		keyboardables.remove(x);
 	}
 
+	/**
+	 * Handles all logic associated with input from mouse and keyboard
+	 * <p>
+	 * (Is to be called every frame to ensure handling input is fine)
+	 */
 	public static void logic() {
 		ArrayList<KeyboardEvent> ke = new ArrayList<KeyboardEvent>();
 		while (Keyboard.next()) {

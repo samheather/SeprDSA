@@ -11,19 +11,28 @@ import game.WayPoint;
 import java.util.ArrayList;
 
 public class Physicals {
-	public static ArrayList<Physical> physicals;
-	static {
-		physicals = new ArrayList<Physical>();
-	}
+	public static ArrayList<Physical> physicals = new ArrayList<Physical>();
 
+	/**
+	 * Will allow a Physical object to update its Physics (Position, collisions etc)
+	 * @param d Physical object to respond to physics
+	 */
 	public static void add(Physical d) {
 		physicals.add(d);
 	}
 
+	/**
+	 * Stops physicals from updating a Physical's position and collisions
+	 * @param d Physical object to stop responding to updates in physics
+	 */
 	public static void remove(Physical d) {
 		physicals.remove(d);
 	}
 
+	/**
+	 * Will handle logic of updating the physical position of objects in the physicals ArrayList along with collisions
+	 * @return A list of Physical[] that contains objects that are colliding with each other
+	 */
 	public static ArrayList<Physical[]> logic() {
 		ArrayList<Physical[]> colliding = new ArrayList<Physical[]>();
 		double time = Timing.timeSinceLastFrame() / 1000;
