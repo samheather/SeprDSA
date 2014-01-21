@@ -1,5 +1,8 @@
 package engine.input;
 
+/**
+ * Stores a mouse event. Used internally to communicate with TWL.
+ */
 public class MouseEvent {
 	private final int x;
 	private final int y;

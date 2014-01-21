@@ -1,5 +1,8 @@
 package engine.input;
 
+/**
+ * Stores a keyboard event. Used internally to communicate with TWL.
+ */
 public class KeyboardEvent {
 
 	private final int keyCode;
