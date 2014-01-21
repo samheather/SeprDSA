@@ -76,7 +76,7 @@ public class FuturePlane {
 										enterPoint, exitPoint, (float) ((randomgen
 												.nextDouble() - 0.5)
 												* 2.0
-												* enterPoint.getTolerance()
+												* (Math.min(enterPoint.getTolerance()+88,randomgen.nextInt(176))-88)
 												+ enterPoint.getBearingNeeded()));
 								FuturePlanes.pop();
 							} else {
