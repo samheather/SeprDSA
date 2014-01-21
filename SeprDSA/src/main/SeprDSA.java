@@ -11,7 +11,6 @@ import engine.timing.Timing;
 import game.EntryExitPoint;
 import game.FuturePlane;
 import game.FuturePlanes;
-import game.Leaderboard;
 import game.MainMenu;
 import game.Map;
 import game.Plane;
@@ -40,7 +39,6 @@ public class SeprDSA {
 	private static ArrayList<WayPoint> wayPointList = new ArrayList<WayPoint>();
 	private static ArrayList<EntryExitPoint> entryExitPointList = new ArrayList<EntryExitPoint>();
 	public static double timer;
-	private static int score = 0;
 	private static Random randomgen = new Random();
 	public static Plane selectedPlane;
 	public static boolean gameCurrentlyPlaying = false;
@@ -50,10 +48,6 @@ public class SeprDSA {
 	 * such.
 	 */
 	public static double resizeWindowScaleFactor = 1.25;
-	/**
-	 * Initialise leaderboard here so it can be accessed globally
-	 */
-	public static Leaderboard l = new Leaderboard();
 
 	public static ArrayList<WayPoint> getWayPoints() {
 		return wayPointList;
@@ -69,10 +63,6 @@ public class SeprDSA {
 	
 	public static void addEntryExitPoint(EntryExitPoint newEEP) {
 		entryExitPointList.add(newEEP);
-	}
-
-	public static void updateScore(int scoreToAdd) {
-		score += scoreToAdd;
 	}
 
 	public static float getMagnitude(Vector vecA, Vector vecB) {
