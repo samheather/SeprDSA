@@ -1,6 +1,5 @@
 package game;
 
-
 import org.la4j.vector.Vector;
 import org.la4j.vector.dense.BasicVector;
 
@@ -13,7 +12,7 @@ import engine.physics.Physicals;
 
 /**
  * A point at which Planes can enter or exit the game
- *
+ * 
  */
 public class EntryExitPoint implements Drawable, Physical {
 
@@ -21,15 +20,23 @@ public class EntryExitPoint implements Drawable, Physical {
 	private float tolerance = 20;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private double radius = 200;
-	private int size = (int)((25.0/640.0)*Drawables.virtualDisplaySize().get(1));
+	private int size = (int) ((25.0 / 640.0) * Drawables.virtualDisplaySize()
+			.get(1));
 	private int number;
 
 	/**
 	 * Constructor for EntryExitPoint
-	 * @param pos Position for the EntryExitPoint to be drawn
-	 * @param bearing Bearing at which Planes can successfully collide with EntryExitPoint
-	 * @param tolerances Tolerance of +- angle(degrees) from bearing to which the plane can still collide
-	 * @param pointNumber An assigned number for EntryExitPoint used as a UID.
+	 * 
+	 * @param pos
+	 *            Position for the EntryExitPoint to be drawn
+	 * @param bearing
+	 *            Bearing at which Planes can successfully collide with
+	 *            EntryExitPoint
+	 * @param tolerances
+	 *            Tolerance of +- angle(degrees) from bearing to which the plane
+	 *            can still collide
+	 * @param pointNumber
+	 *            An assigned number for EntryExitPoint used as a UID.
 	 */
 	public EntryExitPoint(Vector pos, float bearing, float tolerances,
 			int pointNumber) {
@@ -40,7 +47,7 @@ public class EntryExitPoint implements Drawable, Physical {
 		bearingNeeded = bearing;
 		tolerance = tolerances;
 	}
-	
+
 	/**
 	 * Returns a readable string for debugging
 	 */
@@ -48,25 +55,28 @@ public class EntryExitPoint implements Drawable, Physical {
 	public String toString() {
 		return "EntryExitPoint" + number;
 	}
-	
+
 	/**
 	 * Getter for EntryExitPoint tolerance
+	 * 
 	 * @return tolerance of EntryExitPoint
 	 */
 	public float getTolerance() {
 		return tolerance;
 	}
-	
+
 	/**
 	 * Getter for EntryExitPoint bearing
+	 * 
 	 * @return bearing of EntryExitPoint
 	 */
 	public float getBearingNeeded() {
 		return bearingNeeded;
 	}
-	
+
 	/**
 	 * Gets a descriptive name for EntryExitPointfor use in SideMenu
+	 * 
 	 * @return A string to use for SideMenu plane list
 	 */
 	public String sidemenuString() {
@@ -88,6 +98,7 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	/**
 	 * Allows for the object to be drawn
+	 * 
 	 * @return A Sprite that is used for drawing
 	 */
 	public Drawing draw() {
@@ -97,6 +108,7 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	/**
 	 * Getter for EntryExitPoint position
+	 * 
 	 * @return Position of EntryExitPoint
 	 */
 	public Vector getPos() {
@@ -120,24 +132,31 @@ public class EntryExitPoint implements Drawable, Physical {
 
 	/**
 	 * Method that detects collisions between this and a Vector point
-	 * @param checkPos A Vector point to check collision with
-	 * @return A boolean that indicates if an this is colliding with a Vector point
+	 * 
+	 * @param checkPos
+	 *            A Vector point to check collision with
+	 * @return A boolean that indicates if an this is colliding with a Vector
+	 *         point
 	 */
 	public boolean isCollidingPos(Vector checkPos) {
-		return position.subtract(checkPos).norm() < radius;
+		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
+		          + Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
 	}
 
 	/**
-	 * Method that indicates if this is colliding with another object based on radius variable
-	 * @param checkObj A Physical object to check collision with
-	 * @return A boolean that indicates if an object is colliding with another Physical
+	 * Method that indicates if this is colliding with another object based on
+	 * radius variable
+	 * 
+	 * @param checkObj
+	 *            A Physical object to check collision with
+	 * @return A boolean that indicates if an object is colliding with another
+	 *         Physical
 	 */
 	public boolean isCollidingObj(Physical checkObj) {
 		return isCollidingPos(checkObj.getPos())
-
-				&& ((checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance) % 360 > bearingNeeded
+				&& ( (checkObj.getBearing() > 180 ? (checkObj.getBearing() - tolerance) % 360 > bearingNeeded
 						- tolerance
-						: checkObj.getBearing() > bearingNeeded - tolerance) && (checkObj
+						: checkObj.getBearing() > bearingNeeded - tolerance) || (checkObj
 						.getBearing() > 180 ? (checkObj.getBearing() + tolerance) % 360 < bearingNeeded
 						+ tolerance
 						: checkObj.getBearing() < bearingNeeded + tolerance));
