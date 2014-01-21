@@ -1,15 +1,12 @@
 package main;
 
 import engine.audio.Audio;
-import engine.graphics.Drawable;
 import engine.graphics.Drawables;
-import engine.graphics.display.Fullscreen;
 import engine.graphics.display.Window;
 import engine.input.Input;
 import engine.physics.Physicals;
 import engine.timing.Timing;
 import game.EntryExitPoint;
-import game.FuturePlane;
 import game.FuturePlanes;
 import game.Leaderboard;
 import game.MainMenu;
