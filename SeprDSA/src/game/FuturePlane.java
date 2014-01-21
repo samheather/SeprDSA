@@ -46,7 +46,7 @@ public class FuturePlane {
 		fnumber = generateFlightNumber();
 		wayPointList = new ArrayList<WayPoint>();
 		int lastUsed = -1;
-		for (int i = 0; i < 2 + randomgen.nextInt(3); i++) {
+		for (int i = 0; i < 2 + randomgen.nextInt(2); i++) {
 			int newNumber = getWayPointNumber(lastUsed);
 			wayPointList.add(SeprDSA.getWayPoints().get(newNumber));
 			lastUsed = newNumber;
