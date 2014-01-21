@@ -33,7 +33,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private float rotation = 0.0f;
 	private double radius = 175;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
-	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
+	private int size = (int)((55.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;
 	private Text numbertext;
 	private double baseSpeed = ((15.0/640.0) * Drawables.virtualDisplaySize().get(1));
@@ -90,7 +90,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 			return "Next " + getNextWayPoint().toString();
 		}
 		else {
-			return "Now Exit!";
+			return "Exit at: " + exitPoint.sidemenuString();
 		}
 	}
 
