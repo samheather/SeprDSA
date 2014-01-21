@@ -2,14 +2,26 @@ package testing;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import engine.graphics.Drawables;
+import engine.graphics.display.Window;
 import engine.physics.Physicals;
 import game.EntryExitPoint;
 import game.WayPoint;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.la4j.vector.dense.BasicVector;
 
 public class PhysicalsTest {
+//	@BeforeClass 
+//    public static void setUpClass() throws MalformedURLException, IOException {      
+//	 Drawables.initialise(new Window(1024, 640), 824, 640, new File(
+//				"default.xml").toURI().toURL());
+//}
 	
 	@Test
 	public void testLogicColliding() {

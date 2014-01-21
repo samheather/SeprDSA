@@ -53,8 +53,16 @@ public class SeprDSA {
 		return wayPointList;
 	}
 
+	public static void addWayPoint(WayPoint newWP) {
+		wayPointList.add(newWP);
+	}
+	
 	public static ArrayList<EntryExitPoint> getEntryExitPoints() {
 		return entryExitPointList;
+	}
+	
+	public static void addEntryExitPoint(EntryExitPoint newEEP) {
+		entryExitPointList.add(newEEP);
 	}
 
 	public static float getMagnitude(Vector vecA, Vector vecB) {
