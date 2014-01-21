@@ -31,7 +31,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
 	private float rotation = 0.0f;
-	private double radius = 200;
+	private double radius = 175;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
 	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
 	private String number;

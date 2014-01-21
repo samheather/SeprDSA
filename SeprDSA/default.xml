@@ -61,7 +61,7 @@
 
     <theme name="sidemenu" ref="-defaults">
         <theme name="button" ref="-defaults">
-            <param name="background"><image>button.background</image></param>
+            <param name="background"><image>label.background</image></param>
         </theme>
         <theme name="label" ref="-defaults">
         	<param name="background"><image>label.background</image></param>
@@ -81,7 +81,7 @@
     
     <theme name="mainmenu" ref="-defaults">
         <theme name="button" ref="-defaults">
-            <param name="background"><image>button.background</image></param>
+            <param name="background"><image>label.background</image></param>
         </theme>
     </theme>
     
