@@ -110,7 +110,8 @@ public class XMLParser implements Closeable {
         XmlPullParser xpp_ = null;
         InputStream is = null;
 
-        this.source = url.toString();
+//        this.source = url.toString();
+        this.source = "default.xml";
         
         try {
             xpp_ = (XmlPullParser)url.getContent(XPP_CLASS);

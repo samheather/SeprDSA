@@ -98,9 +98,10 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
+//		System.setProperty("org.lwjgl.librarypath", new File("lib/native/").getAbsolutePath());
 		Drawables.initialise(new Window((int) (1024 * resizeWindowScaleFactor),
 				(int) (640 * resizeWindowScaleFactor)), 4096, 2560, new File(
-				"default.xml").toURI().toURL());
+				"/usr/userfs/s/sbh514/git/SeprDSA/SeprDSA/default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 		Display.setTitle("Dat Flying Game");
