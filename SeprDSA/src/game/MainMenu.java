@@ -23,6 +23,7 @@ public class MainMenu extends Widget {
 	private Button helpButton;
 	private Button exitButton;
 	private MainMenuBackground mmb;
+	private double resizeWindowScaleFactor = 1;
 	
 	private void createButtons() {
 		startButton = new Button(" ");
@@ -60,12 +61,12 @@ public class MainMenu extends Widget {
 	}
 	
 	protected void layout() {
-		startButton.setPosition(446, 194);
-		startButton.setSize(130,45);
-		helpButton.setPosition(446, 260);
-		helpButton.setSize(130,45);
-		exitButton.setPosition(446, 324);
-		exitButton.setSize(130,45);
+		startButton.setPosition((int)(446*resizeWindowScaleFactor), (int)(194*resizeWindowScaleFactor));
+		startButton.setSize((int)(130*resizeWindowScaleFactor),(int)(45*resizeWindowScaleFactor));
+		helpButton.setPosition((int)(446*resizeWindowScaleFactor), (int)(260*resizeWindowScaleFactor));
+		helpButton.setSize((int)(130*resizeWindowScaleFactor),(int)(45*resizeWindowScaleFactor));
+		exitButton.setPosition((int)(446*resizeWindowScaleFactor), (int)(324*resizeWindowScaleFactor));
+		exitButton.setSize((int)(130*resizeWindowScaleFactor),(int)(45*resizeWindowScaleFactor));
 	}
 	
 	public void show() {
@@ -90,6 +91,8 @@ public class MainMenu extends Widget {
 	 */
 	public MainMenu() {
 		Drawables.add(this);
+		
+		resizeWindowScaleFactor = main.SeprDSA.resizeWindowScaleFactor;
 		
 		mmb = new MainMenuBackground();
 		

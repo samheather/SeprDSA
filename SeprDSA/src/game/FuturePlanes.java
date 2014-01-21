@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 public class FuturePlanes {
 
-	public FuturePlanes() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static ArrayList<FuturePlane> futurePlanes = new ArrayList<FuturePlane>();
 
 	/**
 	 * This method adds a FuturePlane to the list
 	 * 
-	 * @param p
+	 * @param p FuturePlane to add to list
 	 */
 	public static void add(FuturePlane p) {
 		futurePlanes.add(p);
@@ -35,7 +31,7 @@ public class FuturePlanes {
 	/**
 	 * This method returns the number of FuturePlanes in the list
 	 * 
-	 * @return
+	 * @return integer size of list
 	 */
 	public static int size() {
 		return futurePlanes.size();

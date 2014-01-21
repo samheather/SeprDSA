@@ -25,7 +25,7 @@ public class MainMenuBackground implements Drawable {
 	}
 	
 	public void hide() {
-		System.out.println("Start pressed - hiding background");
+		//System.out.println("Start pressed - hiding background");
 		Drawables.remove(this);
 	}
 

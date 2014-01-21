@@ -72,8 +72,6 @@ public class Planes {
 		} else {
 			if (Timing.timeSinceStart() >= spawnThreshhold
 					&& planes.size() < maxplanenumb) {
-				System.out.println(planes.size());
-				System.out.println("Added plane");
 				FuturePlane tempFuturePlane = new FuturePlane(
 						randomgen.nextInt(2000));
 				FuturePlanes.add(tempFuturePlane);

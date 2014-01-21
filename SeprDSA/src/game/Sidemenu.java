@@ -35,6 +35,8 @@ public class Sidemenu extends Widget {
 	 * Width of SideMenu, used for positioning other items elsewhere.
 	 */
 	public static final int width = 800;
+	
+	private double resizeWindowScaleFactor = 1;
 
 	/**
 	 * Returns the width of the virtual display - the width of the side menu.
@@ -81,11 +83,11 @@ public class Sidemenu extends Widget {
 		// button.adjustSize(); //Calculate optimal size instead of manually
 		// setting it
 		for (int i = 0; i < labelArray.length; i++) {
-            labelArray[i].setPosition(0, 110 + 20 * i);
-            labelArray[i].setSize(200, 20);
+            labelArray[i].setPosition(0, (int)((110 + 20 * i)*resizeWindowScaleFactor));
+            labelArray[i].setSize((int)(200*resizeWindowScaleFactor), (int)(20*resizeWindowScaleFactor));
 		}
-		exitGameButton.setPosition(35, 554);
-		exitGameButton.setSize(130, 45);
+		exitGameButton.setPosition((int)(35*resizeWindowScaleFactor), (int)(554*resizeWindowScaleFactor));
+		exitGameButton.setSize((int)(130*resizeWindowScaleFactor), (int)(45*resizeWindowScaleFactor));
 	}
 
 	/**
@@ -95,6 +97,8 @@ public class Sidemenu extends Widget {
 	public Sidemenu() {
 
 		Drawables.add(this);
+		
+		resizeWindowScaleFactor = main.SeprDSA.resizeWindowScaleFactor;
 
 		createButton();
 		setupLabels();
