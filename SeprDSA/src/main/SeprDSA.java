@@ -101,7 +101,7 @@ public class SeprDSA {
 //		System.setProperty("org.lwjgl.librarypath", new File("lib/native/").getAbsolutePath());
 		Drawables.initialise(new Window((int) (1024 * resizeWindowScaleFactor),
 				(int) (640 * resizeWindowScaleFactor)), 4096, 2560, new File(
-				"/usr/userfs/s/sbh514/git/SeprDSA/SeprDSA/default.xml").toURI().toURL());
+				"default.xml").toURI().toURL());
 		SoundStore.get().init();
 		SoundStore.get().setCurrentMusicVolume(9.0f);
 		Display.setTitle("Dat Flying Game");
