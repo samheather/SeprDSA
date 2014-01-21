@@ -39,7 +39,7 @@ public class FuturePlane {
 	/**
 	 * Constructor for FuturePlane
 	 * 
-	 * @param delayTime
+	 * @param delayTime Time in milliseconds before a plane is created
 	 * @throws InterruptedException
 	 */
 	public FuturePlane(int delayTime) {
@@ -51,13 +51,12 @@ public class FuturePlane {
 			wayPointList.add(SeprDSA.getWayPoints().get(newNumber));
 			lastUsed = newNumber;
 		}
-		System.out.println(wayPointList.toString());
+		//System.out.println(wayPointList.toString());
 		timeTillAppears = delayTillFuturePlanesBecomePlanes;
 		if (Planes.planes.size() == 0) {
 			Timing.doIn(100, new NRunnable() {
 				@Override
 				public void run(int n) {
-				System.out.println("Lal");
 				Plane p = new Plane(fnumber, wayPointList,
 						enterPoint, exitPoint, (float) ((randomgen
 								.nextDouble() - 0.5)
@@ -73,7 +72,6 @@ public class FuturePlane {
 						@Override
 						public void run(int n) {
 							if (n == 1) {
-								//System.out.println(enterPoint.getTolerance() + " " + enterPoint.getBearingNeeded());
 								Plane p = new Plane(fnumber, wayPointList,
 										enterPoint, exitPoint, (float) ((randomgen
 												.nextDouble() - 0.5)
@@ -127,6 +125,10 @@ public class FuturePlane {
 		}
 	}
 
+	/**
+	 * Getter for the entry point of the FuturePlane
+	 * @return EntryExitPoint that the FuturePlane is scheduled to come in on
+	 */
 	public EntryExitPoint getEntryPoint() {
 		return enterPoint;
 	}

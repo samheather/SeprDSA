@@ -151,10 +151,10 @@ public class Input {
 					for (int i = collisions.size() - 1; i >= 0; i--) {
 						if (collisions.get(i) instanceof Clickable) {
 							c = (Clickable) collisions.get(i);
-							if (c instanceof Plane) {
+							/*if (c instanceof Plane) {
 								System.out.println(((Plane) c).getFNumber());
 								System.out.println(pos);
-							}
+							}*/
 							if (c == current) {
 								c.clickDown(button, pos);
 							} else {

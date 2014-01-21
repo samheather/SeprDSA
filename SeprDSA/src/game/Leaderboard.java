@@ -49,7 +49,7 @@ public class Leaderboard /* implements Drawable */{
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		} else {
-			System.out.println("Loaded before - loading previous leaderboard.");
+			//System.out.println("Loaded before - loading previous leaderboard.");
 			readLeaderboard(); // DO NOT change the leaderboard before this call
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
