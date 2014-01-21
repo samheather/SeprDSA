@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: main.SeprDSA
+Class-Path: lib/lwjgl.jar lib/la4j.jar lib/slick.jar lib/xpp3-1.1.4c.jar
