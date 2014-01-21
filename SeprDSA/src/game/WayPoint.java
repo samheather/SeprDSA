@@ -33,7 +33,7 @@ public class WayPoint implements Drawable, Physical {
 		position = pos;
 		number = pointNumber;
 		numbertext = new Text(pointNumber, Fonts.wayPointFont, Alignment.CENTRED);
-		wayPointAltitudeText = new Text(Integer.toString((int)Math.round(position.get(2)*100)*10), Fonts.wayPointFont, Alignment.CENTRED);
+		wayPointAltitudeText = new Text(Integer.toString((int)Math.round(position.get(2))), Fonts.wayPointFont, Alignment.CENTRED);
 		Drawables.add(this);
 		Physicals.add(this);
 	}

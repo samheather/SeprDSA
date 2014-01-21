@@ -82,7 +82,7 @@ public class SeprDSA {
 								+ Sidemenu.width / 2.0,
 						(randomgen.nextDouble() - 0.5)
 								* (Drawables.virtualDisplaySize().get(1) - pixelsFromEdge),
-						randomgen.nextDouble() * 13 });
+						randomgen.nextDouble() * 14000 });
 
 		for (WayPoint waypoint : wayPointList) {
 			if (getMagnitude(waypoint.getPos(), testVector) < 400.0f) {
@@ -114,7 +114,7 @@ public class SeprDSA {
 		// Top
 		EntryExitPoint newExit1 = new EntryExitPoint(new BasicVector(
 				new double[] { Sidemenu.width / 2,
-						Drawables.virtualDisplaySize().get(1) / 2, 11 } // this
+						Drawables.virtualDisplaySize().get(1) / 2, 11000 } // this
 																		// is
 																		// altitude
 				), -90, 85, 1);
@@ -122,12 +122,12 @@ public class SeprDSA {
 		EntryExitPoint newExit2 = new EntryExitPoint(new BasicVector(
 				new double[] {
 						Sidemenu.width / 2 + Sidemenu.remainingDisplayWidth()
-								/ 2, 0, 8 } // this is altitude
+								/ 2, 0, 8000 } // this is altitude
 				), -180, 85, 2);
 		// Bottom
 		EntryExitPoint newExit3 = new EntryExitPoint(new BasicVector(
 				new double[] { Sidemenu.width / 2,
-						-Drawables.virtualDisplaySize().get(1) / 2, 2 } // this
+						-Drawables.virtualDisplaySize().get(1) / 2, 2000 } // this
 																		// is
 																		// altitude
 				), 90, 85, 3);
@@ -135,7 +135,7 @@ public class SeprDSA {
 		EntryExitPoint newExit4 = new EntryExitPoint(new BasicVector(
 				new double[] {
 						Sidemenu.width / 2 - Sidemenu.remainingDisplayWidth()
-								/ 2, 0, 5 } // this is altitude
+								/ 2, 0, 5000 } // this is altitude
 				), 0, 85, 4);
 		entryExitPointList.add(newExit1);
 		entryExitPointList.add(newExit2);
@@ -143,11 +143,11 @@ public class SeprDSA {
 		entryExitPointList.add(newExit4);
 
 		EntryExitPoint landingStripRight = new EntryExitPoint(new BasicVector(
-				new double[] { -40, -500, 0.1 }), 0, 15, 0); // Landing Strip
+				new double[] { -40, -500, 100 }), 0, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripRight);
 
 		EntryExitPoint landingStripLeft = new EntryExitPoint(new BasicVector(
-				new double[] { -40, -500, 0.1 }), 180, 15, 0); // Landing Strip
+				new double[] { -40, -500, 100 }), 180, 15, 0); // Landing Strip
 		entryExitPointList.add(landingStripLeft);
 
 		for (Integer i = 1; i <= wayPointNumber; i++) { // Random waypoints
