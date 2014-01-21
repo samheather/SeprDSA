@@ -88,10 +88,6 @@ public class FuturePlane {
 		}
 	}
 
-	public void createPlaneFromFuturePlane() {
-
-	}
-
 	/**
 	 * Create an eight digit string of letters and numbers
 	 */
