@@ -28,16 +28,9 @@ import org.la4j.vector.dense.*;
 public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	private static Random randomgen = new Random();
-	private double x; // Should be pixel values for x,y
-	private double y;
-	private double z;
 	private Vector position = new BasicVector(new double[] { 0, 0, 0 });
 	private Vector velocity = new BasicVector(new double[] { 0, 0, 0 });
 	private float rotation = 0.0f;
-	private boolean left = false;
-	private boolean right = false;
-	private boolean up = false;
-	private boolean down = false;
 	private double radius = 200;
 	private int randomImage = randomgen.nextInt(Images.planes.length);
 	private int size = (int)((60.0/640.0)*Drawables.virtualDisplaySize().get(1));
@@ -66,7 +59,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		// Add line here using setPos to randomise initial altitude.
 		numbertext = new Text(fnumber, Fonts.planeFont, Alignment.CENTRED);
 		altitudeText = new Text("Altitude: "
-				+ String.valueOf(Math.round(z * 1000)) + "m", Fonts.planeFont,
+				+ String.valueOf(Math.round(position.get(2) * 1000)) + "m", Fonts.planeFont,
 				Alignment.CENTRED);
 		nextWaypointText = new Text(getNextWayPointText(), Fonts.planeFont,
 				Alignment.CENTRED);
@@ -124,19 +117,6 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 
 	public Drawing draw() {
-		if (left) {
-			x -= 10.0;
-		}
-		if (right) {
-			x += 10.0;
-		}
-		if (up) {
-			y += 10.0;
-		}
-		if (down) {
-			y -= 10.0;
-		}
-
 		return new Sprite(Images.planes[randomImage])
 				.red(1.0)
 				.blue(SeprDSA.selectedPlane == this ? 0.0 : 1.0)
@@ -153,7 +133,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 										new BasicVector(new double[] { 0, -160 })))
 				.overlay(
 						new Text("Altitude: "
-								+ String.valueOf(Math.round(z * 1000)),
+								+ String.valueOf(Math.round(position.get(2) * 1000)),
 								Fonts.planeFont, Alignment.CENTRED)
 								.red(1.0)
 								.blue(1.0)
@@ -170,20 +150,18 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								.alpha(0.75)
 								.translate(
 										new BasicVector(new double[] { 0, -320 })))
-				.translate(new BasicVector(new double[] { x, y }))
+				.translate(new BasicVector(new double[] { position.get(0), position.get(1) }))
 				.overlay(
 						(lineExists ? new Line(getPos(), endLine)
 								: new Identity()).alpha(1.0).red(1.0));
 	}
 
 	public Vector getPos() {
-		return new BasicVector(new double[] { x, y, z });
+		return position;
 	}
 
 	public void setPos(Vector newPos) {
-		x = newPos.get(0);
-		y = newPos.get(1);
-		z = newPos.get(2);
+		position = newPos;
 	}
 
 	public Vector getVel() {
@@ -195,13 +173,13 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 
 	public boolean isCollidingPos(Vector checkPos) {
-		return Math.sqrt(Math.pow(x - checkPos.get(0), 2)
-				+ Math.pow(y - checkPos.get(1), 2)) < radius;
+		return Math.sqrt(Math.pow(position.get(0) - checkPos.get(0), 2)
+				+ Math.pow(position.get(1) - checkPos.get(1), 2)) < radius;
 	}
 
 	public boolean isCollidingObj(Physical checkObj) {
-		return Math.sqrt(Math.pow(x - checkObj.getPos().get(0), 2)
-				+ Math.pow(y - checkObj.getPos().get(1), 2)) < radius;
+		return Math.sqrt(Math.pow(position.get(0) - checkObj.getPos().get(0), 2)
+				+ Math.pow(position.get(1) - checkObj.getPos().get(1), 2)) < radius;
 	}
 
 	public float getBearing() {
@@ -237,7 +215,7 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	}
 
 	public double getZ() {
-		return z;
+		return getPos().get(2);
 	}
 
 	public int compareTo(Drawable o) {
@@ -291,15 +269,14 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	 */
 	@Override
 	public void scroll(int amount) {
-		// TODO Auto-generated method stub
 		if (SeprDSA.selectedPlane == this) {
-			z += amount * 0.001;
+			position.set(2, position.get(2) + amount * 0.001);
 		}
-		if (z > 14.0) {
-			z = 14.0;
+		if (position.get(2) > 14.0) {
+			position.set(2, 14.0);
 		}
-		if (z < 0.1) {
-			z = 0.1;
+		if (position.get(2) < 0.1) {
+			position.set(2, 0.1);
 		}
 	}
 }
