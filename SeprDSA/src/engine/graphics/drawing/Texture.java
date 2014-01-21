@@ -26,11 +26,21 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL31;
 
+/**
+ * Represents an image stored by the graphics engine.
+ */
 public class Texture {
 
 	private final int internal;
 	private final Vector size;
 
+	/**
+	 * Loads the image at filePath as a texture.
+	 * 
+	 * @param filePath
+	 *            The image to load
+	 * @throws IOException
+	 */
 	public Texture(String filePath) throws IOException {
 		/*
 		 * BufferedImage image = null; try { image = ImageIO.read(new
@@ -40,6 +50,12 @@ public class Texture {
 		this(ImageIO.read(new File(filePath)));
 	}
 
+	/**
+	 * Creates a texture from a BufferedImage.
+	 * 
+	 * @param image
+	 *            The BufferedImage to create a texture from
+	 */
 	public Texture(BufferedImage image) {
 		double xs = image.getWidth();
 		double ys = image.getHeight();
@@ -81,11 +97,17 @@ public class Texture {
 
 	}
 
+	/**
+	 * Makes this texture the current texture to render with.
+	 */
 	public void bind() {
 		glBindTexture(GL31.GL_TEXTURE_RECTANGLE, internal);
 
 	}
 
+	/**
+	 * @return the size of the texture in pixels
+	 */
 	public Vector size() {
 		return size;
 	}
