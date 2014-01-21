@@ -53,11 +53,11 @@ public class SeprDSA {
 	public static void addWayPoint(WayPoint newWP) {
 		wayPointList.add(newWP);
 	}
-	
+
 	public static ArrayList<EntryExitPoint> getEntryExitPoints() {
 		return entryExitPointList;
 	}
-	
+
 	public static void addEntryExitPoint(EntryExitPoint newEEP) {
 		entryExitPointList.add(newEEP);
 	}
@@ -93,7 +93,8 @@ public class SeprDSA {
 
 	public static void main(String[] args) throws InterruptedException,
 			MalformedURLException, IOException {
-//		System.setProperty("org.lwjgl.librarypath", new File("lib/native/").getAbsolutePath());
+		// System.setProperty("org.lwjgl.librarypath", new
+		// File("lib/native/").getAbsolutePath());
 		Drawables.initialise(new Window((int) (1024 * resizeWindowScaleFactor),
 				(int) (640 * resizeWindowScaleFactor)), 4096, 2560, new File(
 				"default.xml").toURI().toURL());
@@ -111,8 +112,8 @@ public class SeprDSA {
 		EntryExitPoint newExit1 = new EntryExitPoint(new BasicVector(
 				new double[] { Sidemenu.width / 2,
 						Drawables.virtualDisplaySize().get(1) / 2, 11000 } // this
-																		// is
-																		// altitude
+																			// is
+																			// altitude
 				), -90, 85, 1);
 		// Right
 		EntryExitPoint newExit2 = new EntryExitPoint(new BasicVector(
@@ -124,8 +125,8 @@ public class SeprDSA {
 		EntryExitPoint newExit3 = new EntryExitPoint(new BasicVector(
 				new double[] { Sidemenu.width / 2,
 						-Drawables.virtualDisplaySize().get(1) / 2, 2000 } // this
-																		// is
-																		// altitude
+																			// is
+																			// altitude
 				), 90, 85, 3);
 		// Left
 		EntryExitPoint newExit4 = new EntryExitPoint(new BasicVector(
@@ -175,7 +176,7 @@ public class SeprDSA {
 					p.quickRemove();
 				}
 				Planes.planes.clear();
-				Timing.clearAllTasks();
+				Timing.clear();
 				mm.show();
 			}
 		}

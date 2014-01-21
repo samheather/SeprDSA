@@ -10,6 +10,14 @@ public class Timing {
 	private static long lastTimeSinceLastFrame = 0;
 	private static PriorityQueue<Task> tasks = new PriorityQueue<Task>();
 
+	public static void clear() {
+		timeSinceStart = 0;
+		startTime = System.currentTimeMillis();
+		timeSinceLastFrame = 0;
+		lastTimeSinceLastFrame = 0;
+		tasks = new PriorityQueue<Task>();
+	}
+
 	/**
 	 * Implemented by a class which represents a closure that is to be called
 	 * more than once.
@@ -28,9 +36,9 @@ public class Timing {
 		return doNTimes(1, milliseconds, does);
 	}
 
-	public static void clearAllTasks() {
-		tasks.clear();
-	}
+	/*
+	 * public static void clearAllTasks() { tasks.clear(); }
+	 */
 
 	/**
 	 * 
