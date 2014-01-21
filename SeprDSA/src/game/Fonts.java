@@ -11,10 +11,6 @@ import engine.graphics.drawing.Font;
  * @author sbh514
  */
 public class Fonts {
-	public static Font test = new Font("Tahoma Bold", java.awt.Font.BOLD,
-			144);
-	public static Font smallFont = new Font("Tahoma Bold",
-			java.awt.Font.BOLD, 48);
 	public static Font planeFont = new Font("Tahoma Bold",
 			java.awt.Font.BOLD, 64);
 	public static Font wayPointFont = new Font("Tahoma Bold",
