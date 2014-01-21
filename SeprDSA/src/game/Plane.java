@@ -7,7 +7,6 @@ import main.SeprDSA;
 
 import org.la4j.vector.Vector;
 
-
 import engine.graphics.Drawable;
 import engine.graphics.Drawables;
 import engine.graphics.drawing.Drawing;
@@ -25,6 +24,10 @@ import engine.timing.*;
 
 import org.la4j.vector.dense.*;
 
+/**
+ * Class for planes - these are created from FuturePlanes, when a plane is ready
+ * to enter the airspace.
+ */
 public class Plane implements Drawable, Physical, Clickable, Scrollable {
 
 	private static Random randomgen = new Random();
@@ -44,6 +47,16 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 	private boolean lineExists = false;
 	private float targetBearing = 0.0f;
 
+	/**
+	 * Constructor.  Takes a flight number, List of WayPoints that this plane
+	 * must go through, the point at which it will enter, the point at which it 
+	 * exit and the original bearing.
+	 * @param fnumber
+	 * @param pointList
+	 * @param startPoint
+	 * @param endPoint
+	 * @param bearing
+	 */
 	public Plane(String fnumber, ArrayList<WayPoint> pointList,
 			EntryExitPoint startPoint, EntryExitPoint endPoint, float bearing) {
 		number = fnumber;
@@ -63,10 +76,16 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		Input.addScrollable(this);
 	}
 
+	/**
+	 * Returns string containing information on this plane.
+	 */
 	public String toString() {
 		return "Plane" + number;
 	}
 
+	/**
+	 * Update list of remaining way points.
+	 */
 	public void updateWaypoints() {
 		if (wayPointList.size() > 0) {
 			//System.out.println(wayPointList.get(0).toString());
@@ -75,6 +94,11 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		}
 	}
 
+	/**
+	 * Used to work out what the next way point will be for a plane (i.e. after
+	 * it has gone through one).
+	 * @return
+	 */
 	public WayPoint getNextWayPoint() {
 		if (wayPointList.size() > 0) {
 			return wayPointList.get(0);
@@ -83,6 +107,10 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		}
 	}
 	
+	/**
+	 * Text to display under a plane re: waypoint or exit.
+	 * @return String
+	 */
 	public String getNextWayPointText() {
 		if (getNextWayPoint() != null) {
 			return "Next " + getNextWayPoint().toString();
@@ -92,6 +120,10 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		}
 	}
 
+	/**
+	 * Returns the exit point of a plane.
+	 * @return
+	 */
 	public EntryExitPoint getExitPoint() {
 		if (exitPoint != null) {
 			return exitPoint;
@@ -100,14 +132,25 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 		}
 	}
 
+	/**
+	 * Returns the array of way points a plane must go through.
+	 * @return
+	 */
 	public ArrayList<WayPoint> getWayPoints() {
 		return wayPointList;
 	}
 
+	/**
+	 * Returns the Flight Number of this plane.
+	 * @return
+	 */
 	public String getFNumber() {
 		return number;
 	}
 
+	/**
+	 * Drawables draw() function - called everytime a Plane is drawn.
+	 */
 	public Drawing draw() {
 		return new Sprite(Images.planes[randomImage])
 				.red(1.0)
@@ -148,34 +191,58 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 								: new Identity()).alpha(1.0).red(1.0));
 	}
 
+	/**
+	 * Returns position.
+	 */
 	public Vector getPos() {
 		return position;
 	}
 
+	/**
+	 * Sets new position vector.
+	 */
 	public void setPos(Vector newPos) {
 		position = newPos;
 	}
 
+	/**
+	 * Returns velocity vector.
+	 */
 	public Vector getVel() {
 		return velocity;
 	}
 
+	/**
+	 * Sets new velocity vector.
+	 */
 	public void setVel(Vector newVel) {
 		velocity = newVel;
 	}
 
+	/**
+	 * Is plane colliding with this vector?
+	 */
 	public boolean isCollidingPos(Vector checkPos) {
 		return position.subtract(checkPos).norm() < radius;
 	}
 
+	/**
+	 * Is plane colliding with this Physical object?
+	 */
 	public boolean isCollidingObj(Physical checkObj) {
 		return isCollidingPos(checkObj.getPos());
 	}
 
+	/**
+	 * Returns current bearing of plane.
+	 */
 	public float getBearing() {
 		return rotation;
 	};
 
+	/**
+	 * Sets new bearing of a plane.
+	 */
 	public void setBearing(final float newBearing) {
 		rotation = newBearing % 360;
 		setVel(new BasicVector(new double[] {
@@ -183,6 +250,9 @@ public class Plane implements Drawable, Physical, Clickable, Scrollable {
 				Math.sin(Math.toRadians(rotation)), 0 }).multiply(speed));
 	};
 
+	/**
+	 * Destroys this and removes it from appropriate lists.
+	 */
 	public void destroy() {
 		Timing.doNTimes(size, 50, new Timing.NRunnable() {
 			public void run(int i) {
