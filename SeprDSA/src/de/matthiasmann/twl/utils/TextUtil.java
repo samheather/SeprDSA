@@ -262,8 +262,11 @@ public final class TextUtil {
         }
     }
 
-    private static final String ROMAN_NUMBERS = "ↂMↂↁMↁMCMDCDCXCLXLXIXVIVI";
-    private static final String ROMAN_VALUES = "\u2710\u2328\u1388\u0FA0\u03E8\u0384\u01F4\u0190\144\132\62\50\12\11\5\4\1";
+    //private static final String ROMAN_NUMBERS = "ↂMↂↁMↁMCMDCDCXCLXLXIXVIVI";
+    //private static final String ROMAN_VALUES = "\u2710\u2328\u1388\u0FA0\u03E8\u0384\u01F4\u0190\144\132\62\50\12\11\5\4\1";
+
+    private static final String ROMAN_NUMBERS = "MCMDCDCXCLXLXIXVIVI";
+    private static final String ROMAN_VALUES = "\u03E8\u0384\u01F4\u0190\144\132\62\50\12\11\5\4\1"
 
     /**
      * The largest number which can be converted into a Roman number.
